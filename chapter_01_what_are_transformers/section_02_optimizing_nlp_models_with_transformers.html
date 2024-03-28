@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>1.2. 使用Transformer优化NLP模型 &#8212; Transformer for NLP 0.0.1 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fontawesome/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/d2l.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/d2l.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.3. 我们需要什么资源" href="section_03_what_resources_should_we_use.html" />
+    <link rel="prev" title="1.1. Transformer的生态系统" href="section_01_the_ecosystem_of_transformers.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">1. </span>什么是Transformer?</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active"><span class="section-number">1.2. </span>使用Transformer优化NLP模型</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="../search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="../_sources/chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.rst.txt" rel="nofollow">
+  <i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">1. 什么是Transformer?</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+
+	<script type="text/javascript" src="../_static/sphinx_materialdesign_theme.js "></script>
+    <header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">1. 什么是Transformer?</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+
+    <div class="document">
+        <div class="page-content" role="main">
+        
+  <div class="section" id="transformernlp">
+<h1><span class="section-number">1.2. </span>使用Transformer优化NLP模型<a class="headerlink" href="#transformernlp" title="Permalink to this heading">¶</a></h1>
+<p>近十年来，循环神经网络（Recurrent Neural Networks,
+RNN）及其变体长短期记忆网络（Long Short-Term Memory,
+LSTM）将神经网络应用到了NLP序列模型中。然而，循环机制在处理长序列和大量参数时其能力会受限。因此，目前的最先进的Transformer模型在NLP中占据了主导地位。</p>
+<p>这一节简要介绍了NLP中促成Transformer模型发展的背景，我们将在“<a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html#chapter-2"><span class="std std-ref">从Transformer的架构开始</span></a>”中更详细地描述这一背景。首先，让我们直观地看一下transformer的注意力头（Attention
+Head），它取代了NLP神经网络中的RNN层。</p>
+<p>Transformer的核心概念可以粗略地概括为“混合标记（Mixing
+Tokens）”。自然语言处理模型首先将单词序列转换为标记（Token）。循环神经网络（RNN）通过循环函数顺序地分析标记。而Transformer则不按顺序分析标记，而是将每个标记与序列中的其他标记相关联，如图
+<a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html#fig-1"><span class="std std-numref">图2.1.1</span></a>
+所示。读者可以在<a class="reference external" href="https://github.com/jessevig/bertviz">这里</a>尝试自定义的可视化。</p>
+<div class="figure align-default" id="id1">
+<span id="fig-1"></span><img alt="../_images/2024-03-19-10-06-17.png" src="../_images/2024-03-19-10-06-17.png" />
+<p class="caption"><span class="caption-number">图1.2.1 </span><span class="caption-text">Transformer中某一层的注意力头</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>我们将在“<a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html#chapter-2"><span class="std std-ref">从Transformer的架构开始</span></a>”中详细介绍注意力头的细节。目前来说，从图
+<a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html#fig-1"><span class="std std-numref">图2.1.1</span></a>
+可以得出的结论是，序列中的每个单词（标记）都与序列中的所有其他单词相关联。这个模型为工业4.0的自然语言处理打开了大门。</p>
+<p>接下来让我们简要回顾一下transformer的背景。</p>
+<div class="section" id="transformer">
+<h2><span class="section-number">1.2.1. </span>Transformer的背景<a class="headerlink" href="#transformer" title="Permalink to this heading">¶</a></h2>
+<p>在过去的100多年里，许多伟大的想法致力于序列模式和语言建模的研究。因此，机器逐渐学会了预测可能的词序列。要列举所有使这成为可能的巨人，需要写一本完整的书。</p>
+<p>本节将分享一些典型的研究者，为Transformer的出现奠定基础。</p>
+<p>在20世纪初，安德烈·马尔可夫（Andrey
+Markov）引入了随机值的概念，并创立了随机过程理论。在人工智能领域，我们将其称为马尔可夫决策过程（Markov
+Decision Process, MDP）、马尔可夫链（Markov
+Chain）和马尔可夫过程（Markov
+Process）。在20世纪初，马尔可夫证明了我们可以仅通过过去序列的最后几个元素来预测链式序列的下一个元素。他将这种方法应用于一个包含数千个字母的数据集，利用过去的序列来预测句子中的下一个字母。请记住，他当时没有计算机，但他证明了这一理论，至今在人工智能领域仍然被使用。</p>
+<p>1948年，克劳德·香农发表了（Claude Shannon）《通信的数学理论》（<em>The
+Mathematical Theory of
+Communication</em>）。克劳德·香农为基于源编码器、发送器和接收器或语义解码器的通信模型奠定了基础。他创立了我们今天所知的信息论。</p>
+<p>1950年，艾伦·图灵（Alan
+Turing）发表了他的里程碑之作《计算机机器与智能》（<em>Computing Machinery
+and
+Intelligence</em>）。艾伦·图灵在这篇文章中基于二战期间成功解密德国密码的图灵机，提出了关于机器智能的观点。这些密码消息由一系列的单词和数字组成。</p>
+<p>1954年，乔治敦大学（Georgetown）和IBM进行了一项实验，使用计算机通过规则系统将俄语句子翻译成英语。规则系统是一个运行一系列规则的程序，用于分析语言结构。规则系统至今仍存在并广泛应用。然而，在某些情况下，机器智能可以通过自动学习语言模式来代替规则列表，处理数十亿种语言组合。</p>
+<p>“人工智能”这个概念的表述由约翰·麦卡锡（John
+McCarthy）在1956年首次使用，当时确定了机器可以进行学习的事实。</p>
+<p>1982年，约翰·霍普菲尔德（John
+Hopfield）引入了一种循环神经网络（RNN），被称为霍普菲尔德网络（Hopfield
+Network）或“联想”神经网络（“Associative Neural
+Network”）。W.A.利特尔（W.A
+Little）在1974年写了《大脑中持久态的存在》（<em>The existence of
+persistent
+states</em>），约翰·霍普菲尔德受其启发，为学习过程奠定了几十年的理论基础。RNN得到了进一步发展，而我们今天所熟知的LSTM也随之出现。</p>
+<p>循环神经网络（RNN）能够高效地记忆序列的持久状态，如图 <a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html#fig-2"><span class="std std-numref">图2.1.2</span></a>
+所示：</p>
+<div class="figure align-default" id="id2">
+<span id="fig-2"></span><img alt="../_images/rnn-process.svg" src="../_images/rnn-process.svg" /><p class="caption"><span class="caption-number">图1.2.2 </span><span class="caption-text">RNN流程图</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>每个状态<span class="math notranslate nohighlight">\(S_n\)</span>捕捉了<span class="math notranslate nohighlight">\(S_{n-1}\)</span>的信息。当到达网络的终点时，函数<span class="math notranslate nohighlight">\(F\)</span>将会执行一个动作，这个动作可以是转换、建模或任何其他基于序列的任务。</p>
+<!-- 加两段解释序列转换和序列建模 --><p>序列转可以理解为将一个词序列转换为另一个词序列。例如机器翻译任务将一种语言的句子转换为另一种语言。</p>
+<p>序列建模可以理解为通过上下文对序列进行预测。例如给定一部分句子要求预测句子的下一个单词。</p>
+<p>在20世纪80年代，杨立昆（Yann
+LeCun）设计了多用途的卷积神经网络（Convolutional Neural Network,
+CNN）。他将CNN应用于文本序列，同时也适用于序列转换和建模。它们同样基于W.A.利特尔的持久状态，逐层处理信息。在20世纪90年代，经过数年的工作总结，杨立昆开发出了LeNet-5模型，为我们今天所熟知的许多CNN模型奠定了基础。然而，CNN的高效架构在处理长期依赖关系的复杂序列时会面临问题。</p>
+<p>还有许多其他令人敬佩的名字、论文和模型在这里没有被提及。在这些年里，似乎每个从事人工智能的人都走在正确的轨道上。在这个过程中出现了注意力的概念。注意力可以在当前状态下窥视序列中的其他所有标记，而不仅仅是最后一个标记。注意力被集成到了RNN和CNN模型中，提升了RNN和CNN的建模能力。</p>
+<p>此后，当AI模型所需分析的序列长度开始增加时，意味着学习所需要的算力更大，AI开发者们使用更强大的机器，并找到了优化梯度的方法。一些工作基于RNN和注意力机制对序列到序列（Sequence-to-Sequence,
+s2s）模型进行了研究，但是并未达到预期的效果。</p>
+<p>似乎没有其他办法可以取得更多进展。就这样过了三十年。然后，从2017年末开始，面向工业化的最先进的transformer模型出现了。Transformer具有注意力头子层（Attention
+Head
+Sublayer）等功能。至此，循环神经网络（RNN）不再是序列建模的必要条件。</p>
+<p>在深入研究原始Transformer的架构之前（详见:ref:<cite>chapter-2</cite>），让我们从高层次上开始，通过检视我们应该使用的软件资源的范式转变来学习和实现Transformer模型。</p>
+</div>
+</div>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">1.2. 使用Transformer优化NLP模型</a><ul>
+<li><a class="reference internal" href="#transformer">1.2.1. Transformer的背景</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="section_01_the_ecosystem_of_transformers.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>1.1. Transformer的生态系统</div>
+         </div>
+     </a>
+     <a id="button-next" href="section_03_what_resources_should_we_use.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>1.3. 我们需要什么资源</div>
+        </div>
+     </a>
+  </div>
+        
+        </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>1. 什么是Transformer? &#8212; Transformer for NLP 0.0.1 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fontawesome/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/d2l.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/d2l.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.1. Transformer的生态系统" href="section_01_the_ecosystem_of_transformers.html" />
+    <link rel="prev" title="Transformer for NLP" href="../index.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link is-active"><span class="section-number">1. </span>什么是Transformer?</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="../search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="../_sources/chapter_01_what_are_transformers/index.rst.txt" rel="nofollow">
+  <i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+
+	<script type="text/javascript" src="../_static/sphinx_materialdesign_theme.js "></script>
+    <header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+
+    <div class="document">
+        <div class="page-content" role="main">
+        
+  <div class="section" id="transformer">
+<span id="chapter-1"></span><h1><span class="section-number">1. </span>什么是Transformer?<a class="headerlink" href="#transformer" title="Permalink to this heading">¶</a></h1>
+<p>Transformer是一种工业化、同质化的后深度学习模型（Post-Deep Learning
+Model），专为超级计算机上的并行计算而设计。通过将各种任务进行同质化（Homogenization），Transformer模型可以执行多种任务，而无需在特定任务上进行微调训练（Fine-tuning）。Transformer可以利用十亿级的参数对十亿级的原始未标记数据记录执行自监督学习（Self-supervised
+Learning）。</p>
+<p>后深度学习中涉及的这些特定模型架构被统称为基座模型（Foundation
+Models），其中transformer基座模型更是代表着第四次工业革命的缩影。2015年，随着可实现万物互联的机器对机器自动化（Machine-to-machine
+Automation）的兴起，第四次工业革命开始。人工智能（AI），特别是针对工业4.0的自然语言处理（NLP），已经远远超出了过去的软件实践。</p>
+<p>过了不到五年的时间，AI已经演变为具备无缝API的高效云服务。而在以往的范式中，人们需要通过下载软件库和本地开发来使用AI.
+现在这种范式在大多数情况下只被用于教育性质的练习中。</p>
+<p>工业4.0时代的项目经理可以访问OpenAI的云平台、注册账号、获取API密钥，然后在几分钟内开始工作。用户可以在这里输入文本，指定自然语言处理任务，并获得由GPT-3变换器引擎发送的回复。最后，用户可以进入GPT-3
+Codex，创建应用程序，而无需了解编程知识。提示工程（Prompt
+Engineering）是从这些模型中崛起的一项新技能。</p>
+<p>然而，有时候GPT-3模型可能并不适用于特定任务。例如，项目经理、顾问或开发者可能希望使用由Google
+AI、亚马逊网络服务（AWS）、Allen人工智能研究所或Hugging
+Face提供的其他系统。</p>
+<p>这时候项目经理应该选择在本地开展工作？还是应该直接在Google
+Cloud、Microsoft Azure或AWS上开展工作呢？开发团队是否应选择Hugging
+Face、Google
+Trax、OpenAI或AllenNLP等提供的软件开发库？人工智能专家或数据科学家是否应该使用几乎不需要AI开发的API呢？</p>
+<p>最佳答案是同时考虑以上所有选择。因为我们不知道未来的雇主、客户或用户可能想要或指定什么。因此，我们必须准备好适应任何出现的需求。本书并未描述市场上存在的所有选择。然而，本书为读者提供了足够的解决方案，以应对工业4.0人工智能驱动的自然语言处理挑战。</p>
+<p>本章首先从抽象和高层的视角解释了什么是transformer.
+然后解释了对实现transformer的各种方法获得灵活理解的重要性。由于市场上可用的API和自动化解决方案数量众多，对于平台、框架、库和语言的定义存在模糊和分歧。最后，本章介绍了在嵌入式transformer技术进展下的工业4.0人工智能专家的角色。在我们开始探索本书中描述的各种transformer模型实现之前，我们需要解决这些关键概念。</p>
+<p>本章涵盖以下主题： - 第四次工业革命，工业4.0的出现 - 基座模型的范式变革
+- 引入新技能：提示工程 - transformer的背景知识 - 实施transformer的挑战 -
+颠覆性的transformer模型API - 选择transformer库的困难 -
+选择transformer模型的困难 - 工业4.0人工智能专家的新角色 -
+嵌入式transformers</p>
+<p>我们的第一步将是探索transformer的生态系统。</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_ecosystem_of_transformers.html#id1">1.1.1. 工业4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_ecosystem_of_transformers.html#id2">1.1.2. 基座模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_ecosystem_of_transformers.html#nlp">1.1.3. 编程是否成为了NLP的一个子领域？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_ecosystem_of_transformers.html#id3">1.1.4. 人工智能专家的未来</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_02_optimizing_nlp_models_with_transformers.html#transformer">1.2.1. Transformer的背景</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_03_what_resources_should_we_use.html#transformer-api">1.3.1. Transformer API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_what_resources_should_we_use.html#api">1.3.2. 基于API的软件库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_what_resources_should_we_use.html#transformer">1.3.3. 预训练Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_what_resources_should_we_use.html#id2">1.3.4. 工业4.0时代人工智能专家的角色</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="../index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>Transformer for NLP</div>
+         </div>
+     </a>
+     <a id="button-next" href="section_01_the_ecosystem_of_transformers.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>1.1. Transformer的生态系统</div>
+        </div>
+     </a>
+  </div>
+        
+        </main>
+    </div>
+  </body>
+</html>

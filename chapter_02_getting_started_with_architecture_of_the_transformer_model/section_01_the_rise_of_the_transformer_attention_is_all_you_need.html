@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>2.1. Transformer模型架构 &#8212; Transformer for NLP 0.0.1 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fontawesome/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/d2l.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/d2l.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.2. 模型训练和表现" href="section_02_training_and_performance.html" />
+    <link rel="prev" title="2. 从Transformer的架构开始" href="index.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">2. </span>从Transformer的架构开始</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active"><span class="section-number">2.1. </span>Transformer模型架构</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="../search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="../_sources/chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.rst.txt" rel="nofollow">
+  <i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. 从Transformer的架构开始</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+
+	<script type="text/javascript" src="../_static/sphinx_materialdesign_theme.js "></script>
+    <header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. 从Transformer的架构开始</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+
+    <div class="document">
+        <div class="page-content" role="main">
+        
+  <div class="section" id="transformer">
+<h1><span class="section-number">2.1. </span>Transformer模型架构<a class="headerlink" href="#transformer" title="Permalink to this heading">¶</a></h1>
+<p>在<em>Attention is All You
+Need</em>这篇论文中，原始的Transformer模型由6层的堆栈组成，其中第<span class="math notranslate nohighlight">\(l\)</span>层的输出是第<span class="math notranslate nohighlight">\(l+1\)</span>层的输入，直到最后一层。如图
+<a class="reference internal" href="#fig-1"><span class="std std-numref">图2.1.1</span></a>
+所示，左边是一个6层的编码器堆栈，右边是一个6层的解码器堆栈。</p>
+<div class="figure align-default" id="id20">
+<span id="fig-1"></span><img alt="../_images/transformers.svg" src="../_images/transformers.svg" /><p class="caption"><span class="caption-number">图2.1.1 </span><span class="caption-text">Transformer原始模型的架构</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+</div>
+<p>图中左边，输入数据在Transformer的编码器部分经过了一个注意力子层（Multi-Head
+Attention）和一个前馈子层（Feedforward）。图中右边，目标输出数据在Transformer的解码器部分经过了两个注意力子层（Masked
+Multi-Head Attention, Multi-Head
+Attention）和一个前馈网络子层（Feedforward）。我们注意到，Transformer架构中没有使用RNN、LSTM和CNN.
+递归机制不复存在。</p>
+<p>在RNN中，当两个单词的距离增加时，递归次数也会增加，从而参与递归运算的递归函数的参数也会增加。Transformer中注意力机制取代了递归函数。注意力机制是一种“词对词”的操作，更严格地说是一种标记对标记（Token-to-Token）的操作。在有的分词器中，一个单词会被拆成多个标记，而有的分词器中，多个单词会被聚合为一个标记。为了表述的简单，我们大多数时候不区分单词和标记的概念。注意力机制将找出每个单词与序列中的所有其他单词的关系，包括正在分析的单词本身。让我们来看下面的序列：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">cat</span> <span class="n">sat</span> <span class="n">on</span> <span class="n">the</span> <span class="n">mat</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>注意力机制会在两个词向量之间执行点积运算，并且确定一个单词与其他所有单词的关系中最强的关系，包含与自身的关系（“cat”到“cat”）。图
+<a class="reference internal" href="#fig-2"><span class="std std-numref">图2.1.2</span></a> 可视化了注意力机制作用在一个句子上的过程。</p>
+<div class="figure align-default" id="id21">
+<span id="fig-2"></span><img alt="../_images/2024-03-20-11-11-25.png" src="../_images/2024-03-20-11-11-25.png" />
+<p class="caption"><span class="caption-number">图2.1.2 </span><span class="caption-text">单词“cat”对其他所有单词的注意力</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
+</div>
+<p>注意力机制将提供单词之间更深入的关系，并产生更好的结果。</p>
+<p>对于每个注意力子层，原始的Transformer模型并行地运行了8组注意力机制，以加快计算速度。接下来我们将探索编码器堆栈和多头注意力（Multi-Head
+Attention）。多头注意力机制的优势如下：</p>
+<ul class="simple">
+<li><p>对序列进行更广泛的深入分析</p></li>
+<li><p>减少计算操作，避免了递归的需求</p></li>
+<li><p>实现并行化，减少训练时间</p></li>
+<li><p>每个注意力机制学习相同输入序列的不同视角</p></li>
+</ul>
+<p>至此，我们已经浅显地从外部的视角了解了Transformer.
+接下来我们来看一下Transformer编码器的内部结构。</p>
+<div class="section" id="id1">
+<h2><span class="section-number">2.1.1. </span>Transformer编码器<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<p>原始Transformer模型的编码器和解码器的层都是一堆叠的层。编码器堆栈的每一层具有如图
+<a class="reference internal" href="#fig-3"><span class="std std-numref">图2.1.3</span></a>
+所示的结构。图中分别展示了第1层、中间层和第<span class="math notranslate nohighlight">\(N\)</span>层的情况，因为它们的两端连接着不同的其他模块。</p>
+<div class="figure align-default" id="id22">
+<span id="fig-3"></span><img alt="../_images/transformer-encoder-layer.svg" src="../_images/transformer-encoder-layer.svg" /><p class="caption"><span class="caption-number">图2.1.3 </span><span class="caption-text">Transformer编码器的每一层</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+</div>
+<p>原始Transformer模型中，所有编码器层的结构是相同的。每一层包含两个主要的子层：多头注意力机制（Multi-Head
+Attention）和全连接的逐位置前馈网络（Fully Connected Position-wise
+Feedforward Network）。</p>
+<p>请注意，Transformer模型中的每个主要子层<span class="math notranslate nohighlight">\(\text{sublayer}(x)\)</span>周围都有一个残差连接（Residual
+Connection）。残差连接将未经子层处理的输入<span class="math notranslate nohighlight">\(x\)</span>传递到层归一化（Layer
+Normalization）函数中。这样，我们可以确保关键信息（如位置编码）在传递过程中不会由于子层的处理而丢失。因此，每一个子层的归一化输出可以表示为：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-0">
+<span class="eqno">(2.1.1)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-0" title="Permalink to this equation">¶</a></span>\[\text{LayerNorm}(x+\text{sublayer}(x))\]</div>
+<p>尽管编码器的每个N=6层的结构相同，但每一层的内容与前一层并不一定相同。例如，只有第1层才与嵌入层（Input
+Embedding）相连。其他五层不与嵌入层相连，这确保了通过所有层的编码输入是稳定的。</p>
+<p>此外，从第1层到第6层，多头注意力机制执行的运算是相同的。然而，它们并不执行相同的任务。每一层都从前一层的输出中学习，并探索不同的方式来将序列中的tokens相关联。就像我们在玩填字游戏的时候，会寻找字母和单词的不同种类的关联。</p>
+<p>Transformer的设计者引入了一个约束，方便层以及子层之间进行堆叠。模型的每个子层的输出都具有固定的维度，包括嵌入层和残差连接。我们用<span class="math notranslate nohighlight">\(d_\text{model}\)</span>来表示这个维度，根据不同的模型大小和用户需求可以设置不同的值。在原始的Transformer架构中，<span class="math notranslate nohighlight">\(d_\text{model}=512\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(d_\text{model}\)</span>具有强大的影响。在Transformer中几乎所有关键的运算都是点积运算。因此，需要一个稳定的维度来减少所需的运算数量，降低机器的资源消耗，并且我们更容易追踪随运算而在模型中流动的信息。</p>
+<p>上述Transformer编码器的整体视图展示了Transformer的高度优化架构。接下来我们将深入研究编码其中的每个子层及其机制。</p>
+<div class="section" id="id2">
+<h3><span class="section-number">2.1.1.1. </span>输入嵌入层<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<p>在原始Transformer模型中，输入嵌入层（Input Embedding
+Layer）使用学习到的嵌入（Embeddings）将输入的tokens转换为维度为<span class="math notranslate nohighlight">\(d_\text{model}=512\)</span>的向量。</p>
+<div class="figure align-default" id="id23">
+<img alt="../_images/input-embedding.svg" src="../_images/input-embedding.svg" /><p class="caption"><span class="caption-number">图2.1.4 </span><span class="caption-text">输入嵌入层</span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
+</div>
+<p>在使用输入嵌入层之前，首先需要使用分词器将一个句子转换为tokens。每种分词器都有自己的算法，例如BPE、Word
+Piece和Sentence
+Piece等。Transformer最初使用的是BPE，但后续基于Transformer的模型可能使用了其他分词算法。</p>
+<p>我们通过一个例子来看分词器是如何工作的。给定一个句子“The cat slept on
+the couch.It was too tired to get up.”，某个分词器可能将其分成如下形式：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;slept&#39;</span><span class="p">,</span> <span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;couch&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;It&#39;</span><span class="p">,</span> <span class="s1">&#39;was&#39;</span><span class="p">,</span> <span class="s1">&#39;too&#39;</span><span class="p">,</span> <span class="s1">&#39;tired&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="s1">&#39;up&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>注意到，这个分词器将字符串转为小写，并分成一个个的token，并且不是严格按照空格来分的。另外，分词器通常还能将token转为整数表述，以便于某些嵌入层的输入：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1996</span><span class="p">,</span> <span class="mi">4937</span><span class="p">,</span> <span class="mi">7771</span><span class="p">,</span> <span class="mi">2006</span><span class="p">,</span> <span class="mi">1996</span><span class="p">,</span> <span class="mi">6411</span><span class="p">,</span> <span class="mi">1012</span><span class="p">,</span> <span class="mi">2009</span><span class="p">,</span> <span class="mi">2001</span><span class="p">,</span> <span class="mi">2205</span><span class="p">,</span> <span class="mi">5458</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">2131</span><span class="p">,</span> <span class="mi">2039</span><span class="p">,</span> <span class="mi">1012</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>嵌入层的作用是将离散的token序列映射到连续的向量空间中。</p>
+<p>我们借用2013年Google提出的word2vec嵌入方法中的<a class="reference external" href="https://zhuanlan.zhihu.com/p/29305464">skip-gram架构</a>来说明Transformer的嵌入层。skip-gram在训练时会关注一个窗口中的中心词，并预测其上下文的单词。例如，如果<code class="docutils literal notranslate"><span class="pre">word[i]</span></code>是一个窗口大小为2的窗口中的中心词，skip-gram模型将利用中心词来预测<code class="docutils literal notranslate"><span class="pre">word[i-2]</span></code>、<code class="docutils literal notranslate"><span class="pre">word[i-1]</span></code>、<code class="docutils literal notranslate"><span class="pre">word[i+1]</span></code>和<code class="docutils literal notranslate"><span class="pre">word[i+2]</span></code>。然后窗口会滑动并重复这个过程。在完成训练后，一个句子中拥有类似上下文的单词会拥有类似的词嵌入。</p>
+<p>假设我们需要对以下句子进行嵌入：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide outputs</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The black cat sat on the couch and the brown dog slept on the rug.&quot;</span>
+</pre></div>
+</div>
+<p>我们将关注“black”和“brown”两个词，因为这两个词都表示颜色，且是相近的颜色，因此它们的嵌入向量应该是相似的。</p>
+<p>对于每一个词，我们必须产生一个长度等于<span class="math notranslate nohighlight">\(d_\text{model}=512\)</span>的嵌入向量，以满足Transformer模型的维度约束。</p>
+<p>我们首先对句子进行分词：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span># Hide outputs
+# 安装NLP工具包NLTK
+!pip install nltk
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide outputs</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tokens</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;The&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;cat&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;sat&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;on&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;the&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;couch&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;and&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;the&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;brown&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;dog&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;slept&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;on&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;the&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;rug&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;.&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>然后我们利用word2vec对分出来的token序列进行词嵌入。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span># Hide outputs
+# 安装gensim以使用word2vec模型
+!pip install gensim
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide outputs</span>
+<span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">word2vec</span>
+
+<span class="c1"># 利用tokens来初始化word2vec模型</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">word2vec</span><span class="o">.</span><span class="n">Word2Vec</span><span class="p">([</span><span class="n">tokens</span><span class="p">],</span> <span class="n">vector_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>在完成嵌入后，我们可以看到，“black”的嵌入向量如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="s2">&quot;black&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>“brown”的嵌入向量如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="s2">&quot;brown&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>tokens序列中所有单词的嵌入向量依次拼接起来可以得到整个句子的嵌入矩阵：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide outputs</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">all_vectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+<span class="n">embedding_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">all_vectors</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">embedding_matrix</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.7773618e-06</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2406202e-03</span><span class="p">,</span>  <span class="mf">1.0836283e-03</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span>
+         <span class="mf">1.4894076e-03</span><span class="p">,</span>  <span class="mf">1.3333119e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.9588985e-04</span><span class="p">],</span>
+       <span class="p">[</span><span class="o">-</span><span class="mf">8.6162530e-04</span><span class="p">,</span>  <span class="mf">9.5684874e-05</span><span class="p">,</span>  <span class="mf">7.8154920e-04</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span>
+        <span class="o">-</span><span class="mf">1.3933406e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6465067e-03</span><span class="p">,</span>  <span class="mf">6.2610651e-04</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">1.0645260e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5917873e-03</span><span class="p">,</span>  <span class="mf">1.1200103e-03</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span>
+         <span class="mf">6.1501295e-04</span><span class="p">,</span>  <span class="mf">9.7177655e-04</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.6096081e-03</span><span class="p">],</span>
+       <span class="o">...</span><span class="p">,</span>
+       <span class="p">[</span><span class="o">-</span><span class="mf">1.0524952e-04</span><span class="p">,</span>  <span class="mf">4.5736761e-05</span><span class="p">,</span>  <span class="mf">9.9684531e-04</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span>
+        <span class="o">-</span><span class="mf">1.3415579e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.7771606e-04</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.4606728e-04</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">1.6664164e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3794217e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7350025e-03</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span>
+        <span class="o">-</span><span class="mf">1.8930300e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2796884e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.7067595e-04</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">7.7261886e-04</span><span class="p">,</span>  <span class="mf">9.8410877e-04</span><span class="p">,</span>  <span class="mf">1.1888242e-03</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span>
+        <span class="o">-</span><span class="mf">7.0035725e-04</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7677722e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4823560e-04</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>我们计算“black”与“brown”的相似度，发现得到的相似度并不高：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="s2">&quot;brown&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.026231231</span>
+</pre></div>
+</div>
+<p>这是因为上面使用的word2vec模型只在一个句子上进行了词嵌入向量的训练，训练数据太少。接下来，我们使用Text8语料库来对word2vec进行训练。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span># Hide outputs
+# 下载并解压text8语料库
+!wget http://mattmahoney.net/dc/text8.zip
+!unzip text8.zip
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide outputs</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;word2vec.model&quot;</span><span class="p">):</span>
+    <span class="c1"># 加载text8语料库</span>
+    <span class="n">corpus</span> <span class="o">=</span> <span class="n">word2vec</span><span class="o">.</span><span class="n">Text8Corpus</span><span class="p">(</span><span class="s2">&quot;text8&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 使用text8语料库初始化word2vec</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">word2vec</span><span class="o">.</span><span class="n">Word2Vec</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="n">vector_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># 保存训练后的模型</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;word2vec.model&quot;</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># 直接加载上次训练好的模型</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">word2vec</span><span class="o">.</span><span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;word2vec.model&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>在使用Text8语料库训练后，我们再来看看“black”和“brown”的相似度，发现已经提高了很多：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="s2">&quot;brown&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.46911407</span>
+</pre></div>
+</div>
+<p>Transformer中嵌入层以后的层可以利用已经学习好的词嵌入向量。这些词嵌入向量为后续的注意力机制提供了重要的信息，这些信息将高速注意力机制如何将词语之间进行关联。</p>
+<p>然而，有一种信息在Transformer架构中被丢失了，即词的位置信息。在递归神经网络中，token序列的输入是按顺序串行进行的，这一顺序自然隐含了token的位置信息。而在Transformer中，所有的token是被并行输入的，没有额外的向量或信息来指示一个词在序列中的位置。</p>
+<p>Transformer的设计者提出了另一个创新特性：位置编码（Positional
+Encoding）。让我们看看位置编码是如何工作的。</p>
+</div>
+<div class="section" id="id3">
+<h3><span class="section-number">2.1.1.2. </span>位置编码<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<div class="figure align-default" id="id24">
+<img alt="../_images/positional-encoding.svg" src="../_images/positional-encoding.svg" /><p class="caption"><span class="caption-number">图2.1.5 </span><span class="caption-text">位置编码</span><a class="headerlink" href="#id24" title="Permalink to this image">¶</a></p>
+</div>
+<p>为了控制Transformer的训练时间和注意力的运算复杂度，Transformer没有单独创建另一个向量空间来描述token的位置信息。一方面是因为这样需要像训练词嵌入模型一样通过训练来得到位置信息向量（有一些基于Transformer的模型采用了可训练的位置编码），增加了训练时间。另一方面，需要将位置向量传给后续的层进行处理，需要进行更多点积运算。</p>
+<p>Transformer的做法是使用一个固定的（不可训练的）位置编码函数，其输出向量具有固定的大小dmodel
+=
+512（或模型的其他常量值）。然后将位置编码函数输出的位置编码向量直接加到词嵌入向量上。</p>
+<p>原始Transformer中使用正弦和余弦函数来为每个位置<span class="math notranslate nohighlight">\(\text{pos}\)</span>和<span class="math notranslate nohighlight">\(d_\text{model}=512\)</span>维中每一个维度<span class="math notranslate nohighlight">\(i\)</span>生成相应的值：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-1">
+<span class="eqno">(2.1.2)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+\text{PE}(\text{pos}, 2i)&amp;=\sin\left(\frac{\text{pos}}{10000^{\frac{2i}{d_\text{model}}}}\right) \\
+\text{PE}(\text{pos}, 2i+1)&amp;=\cos\left(\frac{\text{pos}}{10000^{\frac{2i}{d_\text{model}}}}\right)
+\end{aligned}\end{split}\]</div>
+<p>例如，第0个位置上的token的位置编码向量为<span class="math notranslate nohighlight">\((\text{PE}(1, 1),\text{PE}(1, 2),\cdots,\text{PE}(1, 512))\)</span>.</p>
+<p>以下是位置编码函数的简单代码实现：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide outputs</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">positional_encoding</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">d_model</span><span class="o">=</span><span class="mi">512</span><span class="p">):</span>
+    <span class="n">pe</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d_model</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">pe</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">pos</span> <span class="o">/</span> <span class="p">(</span><span class="mi">10000</span> <span class="o">**</span> <span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="n">d_model</span><span class="p">)))</span>
+        <span class="n">pe</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">pos</span> <span class="o">/</span> <span class="p">(</span><span class="mi">10000</span> <span class="o">**</span> <span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="n">d_model</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pe</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>可以由此计算得到任意位置的位置编码向量，它们都是长度为<code class="docutils literal notranslate"><span class="pre">d_model</span></code>的向量：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">positional_encoding</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>接下来我们讨论如何将位置编码向量融合到词嵌入向量上。</p>
+<div class="section" id="id4">
+<h4><span class="section-number">2.1.1.2.1. </span>融合位置编码<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h4>
+<p>Transformer使用一种最简单的方式将词嵌入向量与位置编码融合：直接将位置编码向量与词嵌入向量相加。我们将融合后得到的向量称为词向量（Word
+Vector）。</p>
+<p>这个解决方案很直接。然而，我们可能会丢失词嵌入的信息，因为它的影响会被位置编码向量“缩小”。在上面的代码中我们可以看到，词嵌入向量与位置编码向量相差了约两个数量级。</p>
+<p>我们直观地演示一下直接相加后会对单词的相似度所造成的影响。我们回到句子“The
+black cat sat on the couch and the brown dog slept on the
+rug.”，其中“black”在第1个位置（从0开始），“brown”在第9个位置。我们通过简单相加的方式求出两个单词的词向量：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide outputs</span>
+<span class="n">pwev_black</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="s2">&quot;black&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">positional_encoding</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">pwev_brown</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="s2">&quot;brown&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">positional_encoding</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>然后求两个词向量的余弦相似度：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span>
+
+<span class="n">cosine_similarity</span><span class="p">(</span><span class="n">pwev_black</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">pwev_brown</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span><span class="mf">0.74976893</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>可以发现，此时计算出来两个词向量的相似度约为<code class="docutils literal notranslate"><span class="pre">0.76</span></code>，已经远大于之前根据不带位置信息的词嵌入向量计算出来的约<code class="docutils literal notranslate"><span class="pre">0.48</span></code>.
+可见，位置编码对词的语义影响太过强大。</p>
+<p>一种简单的方式是通过将词嵌入向量乘一个较大的数来增加其影响。这个数一般可以取<span class="math notranslate nohighlight">\(\sqrt{d_\text{model}}\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide outputs</span>
+<span class="c1"># 对词嵌入向量乘以sqrt(d_model)</span>
+<span class="n">pwev_black_better</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="s2">&quot;black&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span> <span class="o">+</span> <span class="n">positional_encoding</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">pwev_brown_better</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="s2">&quot;brown&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span> <span class="o">+</span> <span class="n">positional_encoding</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cosine_similarity</span><span class="p">(</span><span class="n">pwev_black_better</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">pwev_brown_better</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span><span class="mf">0.47052839</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>可以看到，此时位置编码的影响已经被削弱，两个词向量的相似度约为<code class="docutils literal notranslate"><span class="pre">0.48</span></code>，与不带位置信息的词嵌入向量的相似度相当。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h3><span class="section-number">2.1.1.3. </span>多头注意力子层<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
+<p>多头注意力（Multi-head Attention）子层包含八个注意力头（Attention
+Head）和一个归一化层，归一化层对注意力头的输出进行归一化，并添加残差连接，如图
+<a class="reference internal" href="#fig-4"><span class="std std-numref">图2.1.6</span></a> 所示。</p>
+<div class="figure align-default" id="id25">
+<span id="fig-5"></span><span id="fig-4"></span><img alt="../_images/multi-head-attention-sublayer.svg" src="../_images/multi-head-attention-sublayer.svg" /><p class="caption"><span class="caption-number">图2.1.6 </span><span class="caption-text">多头注意力子层</span><a class="headerlink" href="#id25" title="Permalink to this image">¶</a></p>
+</div>
+<p>本节从注意力层的架构开始，然后使用Python实现了多头注意力的示例代码，最后描述了归一化层中的归一化处理和残差连接。</p>
+<p>让我们从多头注意力的架构开始。</p>
+<div class="section" id="id6">
+<h4><span class="section-number">2.1.1.3.1. </span>多头注意力的架构<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h4>
+<p>编码器中的第一层的多头注意力子层的输入是一组向量，其中包含了每个单词的词嵌入和位置编码。</p>
+<p>多头注意力机制会将每个单词都与其他所有单词进行映射，从而确定该单词在序列中的重要程度和含义。</p>
+<p>用一个符合人类直觉的例子来解释：对于句子“The cat sat on the rug and it
+was
+dry-cleaned.”，如果不看上下文，“it”可能指代“cat”，也可能指代“rug”，从而我们人脑的注意力机制会给“it”对“cat”和对“rug”分配相同的注意力权重。而当我们看到dry-cleaned时，我们会提高“it”对“rug”的注意力权重，降低“it”对“cat”的注意力权重。</p>
+<p>Transformer的注意力机制也是这样。在刚开始时，“it”对所有单词的注意力权重是相同的。随着在大量语料上进行训练，“it”对“rug”的注意力权重会高于对“cat”的注意力权重。</p>
+<p>输入序列中，每个单词<span class="math notranslate nohighlight">\(x_t\)</span>可以表示成一个长度为<span class="math notranslate nohighlight">\(d_\text{model}=512\)</span>的向量<span class="math notranslate nohighlight">\(\text{WE}(x_t)\)</span>，即词向量。</p>
+<p>同理，整个句子<span class="math notranslate nohighlight">\(\mathbf{x}=(x_1,\cdots,x_N)\)</span>可以表示为一个大小为<span class="math notranslate nohighlight">\(N \times d_\text{model} = N \times 512\)</span>的矩阵<span class="math notranslate nohighlight">\(\mathbf{X}=(\text{WE}(x_1),\cdots,\text{WE}(x_N))\)</span>，我们称为词序列矩阵。</p>
+<p>词序列矩阵<span class="math notranslate nohighlight">\(\mathbf{X}\)</span>会被输入到多头注意力（Multi-Head
+Attention）子层的每个注意力头（Attention Head）中，如图
+<a class="reference internal" href="#fig-5"><span class="std std-numref">图2.1.6</span></a> 所示。</p>
+<div class="figure align-default">
+<img alt="../_images/8-attention-heads.svg" src="../_images/8-attention-heads.svg" /></div>
+<p>中间蓝色的部分分别表示<span class="math notranslate nohighlight">\(m=8\)</span>个注意力头，<span class="math notranslate nohighlight">\(\mathbf{Z}_1,\cdots,\mathbf{Z}_8\)</span>分别对应每个头的输出，输出均为<span class="math notranslate nohighlight">\(N \times d_k\)</span>的矩阵.
+一般来说，<span class="math notranslate nohighlight">\(d_k=d_\text{model}/m\)</span>.</p>
+<p>最终，所有注意力头的输出拼接为最终输出<span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>，为<span class="math notranslate nohighlight">\(N\times d_k\times m = N\times d_\text{model}\)</span>的矩阵。</p>
+<p><span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>再经过一次线性变换得到多头注意力子层的最终的输出<span class="math notranslate nohighlight">\(\mathbf{H}\)</span>（未经归一化和残差连接），<span class="math notranslate nohighlight">\(\mathbf{H}\)</span>的形状与<span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>相同。</p>
+<p>注意力头内部采用的是比例缩放点积注意力（Scaled Dot-Product
+Attention）运算。以Head 1为例，其内部结构如图 <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig-6</span></code> 所示。</p>
+<div class="figure align-default" id="id26">
+<img alt="../_images/scaled-dot-product.svg" src="../_images/scaled-dot-product.svg" /><p class="caption"><span class="caption-number">图2.1.7 </span><span class="caption-text">注意力头内部的点积注意力</span><a class="headerlink" href="#id26" title="Permalink to this image">¶</a></p>
+</div>
+<p>可以看到，输入矩阵<span class="math notranslate nohighlight">\(\mathbf{X}\)</span>被施加了三种线性变换，线性变换的权重分别为<span class="math notranslate nohighlight">\(\mathbf{W}^Q_1,\mathbf{W}^K_1,\mathbf{W}^V_1\)</span>，并分别得到新的矩阵<span class="math notranslate nohighlight">\(\mathbf{Q}_1,\mathbf{K}_1,\mathbf{V}_1\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{W}^Q_1\)</span>是查询权重矩阵（Query Weight
+Matrix），其大小为<span class="math notranslate nohighlight">\(d_\text{model} \times d_q\)</span>.
+<span class="math notranslate nohighlight">\(\mathbf{Q}_1=\mathbf{X}\mathbf{W}^Q_1\)</span>称为查询矩阵（Query
+Matrix），其形状为<span class="math notranslate nohighlight">\(N \times d_q\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{W}^K_1\)</span>是键权重矩阵（Key Weight
+Matrix），其大小为<span class="math notranslate nohighlight">\(d_\text{model} \times d_k\)</span>.
+<span class="math notranslate nohighlight">\(\mathbf{K}_1=\mathbf{X}\mathbf{W}^K_1\)</span>称为键矩阵（Key
+Matrix），其形状为<span class="math notranslate nohighlight">\(N \times d_k\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{W}^V_1\)</span>是值权重矩阵（Value Weight
+Matrix），其大小为<span class="math notranslate nohighlight">\(d_\text{model} \times d_v\)</span>.
+<span class="math notranslate nohighlight">\(\mathbf{V}_1=\mathbf{X}\mathbf{W}^V_1\)</span>称为值矩阵（Value
+Matrix），其形状为<span class="math notranslate nohighlight">\(N \times d_v\)</span>.</p></li>
+</ul>
+<p>图 <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig-6</span></code>
+中所示的<span class="math notranslate nohighlight">\(\mathbf{Q}_1,\mathbf{K}_1,\mathbf{V}_1\)</span>三者之间的运算称为缩放点积注意力（Scaled
+Dot-Product Attention），其中:</p>
+<ul class="simple">
+<li><p>MatMul表示矩阵乘法</p></li>
+<li><p>Scale表示将输入缩小为原来的<span class="math notranslate nohighlight">\(\frac{1}{\sqrt{d_k}}\)</span></p></li>
+<li><p>Softmax表示对输入应用<a class="reference external" href="https://zhuanlan.zhihu.com/p/105722023">softmax函数</a></p></li>
+</ul>
+<p>比例缩放点积注意力使用公式表示为：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-2">
+<span class="eqno">(2.1.3)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-2" title="Permalink to this equation">¶</a></span>\[\text{Attention}(\mathbf{Q},\mathbf{K},\mathbf{V})=\text{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^T}{\sqrt{d_k}}\right)\mathbf{V}\]</div>
+<p>Head 1的输出可以表示为</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-3">
+<span class="eqno">(2.1.4)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-3" title="Permalink to this equation">¶</a></span>\[\mathbf{Z}_1=\text{Attention}(\mathbf{Q}_1,\mathbf{K}_1,\mathbf{V}_1)\]</div>
+<p>其中线性变换的权重<span class="math notranslate nohighlight">\(\mathbf{W}^Q_1,\mathbf{W}^K_1,\mathbf{W}^V_1\)</span>是可训练的参数，为了得到可用的<span class="math notranslate nohighlight">\(\mathbf{Q}_1,\mathbf{K}_1,\mathbf{V}_1\)</span>，我们需要训练模型来学习这些参数。</p>
+<p>所有头的输出拼接起来为</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-4">
+<span class="eqno">(2.1.5)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-4" title="Permalink to this equation">¶</a></span>\[\mathbf{Z}=\text{Concat}(\mathbf{Z}_1,\cdots,\mathbf{Z}_8)\]</div>
+<p>再经过一次线性变换得到子层最终的输出<span class="math notranslate nohighlight">\(\mathbf{H}\)</span></p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-5">
+<span class="eqno">(2.1.6)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-5" title="Permalink to this equation">¶</a></span>\[\mathbf{H}=\mathbf{Z}\mathbf{W}^O\]</div>
+<p>接下来，我们将使用最基本的Python代码，只使用numpy库和softmax函数，用8个步骤来实现多头注意力机制的关键部分。</p>
+</div>
+<div class="section" id="id7">
+<h4><span class="section-number">2.1.1.3.2. </span>第1步：构建输入<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h4>
+<p>首先安装numpy和scipy:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span># Hide outputs
+!pip install numpy scipy
+</pre></div>
+</div>
+<p>然后导入所需要的包</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide outputs</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">softmax</span>
+</pre></div>
+</div>
+<p>为了简单和直观起见，我们将<span class="math notranslate nohighlight">\(d_\text{model}\)</span>设为4而不是512.</p>
+<p>考虑一个长度为3的token序列，它的词序列矩阵大小应该为<span class="math notranslate nohighlight">\(3\times 4\)</span>，我们在代码里创建一个矩阵来模拟它：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">1.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.</span> <span class="mf">2.</span> <span class="mf">0.</span> <span class="mf">2.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.</span> <span class="mf">1.</span> <span class="mf">1.</span> <span class="mf">1.</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h4><span class="section-number">2.1.1.3.3. </span>第2步：初始化权重矩阵<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h4>
+<p>这里我们使用<span class="math notranslate nohighlight">\(m=2\)</span>个注意力头，从而<span class="math notranslate nohighlight">\(d_k=d_\text{model}/m=2\)</span>，并令<span class="math notranslate nohighlight">\(d_q=d_v=d_k\)</span>.</p>
+<p>首先初始化第1个注意力头的权重矩阵<span class="math notranslate nohighlight">\(\mathbf{W}^Q_1,\mathbf{W}^K_2,\mathbf{W}^V_3\)</span>，大小均为<span class="math notranslate nohighlight">\(d_\text{model} \times d_k = 4 \times 2\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">W_Q_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="n">W_K_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="n">W_V_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+<p>然后同样地初始化第2个注意力头的权重矩阵，大小与上面相同：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">W_Q_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="n">W_K_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="n">W_V_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-k-v">
+<h4><span class="section-number">2.1.1.3.4. </span>第3步：计算Q, K, V矩阵<a class="headerlink" href="#q-k-v" title="Permalink to this heading">¶</a></h4>
+<p>计算第1个注意力头中的<span class="math notranslate nohighlight">\(\mathbf{Q}_1,\mathbf{K}_1,\mathbf{V}_1\)</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Q_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W_Q_1</span><span class="p">)</span>
+<span class="n">K_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W_K_1</span><span class="p">)</span>
+<span class="n">V_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W_V_1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>计算第2个注意力头中的<span class="math notranslate nohighlight">\(\mathbf{Q}_1,\mathbf{K}_1,\mathbf{V}_1\)</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Q_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W_Q_2</span><span class="p">)</span>
+<span class="n">K_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W_K_2</span><span class="p">)</span>
+<span class="n">V_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W_V_2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>查看一下计算得到的矩阵:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Q_1</span><span class="p">,</span> <span class="n">K_1</span><span class="p">,</span> <span class="n">V_1</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]]),</span>
+ <span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">4.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]]),</span>
+ <span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">]]))</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Q_2</span><span class="p">,</span> <span class="n">K_2</span><span class="p">,</span> <span class="n">V_2</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]]),</span>
+ <span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]]),</span>
+ <span class="n">array</span><span class="p">([[</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">6.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]]))</span>
+</pre></div>
+</div>
+<p>Q, K, V的大小均为<span class="math notranslate nohighlight">\(N \times d_k\)</span>，即<span class="math notranslate nohighlight">\(3 \times 2\)</span></p>
+</div>
+<div class="section" id="id9">
+<h4><span class="section-number">2.1.1.3.5. </span>第4步：计算注意力权重<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h4>
+<p>第1个注意力头的最终输出为：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-6">
+<span class="eqno">(2.1.7)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-6" title="Permalink to this equation">¶</a></span>\[\mathbf{Z}_1=\text{Attention}(\mathbf{Q}_1,\mathbf{K}_1,\mathbf{V}_1)=\text{softmax}\left(\frac{\mathbf{Q}_1\mathbf{K}_1^T}{\sqrt{d_k}}\right)\mathbf{V}_1\]</div>
+<p>我们先来算这一部分：<span class="math notranslate nohighlight">\(\left(\frac{\mathbf{Q}_1\mathbf{K}_1^T}{\sqrt{d_k}}\right)\)</span>，也被称为注意力权重矩阵:</p>
+<p>代码如下</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d_k</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">attention_weights_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">Q_1</span> <span class="o">@</span> <span class="n">K_1</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d_k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">attention_weights_1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mf">0.</span>         <span class="mf">2.82842712</span> <span class="mf">1.41421356</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">2.82842712</span> <span class="mf">5.65685425</span> <span class="mf">5.65685425</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.41421356</span> <span class="mf">5.65685425</span> <span class="mf">4.24264069</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>可以看到，注意力权重矩阵是一个大小为<span class="math notranslate nohighlight">\(N \times N = 3 \times 3\)</span>的矩阵.</p>
+<ul class="simple">
+<li><p>矩阵第<span class="math notranslate nohighlight">\(i\)</span>行第<span class="math notranslate nohighlight">\(j\)</span>列的元素表示输入的句子中第<span class="math notranslate nohighlight">\(i\)</span>个单词对第<span class="math notranslate nohighlight">\(j\)</span>个单词的注意力权重。例如，第1个单词对第3个单词的注意力权重为1.41421356</p></li>
+<li><p>从行的视角看，矩阵第<span class="math notranslate nohighlight">\(i\)</span>行表示第<span class="math notranslate nohighlight">\(i\)</span>个单词对其他所有单词的注意力权重</p></li>
+<li><p>从列的视角看，矩阵第<span class="math notranslate nohighlight">\(j\)</span>列表示其他所有单词对第<span class="math notranslate nohighlight">\(j\)</span>个单词的注意力权重</p></li>
+</ul>
+<p>上面的注意力权重矩阵只是第1个注意力头的想法，我们用同样的方法计算第2个注意力头的注意力权重矩阵：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention_weights_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">Q_2</span> <span class="o">@</span> <span class="n">K_2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d_k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">attention_weights_2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mf">2.12132034</span> <span class="mf">2.82842712</span> <span class="mf">3.53553391</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.41421356</span> <span class="mf">0.</span>         <span class="mf">1.41421356</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">2.82842712</span> <span class="mf">2.82842712</span> <span class="mf">4.24264069</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="softmax">
+<h4><span class="section-number">2.1.1.3.6. </span>第5步：Softmax操作<a class="headerlink" href="#softmax" title="Permalink to this heading">¶</a></h4>
+<p>对注意力权重矩阵中每一行做softmax运算：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention_weights_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">attention_weights_1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">attention_weights_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">attention_weights_1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">attention_weights_1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">attention_weights_1</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">attention_weights_1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mf">0.04538836</span> <span class="mf">0.76791794</span> <span class="mf">0.1866937</span> <span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.02870457</span> <span class="mf">0.48564771</span> <span class="mf">0.48564771</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.01142724</span> <span class="mf">0.79523727</span> <span class="mf">0.19333549</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>可以看到，softmax函数的直观作用是将每一行的权重之和都变为了1.</p>
+<p>对于<code class="docutils literal notranslate"><span class="pre">attention_weights_2</span></code>我们使用更简单的softmax调用方法：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention_weights_2</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">attention_weights_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">attention_weights_2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mf">0.04843612</span> <span class="mf">0.09823402</span> <span class="mf">0.19922988</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.02388233</span> <span class="mf">0.00580619</span> <span class="mf">0.02388233</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.09823402</span> <span class="mf">0.09823402</span> <span class="mf">0.4040611</span> <span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h4><span class="section-number">2.1.1.3.7. </span>第6步：计算注意力头输出<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h4>
+<p>第1个注意力头的输出为softmax后的注意力权重矩阵右乘值矩阵<span class="math notranslate nohighlight">\(\mathbf{V}_1\)</span>：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-7">
+<span class="eqno">(2.1.8)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-7" title="Permalink to this equation">¶</a></span>\[\mathbf{Z}_1=\text{Attention}(\mathbf{Q}_1,\mathbf{K}_1,\mathbf{V}_1)=\text{softmax}\left(\frac{\mathbf{Q}_1\mathbf{K}_1^T}{\sqrt{d_k}}\right)\mathbf{V}_1\]</div>
+<p>第1个注意力头的输出计算代码如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention_outputs_1</span> <span class="o">=</span> <span class="n">attention_weights_1</span> <span class="o">@</span> <span class="n">V_1</span>
+<span class="n">attention_outputs_1</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span><span class="mf">1.95461164</span><span class="p">,</span> <span class="mf">7.35428242</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">1.97129543</span><span class="p">,</span> <span class="mf">6.85647715</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">1.98857276</span><span class="p">,</span> <span class="mf">7.54476559</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>可以看到，注意力头的输出是一个大小为<span class="math notranslate nohighlight">\(N \times d_v = 3 \times 2\)</span>的矩阵，其中第<span class="math notranslate nohighlight">\(i\)</span>行是一个向量，表示第<span class="math notranslate nohighlight">\(i\)</span>个单词在<span class="math notranslate nohighlight">\(d_v\)</span>个不同维度的特征值。</p>
+<p>第2个注意力头的输出计算代码如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention_outputs_2</span> <span class="o">=</span> <span class="n">attention_weights_2</span> <span class="o">@</span> <span class="n">V_2</span>
+<span class="n">attention_outputs_2</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span><span class="mf">1.63402788</span><span class="p">,</span> <span class="mf">0.79139582</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">0.27431805</span><span class="p">,</span> <span class="mf">0.07098945</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.1120047</span> <span class="p">,</span> <span class="mf">1.20105826</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h4><span class="section-number">2.1.1.3.8. </span>第7步：拼接所有头的输出<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h4>
+<p>我们使用了2个注意力头，现在将它们的输出拼接起来得到<span class="math notranslate nohighlight">\(\mathbf{Z}=\text{Concat}(\mathbf{Z}_1,\mathbf{Z}_2)\)</span>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention_outputs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">attention_outputs_1</span><span class="p">,</span> <span class="n">attention_outputs_2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">attention_outputs</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span><span class="mf">1.95461164</span><span class="p">,</span> <span class="mf">7.35428242</span><span class="p">,</span> <span class="mf">1.63402788</span><span class="p">,</span> <span class="mf">0.79139582</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">1.97129543</span><span class="p">,</span> <span class="mf">6.85647715</span><span class="p">,</span> <span class="mf">0.27431805</span><span class="p">,</span> <span class="mf">0.07098945</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">1.98857276</span><span class="p">,</span> <span class="mf">7.54476559</span><span class="p">,</span> <span class="mf">3.1120047</span> <span class="p">,</span> <span class="mf">1.20105826</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>可以看到，<code class="docutils literal notranslate"><span class="pre">attention_outputs</span></code>即<span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>是大小为<span class="math notranslate nohighlight">\(N\times d_\text{model}=3 \times 4\)</span>的矩阵</p>
+</div>
+<div class="section" id="id12">
+<h4><span class="section-number">2.1.1.3.9. </span>第8步：得到最终输出<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h4>
+<p>常见的Transformer代码实现中，还需要对<code class="docutils literal notranslate"><span class="pre">attention_outputs</span></code>进行一次形状不变的线性变换:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">W_O</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="n">hidden_states</span> <span class="o">=</span> <span class="n">attention_outputs</span> <span class="o">@</span> <span class="n">W_O</span>
+<span class="n">hidden_states</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span> <span class="mf">2.74600745</span><span class="p">,</span>  <span class="mf">2.4254237</span> <span class="p">,</span>  <span class="mf">8.14567824</span><span class="p">,</span> <span class="mf">11.73431775</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">2.04228487</span><span class="p">,</span>  <span class="mf">0.3453075</span> <span class="p">,</span>  <span class="mf">6.92746659</span><span class="p">,</span>  <span class="mf">9.17308007</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">3.18963102</span><span class="p">,</span>  <span class="mf">4.31306296</span><span class="p">,</span>  <span class="mf">8.74582385</span><span class="p">,</span> <span class="mf">13.84640131</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>得到的<code class="docutils literal notranslate"><span class="pre">hidden_states</span></code>为<span class="math notranslate nohighlight">\(N\times d_\text{model}=3 \times 4\)</span>的矩阵。</p>
+<p><code class="docutils literal notranslate"><span class="pre">hidden_states</span></code>中的每个向量也可以看作句子中每个单词的表征。但与<span class="math notranslate nohighlight">\(X\)</span>不同的是，<span class="math notranslate nohighlight">\(X\)</span>中的每个向量只包含一个单词的信息，而<code class="docutils literal notranslate"><span class="pre">hidden_states</span></code>中的向量是通过对单词之间互相关联的注意力运算得到的，因此还能包含上下文的信息。</p>
+</div>
+<div class="section" id="id13">
+<h4><span class="section-number">2.1.1.3.10. </span>归一化和残差连接<a class="headerlink" href="#id13" title="Permalink to this heading">¶</a></h4>
+<p>每一个子层（包括多头注意力子层和前馈子层）之后都有一个层后归一化模块（Post-Layer
+Normalization Post-LN），如图 <a class="reference internal" href="#fig-7"><span class="std std-numref">图2.1.8</span></a> 中“Add &amp; Norm”所示。</p>
+<div class="figure align-default" id="id27">
+<span id="fig-7"></span><img alt="../_images/multi-head-attention-sublayer.svg" src="../_images/multi-head-attention-sublayer.svg" /><p class="caption"><span class="caption-number">图2.1.8 </span><span class="caption-text">层归一化</span><a class="headerlink" href="#id27" title="Permalink to this image">¶</a></p>
+</div>
+<p>Post-LN包含一个残差连接（Residual Connection）和一个层归一化（Layer
+Normalization）过程。残差连接简单来说就是把子层的输入加到子层的输出上。残差连接的目标是确保关键信息不会丢失。整个Post-LN过程可以表述为以下公式：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-8">
+<span class="eqno">(2.1.9)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-8" title="Permalink to this equation">¶</a></span>\[\text{LayerNormalization}(\mathbf{X}+\text{Sublayer}(\mathbf{X}))\]</div>
+<p>其中<span class="math notranslate nohighlight">\(\mathbf{X}\)</span>是子层的输入，<span class="math notranslate nohighlight">\(\text{Sublayer}(\mathbf{X})\)</span>是子层的输出。</p>
+<p>层归一化的输入和输出均为长度为<span class="math notranslate nohighlight">\(d_\text{model}=512\)</span>的向量。层归一化有多种实现方式，且不同模型的层归一化方式也存在不同。一种基本的实现方式如下：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-9">
+<span class="eqno">(2.1.10)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-9" title="Permalink to this equation">¶</a></span>\[\text{LayerNormalization}(\boldsymbol{v})=\gamma\frac{\boldsymbol{v}-\mu}{\sigma}+\boldsymbol{\beta}\]</div>
+<p>其中：</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span>是输入向量<span class="math notranslate nohighlight">\(\boldsymbol{v}\)</span>的均值：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-10">
+<span class="eqno">(2.1.11)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-10" title="Permalink to this equation">¶</a></span>\[\mu=\frac{1}{d}\sum_{k=1}^dv_k\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span>是<span class="math notranslate nohighlight">\(\boldsymbol{v}\)</span>的标准差：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-11">
+<span class="eqno">(2.1.12)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-11" title="Permalink to this equation">¶</a></span>\[\sigma^2=\frac{1}{d}\sum_{k=1}^d(v_k-\mu)^2\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\gamma\)</span>是比例缩放参数</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span>是偏置向量</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id14">
+<h3><span class="section-number">2.1.1.4. </span>前馈网络子层<a class="headerlink" href="#id14" title="Permalink to this heading">¶</a></h3>
+<p>前馈网络（Feedforward Network,
+FFN）子层的输入是上一子层（多头注意力子层）的post-LN模块的输出，如图
+<a class="reference internal" href="#fig-8"><span class="std std-numref">图2.1.9</span></a> 所示：</p>
+<div class="figure align-default" id="id28">
+<span id="fig-8"></span><img alt="../_images/feedforward-sublayer.svg" src="../_images/feedforward-sublayer.svg" /><p class="caption"><span class="caption-number">图2.1.9 </span><span class="caption-text">前馈子层</span><a class="headerlink" href="#id28" title="Permalink to this image">¶</a></p>
+</div>
+<p>FFN子层具有以下特性：</p>
+<ul class="simple">
+<li><p>编码器和解码器中的FFN均为<a class="reference external" href="https://ver217.github.io/2018/07/06/fc/">全连接网络（Fully-Connected Network,
+FCN）</a></p></li>
+<li><p>FFN采用逐位置的计算过程，采用相同的方式单独对每个位置进行计算</p></li>
+<li><p>FFN包含两个全连接层，并且使用ReLU激活函数</p></li>
+<li><p>FFN整体的输入和输出都是长度为<span class="math notranslate nohighlight">\(d_\text{model}=512\)</span>的向量，隐藏层（中间层）的输入输出维度为<span class="math notranslate nohighlight">\(d_\text{ff}=2048\)</span>，如图
+<a class="reference internal" href="#fig-9"><span class="std std-numref">图2.1.10</span></a> 所示</p></li>
+<li><p>FFN可以被视为两个卷积核为1的<a class="reference external" href="https://paulxiong.medium.com/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%88%9D%E5%AD%A6%E8%80%85%E6%8C%87%E5%8D%97-31e177fdded2">卷积层</a></p></li>
+</ul>
+<div class="figure align-default" id="id29">
+<span id="fig-9"></span><img alt="../_images/FFN-inner.svg" src="../_images/FFN-inner.svg" /><p class="caption"><span class="caption-number">图2.1.10 </span><span class="caption-text">FFN内部结构</span><a class="headerlink" href="#id29" title="Permalink to this image">¶</a></p>
+</div>
+<p>FFN的输出跟多头注意力的输出一样需要经过post-LN层，得到整个FFN子层的输出。FFN子层的输出会被作为编码器中下一个多头注意力子层的输入。编码器中最后一层FFN子层的输出则会被作为解码器中多头注意力子层的输入。</p>
+<p>接下来我们来看解码器的结构。</p>
+</div>
+</div>
+<div class="section" id="id15">
+<h2><span class="section-number">2.1.2. </span>Transformer解码器<a class="headerlink" href="#id15" title="Permalink to this heading">¶</a></h2>
+<p>Transformer模型的解码器与编码器类似，都是通过多层堆叠起来的。每一个解码器层的结构如图
+<a class="reference internal" href="#fig-10"><span class="std std-numref">图2.1.11</span></a> 所示。</p>
+<div class="figure align-default" id="id30">
+<span id="fig-10"></span><img alt="../_images/transformer-decoder-layer.svg" src="../_images/transformer-decoder-layer.svg" /><p class="caption"><span class="caption-number">图2.1.11 </span><span class="caption-text">Transformer解码器的每一层</span><a class="headerlink" href="#id30" title="Permalink to this image">¶</a></p>
+</div>
+<p>每一个解码器层由三个子层组成：掩蔽多头注意力子层（Masked Multi-head
+Attention Layer）、多头注意力子层以及前馈网络子层。</p>
+<p>掩蔽多头注意力子层与普通的多头注意力子层在计算注意力权重时有所不同。</p>
+<ul class="simple">
+<li><p>后者在计算注意力权重时，对于每个位置的单词，都会计算其与其他所有位置的注意力权重。</p></li>
+<li><p>前者在计算注意力权重时，对于每个位置的单词，会掩蔽其后续位置上单词的注意力权重。</p></li>
+</ul>
+<p>因此，在掩蔽多头注意力子层中，每个位置的单词只能“看到”其前面的单词，而不能“看到”其后面的单词。</p>
+<p>这一机制可以让Transformer学会只根据前面的句子来预测下一个单词。</p>
+<p>与编码器相同，解码器中每个子层后都有“Add &amp;
+Norm”模块来进行残差连接和层归一化。</p>
+<p>与编码器相同，输出嵌入层（Output Embedding）和位置编码（Positional
+Encoding）的输出也只与第一层解码器相连。</p>
+<p>解码器中各子层之间的结构以及子层的作用与编码器相似。因此，本节只重点关注二者之间不同的部分。</p>
+<div class="section" id="id16">
+<h3><span class="section-number">2.1.2.1. </span>输出嵌入和位置编码<a class="headerlink" href="#id16" title="Permalink to this heading">¶</a></h3>
+<p>输出嵌入层和位置编码函数与编码器中的输入嵌入层和位置编码相同。</p>
+<p>以英译中的机器翻译任务为例，输入是指原始的英文句子，输出就是我们所需要学习的中文翻译：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Inputs</span> <span class="o">=</span> <span class="s2">&quot;The black cat set on the couch and the brown dog slept on the rug.&quot;</span>
+<span class="n">Outputs</span> <span class="o">=</span> <span class="s2">&quot;黑猫坐在沙发上，棕狗睡在地毯上。&quot;</span>
+</pre></div>
+</div>
+<p>在训练阶段，正如编码器中的输入句子一样，输出句子也会经过词嵌入层和位置编码函数。</p>
+<p>接下来我们来看解码器中的多头注意力层。</p>
+</div>
+<div class="section" id="id17">
+<h3><span class="section-number">2.1.2.2. </span>掩蔽多头注意力层<a class="headerlink" href="#id17" title="Permalink to this heading">¶</a></h3>
+<p>掩蔽多头注意力层是解码器每一层中位于下方的多头注意力子层：</p>
+<div class="figure align-default" id="id31">
+<img alt="../_images/decoder-layer-first-attention-sublayer.svg" src="../_images/decoder-layer-first-attention-sublayer.svg" /><p class="caption"><span class="caption-number">图2.1.12 </span><span class="caption-text">掩蔽多头注意力子层在解码器层中的位置</span><a class="headerlink" href="#id31" title="Permalink to this image">¶</a></p>
+</div>
+<p>Transformer是一个<a class="reference external" href="https://aws.amazon.com/cn/what-is/autoregressive-models/">自回归模型</a>。在自回归模型中，每一个token的预测都基于先前已有的token序列。将输出序列<span class="math notranslate nohighlight">\(\mathbf{y}\)</span>中第<span class="math notranslate nohighlight">\(t\)</span>个token记作<span class="math notranslate nohighlight">\(y_t\)</span>。在自回归模型中，要预测<span class="math notranslate nohighlight">\(y_t\)</span>，则<span class="math notranslate nohighlight">\(y_1,\cdots,y_{t-1}\)</span>必须是已知的。自回归模型会计算给定<span class="math notranslate nohighlight">\(y_1,\cdots,y_{t-1}\)</span>的条件下<span class="math notranslate nohighlight">\(y_t\)</span>的概率，即<span class="math notranslate nohighlight">\(p(y_t|y_1,\cdots,y_{t-1})\)</span>.</p>
+<p>掩蔽多头注意力层通过对注意力权重矩阵进行掩码操作来实现自回归机制。图
+<a class="reference internal" href="#fig-11"><span class="std std-numref">图2.1.13</span></a>
+展示了掩蔽多头注意力与普通多头注意力中注意力头内部的点积注意力的区别。</p>
+<div class="figure align-default" id="id32">
+<span id="fig-11"></span><img alt="../_images/normal-attention-vs-masked-attention.svg" src="../_images/normal-attention-vs-masked-attention.svg" /><p class="caption"><span class="caption-number">图2.1.13 </span><span class="caption-text">掩蔽多头注意力与普通多头注意力中注意力头内部的点积注意力</span><a class="headerlink" href="#id32" title="Permalink to this image">¶</a></p>
+</div>
+<p>可以看到，掩蔽多头注意力机制在比例缩放操作（Scale）之后进行了掩蔽（Mask）操作。</p>
+<p>掩蔽注意力机制中比例缩放点积注意力使用公式表示为：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-12">
+<span class="eqno">(2.1.13)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-12" title="Permalink to this equation">¶</a></span>\[\text{Attention}(\mathbf{Q},\mathbf{K},\mathbf{V})=\text{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^T}{\sqrt{d_k}}+\mathbf{M}\right)\mathbf{V}\]</div>
+<p>其中<span class="math notranslate nohighlight">\(\frac{\mathbf{Q}\mathbf{K}^T}{\sqrt{d_k}}\)</span>是注意力权重矩阵，大小为<span class="math notranslate nohighlight">\(N\times N\)</span>，矩阵第<span class="math notranslate nohighlight">\(i\)</span>行第<span class="math notranslate nohighlight">\(j\)</span>列的元素表示输入的句子中第<span class="math notranslate nohighlight">\(i\)</span>个单词对第<span class="math notranslate nohighlight">\(j\)</span>个单词的注意力权重。</p>
+<p>为了实现自回归机制，我们只允许每个单词关注其前面的单词，而不允许其关注后面的单词。</p>
+<p>因此，我们使用掩蔽矩阵<span class="math notranslate nohighlight">\(\mathbf{M}\)</span>将注意力权重矩阵中列号大于行号的元素掩蔽掉。即，掩蔽矩阵<span class="math notranslate nohighlight">\(\mathbf{M}\)</span>中第<span class="math notranslate nohighlight">\(i\)</span>行第<span class="math notranslate nohighlight">\(j\)</span>列的元素<span class="math notranslate nohighlight">\(M_{ij}\)</span>满足：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-13">
+<span class="eqno">(2.1.14)<a class="headerlink" href="#equation-chapter-02-getting-started-with-architecture-of-the-transformer-model-section-01-the-rise-of-the-transformer-attention-is-all-you-need-13" title="Permalink to this equation">¶</a></span>\[\begin{split}M_{ij}=\left\{
+    \begin{aligned}
+    0, &amp; ~i\leq j \\
+    -\infty, &amp; ~i&gt;j &amp;
+    \end{aligned}
+\right.\end{split}\]</div>
+<p>接下来我们使用代码来演示掩蔽多头注意力的具体计算过程。</p>
+<p>我们沿用编码器中计算得到的<span class="math notranslate nohighlight">\(\mathbf{Q}_1,\mathbf{K}_1,\mathbf{V}_1\)</span>和<span class="math notranslate nohighlight">\(\mathbf{Q}_2,\mathbf{K}_2,\mathbf{V}_2\)</span>矩阵，首先计算两个掩蔽注意力头的注意力权重矩阵：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d_k</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">attention_weights_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">Q_1</span> <span class="o">@</span> <span class="n">K_1</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d_k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">attention_weights_1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mf">0.</span>         <span class="mf">2.82842712</span> <span class="mf">1.41421356</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">2.82842712</span> <span class="mf">5.65685425</span> <span class="mf">5.65685425</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.41421356</span> <span class="mf">5.65685425</span> <span class="mf">4.24264069</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention_weights_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">Q_2</span> <span class="o">@</span> <span class="n">K_2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d_k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">attention_weights_2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mf">2.12132034</span> <span class="mf">2.82842712</span> <span class="mf">3.53553391</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.41421356</span> <span class="mf">0.</span>         <span class="mf">1.41421356</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">2.82842712</span> <span class="mf">2.82842712</span> <span class="mf">4.24264069</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>然后我们定义与注意力权重大小相同的掩蔽矩阵，这里我们将负无穷大实现为-10000.0：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inf</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10000.0</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">inf</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">inf</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+<p>将掩蔽矩阵与权重矩阵相加：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 对于`array`对象而言，`+=`是就地（inplace）操作，`+`会创建新对象</span>
+<span class="n">attention_weights_1</span> <span class="o">=</span> <span class="n">attention_weights_1</span> <span class="o">+</span> <span class="n">M</span>
+<span class="n">attention_weights_2</span> <span class="o">=</span> <span class="n">attention_weights_2</span> <span class="o">+</span> <span class="n">M</span>
+</pre></div>
+</div>
+<p>然后进行softmax操作：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention_weights_1</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">attention_weights_1</span><span class="p">)</span>
+<span class="n">attention_weights_2</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">attention_weights_2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>可以看到，每个单词对其后续单词的权重都变为接近0：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention_weights_1</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span>        <span class="p">,</span> <span class="mf">0.05506018</span><span class="p">,</span> <span class="mf">0.01338605</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">0.</span>        <span class="p">,</span> <span class="mf">0.</span>        <span class="p">,</span> <span class="mf">0.93155377</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">0.</span>        <span class="p">,</span> <span class="mf">0.</span>        <span class="p">,</span> <span class="mf">0.</span>        <span class="p">]])</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention_weights_2</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span>        <span class="p">,</span> <span class="mf">0.30569525</span><span class="p">,</span> <span class="mf">0.61998512</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">0.</span>        <span class="p">,</span> <span class="mf">0.</span>        <span class="p">,</span> <span class="mf">0.07431963</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">0.</span>        <span class="p">,</span> <span class="mf">0.</span>        <span class="p">,</span> <span class="mf">0.</span>        <span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id18">
+<h3><span class="section-number">2.1.2.3. </span>交叉注意力层<a class="headerlink" href="#id18" title="Permalink to this heading">¶</a></h3>
+<p>在解码器中，掩蔽多头注意力层之后还有一个不带掩蔽的普通多头注意力层，也称为交叉注意力（Cross-attention）层：</p>
+<div class="figure align-default" id="id33">
+<img alt="../_images/decoder-layer-second-attention-sublayer.svg" src="../_images/decoder-layer-second-attention-sublayer.svg" /><p class="caption"><span class="caption-number">图2.1.14 </span><span class="caption-text">交叉注意力层子层在解码器层中的位置</span><a class="headerlink" href="#id33" title="Permalink to this image">¶</a></p>
+</div>
+<p>在注意力计算的过程中，按照输入来源可以分为：自注意力（Self-attention）和交叉注意力（Cross-attention）。自注意力中，<span class="math notranslate nohighlight">\(\mathbf{Q}, \mathbf{K}, \mathbf{V}\)</span>都来源于同一个序列。例如，</p>
+<ul class="simple">
+<li><p>编码器层中的多头注意力就是自注意力，因为其<span class="math notranslate nohighlight">\(\mathbf{Q}, \mathbf{K}, \mathbf{V}\)</span>均来源于输入序列<span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p></li>
+<li><p>解码器层中的掩蔽多头注意力也是自注意力，因为其<span class="math notranslate nohighlight">\(\mathbf{Q}, \mathbf{K}, \mathbf{V}\)</span>均来源于输出序列<span class="math notranslate nohighlight">\(\mathbf{Y}\)</span>.</p></li>
+</ul>
+<p>而解码器中位于中间的多头注意力层则是交叉注意力，因为其<span class="math notranslate nohighlight">\(\mathbf{Q}\)</span>来源于输出序列<span class="math notranslate nohighlight">\(\mathbf{Y}\)</span>，而其<span class="math notranslate nohighlight">\(\mathbf{K}\)</span>和<span class="math notranslate nohighlight">\(\mathbf{V}\)</span>来源于输入序列<span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p>
+<p>图 <a class="reference internal" href="#fig-13"><span class="std std-numref">图2.1.15</span></a>
+展示了编码器中的自注意力、解码器中的自注意力以及解码器中的交叉注意力之间的区别。</p>
+<div class="figure align-default" id="id34">
+<span id="fig-13"></span><img alt="../_images/self-attention-vs-cross-attention.svg" src="../_images/self-attention-vs-cross-attention.svg" /><p class="caption"><span class="caption-number">图2.1.15 </span><span class="caption-text">编码器中的自注意力、解码器中的自注意力以及解码器中的交叉注意力</span><a class="headerlink" href="#id34" title="Permalink to this image">¶</a></p>
+</div>
+<p>其中交叉注意力中<span class="math notranslate nohighlight">\(\mathbf{K}_1\)</span>和<span class="math notranslate nohighlight">\(\mathbf{V}_1\)</span>的计算都来源于编码器的最终输出<span class="math notranslate nohighlight">\(\mathbf{H}(\mathbf{X})\)</span>，归根结底来源于输入序列<span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p>
+<p>交叉注意力的目的是计算输出序列中每个单词对输入序列中每个单词的注意力。</p>
+<p>假设输入序列<span class="math notranslate nohighlight">\(\mathbf{X}\)</span>的长度为<span class="math notranslate nohighlight">\(N\)</span>，输出序列<span class="math notranslate nohighlight">\(\mathbf{Y}\)</span>的长度为<span class="math notranslate nohighlight">\(M\)</span>，则交叉注意力中的注意力权重矩阵的大小应为<span class="math notranslate nohighlight">\(M \times N\)</span>，且其中第<span class="math notranslate nohighlight">\(i\)</span>行<span class="math notranslate nohighlight">\(j\)</span>列的值表示<span class="math notranslate nohighlight">\(y_i\)</span>对<span class="math notranslate nohighlight">\(x_j\)</span>的注意力权重。</p>
+<p>其计算代码与自注意力类似，只是Q, K, V的来源不同，在此不赘述。</p>
+</div>
+<div class="section" id="id19">
+<h3><span class="section-number">2.1.2.4. </span>解码器中其他模块<a class="headerlink" href="#id19" title="Permalink to this heading">¶</a></h3>
+<p>与编码器相同：</p>
+<ul class="simple">
+<li><p>解码器每一层中也有前馈网络子层（FNN）</p></li>
+<li><p>每个注意力子层和FNN子层之后都有Post-LN模块进行残差连接和层归一化</p></li>
+</ul>
+<p>与编码器不同的是，解码器的最终输出还会经过一个线性层和一个Softmax层来输出最终预测单词的概率。</p>
+<ul class="simple">
+<li><p>线性层的作用是将解码器输出的<span class="math notranslate nohighlight">\(d_\text{model}=512\)</span>的特征向量转换为<span class="math notranslate nohighlight">\(d_\text{vocab}=\)</span>词表长度的向量</p></li>
+<li><p>Softmax的作用是将转换后的向量进一步转换为每个单词的概率</p></li>
+</ul>
+<p>至此，我们已经基本介绍完了Transformer的架构，接下来我们来看Transformer是如何训练并取得良好表现的。</p>
+</div>
+</div>
+</div>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">2.1. Transformer模型架构</a><ul>
+<li><a class="reference internal" href="#id1">2.1.1. Transformer编码器</a><ul>
+<li><a class="reference internal" href="#id2">2.1.1.1. 输入嵌入层</a></li>
+<li><a class="reference internal" href="#id3">2.1.1.2. 位置编码</a><ul>
+<li><a class="reference internal" href="#id4">2.1.1.2.1. 融合位置编码</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">2.1.1.3. 多头注意力子层</a><ul>
+<li><a class="reference internal" href="#id6">2.1.1.3.1. 多头注意力的架构</a></li>
+<li><a class="reference internal" href="#id7">2.1.1.3.2. 第1步：构建输入</a></li>
+<li><a class="reference internal" href="#id8">2.1.1.3.3. 第2步：初始化权重矩阵</a></li>
+<li><a class="reference internal" href="#q-k-v">2.1.1.3.4. 第3步：计算Q, K, V矩阵</a></li>
+<li><a class="reference internal" href="#id9">2.1.1.3.5. 第4步：计算注意力权重</a></li>
+<li><a class="reference internal" href="#softmax">2.1.1.3.6. 第5步：Softmax操作</a></li>
+<li><a class="reference internal" href="#id10">2.1.1.3.7. 第6步：计算注意力头输出</a></li>
+<li><a class="reference internal" href="#id11">2.1.1.3.8. 第7步：拼接所有头的输出</a></li>
+<li><a class="reference internal" href="#id12">2.1.1.3.9. 第8步：得到最终输出</a></li>
+<li><a class="reference internal" href="#id13">2.1.1.3.10. 归一化和残差连接</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">2.1.1.4. 前馈网络子层</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id15">2.1.2. Transformer解码器</a><ul>
+<li><a class="reference internal" href="#id16">2.1.2.1. 输出嵌入和位置编码</a></li>
+<li><a class="reference internal" href="#id17">2.1.2.2. 掩蔽多头注意力层</a></li>
+<li><a class="reference internal" href="#id18">2.1.2.3. 交叉注意力层</a></li>
+<li><a class="reference internal" href="#id19">2.1.2.4. 解码器中其他模块</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>2. 从Transformer的架构开始</div>
+         </div>
+     </a>
+     <a id="button-next" href="section_02_training_and_performance.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>2.2. 模型训练和表现</div>
+        </div>
+     </a>
+  </div>
+        
+        </main>
+    </div>
+  </body>
+</html>

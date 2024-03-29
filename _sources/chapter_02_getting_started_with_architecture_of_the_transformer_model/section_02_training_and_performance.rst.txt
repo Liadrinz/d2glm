@@ -6,3 +6,6 @@
 
 数据集来源于\ `Workshops on Machine
 Translation（WMT） <http://www.statmt.org/wmt14/>`__
+
+原始Transformer基础模型在8张NVIDIA P100
+GPU上训练了10万步，花费12小时。Transformer大模型训练了30万步，花费3.5天。

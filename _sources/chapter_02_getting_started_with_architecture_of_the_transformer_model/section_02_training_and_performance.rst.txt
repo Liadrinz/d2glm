@@ -1,3 +1,8 @@
 
 模型训练和表现
 ==============
+
+原始的Transformer模型的训练数据包含450万条英文-德文数据集和3600万条英文-法文数据集。
+
+数据集来源于\ `Workshops on Machine
+Translation（WMT） <http://www.statmt.org/wmt14/>`__

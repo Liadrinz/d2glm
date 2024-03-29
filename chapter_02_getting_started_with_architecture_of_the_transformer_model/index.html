@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>2. 从Transformer的架构开始 &#8212; Transformer for NLP 0.0.1 documentation</title>
+    <title>从Transformer的架构开始 &#8212; Transformer for NLP 0.0.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
@@ -26,7 +26,7 @@
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.1. Transformer模型架构" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html" />
+    <link rel="next" title="1. Transformer模型架构" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html" />
     <link rel="prev" title="1.3. 我们需要什么资源" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html" /> 
   </head>
 <body>
@@ -34,7 +34,7 @@
     <div class="mdl-layout__header-row">
         
         <nav class="mdl-navigation breadcrumb">
-            <a class="mdl-navigation__link is-active"><span class="section-number">2. </span>从Transformer的架构开始</a>
+            <a class="mdl-navigation__link is-active">从Transformer的架构开始</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -95,10 +95,10 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
 </ul>
 </li>
 </ul>
@@ -136,10 +136,10 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
 </ul>
 </li>
 </ul>
@@ -154,7 +154,7 @@ Show Source
         <div class="page-content" role="main">
         
   <div class="section" id="transformer">
-<span id="chapter-2"></span><h1><span class="section-number">2. </span>从Transformer的架构开始<a class="headerlink" href="#transformer" title="Permalink to this heading">¶</a></h1>
+<span id="chapter-2"></span><h1>从Transformer的架构开始<a class="headerlink" href="#transformer" title="Permalink to this heading">¶</a></h1>
 <p>语言是人类交流的精髓。如果没有构成语言的词汇序列，文明将永远无法诞生。如今，我们大多生活在数字化语言表达的世界中。我们的日常生活依赖于自然语言处理（NLP）数字化语言功能，如网络搜索引擎、电子邮件、社交网络、帖子、推文、智能手机短信、翻译、网页、流媒体网站上的语音转文字、热线服务上的文字转语音等等，这些都是我们日常生活中常见的功能。</p>
 <p>在“<a class="reference internal" href="../chapter_01_what_are_transformers/index.html#chapter-1"><span class="std std-ref">什么是Transformer?</span></a>”中解释了循环神经网络（RNN）的局限性以及云端AI
 Transformer在设计和开发中所占据的重要地位。工业4.0开发人员的角色是理解原始Transformer的架构以及随后出现的多个Transformer生态系统。</p>
@@ -180,13 +180,13 @@ Need</em>。Transformer应运而生。Transformer在性能上超越了现有的�
 <p>让我们直接深入原始Transformer架构的结构。</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html#id1">2.1.1. Transformer编码器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html#id15">2.1.2. Transformer解码器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html#id1">1.1. Transformer编码器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html#id15">1.2. Transformer解码器</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section_02_training_and_performance.html">2. 模型训练和表现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
 </ul>
 </div>
 </div>
@@ -211,7 +211,7 @@ Need</em>。Transformer应运而生。Transformer在性能上超越了现有的�
          <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>2.1. Transformer模型架构</div>
+            <div>1. Transformer模型架构</div>
         </div>
      </a>
   </div>

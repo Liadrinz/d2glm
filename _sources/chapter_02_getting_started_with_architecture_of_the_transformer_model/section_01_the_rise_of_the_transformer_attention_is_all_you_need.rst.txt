@@ -1343,7 +1343,7 @@ Transformer是一个\ `自回归模型 <https://aws.amazon.com/cn/what-is/autore
      [2.82842712 2.82842712 4.24264069]]
 
 
-然后我们定义与注意力权重大小相同的掩蔽矩阵，这里我们将负无穷大实现为-10000.0：
+然后我们定义与注意力权重大小相同的掩蔽矩阵，这里我们将无穷大实现为10000.0：
 
 .. raw:: latex
 
@@ -1351,7 +1351,7 @@ Transformer是一个\ `自回归模型 <https://aws.amazon.com/cn/what-is/autore
 
 .. code:: python
 
-    inf = -10000.0
+    inf = 10000.0
     M = np.array([
         [0, -inf, -inf],
         [0,    0, -inf],
@@ -1401,9 +1401,9 @@ Transformer是一个\ `自回归模型 <https://aws.amazon.com/cn/what-is/autore
 .. parsed-literal::
     :class: output
 
-    array([[0.        , 0.05506018, 0.01338605],
-           [0.        , 0.        , 0.93155377],
-           [0.        , 0.        , 0.        ]])
+    array([[0.00150576, 0.        , 0.        ],
+           [0.02547568, 0.43101859, 0.        ],
+           [0.00619356, 0.43101859, 0.10478783]])
 
 
 
@@ -1425,57 +1425,52 @@ Transformer是一个\ `自回归模型 <https://aws.amazon.com/cn/what-is/autore
 .. parsed-literal::
     :class: output
 
-    array([[0.        , 0.30569525, 0.61998512],
-           [0.        , 0.        , 0.07431963],
-           [0.        , 0.        , 0.        ]])
+    array([[0.07137088, 0.        , 0.        ],
+           [0.03519075, 0.00855546, 0.        ],
+           [0.14474835, 0.14474835, 0.59538621]])
 
 
 
-交叉注意力层
-~~~~~~~~~~~~
+.. raw:: html
 
-在解码器中，掩蔽多头注意力层之后还有一个不带掩蔽的普通多头注意力层，也称为交叉注意力（Cross-attention）层：
+   <!-- ### 交叉注意力层
 
-.. figure:: screenshots/decoder-layer-second-attention-sublayer.svg
+   在解码器中，掩蔽多头注意力层之后还有一个不带掩蔽的普通多头注意力层，也称为交叉注意力（Cross-attention）层：
 
-   交叉注意力层子层在解码器层中的位置
+   ![交叉注意力层子层在解码器层中的位置](screenshots/decoder-layer-second-attention-sublayer.svg)
 
-在注意力计算的过程中，按照输入来源可以分为：自注意力（Self-attention）和交叉注意力（Cross-attention）。自注意力中，\ :math:`\mathbf{Q}, \mathbf{K}, \mathbf{V}`\ 都来源于同一个序列。例如，
+   在注意力计算的过程中，按照输入来源可以分为：自注意力（Self-attention）和交叉注意力（Cross-attention）。自注意力中，$\mathbf{Q}, \mathbf{K}, \mathbf{V}$都来源于同一个序列。例如，
 
--  编码器层中的多头注意力就是自注意力，因为其\ :math:`\mathbf{Q}, \mathbf{K}, \mathbf{V}`\ 均来源于输入序列\ :math:`\mathbf{X}`.
--  解码器层中的掩蔽多头注意力也是自注意力，因为其\ :math:`\mathbf{Q}, \mathbf{K}, \mathbf{V}`\ 均来源于输出序列\ :math:`\mathbf{Y}`.
+   - 编码器层中的多头注意力就是自注意力，因为其$\mathbf{Q}, \mathbf{K}, \mathbf{V}$均来源于输入序列$\mathbf{X}$.
+   - 解码器层中的掩蔽多头注意力也是自注意力，因为其$\mathbf{Q}, \mathbf{K}, \mathbf{V}$均来源于输出序列$\mathbf{Y}$.
 
-而解码器中位于中间的多头注意力层则是交叉注意力，因为其\ :math:`\mathbf{Q}`\ 来源于输出序列\ :math:`\mathbf{Y}`\ ，而其\ :math:`\mathbf{K}`\ 和\ :math:`\mathbf{V}`\ 来源于输入序列\ :math:`\mathbf{X}`.
+   而解码器中位于中间的多头注意力层则是交叉注意力，因为其$\mathbf{Q}$来源于输出序列$\mathbf{Y}$，而其$\mathbf{K}$和$\mathbf{V}$来源于输入序列$\mathbf{X}$.
 
-图 :numref:`fig-13`
-展示了编码器中的自注意力、解码器中的自注意力以及解码器中的交叉注意力之间的区别。
+   图 :numref:`fig-13` 展示了编码器中的自注意力、解码器中的自注意力以及解码器中的交叉注意力之间的区别。
 
-.. _fig-13:
+   ![编码器中的自注意力、解码器中的自注意力以及解码器中的交叉注意力](screenshots/self-attention-vs-cross-attention.svg)
 
-.. figure:: screenshots/self-attention-vs-cross-attention.svg
-
-   编码器中的自注意力、解码器中的自注意力以及解码器中的交叉注意力
+   :label:`fig-13`
 
 
-其中交叉注意力中\ :math:`\mathbf{K}_1`\ 和\ :math:`\mathbf{V}_1`\ 的计算都来源于编码器的最终输出\ :math:`\mathbf{H}(\mathbf{X})`\ ，归根结底来源于输入序列\ :math:`\mathbf{X}`.
+   其中交叉注意力中$\mathbf{K}_1$和$\mathbf{V}_1$的计算都来源于编码器的最终输出$\mathbf{H}(\mathbf{X})$，归根结底来源于输入序列$\mathbf{X}$.
 
-交叉注意力的目的是计算输出序列中每个单词对输入序列中每个单词的注意力。
+   交叉注意力的目的是计算输出序列中每个单词对输入序列中每个单词的注意力。
 
-假设输入序列\ :math:`\mathbf{X}`\ 的长度为\ :math:`N`\ ，输出序列\ :math:`\mathbf{Y}`\ 的长度为\ :math:`M`\ ，则交叉注意力中的注意力权重矩阵的大小应为\ :math:`M \times N`\ ，且其中第\ :math:`i`\ 行\ :math:`j`\ 列的值表示\ :math:`y_i`\ 对\ :math:`x_j`\ 的注意力权重。
+   假设输入序列$\mathbf{X}$的长度为$N$，输出序列$\mathbf{Y}$的长度为$M$，则交叉注意力中的注意力权重矩阵的大小应为$M \times N$，且其中第$i$行$j$列的值表示$y_i$对$x_j$的注意力权重。
 
-其计算代码与自注意力类似，只是Q, K, V的来源不同，在此不赘述。
+   其计算代码与自注意力类似，只是Q, K, V的来源不同，在此不赘述。
 
-解码器中其他模块
-~~~~~~~~~~~~~~~~
+   ### 解码器中其他模块
 
-与编码器相同：
+   与编码器相同：
 
--  解码器每一层中也有前馈网络子层（FNN）
--  每个注意力子层和FNN子层之后都有Post-LN模块进行残差连接和层归一化
+   - 解码器每一层中也有前馈网络子层（FNN）
+   - 每个注意力子层和FNN子层之后都有Post-LN模块进行残差连接和层归一化
 
-与编码器不同的是，解码器的最终输出还会经过一个线性层和一个Softmax层来输出最终预测单词的概率。
+   与编码器不同的是，解码器的最终输出还会经过一个线性层和一个Softmax层来输出最终预测单词的概率。
 
--  线性层的作用是将解码器输出的\ :math:`d_\text{model}=512`\ 的特征向量转换为\ :math:`d_\text{vocab}=`\ 词表长度的向量
--  Softmax的作用是将转换后的向量进一步转换为每个单词的概率
+   - 线性层的作用是将解码器输出的$d_\text{model}=512$的特征向量转换为$d_\text{vocab}=$词表长度的向量
+   - Softmax的作用是将转换后的向量进一步转换为每个单词的概率
 
-至此，我们已经基本介绍完了Transformer的架构，接下来我们来看Transformer是如何训练并取得良好表现的。
+   至此，我们已经基本介绍完了Transformer的架构，接下来我们来看Transformer是如何训练并取得良好表现的。 -->

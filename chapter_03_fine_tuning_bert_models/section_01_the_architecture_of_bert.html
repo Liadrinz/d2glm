@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>2. 模型训练和表现 &#8212; Transformer for NLP 0.0.1 documentation</title>
+    <title>1. BERT模型的架构 &#8212; Transformer for NLP 0.0.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
@@ -25,17 +25,14 @@
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Hugging Face上的Transformer模型" href="section_03_transformer_models_in_hugging_face.html" />
-    <link rel="prev" title="1. Transformer模型架构" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
   </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
     <div class="mdl-layout__header-row">
         
         <nav class="mdl-navigation breadcrumb">
-            <a class="mdl-navigation__link" href="index.html">从Transformer的架构开始</a><i class="material-icons">navigate_next</i>
-            <a class="mdl-navigation__link is-active"><span class="section-number">2. </span>模型训练和表现</a>
+            <a class="mdl-navigation__link is-active"><span class="section-number">1. </span>BERT模型的架构</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -58,7 +55,7 @@
         
 <a id="button-show-source"
     class="mdl-button mdl-js-button mdl-button--icon"
-    href="../_sources/chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.rst.txt" rel="nofollow">
+    href="../_sources/chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.rst.txt" rel="nofollow">
   <i class="material-icons">code</i>
 </a>
 <div class="mdl-tooltip" data-mdl-for="button-show-source">
@@ -89,18 +86,18 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul class="current">
+                <ul>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">从Transformer的架构开始</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
 </ul>
 </li>
 </ul>
@@ -131,18 +128,18 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul class="current">
+                <ul>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">从Transformer的架构开始</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
 </ul>
 </li>
 </ul>
@@ -156,24 +153,10 @@ Show Source
     <div class="document">
         <div class="page-content" role="main">
         
-  <div class="section" id="id1">
-<h1><span class="section-number">2. </span>模型训练和表现<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
-<p>原始的Transformer模型的训练数据包含450万条英文-德文数据集和3600万条英文-法文数据集。</p>
-<p>数据集来源于<a class="reference external" href="http://www.statmt.org/wmt14/">Workshops on Machine
-Translation（WMT）</a></p>
-<p>原始Transformer基础模型在8张NVIDIA P100
-GPU上训练了10万步，花费12小时。Transformer大模型训练了30万步，花费3.5天。</p>
-<p>原始Transformer在WMT英译法的数据集上取得了41.8的<a class="reference external" href="https://zhuanlan.zhihu.com/p/338488036">BLEU分数</a>，超越了以往所有的机器翻译模型。</p>
-<p>BLEU表示Bilingual Evaluation Understudy，是一种用于评估翻译质量的算法。</p>
-<p>Google Research和Google
-Brain团队应用了优化策略来改善Transformer的性能。例如，使用Adam优化器，使用带预热（Warmup）的学习率调度，即先让学习率从0线性提升到所设置的学习率，然后让学习率缓慢地线性递减。</p>
-<p>在嵌入的求和部分应用了不同类型的正则化技术，例如<a class="reference external" href="https://zh.d2l.ai/chapter_multilayer-perceptrons/dropout.html">暂退（Dropout）</a>和残差暂退（Residual
-Dropout）。</p>
-<p>此外，Transformer还应用了标签平滑（Label
-Smoothing）取代了过度自信的独热编码（One-hot），以防止过拟合。</p>
-<p>其他几种Transformer模型的变体已经促成了新的模型和用法，我们将在后续章节中进行探索。</p>
-<p>在结束本章之前，让我们感受一下Hugging
-Face中现成可用的Transformer模型的简便性。</p>
+  <div class="section" id="bert">
+<h1><span class="section-number">1. </span>BERT模型的架构<a class="headerlink" href="#bert" title="Permalink to this heading">¶</a></h1>
+<p>我们不再赘述“<a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html#chapter-2"><span class="std std-ref">从Transformer的架构开始</span></a>”中描述的Transformer模型的构建模块。在本节中，我们将重点关注BERT模型的与原始Transformer中不同的地方。</p>
+<p>我们重点关注<a class="reference external" href="https://arxiv.org/pdf/1810.04805.pdf">Devlin等人（2018年）</a>这篇论文中设计的改进版编码器。我们首先将介绍编码器的架构，然后介绍预训练输入环境的准备工作。然后我们将描述BERT的两步骤框架：预训练和微调。</p>
 </div>
 
 
@@ -185,20 +168,6 @@ Face中现成可用的Transformer模型的简便性。</p>
 
       <div class="clearer"></div>
     </div><div class="pagenation">
-     <a id="button-prev" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
-         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
-         <div class="pagenation-text">
-            <span class="pagenation-direction">Previous</span>
-            <div>1. Transformer模型架构</div>
-         </div>
-     </a>
-     <a id="button-next" href="section_03_transformer_models_in_hugging_face.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
-         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
-        <div class="pagenation-text">
-            <span class="pagenation-direction">Next</span>
-            <div>3. Hugging Face上的Transformer模型</div>
-        </div>
-     </a>
   </div>
         
         </main>

@@ -1,3 +1,96 @@
 
 Hugging Face上的Transformer模型
 ===============================
+
+您在本章中看到的所有内容都可以简化为一个可直接使用的Hugging Face
+Transformer模型。
+
+有了Hugging Face，用三行代码就能实现机器翻译！
+
+首先我们需要在Python中安装Hugging Face transformers:
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    !pip -q install transformers
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+    
+
+然后我们导入Hugging
+Face的pipeline方法，其中包含了transformer的多种用法：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    from transformers import pipeline
+
+然后，我们创建一个翻译模型并输入一个要从英文翻译成法文的句子，以演示原始Transformer的功能：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    translator = pipeline("translation_en_to_fr")
+    print(translator("It is easy to translate languages with Transformers.", max_length=40))
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    No model was supplied, defaulted to t5-base (https://huggingface.co/t5-base)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    [{'translation_text': 'Il est facile de traduire des langues avec Transformers.'}]
+
+
+可以看到，我们得到了一个翻译后的法文句子。
+
+使用Hugging Face上发布的其他模型也可以实现将英文翻译成中文：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    translator = pipeline("translation_en_to_zh", model="liam168/trans-opus-mt-en-zh")
+    print(translator("It is easy to translate languages with Transformers.", max_length=40))
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    [{'translation_text': '使用变换器翻译语言很容易。'}]
+

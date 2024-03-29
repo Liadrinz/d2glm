@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>3. Hugging Face上的Transformer模型 &#8212; Transformer for NLP 0.0.1 documentation</title>
+    <title>2.3. Hugging Face上的Transformer模型 &#8212; Transformer for NLP 0.0.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
@@ -26,15 +26,15 @@
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="2. 模型训练和表现" href="section_02_training_and_performance.html" /> 
+    <link rel="prev" title="2.2. 模型训练和表现" href="section_02_training_and_performance.html" /> 
   </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
     <div class="mdl-layout__header-row">
         
         <nav class="mdl-navigation breadcrumb">
-            <a class="mdl-navigation__link" href="index.html">从Transformer的架构开始</a><i class="material-icons">navigate_next</i>
-            <a class="mdl-navigation__link is-active"><span class="section-number">3. </span>Hugging Face上的Transformer模型</a>
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">2. </span>从Transformer的架构开始</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active"><span class="section-number">2.3. </span>Hugging Face上的Transformer模型</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -95,10 +95,10 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">从Transformer的架构开始</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. 从Transformer的架构开始</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.3. Hugging Face上的Transformer模型</a></li>
 </ul>
 </li>
 </ul>
@@ -136,10 +136,10 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">从Transformer的架构开始</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. 从Transformer的架构开始</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.3. Hugging Face上的Transformer模型</a></li>
 </ul>
 </li>
 </ul>
@@ -154,7 +154,42 @@ Show Source
         <div class="page-content" role="main">
         
   <div class="section" id="hugging-facetransformer">
-<h1><span class="section-number">3. </span>Hugging Face上的Transformer模型<a class="headerlink" href="#hugging-facetransformer" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">2.3. </span>Hugging Face上的Transformer模型<a class="headerlink" href="#hugging-facetransformer" title="Permalink to this heading">¶</a></h1>
+<p>您在本章中看到的所有内容都可以简化为一个可直接使用的Hugging Face
+Transformer模型。</p>
+<p>有了Hugging Face，用三行代码就能实现机器翻译！</p>
+<p>首先我们需要在Python中安装Hugging Face transformers:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip -q install transformers
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">Running</span> <span class="n">pip</span> <span class="k">as</span> <span class="n">the</span> <span class="s1">&#39;root&#39;</span> <span class="n">user</span> <span class="n">can</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">broken</span> <span class="n">permissions</span> <span class="ow">and</span> <span class="n">conflicting</span> <span class="n">behaviour</span> <span class="k">with</span> <span class="n">the</span> <span class="n">system</span> <span class="n">package</span> <span class="n">manager</span><span class="o">.</span> <span class="n">It</span> <span class="ow">is</span> <span class="n">recommended</span> <span class="n">to</span> <span class="n">use</span> <span class="n">a</span> <span class="n">virtual</span> <span class="n">environment</span> <span class="n">instead</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pip</span><span class="o">.</span><span class="n">pypa</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">warnings</span><span class="o">/</span><span class="n">venv</span>
+</pre></div>
+</div>
+<p>然后我们导入Hugging
+Face的pipeline方法，其中包含了transformer的多种用法：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+</pre></div>
+</div>
+<p>然后，我们创建一个翻译模型并输入一个要从英文翻译成法文的句子，以演示原始Transformer的功能：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">translator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;translation_en_to_fr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">translator</span><span class="p">(</span><span class="s2">&quot;It is easy to translate languages with Transformers.&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">40</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">No</span> <span class="n">model</span> <span class="n">was</span> <span class="n">supplied</span><span class="p">,</span> <span class="n">defaulted</span> <span class="n">to</span> <span class="n">t5</span><span class="o">-</span><span class="n">base</span> <span class="p">(</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">huggingface</span><span class="o">.</span><span class="n">co</span><span class="o">/</span><span class="n">t5</span><span class="o">-</span><span class="n">base</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">&#39;translation_text&#39;</span><span class="p">:</span> <span class="s1">&#39;Il est facile de traduire des langues avec Transformers.&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+<p>可以看到，我们得到了一个翻译后的法文句子。</p>
+<p>使用Hugging Face上发布的其他模型也可以实现将英文翻译成中文：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">translator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;translation_en_to_zh&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;liam168/trans-opus-mt-en-zh&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">translator</span><span class="p">(</span><span class="s2">&quot;It is easy to translate languages with Transformers.&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">40</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">&#39;translation_text&#39;</span><span class="p">:</span> <span class="s1">&#39;使用变换器翻译语言很容易。&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
 </div>
 
 
@@ -170,7 +205,7 @@ Show Source
          <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>2. 模型训练和表现</div>
+            <div>2.2. 模型训练和表现</div>
          </div>
      </a>
   </div>

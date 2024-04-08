@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>3. Hugging Face上的Transformer模型 &#8212; Transformer for NLP 0.0.1 documentation</title>
+    <title>2.3. Hugging Face上的Transformer模型 &#8212; Transformer for NLP 0.0.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
@@ -26,16 +26,16 @@
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. 练习" href="section_04_exercise.html" />
-    <link rel="prev" title="2. 模型训练和表现" href="section_02_training_and_performance.html" /> 
+    <link rel="next" title="2.4. 练习" href="section_04_exercise.html" />
+    <link rel="prev" title="2.2. 模型训练和表现" href="section_02_training_and_performance.html" /> 
   </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
     <div class="mdl-layout__header-row">
         
         <nav class="mdl-navigation breadcrumb">
-            <a class="mdl-navigation__link" href="index.html">从Transformer的架构开始</a><i class="material-icons">navigate_next</i>
-            <a class="mdl-navigation__link is-active"><span class="section-number">3. </span>Hugging Face上的Transformer模型</a>
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">2. </span>从Transformer的架构开始</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active"><span class="section-number">2.3. </span>Hugging Face上的Transformer模型</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -96,11 +96,16 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">从Transformer的架构开始</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. 从Transformer的架构开始</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_04_exercise.html">2.4. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
 </ul>
 </li>
 </ul>
@@ -138,11 +143,16 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">从Transformer的架构开始</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. 从Transformer的架构开始</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_04_exercise.html">2.4. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
 </ul>
 </li>
 </ul>
@@ -157,7 +167,7 @@ Show Source
         <div class="page-content" role="main">
         
   <div class="section" id="hugging-facetransformer">
-<h1><span class="section-number">3. </span>Hugging Face上的Transformer模型<a class="headerlink" href="#hugging-facetransformer" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">2.3. </span>Hugging Face上的Transformer模型<a class="headerlink" href="#hugging-facetransformer" title="Permalink to this heading">¶</a></h1>
 <p>您在本章中看到的所有内容都可以简化为一个可直接使用的Hugging Face
 Transformer模型。</p>
 <p>有了Hugging Face，用三行代码就能实现机器翻译！</p>
@@ -208,14 +218,14 @@ Face的pipeline方法，其中包含了transformer的多种用法：</p>
          <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>2. 模型训练和表现</div>
+            <div>2.2. 模型训练和表现</div>
          </div>
      </a>
      <a id="button-next" href="section_04_exercise.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
          <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>4. 练习</div>
+            <div>2.4. 练习</div>
         </div>
      </a>
   </div>

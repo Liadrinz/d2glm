@@ -1,3 +1,130 @@
 
 微调BERT
 ========
+
+本节将对一个BERT模型进行微调，以预测下游任务的可接受性判断，并使用马修斯相关系数（Matthews
+Correlation Coefficient，MCC，后续解释）来衡量预测结果。
+
+硬件限制
+^^^^^^^^
+
+Transformer模型需要GPU.
+这里强烈建议使用免费的云GPU平台，因为在本地自己配置GPU计算环境较为复杂。
+
+-  `Google Colab <https://colab.research.google.com/>`__
+-  `Kaggle Notebook <https://www.kaggle.com/code>`__
+
+安装PyTorch和Hugging Face Transformer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hugging Face提供了一个预训练的BERT模型。Hugging
+Face开发了一个名为PreTrainedModel的基类。通过安装这个类，我们可以从预训练的模型配置中加载一个模型。
+
+Hugging
+Face提供了TensorFlow和PyTorch的模块。我建议开发者对这两个环境都有一定的熟悉。优秀的人工智能研究团队可能会使用其中一个或两个环境。
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+   # Hide outputs
+   !pip install -q torch transformers
+
+导入模块
+^^^^^^^^
+
+我们将导入所需的预训练模块，例如预训练的BERT分词器和BERT模型的配置。同时，我们还导入了BERTAdam优化器以及序列分类模块：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    # Hide outputs
+    import torch
+    import torch.nn as nn
+    from keras.preprocessing.sequence import pad_sequences
+    from sklearn.model_selection import train_test_split
+    from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
+                                  TensorDataset)
+    from transformers import (AdamW, BertConfig, BertForSequenceClassification,
+                              BertTokenizer, get_linear_schedule_with_warmup)
+
+再导入一个好看的进度条包\ ``tqdm``:
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    from tqdm import tqdm, trange
+
+最后导入机器学习中常用的模块：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    import io
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import pandas as pd
+
+如果一切顺利，不会显示任何消息，需要注意的是，Google
+Colab已经在我们使用的虚拟机上预先安装了这些模块。
+
+指定CUDA作为设备
+^^^^^^^^^^^^^^^^
+
+我们现在将指定torch使用CUDA（Compute Unified Device
+Architecture）来利用NVIDIA GPU的并行计算能力，用于我们的多头注意力模型：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    !nvidia-smi
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Mon Apr  8 17:58:00 2024       
+    +---------------------------------------------------------------------------------------+
+    | NVIDIA-SMI 545.30                 Driver Version: 546.09       CUDA Version: 12.3     |
+    |-----------------------------------------+----------------------+----------------------+
+    | GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+    |                                         |                      |               MIG M. |
+    |=========================================+======================+======================|
+    |   0  NVIDIA GeForce RTX 3060 ...    On  | 00000000:01:00.0 Off |                  N/A |
+    | N/A   49C    P0              17W /  60W |      0MiB /  6144MiB |      1%      Default |
+    |                                         |                      |                  N/A |
+    +-----------------------------------------+----------------------+----------------------+
+                                                                                             
+    +---------------------------------------------------------------------------------------+
+    | Processes:                                                                            |
+    |  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+    |        ID   ID                                                             Usage      |
+    |=======================================================================================|
+    |  No running processes found                                                           |
+    +---------------------------------------------------------------------------------------+
+
+
+输出结果可能会因Google Colab的配置而有所不同。
+
+加载数据集
+^^^^^^^^^^

@@ -27,6 +27,7 @@
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. 练习" href="section_03_exercise.html" />
     <link rel="prev" title="1. BERT模型的架构" href="section_01_the_architecture_of_bert.html" /> 
   </head>
 <body>
@@ -34,7 +35,7 @@
     <div class="mdl-layout__header-row">
         
         <nav class="mdl-navigation breadcrumb">
-            <a class="mdl-navigation__link" href="index.html"><span class="section-number">3. </span>微调BERT模型</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">2. </span>微调BERT模型</a><i class="material-icons">navigate_next</i>
             <a class="mdl-navigation__link is-active"><span class="section-number">2. </span>微调BERT</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
@@ -91,23 +92,25 @@ Show Source
             <nav class="mdl-navigation">
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">3. 微调BERT模型</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. 微调BERT模型</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_exercise.html">3. 练习</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">3. 从头开始预训练RoBERTa模型</a></li>
 </ul>
 
             </nav>
@@ -138,23 +141,25 @@ Show Source
             <nav class="mdl-navigation">
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">3. 微调BERT模型</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. 微调BERT模型</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_exercise.html">3. 练习</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">3. 从头开始预训练RoBERTa模型</a></li>
 </ul>
 
             </nav>
@@ -167,18 +172,18 @@ Show Source
         <div class="page-content" role="main">
         
   <div class="section" id="bert">
-<h1><span class="section-number">2. </span>微调BERT<a class="headerlink" href="#bert" title="Permalink to this heading">¶</a></h1>
+<span id="chapter-03-section-02"></span><h1><span class="section-number">2. </span>微调BERT<a class="headerlink" href="#bert" title="Permalink to this heading">¶</a></h1>
 <p>本节将对一个BERT模型进行微调，以预测下游任务的可接受性判断，并使用马修斯相关系数（Matthews
 Correlation
 Coefficient，MCC，后续解释）来衡量预测结果。本节的官方源码<a class="reference external" href="https://github.com/Denis2054/Transformers-for-NLP-2nd-Edition/blob/main/Chapter03/BERT_Fine_Tuning_Sentence_Classification_GPU.ipynb">见此处</a>。</p>
 <div class="section" id="id1">
 <h2><span class="section-number">2.1. </span>硬件限制<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
-<p>Transformer模型需要GPU.
-这里强烈建议使用免费的云GPU平台，因为在本地自己配置GPU计算环境较为复杂。</p>
+<p>Transformer模型需要GPU. 这里建议使用免费的云GPU平台:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://colab.research.google.com/">Google Colab</a></p></li>
 <li><p><a class="reference external" href="https://www.kaggle.com/code">Kaggle Notebook</a></p></li>
 </ul>
+<p>如果使用自己的电脑或自己搭建的服务器上的GPU，请先安装CUDA和cuDNN（Google/问GPT）</p>
 </div>
 <div class="section" id="pytorchhugging-face-transformer">
 <h2><span class="section-number">2.2. </span>安装PyTorch和Hugging Face Transformer<a class="headerlink" href="#pytorchhugging-face-transformer" title="Permalink to this heading">¶</a></h2>
@@ -221,9 +226,26 @@ Architecture）来利用NVIDIA GPU的并行计算能力，用于我们的多头�
 !nvidia-smi
 </pre></div>
 </div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NVIDIA</span><span class="o">-</span><span class="n">SMI</span> <span class="n">has</span> <span class="n">failed</span> <span class="n">because</span> <span class="n">it</span> <span class="n">couldn</span><span class="s1">&#39;t communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.</span>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mon</span> <span class="n">Apr</span> <span class="mi">22</span> <span class="mi">15</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mi">45</span> <span class="mi">2024</span>
+<span class="o">+---------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">NVIDIA</span><span class="o">-</span><span class="n">SMI</span> <span class="mf">545.30</span>                 <span class="n">Driver</span> <span class="n">Version</span><span class="p">:</span> <span class="mf">546.09</span>       <span class="n">CUDA</span> <span class="n">Version</span><span class="p">:</span> <span class="mf">12.3</span>     <span class="o">|</span>
+<span class="o">|-----------------------------------------+----------------------+----------------------+</span>
+<span class="o">|</span> <span class="n">GPU</span>  <span class="n">Name</span>                 <span class="n">Persistence</span><span class="o">-</span><span class="n">M</span> <span class="o">|</span> <span class="n">Bus</span><span class="o">-</span><span class="n">Id</span>        <span class="n">Disp</span><span class="o">.</span><span class="n">A</span> <span class="o">|</span> <span class="n">Volatile</span> <span class="n">Uncorr</span><span class="o">.</span> <span class="n">ECC</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Fan</span>  <span class="n">Temp</span>   <span class="n">Perf</span>          <span class="n">Pwr</span><span class="p">:</span><span class="n">Usage</span><span class="o">/</span><span class="n">Cap</span> <span class="o">|</span>         <span class="n">Memory</span><span class="o">-</span><span class="n">Usage</span> <span class="o">|</span> <span class="n">GPU</span><span class="o">-</span><span class="n">Util</span>  <span class="n">Compute</span> <span class="n">M</span><span class="o">.</span> <span class="o">|</span>
+<span class="o">|</span>                                         <span class="o">|</span>                      <span class="o">|</span>               <span class="n">MIG</span> <span class="n">M</span><span class="o">.</span> <span class="o">|</span>
+<span class="o">|=========================================+======================+======================|</span>
+<span class="o">|</span>   <span class="mi">0</span>  <span class="n">NVIDIA</span> <span class="n">GeForce</span> <span class="n">RTX</span> <span class="mi">3060</span> <span class="o">...</span>    <span class="n">On</span>  <span class="o">|</span> <span class="mi">00000000</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mf">00.0</span> <span class="n">Off</span> <span class="o">|</span>                  <span class="n">N</span><span class="o">/</span><span class="n">A</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">N</span><span class="o">/</span><span class="n">A</span>   <span class="mi">48</span><span class="n">C</span>    <span class="n">P8</span>               <span class="mi">8</span><span class="n">W</span> <span class="o">/</span>  <span class="mi">60</span><span class="n">W</span> <span class="o">|</span>      <span class="mi">0</span><span class="n">MiB</span> <span class="o">/</span>  <span class="mi">6144</span><span class="n">MiB</span> <span class="o">|</span>      <span class="mi">0</span><span class="o">%</span>      <span class="n">Default</span> <span class="o">|</span>
+<span class="o">|</span>                                         <span class="o">|</span>                      <span class="o">|</span>                  <span class="n">N</span><span class="o">/</span><span class="n">A</span> <span class="o">|</span>
+<span class="o">+-----------------------------------------+----------------------+----------------------+</span>
 
-<span class="n">Failed</span> <span class="n">to</span> <span class="n">properly</span> <span class="n">shut</span> <span class="n">down</span> <span class="n">NVML</span><span class="p">:</span> <span class="n">Driver</span> <span class="n">Not</span> <span class="n">Loaded</span>
+<span class="o">+---------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">Processes</span><span class="p">:</span>                                                                            <span class="o">|</span>
+<span class="o">|</span>  <span class="n">GPU</span>   <span class="n">GI</span>   <span class="n">CI</span>        <span class="n">PID</span>   <span class="n">Type</span>   <span class="n">Process</span> <span class="n">name</span>                            <span class="n">GPU</span> <span class="n">Memory</span> <span class="o">|</span>
+<span class="o">|</span>        <span class="n">ID</span>   <span class="n">ID</span>                                                             <span class="n">Usage</span>      <span class="o">|</span>
+<span class="o">|=======================================================================================|</span>
+<span class="o">|</span>  <span class="n">No</span> <span class="n">running</span> <span class="n">processes</span> <span class="n">found</span>                                                           <span class="o">|</span>
+<span class="o">+---------------------------------------------------------------------------------------+</span>
 </pre></div>
 </div>
 <p>输出结果可能会因Google Colab的配置而有所不同。</p>
@@ -276,74 +298,74 @@ domain_dev.tsv&quot;
   </thead>
   <tbody>
     <tr>
-      <th>1162</th>
+      <th>1281</th>
       <td>r-67</td>
       <td>1</td>
       <td>NaN</td>
-      <td>tom drives as that man does .</td>
+      <td>i went to the store and have bought some excel...</td>
     </tr>
     <tr>
-      <th>8390</th>
-      <td>ad03</td>
-      <td>0</td>
-      <td>*</td>
-      <td>whales have i seen .</td>
-    </tr>
-    <tr>
-      <th>6690</th>
-      <td>m_02</td>
+      <th>1479</th>
+      <td>r-67</td>
       <td>1</td>
       <td>NaN</td>
-      <td>mr knightley despaired .</td>
+      <td>it is not true that that it would confuse the ...</td>
     </tr>
     <tr>
-      <th>1112</th>
-      <td>r-67</td>
+      <th>3687</th>
+      <td>ks08</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>no doubt that he was forced to leave his famil...</td>
+    </tr>
+    <tr>
+      <th>7401</th>
+      <td>sks13</td>
       <td>0</td>
       <td>*</td>
-      <td>i polished the vase which was from india up .</td>
+      <td>they are special of bill .</td>
     </tr>
     <tr>
-      <th>7032</th>
-      <td>sgww85</td>
-      <td>0</td>
-      <td>*</td>
-      <td>kim beaten his dog and alienates cats .</td>
-    </tr>
-    <tr>
-      <th>2961</th>
+      <th>2772</th>
       <td>l-93</td>
       <td>1</td>
       <td>NaN</td>
-      <td>sandy sang a song .</td>
+      <td>steve tossed the ball into the garden .</td>
     </tr>
     <tr>
-      <th>6131</th>
-      <td>c_13</td>
-      <td>0</td>
-      <td>*</td>
-      <td>donny is likely that left .</td>
-    </tr>
-    <tr>
-      <th>1803</th>
-      <td>r-67</td>
+      <th>8152</th>
+      <td>ad03</td>
       <td>1</td>
       <td>NaN</td>
-      <td>the socks are ready for you to try them and th...</td>
+      <td>many fish are in the sea .</td>
     </tr>
     <tr>
-      <th>5556</th>
-      <td>b_73</td>
-      <td>0</td>
-      <td>*</td>
-      <td>some of them made as many as joan errors .</td>
+      <th>6304</th>
+      <td>c_13</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>calvin has dated every girl who jeff has .</td>
     </tr>
     <tr>
-      <th>4791</th>
+      <th>8187</th>
+      <td>ad03</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>alison and david soaked their feet in the kitchen</td>
+    </tr>
+    <tr>
+      <th>4728</th>
       <td>ks08</td>
       <td>0</td>
       <td>*</td>
-      <td>tom claimed how much money she had spent .</td>
+      <td>seoul was slept in by the businessman last nig...</td>
+    </tr>
+    <tr>
+      <th>2624</th>
+      <td>l-93</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>the king banished the general from the army .</td>
     </tr>
   </tbody>
 </table>
@@ -1004,6 +1026,13 @@ Model）<code class="docutils literal notranslate"><span class="pre">BertModel</
             <span class="pagenation-direction">Previous</span>
             <div>1. BERT模型的架构</div>
          </div>
+     </a>
+     <a id="button-next" href="section_03_exercise.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>3. 练习</div>
+        </div>
      </a>
   </div>
         

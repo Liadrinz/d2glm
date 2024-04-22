@@ -41,3 +41,5 @@ Face模块来体验将Transformer预训练模型用于下游任务的过程。
    section_01_the_architecture_of_bert
 
    section_02_fine_tuning_bert
+
+   section_03_exercise

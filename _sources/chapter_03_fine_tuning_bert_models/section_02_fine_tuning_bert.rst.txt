@@ -1,6 +1,9 @@
 
+.. _chapter-03-section-02:
+
 微调BERT
 ========
+
 
 本节将对一个BERT模型进行微调，以预测下游任务的可接受性判断，并使用马修斯相关系数（Matthews
 Correlation
@@ -9,11 +12,12 @@ Coefficient，MCC，后续解释）来衡量预测结果。本节的官方源码
 硬件限制
 --------
 
-Transformer模型需要GPU.
-这里强烈建议使用免费的云GPU平台，因为在本地自己配置GPU计算环境较为复杂。
+Transformer模型需要GPU. 这里建议使用免费的云GPU平台:
 
 -  `Google Colab <https://colab.research.google.com/>`__
 -  `Kaggle Notebook <https://www.kaggle.com/code>`__
+
+如果使用自己的电脑或自己搭建的服务器上的GPU，请先安装CUDA和cuDNN（Google/问GPT）
 
 安装PyTorch和Hugging Face Transformer
 -------------------------------------
@@ -85,10 +89,26 @@ Architecture）来利用NVIDIA GPU的并行计算能力，用于我们的多头�
 .. parsed-literal::
     :class: output
 
-    NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.
-    
-    Failed to properly shut down NVML: Driver Not Loaded
-    
+    Mon Apr 22 15:28:45 2024       
+    +---------------------------------------------------------------------------------------+
+    | NVIDIA-SMI 545.30                 Driver Version: 546.09       CUDA Version: 12.3     |
+    |-----------------------------------------+----------------------+----------------------+
+    | GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+    |                                         |                      |               MIG M. |
+    |=========================================+======================+======================|
+    |   0  NVIDIA GeForce RTX 3060 ...    On  | 00000000:01:00.0 Off |                  N/A |
+    | N/A   48C    P8               8W /  60W |      0MiB /  6144MiB |      0%      Default |
+    |                                         |                      |                  N/A |
+    +-----------------------------------------+----------------------+----------------------+
+                                                                                             
+    +---------------------------------------------------------------------------------------+
+    | Processes:                                                                            |
+    |  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+    |        ID   ID                                                             Usage      |
+    |=======================================================================================|
+    |  No running processes found                                                           |
+    +---------------------------------------------------------------------------------------+
 
 
 输出结果可能会因Google Colab的配置而有所不同。
@@ -176,74 +196,74 @@ Architecture）来利用NVIDIA GPU的并行计算能力，用于我们的多头�
       </thead>
       <tbody>
         <tr>
-          <th>1162</th>
+          <th>1281</th>
           <td>r-67</td>
           <td>1</td>
           <td>NaN</td>
-          <td>tom drives as that man does .</td>
+          <td>i went to the store and have bought some excel...</td>
         </tr>
         <tr>
-          <th>8390</th>
-          <td>ad03</td>
-          <td>0</td>
-          <td>*</td>
-          <td>whales have i seen .</td>
-        </tr>
-        <tr>
-          <th>6690</th>
-          <td>m_02</td>
+          <th>1479</th>
+          <td>r-67</td>
           <td>1</td>
           <td>NaN</td>
-          <td>mr knightley despaired .</td>
+          <td>it is not true that that it would confuse the ...</td>
         </tr>
         <tr>
-          <th>1112</th>
-          <td>r-67</td>
+          <th>3687</th>
+          <td>ks08</td>
+          <td>1</td>
+          <td>NaN</td>
+          <td>no doubt that he was forced to leave his famil...</td>
+        </tr>
+        <tr>
+          <th>7401</th>
+          <td>sks13</td>
           <td>0</td>
           <td>*</td>
-          <td>i polished the vase which was from india up .</td>
+          <td>they are special of bill .</td>
         </tr>
         <tr>
-          <th>7032</th>
-          <td>sgww85</td>
-          <td>0</td>
-          <td>*</td>
-          <td>kim beaten his dog and alienates cats .</td>
-        </tr>
-        <tr>
-          <th>2961</th>
+          <th>2772</th>
           <td>l-93</td>
           <td>1</td>
           <td>NaN</td>
-          <td>sandy sang a song .</td>
+          <td>steve tossed the ball into the garden .</td>
         </tr>
         <tr>
-          <th>6131</th>
-          <td>c_13</td>
-          <td>0</td>
-          <td>*</td>
-          <td>donny is likely that left .</td>
-        </tr>
-        <tr>
-          <th>1803</th>
-          <td>r-67</td>
+          <th>8152</th>
+          <td>ad03</td>
           <td>1</td>
           <td>NaN</td>
-          <td>the socks are ready for you to try them and th...</td>
+          <td>many fish are in the sea .</td>
         </tr>
         <tr>
-          <th>5556</th>
-          <td>b_73</td>
-          <td>0</td>
-          <td>*</td>
-          <td>some of them made as many as joan errors .</td>
+          <th>6304</th>
+          <td>c_13</td>
+          <td>1</td>
+          <td>NaN</td>
+          <td>calvin has dated every girl who jeff has .</td>
         </tr>
         <tr>
-          <th>4791</th>
+          <th>8187</th>
+          <td>ad03</td>
+          <td>1</td>
+          <td>NaN</td>
+          <td>alison and david soaked their feet in the kitchen</td>
+        </tr>
+        <tr>
+          <th>4728</th>
           <td>ks08</td>
           <td>0</td>
           <td>*</td>
-          <td>tom claimed how much money she had spent .</td>
+          <td>seoul was slept in by the businessman last nig...</td>
+        </tr>
+        <tr>
+          <th>2624</th>
+          <td>l-93</td>
+          <td>1</td>
+          <td>NaN</td>
+          <td>the king banished the general from the army .</td>
         </tr>
       </tbody>
     </table>

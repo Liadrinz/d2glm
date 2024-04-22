@@ -104,13 +104,13 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">2. 微调BERT模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">3. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a></li>
 </ul>
 
             </nav>
@@ -153,13 +153,13 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">2. 微调BERT模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">3. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a></li>
 </ul>
 
             </nav>
@@ -175,7 +175,7 @@ Show Source
 <h1><span class="section-number">2.1. </span>Transformer模型架构<a class="headerlink" href="#transformer" title="Permalink to this heading">¶</a></h1>
 <p>在<em>Attention is All You
 Need</em>这篇论文中，原始的Transformer模型由6层的堆栈组成，其中第<span class="math notranslate nohighlight">\(l\)</span>层的输出是第<span class="math notranslate nohighlight">\(l+1\)</span>层的输入，直到最后一层。如图
-<a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html#fig-1"><span class="std std-numref">Fig. 1.1.1</span></a>
+<a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html#fig-1"><span class="std std-numref">Fig. 3.1.1</span></a>
 所示，左边是一个6层的编码器堆栈，右边是一个6层的解码器堆栈。</p>
 <div class="figure align-default" id="id20">
 <span id="fig-1"></span><img alt="../_images/transformers.svg" src="../_images/transformers.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.1 </span><span class="caption-text">Transformer原始模型的架构</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
@@ -190,7 +190,7 @@ Attention）和一个前馈网络子层（Feedforward）。我们注意到，Tra
 </pre></div>
 </div>
 <p>注意力机制会在两个词向量之间执行点积运算，并且确定一个单词与其他所有单词的关系中最强的关系，包含与自身的关系（“cat”到“cat”）。图
-<a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html#fig-2"><span class="std std-numref">Fig. 1.1.2</span></a> 可视化了注意力机制作用在一个句子上的过程。</p>
+<a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html#fig-2"><span class="std std-numref">Fig. 3.1.2</span></a> 可视化了注意力机制作用在一个句子上的过程。</p>
 <div class="figure align-default" id="id21">
 <span id="fig-2"></span><img alt="../_images/2024-03-20-11-11-25.png" src="../_images/2024-03-20-11-11-25.png" />
 <p class="caption"><span class="caption-number">Fig. 2.1.2 </span><span class="caption-text">单词“cat”对其他所有单词的注意力</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>

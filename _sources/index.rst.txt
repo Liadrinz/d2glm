@@ -15,3 +15,5 @@ Transformer for NLP
    chapter_03_fine_tuning_bert_models/index
 
    chapter_04_pretraining_a_roberta_model_from_scratch/index
+
+   chapter_05_downstream_nlp_tasks_with_transformers/index

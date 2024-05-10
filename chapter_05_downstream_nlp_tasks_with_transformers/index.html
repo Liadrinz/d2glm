@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>使用Transformer进行下游NLP任务 &#8212; Transformer for NLP 0.0.1 documentation</title>
+    <title>5. 使用Transformer进行下游NLP任务 &#8212; Transformer for NLP 0.0.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
@@ -25,14 +25,16 @@
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5.1. Transformer的性能 VS 人类基准" href="section_01_transformer_performances_versus_human_baselines.html" />
+    <link rel="prev" title="4. 从头开始预训练RoBERTa模型" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html" /> 
   </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
     <div class="mdl-layout__header-row">
         
         <nav class="mdl-navigation breadcrumb">
-            <a class="mdl-navigation__link is-active">使用Transformer进行下游NLP任务</a>
+            <a class="mdl-navigation__link is-active"><span class="section-number">5. </span>使用Transformer进行下游NLP任务</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -86,27 +88,32 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. 使用Transformer进行下游NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -135,27 +142,32 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. 使用Transformer进行下游NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -168,7 +180,7 @@ Show Source
         <div class="page-content" role="main">
         
   <div class="section" id="transformernlp">
-<h1>使用Transformer进行下游NLP任务<a class="headerlink" href="#transformernlp" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">5. </span>使用Transformer进行下游NLP任务<a class="headerlink" href="#transformernlp" title="Permalink to this heading">¶</a></h1>
 <p>预训练和微调一个Transformer模型需要大量的时间和精力，但当我们看到一个拥有数百万参数的Transformer模型在各种NLU任务中发挥作用时，这些努力都是值得的。</p>
 <p>本章我们将从超越人类基准开始探索。人类基准代表了人类在NLU任务上的表现。人类在幼年时学习了转导，并迅速发展出归纳思维。我们人类能够直接通过感官来感知世界。而机器智能完全依赖于我们感知到的信息通过语言来理解我们的语言。</p>
 <p>接下来，我们将看到如何衡量Transformer的性能。衡量自然语言处理（NLP）任务仍然是一种直接的方法，涉及基于真实和错误结果的准确性得分。这些结果是通过基准任务和数据集获得的。例如，SuperGLUE是一个很好的例子，展示了Google
@@ -188,16 +200,16 @@ AI、纽约大学、华盛顿大学等多个机构共同努力制定了衡量NLP
 </ul>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="section_01_transformer_performances_versus_human_baselines.html">1. Transformer的性能 VS 人类基准</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="section_01_transformer_performances_versus_human_baselines.html#id1">1.1. 使用度量指标来评估模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_01_transformer_performances_versus_human_baselines.html#benchmark">1.2. 标杆（Benchmark）任务和数据集</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_01_transformer_performances_versus_human_baselines.html#supergluebenchmark">1.3. SuperGLUE中的Benchmark任务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_01_transformer_performances_versus_human_baselines.html#id1">5.1.1. 使用度量指标来评估模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_transformer_performances_versus_human_baselines.html#benchmark">5.1.2. 标杆（Benchmark）任务和数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_transformer_performances_versus_human_baselines.html#supergluebenchmark">5.1.3. SuperGLUE中的Benchmark任务</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="section_02_running_downstream_tasks.html">2. 运行下游任务</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="section_02_running_downstream_tasks.html#cola">2.1. CoLA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_02_running_downstream_tasks.html#sst-2">2.2. SST-2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_02_running_downstream_tasks.html#mrpc">2.3. MRPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section_02_running_downstream_tasks.html">5.2. 运行下游任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_02_running_downstream_tasks.html#cola">5.2.1. CoLA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_running_downstream_tasks.html#sst-2">5.2.2. SST-2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_running_downstream_tasks.html#mrpc">5.2.3. MRPC</a></li>
 </ul>
 </li>
 </ul>
@@ -213,6 +225,20 @@ AI、纽约大学、华盛顿大学等多个机构共同努力制定了衡量NLP
 
       <div class="clearer"></div>
     </div><div class="pagenation">
+     <a id="button-prev" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>4. 从头开始预训练RoBERTa模型</div>
+         </div>
+     </a>
+     <a id="button-next" href="section_01_transformer_performances_versus_human_baselines.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>5.1. Transformer的性能 VS 人类基准</div>
+        </div>
+     </a>
   </div>
         
         </main>

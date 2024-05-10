@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>1. Transformer的性能 VS 人类基准 &#8212; Transformer for NLP 0.0.1 documentation</title>
+    <title>5.1. Transformer的性能 VS 人类基准 &#8212; Transformer for NLP 0.0.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
@@ -26,14 +26,17 @@
     <script src="../_static/d2l.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5.2. 运行下游任务" href="section_02_running_downstream_tasks.html" />
+    <link rel="prev" title="5. 使用Transformer进行下游NLP任务" href="index.html" /> 
   </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
     <div class="mdl-layout__header-row">
         
         <nav class="mdl-navigation breadcrumb">
-            <a class="mdl-navigation__link is-active"><span class="section-number">1. </span>Transformer的性能 VS 人类基准</a>
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">5. </span>使用Transformer进行下游NLP任务</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active"><span class="section-number">5.1. </span>Transformer的性能 VS 人类基准</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -87,27 +90,32 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">5. 使用Transformer进行下游NLP任务</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -136,27 +144,32 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">5. 使用Transformer进行下游NLP任务</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -169,23 +182,23 @@ Show Source
         <div class="page-content" role="main">
         
   <div class="section" id="transformer-vs">
-<h1><span class="section-number">1. </span>Transformer的性能 VS 人类基准<a class="headerlink" href="#transformer-vs" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">5.1. </span>Transformer的性能 VS 人类基准<a class="headerlink" href="#transformer-vs" title="Permalink to this heading">¶</a></h1>
 <p>Transformers，就像人类一样，可以通过继承预训练模型的属性进行微调，以执行下游任务。预训练模型通过其参数提供其架构和语言表示。</p>
 <p>预训练模型在关键任务上进行训练，以获得对语言的一般知识。微调模型则用于下游任务的训练。并非每个Transformer模型都使用相同的任务进行预训练。潜在地，可以对所有任务进行预训练或微调。</p>
 <p>每个自然语言处理（NLP）模型都需要使用标准方法进行评估。</p>
 <p>本节首先将介绍一些关键的度量指标。然后，我们将介绍一些主要的基准任务和数据集。</p>
 <div class="section" id="id1">
-<h2><span class="section-number">1.1. </span>使用度量指标来评估模型<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">5.1.1. </span>使用度量指标来评估模型<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
 <p>在没有使用度量标准的普遍测量系统时，无法比较一个Transformer模型与另一个Transformer模型（或任何其他NLP模型）。</p>
 <p>在本节中，我们将分析GLUE和SuperGLUE使用的三种度量评分方法。</p>
 <div class="section" id="accuracy">
-<h3><span class="section-number">1.1.1. </span>准确率（Accuracy）<a class="headerlink" href="#accuracy" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.1.1. </span>准确率（Accuracy）<a class="headerlink" href="#accuracy" title="Permalink to this heading">¶</a></h3>
 <p>准确率（accuracy）是一种实用的评估方法。对于给定测试集<span class="math notranslate nohighlight">\(\mathcal{D}\)</span>，其中第<span class="math notranslate nohighlight">\(i\)</span>个元素为<span class="math notranslate nohighlight">\((\mathbf{x}^{(i)},y^{(i)})\in\mathcal{D}\)</span>，其中<span class="math notranslate nohighlight">\(\mathbf{x}^{(i)}\)</span>表示输入句子，<span class="math notranslate nohighlight">\(y^{(i)}\)</span>是句子的分类标签。设分类模型对<span class="math notranslate nohighlight">\(\mathbf{x}^{(i)}\)</span>预测的分类为<span class="math notranslate nohighlight">\(\hat{y}^{(i)}\)</span>，则该分类模型在测试集<span class="math notranslate nohighlight">\(\mathcal{D}\)</span>上的准确率计算公式为：</p>
 <div class="math notranslate nohighlight" id="equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-0">
-<span class="eqno">()<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-0" title="Permalink to this equation">¶</a></span>\[\text{Accuracy}(\mathcal{D})=\frac{1}{|\mathcal{D}|}\sum_{i=1}^{|\mathcal{D}|}\mathbb{I}(y^{(i)}=\hat{y}^{(i)})\]</div>
+<span class="eqno">(5.1.1)<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-0" title="Permalink to this equation">¶</a></span>\[\text{Accuracy}(\mathcal{D})=\frac{1}{|\mathcal{D}|}\sum_{i=1}^{|\mathcal{D}|}\mathbb{I}(y^{(i)}=\hat{y}^{(i)})\]</div>
 </div>
 <div class="section" id="f1-f1-score">
-<h3><span class="section-number">1.1.2. </span>F1评分（F1-score）<a class="headerlink" href="#f1-f1-score" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.1.2. </span>F1评分（F1-score）<a class="headerlink" href="#f1-f1-score" title="Permalink to this heading">¶</a></h3>
 <p>在:ref:<cite>chapter-2-section-2-mcc</cite>中，我们介绍了真正、假正、真负和假负的概念，我们来回顾一下：</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(TP\)</span>表示True Positive（真正），即预测为正，实际标签为正</p></li>
@@ -196,27 +209,27 @@ Show Source
 <p>F1分数引入了一种更灵活的方法，可以应对数据集中存在不均匀的类别分布的情况。</p>
 <p>F1分数考虑了精确率（precision）和召回率（recall）的，是精确率和召回率值的加权平均：</p>
 <div class="math notranslate nohighlight" id="equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-1">
-<span class="eqno">()<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-1" title="Permalink to this equation">¶</a></span>\[\text{F1score}=\frac{2pr}{p+r}\]</div>
+<span class="eqno">(5.1.2)<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-1" title="Permalink to this equation">¶</a></span>\[\text{F1score}=\frac{2pr}{p+r}\]</div>
 <p>其中精确率<span class="math notranslate nohighlight">\(p\)</span>的计算公式为：</p>
 <div class="math notranslate nohighlight" id="equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-2">
-<span class="eqno">()<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-2" title="Permalink to this equation">¶</a></span>\[p=\frac{TP}{TP+FP}\]</div>
+<span class="eqno">(5.1.3)<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-2" title="Permalink to this equation">¶</a></span>\[p=\frac{TP}{TP+FP}\]</div>
 <p>召回率<span class="math notranslate nohighlight">\(r\)</span>的计算公式为：</p>
 <div class="math notranslate nohighlight" id="equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-3">
-<span class="eqno">()<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-3" title="Permalink to this equation">¶</a></span>\[r=\frac{TP}{TP+FN}\]</div>
+<span class="eqno">(5.1.4)<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-3" title="Permalink to this equation">¶</a></span>\[r=\frac{TP}{TP+FN}\]</div>
 <p>精确率和召回率计算公式的分子相同。精确率的分母是所有预测为正的样本数，而召回率的分母则是所有实际标签为正的样本数。因此，精确率也被称为查准率，即预测为正的样本中有多少是准的；召回率也被称为查全率，即实际为正的样本中，有多少被找出来了。</p>
 </div>
 <div class="section" id="mcc">
-<h3><span class="section-number">1.1.3. </span>马修斯相关系数（MCC）<a class="headerlink" href="#mcc" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.1.3. </span>马修斯相关系数（MCC）<a class="headerlink" href="#mcc" title="Permalink to this heading">¶</a></h3>
 <p>在:ref:<cite>chapter-2-section-2-mcc</cite>中我们介绍了马修斯相关系数（Matthews
 Correlation Coefficient, MCC），其公式为：</p>
 <div class="math notranslate nohighlight" id="equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-4">
-<span class="eqno">()<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-4" title="Permalink to this equation">¶</a></span>\[MCC = \frac{TP\times TN - FP \times FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}\]</div>
+<span class="eqno">(5.1.5)<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-4" title="Permalink to this equation">¶</a></span>\[MCC = \frac{TP\times TN - FP \times FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}\]</div>
 <p>MCC为二元分类模型提供了一个优秀的度量指标，即使类别的大小不同。</p>
 <p>现在，我们对如何衡量给定的Transformer模型的结果并将其与其他Transformer模型或NLP模型进行比较有了一个很好的理解。</p>
 </div>
 </div>
 <div class="section" id="benchmark">
-<h2><span class="section-number">1.2. </span>标杆（Benchmark）任务和数据集<a class="headerlink" href="#benchmark" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">5.1.2. </span>标杆（Benchmark）任务和数据集<a class="headerlink" href="#benchmark" title="Permalink to this heading">¶</a></h2>
 <p>要证明Transformers达到了最先进的（state-of-the-art,
 SOTA）性能水平，必须有以下三样东西：</p>
 <ul class="simple">
@@ -226,7 +239,7 @@ SOTA）性能水平，必须有以下三样东西：</p>
 </ul>
 <p>我们将从探索SuperGLUE基准测试开始，以说明对Transformer模型进行评估的过程。</p>
 <div class="section" id="gluesuperglue">
-<h3><span class="section-number">1.2.1. </span>从GLUE到SuperGLUE<a class="headerlink" href="#gluesuperglue" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.2.1. </span>从GLUE到SuperGLUE<a class="headerlink" href="#gluesuperglue" title="Permalink to this heading">¶</a></h3>
 <p>SuperGLUE基准测试是由<a class="reference external" href="https://arxiv.org/abs/1804.07461">Wang等人（2019年）</a>设计并公开的。<a class="reference external" href="https://arxiv.org/abs/1804.07461">Wang等人（2019年）</a>首先设计了通用语言理解评估（GLUE）基准测试。</p>
 <p>GLUE基准测试的动机是要展示自然语言理解（NLU）必须适用于各种任务才能有用。相对较小的GLUE数据集旨在鼓励NLU模型解决一组任务。</p>
 <p>然而，随着Transformer技术的出现，NLU模型的性能开始超过了普通人的水平，这一点可以在<a class="reference external" href="https://gluebenchmark.com/leaderboard">GLUE排行榜</a>（2021年12月）中看到。</p>
@@ -236,13 +249,13 @@ SOTA）性能水平，必须有以下三样东西：</p>
 <p>随着自然语言理解的进展，GLUE排行榜将不断演变。然而，<a class="reference external" href="https://arxiv.org/abs/1905.00537">Wang等人（2019年）</a>引入了SuperGLUE，为人类基准设定了更高的标准。</p>
 </div>
 <div class="section" id="id2">
-<h3><span class="section-number">1.2.2. </span>引入更高的人类基准标准<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.2.2. </span>引入更高的人类基准标准<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference external" href="https://arxiv.org/abs/1905.00537">Wang等人（2019年）</a>意识到了GLUE的局限性，并设计了用于更加困难的NLU问题的SuperGLUE.</p>
 <p>然而，随着我们不断提升NLU模型的表现，SuperGLUE排行榜也在不断演变。在2021年，Transformer模型已经超过了人类基准。到了2021年12月，人类基准已经下降到第5名。</p>
 <p>随着新的创新模型的出现，AI算法排名将不断变化。这些排名只是给我们一个关于争夺自然语言处理领域至高无上地位的艰巨程度的概念！</p>
 </div>
 <div class="section" id="superglue">
-<h3><span class="section-number">1.2.3. </span>SuperGLUE评分<a class="headerlink" href="#superglue" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.2.3. </span>SuperGLUE评分<a class="headerlink" href="#superglue" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference external" href="https://arxiv.org/abs/1905.00537">Wang等人（2019年）</a>为SuperGLUE基准选择了<a class="reference external" href="https://super.gluebenchmark.com/tasks">10个任务</a>。这些任务的选择标准比GLUE更为严格。例如，这些任务不仅需要理解文本，还需要进行推理。推理的水平并不等同于顶级人类专家。然而，性能水平已经足以替代许多人类任务。</p>
 <p>每个任务都包含了执行该任务所需的信息链接：</p>
 <ul class="simple">
@@ -267,12 +280,12 @@ of Plausible Answers, COPA）可以表述为以下形式：</p>
 </div>
 </div>
 <div class="section" id="supergluebenchmark">
-<h2><span class="section-number">1.3. </span>SuperGLUE中的Benchmark任务<a class="headerlink" href="#supergluebenchmark" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">5.1.3. </span>SuperGLUE中的Benchmark任务<a class="headerlink" href="#supergluebenchmark" title="Permalink to this heading">¶</a></h2>
 <p>一个任务可以作为预训练任务来生成训练好的模型。同一个任务也可以作为另一个模型的下游任务进行微调。然而，SuperGLUE的目标是展示给定的NLU模型可以通过微调执行多个下游任务。多任务模型证明了Transformer的思考能力。</p>
 <p>任何Transformer模型的强大之处在于其能够使用预训练模型执行多个任务，并将其应用于微调的下游任务。原始的Transformer模型及其变种现在在所有的GLUE和SuperGLUE任务中处于领先地位。我们将继续专注于SuperGLUE的下游任务，其中人类基准难以超越。</p>
 <p>在前面的部分，我们已经介绍了COPA任务。在本节中，我们将介绍<a class="reference external" href="https://arxiv.org/abs/1905.00537">Wang等人（2019年）</a>在他们的论文中在表2中定义的其他七个任务。</p>
 <div class="section" id="boolq">
-<h3><span class="section-number">1.3.1. </span>BoolQ<a class="headerlink" href="#boolq" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.3.1. </span>BoolQ<a class="headerlink" href="#boolq" title="Permalink to this heading">¶</a></h3>
 <p>BoolQ是一个布尔类型的是或否回答任务。根据SuperGLUE的定义，该数据集包含15,942个自然问题。以下是一条示例数据：</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;is window movie maker part of windows essentials&quot;</span><span class="p">,</span>
@@ -285,7 +298,7 @@ of Plausible Answers, COPA）可以表述为以下形式：</p>
 <p>其中<code class="docutils literal notranslate"><span class="pre">&quot;question&quot;</span></code>表示问题，<code class="docutils literal notranslate"><span class="pre">&quot;passage&quot;</span></code>表示问题所参考的文章，<code class="docutils literal notranslate"><span class="pre">&quot;label&quot;</span></code>表示问题的答案（真/假）。</p>
 </div>
 <div class="section" id="commitment-bank-cb">
-<h3><span class="section-number">1.3.2. </span>Commitment Bank (CB)<a class="headerlink" href="#commitment-bank-cb" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.3.2. </span>Commitment Bank (CB)<a class="headerlink" href="#commitment-bank-cb" title="Permalink to this heading">¶</a></h3>
 <p>Commitment
 Bank（CB）是一个困难的蕴涵（Entailment）任务。蕴含任务要求Transformer模型阅读一个前提（Premise），并检查基于该前提构建的假设（Hypothesis）。假设可能确认前提，也可能否认前提，还可能是中立的关系。这三种关系分别对应三个标签：蕴含（Entailment），冲突（Contradiction）和中立（Neutral）。</p>
 <p>以下通过CB中的一条数据来举例说明：</p>
@@ -300,7 +313,7 @@ Bank（CB）是一个困难的蕴涵（Entailment）任务。蕴含任务要求T
 <p>根据前提，这里的假设是成立的，即假设确认了前提，因此二者是蕴含关系，标签为<code class="docutils literal notranslate"><span class="pre">&quot;entailment&quot;</span></code>.</p>
 </div>
 <div class="section" id="multi-sentence-reading-comprehension-multirc">
-<h3><span class="section-number">1.3.3. </span>Multi-Sentence Reading Comprehension (MultiRC)<a class="headerlink" href="#multi-sentence-reading-comprehension-multirc" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.3.3. </span>Multi-Sentence Reading Comprehension (MultiRC)<a class="headerlink" href="#multi-sentence-reading-comprehension-multirc" title="Permalink to this heading">¶</a></h3>
 <p>多句子阅读理解（Multi-Sentence Reading Comprehension,
 MultiRC）要求模型阅读一段文本，并从多个可能的选项中进行选择。这个任务对人类和机器来说都很困难（想象一下你做阅读理解时的心情）。模型会被呈现一段文本，几个问题，并针对每个问题给出可能的答案，每个答案都带有一个0（假）或1（真）的标签。</p>
 <p>我们来看MultiRC中的一条数据：</p>
@@ -336,7 +349,7 @@ MultiRC）要求模型阅读一段文本，并从多个可能的选项中进行�
 <p>其中一段文本对应多个问题，每个问题下有多个答案，但是只有一个答案是正确的（标签为1），模型需要预测出那个答案是正确的。</p>
 </div>
 <div class="section" id="reading-comprehension-with-commonsense-reasoning-dataset-record">
-<h3><span class="section-number">1.3.4. </span>Reading Comprehension with Commonsense Reasoning Dataset (ReCoRD)<a class="headerlink" href="#reading-comprehension-with-commonsense-reasoning-dataset-record" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.3.4. </span>Reading Comprehension with Commonsense Reasoning Dataset (ReCoRD)<a class="headerlink" href="#reading-comprehension-with-commonsense-reasoning-dataset-record" title="Permalink to this heading">¶</a></h3>
 <p>具备常识推理的阅读理解数据集（Reading Comprehension with Commonsense
 Reasoning Dataset,
 ReCoRD）是另一个具有挑战性的任务。该数据集包含来自70,000多篇新闻文章的120,000多个查询。Transformer模型必须使用常识推理来解决这个问题。</p>
@@ -357,7 +370,7 @@ ReCoRD）是另一个具有挑战性的任务。该数据集包含来自70,000�
 <p>这里给出了一篇文章（<code class="docutils literal notranslate"><span class="pre">&quot;passage&quot;</span></code>）、一个查询（<code class="docutils literal notranslate"><span class="pre">&quot;query&quot;</span></code>）和4个候选的实体（<code class="docutils literal notranslate"><span class="pre">&quot;entities&quot;</span></code>）。候选的实体用于替换查询中的<code class="docutils literal notranslate"><span class="pre">&quot;&#64;placeholder&quot;</span></code>，模型需要预测使用哪些实体替换<code class="docutils literal notranslate"><span class="pre">&quot;&#64;placeholder&quot;</span></code>是正确的。这里的<code class="docutils literal notranslate"><span class="pre">&quot;start&quot;</span></code>和<code class="docutils literal notranslate"><span class="pre">&quot;end&quot;</span></code>表示实体在句子中开始和结束的位置，便于在Transformer模型中特定的位置进行特征抽取。</p>
 </div>
 <div class="section" id="recognizing-textual-entailment-rte">
-<h3><span class="section-number">1.3.5. </span>Recognizing Textual Entailment (RTE)<a class="headerlink" href="#recognizing-textual-entailment-rte" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.3.5. </span>Recognizing Textual Entailment (RTE)<a class="headerlink" href="#recognizing-textual-entailment-rte" title="Permalink to this heading">¶</a></h3>
 <p>在文本蕴涵识别（Recognizing Textual Entailment,
 RTE）任务中，Transformer模型需要阅读前提（Premise）并检查一个假设（Hypothesis），并预测假设蕴涵状态的标签，与Commitment
 Bank（CB）类似。</p>
@@ -372,7 +385,7 @@ Bank（CB）类似。</p>
 <p>这里的假设与前提是非蕴含的关系，因此标签为<code class="docutils literal notranslate"><span class="pre">&quot;not_entailment&quot;</span></code>.</p>
 </div>
 <div class="section" id="words-in-context-wic">
-<h3><span class="section-number">1.3.6. </span>Words in Context (WiC)<a class="headerlink" href="#words-in-context-wic" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.3.6. </span>Words in Context (WiC)<a class="headerlink" href="#words-in-context-wic" title="Permalink to this heading">¶</a></h3>
 <p>在上下文中的词语（WiC）和随后的Winograd任务中，测试模型处理模棱两可的词语的能力。在WiC任务中，多任务Transformer模型需要分析两个句子，确定目标词语在这两个句子中是否具有相同的意思。</p>
 <p>数据示例如下：</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -391,7 +404,7 @@ Bank（CB）类似。</p>
 这里的<code class="docutils literal notranslate"><span class="pre">&quot;start1&quot;</span></code>和<code class="docutils literal notranslate"><span class="pre">&quot;end1&quot;</span></code>表示该单词在第1个句子中的开始和结束的位置，<code class="docutils literal notranslate"><span class="pre">&quot;start2&quot;</span></code>和<code class="docutils literal notranslate"><span class="pre">&quot;end2&quot;</span></code>表示该单词在第2个句子中的开始和结束的位置.</p>
 </div>
 <div class="section" id="the-winograd-schema-challenge-wsc">
-<h3><span class="section-number">1.3.7. </span>The Winograd schema challenge (WSC)<a class="headerlink" href="#the-winograd-schema-challenge-wsc" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">5.1.3.7. </span>The Winograd schema challenge (WSC)<a class="headerlink" href="#the-winograd-schema-challenge-wsc" title="Permalink to this heading">¶</a></h3>
 <p>Winograd模式任务以Terry
 Winograd的名字命名。该数据集构成了一个共指消解问题。具体而言，模型需要预测句子中的代词与某个名词是否有共指关系。</p>
 <p>示例数据如下：</p>
@@ -419,27 +432,27 @@ Winograd的名字命名。该数据集构成了一个共指消解问题。具体
       <span class="caption-text">Table Of Contents</span>
     </p>
     <ul>
-<li><a class="reference internal" href="#">1. Transformer的性能 VS 人类基准</a><ul>
-<li><a class="reference internal" href="#id1">1.1. 使用度量指标来评估模型</a><ul>
-<li><a class="reference internal" href="#accuracy">1.1.1. 准确率（Accuracy）</a></li>
-<li><a class="reference internal" href="#f1-f1-score">1.1.2. F1评分（F1-score）</a></li>
-<li><a class="reference internal" href="#mcc">1.1.3. 马修斯相关系数（MCC）</a></li>
+<li><a class="reference internal" href="#">5.1. Transformer的性能 VS 人类基准</a><ul>
+<li><a class="reference internal" href="#id1">5.1.1. 使用度量指标来评估模型</a><ul>
+<li><a class="reference internal" href="#accuracy">5.1.1.1. 准确率（Accuracy）</a></li>
+<li><a class="reference internal" href="#f1-f1-score">5.1.1.2. F1评分（F1-score）</a></li>
+<li><a class="reference internal" href="#mcc">5.1.1.3. 马修斯相关系数（MCC）</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#benchmark">1.2. 标杆（Benchmark）任务和数据集</a><ul>
-<li><a class="reference internal" href="#gluesuperglue">1.2.1. 从GLUE到SuperGLUE</a></li>
-<li><a class="reference internal" href="#id2">1.2.2. 引入更高的人类基准标准</a></li>
-<li><a class="reference internal" href="#superglue">1.2.3. SuperGLUE评分</a></li>
+<li><a class="reference internal" href="#benchmark">5.1.2. 标杆（Benchmark）任务和数据集</a><ul>
+<li><a class="reference internal" href="#gluesuperglue">5.1.2.1. 从GLUE到SuperGLUE</a></li>
+<li><a class="reference internal" href="#id2">5.1.2.2. 引入更高的人类基准标准</a></li>
+<li><a class="reference internal" href="#superglue">5.1.2.3. SuperGLUE评分</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#supergluebenchmark">1.3. SuperGLUE中的Benchmark任务</a><ul>
-<li><a class="reference internal" href="#boolq">1.3.1. BoolQ</a></li>
-<li><a class="reference internal" href="#commitment-bank-cb">1.3.2. Commitment Bank (CB)</a></li>
-<li><a class="reference internal" href="#multi-sentence-reading-comprehension-multirc">1.3.3. Multi-Sentence Reading Comprehension (MultiRC)</a></li>
-<li><a class="reference internal" href="#reading-comprehension-with-commonsense-reasoning-dataset-record">1.3.4. Reading Comprehension with Commonsense Reasoning Dataset (ReCoRD)</a></li>
-<li><a class="reference internal" href="#recognizing-textual-entailment-rte">1.3.5. Recognizing Textual Entailment (RTE)</a></li>
-<li><a class="reference internal" href="#words-in-context-wic">1.3.6. Words in Context (WiC)</a></li>
-<li><a class="reference internal" href="#the-winograd-schema-challenge-wsc">1.3.7. The Winograd schema challenge (WSC)</a></li>
+<li><a class="reference internal" href="#supergluebenchmark">5.1.3. SuperGLUE中的Benchmark任务</a><ul>
+<li><a class="reference internal" href="#boolq">5.1.3.1. BoolQ</a></li>
+<li><a class="reference internal" href="#commitment-bank-cb">5.1.3.2. Commitment Bank (CB)</a></li>
+<li><a class="reference internal" href="#multi-sentence-reading-comprehension-multirc">5.1.3.3. Multi-Sentence Reading Comprehension (MultiRC)</a></li>
+<li><a class="reference internal" href="#reading-comprehension-with-commonsense-reasoning-dataset-record">5.1.3.4. Reading Comprehension with Commonsense Reasoning Dataset (ReCoRD)</a></li>
+<li><a class="reference internal" href="#recognizing-textual-entailment-rte">5.1.3.5. Recognizing Textual Entailment (RTE)</a></li>
+<li><a class="reference internal" href="#words-in-context-wic">5.1.3.6. Words in Context (WiC)</a></li>
+<li><a class="reference internal" href="#the-winograd-schema-challenge-wsc">5.1.3.7. The Winograd schema challenge (WSC)</a></li>
 </ul>
 </li>
 </ul>
@@ -452,6 +465,20 @@ Winograd的名字命名。该数据集构成了一个共指消解问题。具体
 
       <div class="clearer"></div>
     </div><div class="pagenation">
+     <a id="button-prev" href="index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>5. 使用Transformer进行下游NLP任务</div>
+         </div>
+     </a>
+     <a id="button-next" href="section_02_running_downstream_tasks.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>5.2. 运行下游任务</div>
+        </div>
+     </a>
   </div>
         
         </main>

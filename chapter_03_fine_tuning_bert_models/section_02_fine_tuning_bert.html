@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>2. 微调BERT &#8212; Transformer for NLP 0.0.1 documentation</title>
+    <title>3.2. 微调BERT &#8212; Transformer for NLP 0.0.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
@@ -27,8 +27,8 @@
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. 练习" href="section_03_exercise.html" />
-    <link rel="prev" title="1. BERT模型的架构" href="section_01_the_architecture_of_bert.html" /> 
+    <link rel="next" title="3.3. 练习" href="section_03_exercise.html" />
+    <link rel="prev" title="3.1. BERT模型的架构" href="section_01_the_architecture_of_bert.html" /> 
   </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
@@ -36,7 +36,7 @@
         
         <nav class="mdl-navigation breadcrumb">
             <a class="mdl-navigation__link" href="index.html"><span class="section-number">3. </span>微调BERT模型</a><i class="material-icons">navigate_next</i>
-            <a class="mdl-navigation__link is-active"><span class="section-number">2. </span>微调BERT</a>
+            <a class="mdl-navigation__link is-active"><span class="section-number">3.2. </span>微调BERT</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -92,25 +92,30 @@ Show Source
             <nav class="mdl-navigation">
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">3. 微调BERT模型</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -141,25 +146,30 @@ Show Source
             <nav class="mdl-navigation">
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">3. 微调BERT模型</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -172,12 +182,12 @@ Show Source
         <div class="page-content" role="main">
         
   <div class="section" id="bert">
-<span id="chapter-03-section-02"></span><h1><span class="section-number">2. </span>微调BERT<a class="headerlink" href="#bert" title="Permalink to this heading">¶</a></h1>
+<span id="chapter-03-section-02"></span><h1><span class="section-number">3.2. </span>微调BERT<a class="headerlink" href="#bert" title="Permalink to this heading">¶</a></h1>
 <p>本节将对一个BERT模型进行微调，以预测下游任务的可接受性判断，并使用马修斯相关系数（Matthews
 Correlation
 Coefficient，MCC，后续解释）来衡量预测结果。本节的官方源码<a class="reference external" href="https://github.com/Denis2054/Transformers-for-NLP-2nd-Edition/blob/main/Chapter03/BERT_Fine_Tuning_Sentence_Classification_GPU.ipynb">见此处</a>。</p>
 <div class="section" id="id1">
-<h2><span class="section-number">2.1. </span>硬件限制<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.1. </span>硬件限制<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
 <p>Transformer模型需要GPU. 这里建议使用免费的云GPU平台:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://colab.research.google.com/">Google Colab</a></p></li>
@@ -186,7 +196,7 @@ Coefficient，MCC，后续解释）来衡量预测结果。本节的官方源码
 <p>如果使用自己的电脑或自己搭建的服务器上的GPU，请先安装CUDA和cuDNN（Google/问GPT）</p>
 </div>
 <div class="section" id="pytorchhugging-face-transformer">
-<h2><span class="section-number">2.2. </span>安装PyTorch和Hugging Face Transformer<a class="headerlink" href="#pytorchhugging-face-transformer" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.2. </span>安装PyTorch和Hugging Face Transformer<a class="headerlink" href="#pytorchhugging-face-transformer" title="Permalink to this heading">¶</a></h2>
 <p>Hugging Face提供了一个预训练的BERT模型。Hugging
 Face开发了一个名为PreTrainedModel的基类。通过安装这个类，我们可以从预训练的模型配置中加载一个模型。</p>
 <p>Hugging
@@ -197,7 +207,7 @@ Face提供了TensorFlow和PyTorch的模块。我建议开发者对这两个环�
 </div>
 </div>
 <div class="section" id="id2">
-<h2><span class="section-number">2.3. </span>导入模块<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.3. </span>导入模块<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
 <p>我们将导入所需的预训练模块，例如预训练的BERT分词器和BERT模型的配置。同时，我们还导入了AdamW优化器以及序列分类模块：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide outputs</span>
 <span class="kn">import</span> <span class="nn">io</span>
@@ -219,7 +229,7 @@ Face提供了TensorFlow和PyTorch的模块。我建议开发者对这两个环�
 Colab已经在我们使用的虚拟机上预先安装了这些模块。</p>
 </div>
 <div class="section" id="cuda">
-<h2><span class="section-number">2.4. </span>指定CUDA作为设备<a class="headerlink" href="#cuda" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.4. </span>指定CUDA作为设备<a class="headerlink" href="#cuda" title="Permalink to this heading">¶</a></h2>
 <p>我们现在将指定torch使用CUDA（Compute Unified Device
 Architecture）来利用NVIDIA GPU的并行计算能力，用于我们的多头注意力模型：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>device = torch.device(&quot;cuda&quot; if torch.cuda.is_available() else &quot;cpu&quot;)
@@ -251,7 +261,7 @@ Architecture）来利用NVIDIA GPU的并行计算能力，用于我们的多头�
 <p>输出结果可能会因Google Colab的配置而有所不同。</p>
 </div>
 <div class="section" id="cola">
-<h2><span class="section-number">2.5. </span>加载CoLA数据集<a class="headerlink" href="#cola" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.5. </span>加载CoLA数据集<a class="headerlink" href="#cola" title="Permalink to this heading">¶</a></h2>
 <p>使用<a class="reference external" href="(https://nyu-mll.github.io/CoLA/)">CoLA数据集</a>：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span># Hide outputs
 !curl -L https://raw.githubusercontent.com/Denis2054/Transformers-for-NLP-2nd-Edition/master/Chapter03/in_domain_train.tsv --output &quot;in_domain_
@@ -378,7 +388,7 @@ domain_dev.tsv&quot;
 </ul>
 </div>
 <div class="section" id="tokens">
-<h2><span class="section-number">2.6. </span>创建句子和标签列表并添加特殊Tokens<a class="headerlink" href="#tokens" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.6. </span>创建句子和标签列表并添加特殊Tokens<a class="headerlink" href="#tokens" title="Permalink to this heading">¶</a></h2>
 <p>将所需分类的句子和分类标签从数据集表格中取出来，并在句子的开头和结尾分别加上<code class="docutils literal notranslate"><span class="pre">[CLS]</span></code>和<code class="docutils literal notranslate"><span class="pre">[SEP]</span></code>特殊token.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sentences</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sentence</span><span class="o">.</span><span class="n">values</span>
 <span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;[CLS] &quot;</span> <span class="o">+</span> <span class="n">sentence</span> <span class="o">+</span> <span class="s2">&quot; [SEP]&quot;</span> <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
@@ -387,7 +397,7 @@ domain_dev.tsv&quot;
 </div>
 </div>
 <div class="section" id="id3">
-<h2><span class="section-number">2.7. </span>使用BERT分词器<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.7. </span>使用BERT分词器<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
 <p>在本节中，我们将初始化一个预训练的BERT分词器。这样可以节省从头开始训练分词器所需的时间。</p>
 <p>我们使用一个不区分大小写的分词器，然后打印第一个分词后的句子：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;bert-base-uncased&#39;</span><span class="p">,</span> <span class="n">do_lower_case</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -416,7 +426,7 @@ domain_dev.tsv&quot;
 </ul>
 </div>
 <div class="section" id="id4">
-<h2><span class="section-number">2.8. </span>数据处理<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.8. </span>数据处理<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h2>
 <p>为了使数据可以成批地输入模型中，我们需要让他们拥有相同的长度。我们需要确定一个固定的最大长度。数据集中的句子很短，但为了确保这一点，程序将序列的最大长度设置为128，并对不足128的token序列进行填充：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">MAX_LEN</span> <span class="o">=</span> <span class="mi">128</span>
 <span class="c1"># 使用BERT分词器将token转换为BERT词表中的索引</span>
@@ -442,7 +452,7 @@ domain_dev.tsv&quot;
 <p>我们打印第一个token序列，发现序列尾部有一大串0，这就是填充后的结果。在BERT模型中，填充token表示为<code class="docutils literal notranslate"><span class="pre">[PAD]</span></code>，其在词表中的索引为0.</p>
 </div>
 <div class="section" id="id5">
-<h2><span class="section-number">2.9. </span>创建注意力遮罩<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.9. </span>创建注意力遮罩<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h2>
 <p>填充的tokens唯一作用只是用来保证输入形状统一，它不应该参与注意力的计算而影响最终的结果。因此，我们要创建注意力遮罩来禁止模型对填充字符施加注意力。</p>
 <p>一种简单的做法是将非填充token部分的注意力遮罩的值置为1，填充token部分的注意力遮罩的值置为0：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention_masks</span> <span class="o">=</span> <span class="p">[]</span>
@@ -478,7 +488,7 @@ domain_dev.tsv&quot;
 <p>可以看到，token序列中填充部分的注意力遮罩的值为0，非填充部分则为1</p>
 </div>
 <div class="section" id="id6">
-<h2><span class="section-number">2.10. </span>分割训练集和验证集<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.10. </span>分割训练集和验证集<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_inputs</span><span class="p">,</span> <span class="n">validation_inputs</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">validation_labels</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">input_ids</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">2018</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">train_masks</span><span class="p">,</span> <span class="n">validation_masks</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">attention_masks</span><span class="p">,</span> <span class="n">input_ids</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">2018</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
@@ -486,7 +496,7 @@ domain_dev.tsv&quot;
 <p>其中<code class="docutils literal notranslate"><span class="pre">test_size=0.1</span></code>表示分割10%作为验证集，<code class="docutils literal notranslate"><span class="pre">random_state=2018</span></code>表示固定2018作为随机分割的随机种子，保证每次分割的结果是相同的。</p>
 </div>
 <div class="section" id="tensor">
-<h2><span class="section-number">2.11. </span>把所有数据转换为tensor<a class="headerlink" href="#tensor" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.11. </span>把所有数据转换为tensor<a class="headerlink" href="#tensor" title="Permalink to this heading">¶</a></h2>
 <p>我们所微调的BERT模型采用PyTorch张量（tensor）作为输入和输出，因此我们要将数据转化为tensor.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">train_inputs</span><span class="p">)</span>
 <span class="n">validation_inputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">validation_inputs</span><span class="p">)</span>
@@ -498,7 +508,7 @@ domain_dev.tsv&quot;
 </div>
 </div>
 <div class="section" id="batch-size">
-<h2><span class="section-number">2.12. </span>设置一个批次大小（Batch Size）并创建数据迭代器<a class="headerlink" href="#batch-size" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.12. </span>设置一个批次大小（Batch Size）并创建数据迭代器<a class="headerlink" href="#batch-size" title="Permalink to this heading">¶</a></h2>
 <p>批次大小（Batch
 Size）表示同时并行输入模型的数据的数量，数据迭代器可以将数据集进行封装，并以指定的batch
 size和模式（随机/顺序）</p>
@@ -520,7 +530,7 @@ size和模式（随机/顺序）</p>
 </div>
 </div>
 <div class="section" id="id7">
-<h2><span class="section-number">2.13. </span>BERT模型配置<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.13. </span>BERT模型配置<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">BertConfig</span><span class="p">,</span> <span class="n">BertModel</span>
 
 <span class="n">configuration</span> <span class="o">=</span> <span class="n">BertConfig</span><span class="p">()</span>
@@ -578,7 +588,7 @@ size和模式（随机/顺序）</p>
 </ul>
 </div>
 <div class="section" id="hugging-facebert">
-<h2><span class="section-number">2.14. </span>加载Hugging Face预训练BERT模型<a class="headerlink" href="#hugging-facebert" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.14. </span>加载Hugging Face预训练BERT模型<a class="headerlink" href="#hugging-facebert" title="Permalink to this heading">¶</a></h2>
 <p>在了解了BERT模型的配置后我们来加载BERT的预训练模型。</p>
 <p>这里使用的是<code class="docutils literal notranslate"><span class="pre">bert-base-uncased</span></code>模型，base表示模型的大小，uncased表示模型的词表和训练数据是不区分大小写的。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 加载预训练模型，`num_labels=2`表示我们将要利用预训练模型来进行2分类任务</span>
@@ -648,7 +658,7 @@ Model）<code class="docutils literal notranslate"><span class="pre">BertModel</
 <p><code class="docutils literal notranslate"><span class="pre">BertForSequenceClassification.from_pretrained(&quot;bert-base-uncased&quot;,</span> <span class="pre">num_labels=2)</span></code>也需要从huggingface.com上下载内容，可能会因为网络原因报错，解决方法同上。</p>
 </div>
 <div class="section" id="id8">
-<h2><span class="section-number">2.15. </span>将模型参数分组<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.15. </span>将模型参数分组<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h2>
 <p>通过<code class="docutils literal notranslate"><span class="pre">model.named_paramters()</span></code>方法可以获取模型参数的名字和参数的值：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">param_optimizer</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">())</span>
 <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">param_optimizer</span><span class="p">]</span>
@@ -671,7 +681,7 @@ Model）<code class="docutils literal notranslate"><span class="pre">BertModel</
 </div>
 </div>
 <div class="section" id="id9">
-<h2><span class="section-number">2.16. </span>训练流程<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.16. </span>训练流程<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h2>
 <p>训练循环遵循标准的学习过程。将迭代的次数设置为4，并将损失和准确率的度量结果绘制出来。训练循环使用数据加载器来加载和训练批次数据。训练过程进行度量和评估。</p>
 <p>BERT的训练流程遵循标准的深度学习的训练流程。我们将迭代次数（Epochs）设为4，并在训练过程中将模型的损失和准确率绘制出来。</p>
 <p>首先创建优化器和学习率调度器，并指定模型训练的相关超参数：</p>
@@ -790,7 +800,7 @@ Model）<code class="docutils literal notranslate"><span class="pre">BertModel</
 <p>执行上述代码后，BERT模型将会在CoLA数据集上进行二分类任务的微调。每轮训练的损失和分类预测准确率会被打印出来。</p>
 </div>
 <div class="section" id="id10">
-<h2><span class="section-number">2.17. </span>训练评估<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.17. </span>训练评估<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h2>
 <p>训练过程中模型的损失存储在<code class="docutils literal notranslate"><span class="pre">train_loss_set</span></code>中，我们可以将损失随训练过程的变化进行可视化：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Training loss&quot;</span><span class="p">)</span>
@@ -803,7 +813,7 @@ Model）<code class="docutils literal notranslate"><span class="pre">BertModel</
 <p>上述代码执行后可以看到，随着训练的进行，模型的损失呈波动下降趋势。</p>
 </div>
 <div class="section" id="id11">
-<h2><span class="section-number">2.18. </span>使用测试集进行预测和评估<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.18. </span>使用测试集进行预测和评估<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h2>
 <p>BERT下游模型是使用<code class="docutils literal notranslate"><span class="pre">in_domain_train.tsv</span></code>数据集进行训练的。现在，我们将使用另一个数据集，<code class="docutils literal notranslate"><span class="pre">out_of_domain_dev.tsv</span></code>数据集来预测句子语法是否正确。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;out_of_domain_dev.tsv&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sentence_source&#39;</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;label_notes&#39;</span><span class="p">,</span> <span class="s1">&#39;sentence&#39;</span><span class="p">])</span>
 <span class="n">df</span><span class="o">.</span><span class="n">shape</span>
@@ -907,10 +917,10 @@ Model）<code class="docutils literal notranslate"><span class="pre">BertModel</
 </div>
 </div>
 <div class="section" id="mcc">
-<span id="chapter-2-section-2-mcc"></span><h2><span class="section-number">2.19. </span>使用马修斯相关系数（MCC）进行评估<a class="headerlink" href="#mcc" title="Permalink to this heading">¶</a></h2>
+<span id="chapter-2-section-2-mcc"></span><h2><span class="section-number">3.2.19. </span>使用马修斯相关系数（MCC）进行评估<a class="headerlink" href="#mcc" title="Permalink to this heading">¶</a></h2>
 <p>马修斯相关系数（MCC）的公式如下：</p>
 <div class="math notranslate nohighlight" id="equation-chapter-03-fine-tuning-bert-models-section-02-fine-tuning-bert-0">
-<span class="eqno">(2.19.1)<a class="headerlink" href="#equation-chapter-03-fine-tuning-bert-models-section-02-fine-tuning-bert-0" title="Permalink to this equation">¶</a></span>\[MCC = \frac{TP\times TN - FP \times FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}\]</div>
+<span class="eqno">(3.2.1)<a class="headerlink" href="#equation-chapter-03-fine-tuning-bert-models-section-02-fine-tuning-bert-0" title="Permalink to this equation">¶</a></span>\[MCC = \frac{TP\times TN - FP \times FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(TP\)</span>表示True Positive（真正），即预测为正，实际标签为正</p></li>
 <li><p><span class="math notranslate nohighlight">\(TN\)</span>表示True Negative（真负），即预测为正，实际标签为正</p></li>
@@ -956,7 +966,7 @@ Model）<code class="docutils literal notranslate"><span class="pre">BertModel</
 </div>
 </div>
 <div class="section" id="id12">
-<h2><span class="section-number">2.20. </span>保存模型<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.2.20. </span>保存模型<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h2>
 <p>现在我们的模型一直存储在显存和内存中，程序结束时会丢失。为了能在以后也能使用该模型，需要将模型保存下来。</p>
 <p>如果我们使用了<code class="docutils literal notranslate"><span class="pre">DataParallel</span></code>将模型封装为多GPU训练对象，原始的模型会被封装到<code class="docutils literal notranslate"><span class="pre">DataParallel</span></code>对象中，称为该对象的一个属性。</p>
 <p>因此，我们在保存模型时需要区分模型是否经过<code class="docutils literal notranslate"><span class="pre">DataParallel</span></code>封装：</p>
@@ -989,27 +999,27 @@ Model）<code class="docutils literal notranslate"><span class="pre">BertModel</
       <span class="caption-text">Table Of Contents</span>
     </p>
     <ul>
-<li><a class="reference internal" href="#">2. 微调BERT</a><ul>
-<li><a class="reference internal" href="#id1">2.1. 硬件限制</a></li>
-<li><a class="reference internal" href="#pytorchhugging-face-transformer">2.2. 安装PyTorch和Hugging Face Transformer</a></li>
-<li><a class="reference internal" href="#id2">2.3. 导入模块</a></li>
-<li><a class="reference internal" href="#cuda">2.4. 指定CUDA作为设备</a></li>
-<li><a class="reference internal" href="#cola">2.5. 加载CoLA数据集</a></li>
-<li><a class="reference internal" href="#tokens">2.6. 创建句子和标签列表并添加特殊Tokens</a></li>
-<li><a class="reference internal" href="#id3">2.7. 使用BERT分词器</a></li>
-<li><a class="reference internal" href="#id4">2.8. 数据处理</a></li>
-<li><a class="reference internal" href="#id5">2.9. 创建注意力遮罩</a></li>
-<li><a class="reference internal" href="#id6">2.10. 分割训练集和验证集</a></li>
-<li><a class="reference internal" href="#tensor">2.11. 把所有数据转换为tensor</a></li>
-<li><a class="reference internal" href="#batch-size">2.12. 设置一个批次大小（Batch Size）并创建数据迭代器</a></li>
-<li><a class="reference internal" href="#id7">2.13. BERT模型配置</a></li>
-<li><a class="reference internal" href="#hugging-facebert">2.14. 加载Hugging Face预训练BERT模型</a></li>
-<li><a class="reference internal" href="#id8">2.15. 将模型参数分组</a></li>
-<li><a class="reference internal" href="#id9">2.16. 训练流程</a></li>
-<li><a class="reference internal" href="#id10">2.17. 训练评估</a></li>
-<li><a class="reference internal" href="#id11">2.18. 使用测试集进行预测和评估</a></li>
-<li><a class="reference internal" href="#mcc">2.19. 使用马修斯相关系数（MCC）进行评估</a></li>
-<li><a class="reference internal" href="#id12">2.20. 保存模型</a></li>
+<li><a class="reference internal" href="#">3.2. 微调BERT</a><ul>
+<li><a class="reference internal" href="#id1">3.2.1. 硬件限制</a></li>
+<li><a class="reference internal" href="#pytorchhugging-face-transformer">3.2.2. 安装PyTorch和Hugging Face Transformer</a></li>
+<li><a class="reference internal" href="#id2">3.2.3. 导入模块</a></li>
+<li><a class="reference internal" href="#cuda">3.2.4. 指定CUDA作为设备</a></li>
+<li><a class="reference internal" href="#cola">3.2.5. 加载CoLA数据集</a></li>
+<li><a class="reference internal" href="#tokens">3.2.6. 创建句子和标签列表并添加特殊Tokens</a></li>
+<li><a class="reference internal" href="#id3">3.2.7. 使用BERT分词器</a></li>
+<li><a class="reference internal" href="#id4">3.2.8. 数据处理</a></li>
+<li><a class="reference internal" href="#id5">3.2.9. 创建注意力遮罩</a></li>
+<li><a class="reference internal" href="#id6">3.2.10. 分割训练集和验证集</a></li>
+<li><a class="reference internal" href="#tensor">3.2.11. 把所有数据转换为tensor</a></li>
+<li><a class="reference internal" href="#batch-size">3.2.12. 设置一个批次大小（Batch Size）并创建数据迭代器</a></li>
+<li><a class="reference internal" href="#id7">3.2.13. BERT模型配置</a></li>
+<li><a class="reference internal" href="#hugging-facebert">3.2.14. 加载Hugging Face预训练BERT模型</a></li>
+<li><a class="reference internal" href="#id8">3.2.15. 将模型参数分组</a></li>
+<li><a class="reference internal" href="#id9">3.2.16. 训练流程</a></li>
+<li><a class="reference internal" href="#id10">3.2.17. 训练评估</a></li>
+<li><a class="reference internal" href="#id11">3.2.18. 使用测试集进行预测和评估</a></li>
+<li><a class="reference internal" href="#mcc">3.2.19. 使用马修斯相关系数（MCC）进行评估</a></li>
+<li><a class="reference internal" href="#id12">3.2.20. 保存模型</a></li>
 </ul>
 </li>
 </ul>
@@ -1024,14 +1034,14 @@ Model）<code class="docutils literal notranslate"><span class="pre">BertModel</
          <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>1. BERT模型的架构</div>
+            <div>3.1. BERT模型的架构</div>
          </div>
      </a>
      <a id="button-next" href="section_03_exercise.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
          <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>3. 练习</div>
+            <div>3.3. 练习</div>
         </div>
      </a>
   </div>

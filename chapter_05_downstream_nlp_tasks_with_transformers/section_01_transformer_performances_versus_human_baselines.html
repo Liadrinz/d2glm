@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>1. Transformer的性能 VS 人类基准 &#8212; Transformer for NLP 0.0.1 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fontawesome/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/d2l.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/d2l.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link is-active"><span class="section-number">1. </span>Transformer的性能 VS 人类基准</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="../search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="../_sources/chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.rst.txt" rel="nofollow">
+  <i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+
+	<script type="text/javascript" src="../_static/sphinx_materialdesign_theme.js "></script>
+    <header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+
+    <div class="document">
+        <div class="page-content" role="main">
+        
+  <div class="section" id="transformer-vs">
+<h1><span class="section-number">1. </span>Transformer的性能 VS 人类基准<a class="headerlink" href="#transformer-vs" title="Permalink to this heading">¶</a></h1>
+<p>Transformers，就像人类一样，可以通过继承预训练模型的属性进行微调，以执行下游任务。预训练模型通过其参数提供其架构和语言表示。</p>
+<p>预训练模型在关键任务上进行训练，以获得对语言的一般知识。微调模型则用于下游任务的训练。并非每个Transformer模型都使用相同的任务进行预训练。潜在地，可以对所有任务进行预训练或微调。</p>
+<p>每个自然语言处理（NLP）模型都需要使用标准方法进行评估。</p>
+<p>本节首先将介绍一些关键的度量指标。然后，我们将介绍一些主要的基准任务和数据集。</p>
+<div class="section" id="id1">
+<h2><span class="section-number">1.1. </span>使用度量指标来评估模型<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<p>在没有使用度量标准的普遍测量系统时，无法比较一个Transformer模型与另一个Transformer模型（或任何其他NLP模型）。</p>
+<p>在本节中，我们将分析GLUE和SuperGLUE使用的三种度量评分方法。</p>
+<div class="section" id="accuracy">
+<h3><span class="section-number">1.1.1. </span>准确率（Accuracy）<a class="headerlink" href="#accuracy" title="Permalink to this heading">¶</a></h3>
+<p>准确率（accuracy）是一种实用的评估方法。对于给定测试集<span class="math notranslate nohighlight">\(\mathcal{D}\)</span>，其中第<span class="math notranslate nohighlight">\(i\)</span>个元素为<span class="math notranslate nohighlight">\((\mathbf{x}^{(i)},y^{(i)})\in\mathcal{D}\)</span>，其中<span class="math notranslate nohighlight">\(\mathbf{x}^{(i)}\)</span>表示输入句子，<span class="math notranslate nohighlight">\(y^{(i)}\)</span>是句子的分类标签。设分类模型对<span class="math notranslate nohighlight">\(\mathbf{x}^{(i)}\)</span>预测的分类为<span class="math notranslate nohighlight">\(\hat{y}^{(i)}\)</span>，则该分类模型在测试集<span class="math notranslate nohighlight">\(\mathcal{D}\)</span>上的准确率计算公式为：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-0">
+<span class="eqno">()<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-0" title="Permalink to this equation">¶</a></span>\[\text{Accuracy}(\mathcal{D})=\frac{1}{|\mathcal{D}|}\sum_{i=1}^{|\mathcal{D}|}\mathbb{I}(y^{(i)}=\hat{y}^{(i)})\]</div>
+</div>
+<div class="section" id="f1-f1-score">
+<h3><span class="section-number">1.1.2. </span>F1评分（F1-score）<a class="headerlink" href="#f1-f1-score" title="Permalink to this heading">¶</a></h3>
+<p>在:ref:<cite>chapter-2-section-2-mcc</cite>中，我们介绍了真正、假正、真负和假负的概念，我们来回顾一下：</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(TP\)</span>表示True Positive（真正），即预测为正，实际标签为正</p></li>
+<li><p><span class="math notranslate nohighlight">\(TN\)</span>表示True Negative（真负），即预测为正，实际标签为正</p></li>
+<li><p><span class="math notranslate nohighlight">\(FP\)</span>表示False Positive（假正），即预测为正，实际标签为负</p></li>
+<li><p><span class="math notranslate nohighlight">\(FN\)</span>表示False Negative（假负），即预测为负，实际标签为正</p></li>
+</ul>
+<p>F1分数引入了一种更灵活的方法，可以应对数据集中存在不均匀的类别分布的情况。</p>
+<p>F1分数考虑了精确率（precision）和召回率（recall）的，是精确率和召回率值的加权平均：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-1">
+<span class="eqno">()<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-1" title="Permalink to this equation">¶</a></span>\[\text{F1score}=\frac{2pr}{p+r}\]</div>
+<p>其中精确率<span class="math notranslate nohighlight">\(p\)</span>的计算公式为：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-2">
+<span class="eqno">()<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-2" title="Permalink to this equation">¶</a></span>\[p=\frac{TP}{TP+FP}\]</div>
+<p>召回率<span class="math notranslate nohighlight">\(r\)</span>的计算公式为：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-3">
+<span class="eqno">()<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-3" title="Permalink to this equation">¶</a></span>\[r=\frac{TP}{TP+FN}\]</div>
+<p>精确率和召回率计算公式的分子相同。精确率的分母是所有预测为正的样本数，而召回率的分母则是所有实际标签为正的样本数。因此，精确率也被称为查准率，即预测为正的样本中有多少是准的；召回率也被称为查全率，即实际为正的样本中，有多少被找出来了。</p>
+</div>
+<div class="section" id="mcc">
+<h3><span class="section-number">1.1.3. </span>马修斯相关系数（MCC）<a class="headerlink" href="#mcc" title="Permalink to this heading">¶</a></h3>
+<p>在:ref:<cite>chapter-2-section-2-mcc</cite>中我们介绍了马修斯相关系数（Matthews
+Correlation Coefficient, MCC），其公式为：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-4">
+<span class="eqno">()<a class="headerlink" href="#equation-chapter-05-downstream-nlp-tasks-with-transformers-section-01-transformer-performances-versus-human-baselines-4" title="Permalink to this equation">¶</a></span>\[MCC = \frac{TP\times TN - FP \times FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}\]</div>
+<p>MCC为二元分类模型提供了一个优秀的度量指标，即使类别的大小不同。</p>
+<p>现在，我们对如何衡量给定的Transformer模型的结果并将其与其他Transformer模型或NLP模型进行比较有了一个很好的理解。</p>
+</div>
+</div>
+<div class="section" id="benchmark">
+<h2><span class="section-number">1.2. </span>标杆（Benchmark）任务和数据集<a class="headerlink" href="#benchmark" title="Permalink to this heading">¶</a></h2>
+<p>要证明Transformers达到了最先进的（state-of-the-art,
+SOTA）性能水平，必须有以下三样东西：</p>
+<ul class="simple">
+<li><p>模型</p></li>
+<li><p>任务（数据集）</p></li>
+<li><p>度量指标</p></li>
+</ul>
+<p>我们将从探索SuperGLUE基准测试开始，以说明对Transformer模型进行评估的过程。</p>
+<div class="section" id="gluesuperglue">
+<h3><span class="section-number">1.2.1. </span>从GLUE到SuperGLUE<a class="headerlink" href="#gluesuperglue" title="Permalink to this heading">¶</a></h3>
+<p>SuperGLUE基准测试是由<a class="reference external" href="https://arxiv.org/abs/1804.07461">Wang等人（2019年）</a>设计并公开的。<a class="reference external" href="https://arxiv.org/abs/1804.07461">Wang等人（2019年）</a>首先设计了通用语言理解评估（GLUE）基准测试。</p>
+<p>GLUE基准测试的动机是要展示自然语言理解（NLU）必须适用于各种任务才能有用。相对较小的GLUE数据集旨在鼓励NLU模型解决一组任务。</p>
+<p>然而，随着Transformer技术的出现，NLU模型的性能开始超过了普通人的水平，这一点可以在<a class="reference external" href="https://gluebenchmark.com/leaderboard">GLUE排行榜</a>（2021年12月）中看到。</p>
+<p>新模型和人类基准排名将不断变化。这些排名只是给我们一个关于经典自然语言处理和Transformer技术的发展程度的想法！</p>
+<p>我们注意到GLUE人类基准没有处于前列的位置，这表明NLU模型已经在GLUE任务上超过了非专业人类。人类基准代表了我们人类所能达到的水平。如今，人工智能已经能够超越人类。在2021年12月，人类基准只排在第17位。这是一个问题。在没有一个标准可以超越的情况下，盲目寻找基准数据集来改进我们的模型是具有挑战性的。</p>
+<p>我们还注意到，Transformer模型已经取得了领先地位。</p>
+<p>随着自然语言理解的进展，GLUE排行榜将不断演变。然而，<a class="reference external" href="https://arxiv.org/abs/1905.00537">Wang等人（2019年）</a>引入了SuperGLUE，为人类基准设定了更高的标准。</p>
+</div>
+<div class="section" id="id2">
+<h3><span class="section-number">1.2.2. </span>引入更高的人类基准标准<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://arxiv.org/abs/1905.00537">Wang等人（2019年）</a>意识到了GLUE的局限性，并设计了用于更加困难的NLU问题的SuperGLUE.</p>
+<p>然而，随着我们不断提升NLU模型的表现，SuperGLUE排行榜也在不断演变。在2021年，Transformer模型已经超过了人类基准。到了2021年12月，人类基准已经下降到第5名。</p>
+<p>随着新的创新模型的出现，AI算法排名将不断变化。这些排名只是给我们一个关于争夺自然语言处理领域至高无上地位的艰巨程度的概念！</p>
+</div>
+<div class="section" id="superglue">
+<h3><span class="section-number">1.2.3. </span>SuperGLUE评分<a class="headerlink" href="#superglue" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference external" href="https://arxiv.org/abs/1905.00537">Wang等人（2019年）</a>为SuperGLUE基准选择了<a class="reference external" href="https://super.gluebenchmark.com/tasks">10个任务</a>。这些任务的选择标准比GLUE更为严格。例如，这些任务不仅需要理解文本，还需要进行推理。推理的水平并不等同于顶级人类专家。然而，性能水平已经足以替代许多人类任务。</p>
+<p>每个任务都包含了执行该任务所需的信息链接：</p>
+<ul class="simple">
+<li><p>Name是微调预训练模型对应的下游任务的名称</p></li>
+<li><p>Identifier是名称的缩写或简短版本</p></li>
+<li><p>Download提供了数据集的下载链接</p></li>
+<li><p>More
+Info通过链接到设计数据集驱动任务的团队的论文或网站，提供了更详细的信息</p></li>
+<li><p>Metric是用于评估模型的度量指标</p></li>
+</ul>
+<p>SuperGLUE提供任务说明、软件、数据集以及描述要解决问题的论文或网站。某个模型在运行SuperGLUE中的benchmark任务后，将得到每个任务的分数和总体的分数。</p>
+<p>例如，<a class="reference external" href="https://arxiv.org/abs/1905.00537">Wang等人（2019年）</a>论文中的“选择合理答案任务”（Choice
+of Plausible Answers, COPA）可以表述为以下形式：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>前提：I knocked on my neighbor&#39;s door.
+问题：What happened as a result?
+选择1：My neighbor invited me in.
+选择2：My neighbor left his house.
+</pre></div>
+</div>
+<p>模型需要给出正确的选择。</p>
+<p>这个问题对于一个人来回答需要一两秒钟的时间，这表明它需要一些常识性的机器思考。COPA.zip是一个准备就绪的数据集，可以直接从SuperGLUE任务页面下载。提供的度量指标使得整个基准竞赛对所有参与者公平可靠。</p>
+</div>
+</div>
+<div class="section" id="supergluebenchmark">
+<h2><span class="section-number">1.3. </span>SuperGLUE中的Benchmark任务<a class="headerlink" href="#supergluebenchmark" title="Permalink to this heading">¶</a></h2>
+<p>一个任务可以作为预训练任务来生成训练好的模型。同一个任务也可以作为另一个模型的下游任务进行微调。然而，SuperGLUE的目标是展示给定的NLU模型可以通过微调执行多个下游任务。多任务模型证明了Transformer的思考能力。</p>
+<p>任何Transformer模型的强大之处在于其能够使用预训练模型执行多个任务，并将其应用于微调的下游任务。原始的Transformer模型及其变种现在在所有的GLUE和SuperGLUE任务中处于领先地位。我们将继续专注于SuperGLUE的下游任务，其中人类基准难以超越。</p>
+<p>在前面的部分，我们已经介绍了COPA任务。在本节中，我们将介绍<a class="reference external" href="https://arxiv.org/abs/1905.00537">Wang等人（2019年）</a>在他们的论文中在表2中定义的其他七个任务。</p>
+<div class="section" id="boolq">
+<h3><span class="section-number">1.3.1. </span>BoolQ<a class="headerlink" href="#boolq" title="Permalink to this heading">¶</a></h3>
+<p>BoolQ是一个布尔类型的是或否回答任务。根据SuperGLUE的定义，该数据集包含15,942个自然问题。以下是一条示例数据：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;is window movie maker part of windows essentials&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;passage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Windows Movie Maker -- Windows Movie Maker (formerly known as Windows Live Movie Maker in Windows 7) is a discontinued video editing software by Microsoft. It is a part of Windows Essentials software suite and offers the ability to create and edit videos as well as to publish them on OneDrive, Facebook, Vimeo, YouTube, and Flickr.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>其中<code class="docutils literal notranslate"><span class="pre">&quot;question&quot;</span></code>表示问题，<code class="docutils literal notranslate"><span class="pre">&quot;passage&quot;</span></code>表示问题所参考的文章，<code class="docutils literal notranslate"><span class="pre">&quot;label&quot;</span></code>表示问题的答案（真/假）。</p>
+</div>
+<div class="section" id="commitment-bank-cb">
+<h3><span class="section-number">1.3.2. </span>Commitment Bank (CB)<a class="headerlink" href="#commitment-bank-cb" title="Permalink to this heading">¶</a></h3>
+<p>Commitment
+Bank（CB）是一个困难的蕴涵（Entailment）任务。蕴含任务要求Transformer模型阅读一个前提（Premise），并检查基于该前提构建的假设（Hypothesis）。假设可能确认前提，也可能否认前提，还可能是中立的关系。这三种关系分别对应三个标签：蕴含（Entailment），冲突（Contradiction）和中立（Neutral）。</p>
+<p>以下通过CB中的一条数据来举例说明：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;premise&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The Susweca. It means &#39;&#39;dragonfly&#39;&#39; in Sioux, you know. Did I ever tell you that&#39;s where Paul and I met?&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;hypothesis&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Susweca is where she and Paul met,&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;entailment&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>根据前提，这里的假设是成立的，即假设确认了前提，因此二者是蕴含关系，标签为<code class="docutils literal notranslate"><span class="pre">&quot;entailment&quot;</span></code>.</p>
+</div>
+<div class="section" id="multi-sentence-reading-comprehension-multirc">
+<h3><span class="section-number">1.3.3. </span>Multi-Sentence Reading Comprehension (MultiRC)<a class="headerlink" href="#multi-sentence-reading-comprehension-multirc" title="Permalink to this heading">¶</a></h3>
+<p>多句子阅读理解（Multi-Sentence Reading Comprehension,
+MultiRC）要求模型阅读一段文本，并从多个可能的选项中进行选择。这个任务对人类和机器来说都很困难（想象一下你做阅读理解时的心情）。模型会被呈现一段文本，几个问题，并针对每个问题给出可能的答案，每个答案都带有一个0（假）或1（真）的标签。</p>
+<p>我们来看MultiRC中的一条数据：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The rally took place on October 17, the shooting on February 29. Again, standard filmmaking techniques are interpreted as smooth distortion: \&quot;Moore works by depriving you of context and guiding your mind to fill the vacuum -- with completely false ideas. It is brilliantly, if unethically, done.\&quot; As noted above, the \&quot;from my cold dead hands\&quot; part is simply Moore&#39;s way to introduce Heston. Did anyone but Moore&#39;s critics view it as anything else? He certainly does not \&quot;attribute it to a speech where it was not uttered\&quot; and, as noted above, doing so twice would make no sense whatsoever if Moore was the mastermind deceiver that his critics claim he is. Concerning the Georgetown Hoya interview where Heston was asked about Rolland, you write: \&quot;There is no indication that [Heston] recognized Kayla Rolland&#39;s case.\&quot; This is naive to the extreme -- Heston would not be president of the NRA if he was not kept up to date on the most prominent cases of gun violence. Even if he did not respond to that part of the interview, he certainly knew about the case at that point. Regarding the NRA website excerpt about the case and the highlighting of the phrase \&quot;48 hours after Kayla Rolland is pronounced dead\&quot;: This is one valid criticism, but far from the deliberate distortion you make it out to be; rather, it is an example for how the facts can sometimes be easy to miss with Moore&#39;s fast pace editing. The reason the sentence is highlighted is not to deceive the viewer into believing that Heston hurried to Flint to immediately hold a rally there (as will become quite obvious), but simply to highlight the first mention of the name \&quot;Kayla Rolland\&quot; in the text, which is in this paragraph. &quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;questions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;When was Kayla Rolland shot?&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;answers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;February 17&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">168</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;February 29&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">169</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;October 29&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">170</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;October 17&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">171</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;February 17&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">172</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">}</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Who was president of the NRA on February 29?&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;answers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Charleton Heston&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">173</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Moore&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">174</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;George Hoya&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">175</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rolland&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">176</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hoya&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">177</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Kayla&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">178</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">}</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>其中一段文本对应多个问题，每个问题下有多个答案，但是只有一个答案是正确的（标签为1），模型需要预测出那个答案是正确的。</p>
+</div>
+<div class="section" id="reading-comprehension-with-commonsense-reasoning-dataset-record">
+<h3><span class="section-number">1.3.4. </span>Reading Comprehension with Commonsense Reasoning Dataset (ReCoRD)<a class="headerlink" href="#reading-comprehension-with-commonsense-reasoning-dataset-record" title="Permalink to this heading">¶</a></h3>
+<p>具备常识推理的阅读理解数据集（Reading Comprehension with Commonsense
+Reasoning Dataset,
+ReCoRD）是另一个具有挑战性的任务。该数据集包含来自70,000多篇新闻文章的120,000多个查询。Transformer模型必须使用常识推理来解决这个问题。</p>
+<p>我们来看ReCoRD中的一条数据：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;passage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The harrowing stories of women and children locked up for so-called &#39;moral crimes&#39; in Afghanistan&#39;s notorious female prison have been revealed after cameras were allowed inside. Mariam has been in Badam Bagh prison for three months after she shot a man who just raped her at gunpoint and then turned the weapon on herself - but she has yet to been charged. Nuria has eight months left to serve of her sentence for trying to divorce her husband. She gave birth in prison to her son and they share a cell together. Scroll down for video Nuria was jailed for trying to divorce her husband. Her son is one of 62 children living at Badam Bagh prison @highlight Most of the 202 Badam Bagh inmates are jailed for so-called &#39;moral crimes&#39; @highlight Crimes include leaving their husbands or refusing an arrange marriage @highlight 62 children live there and share cells with their mothers and five others&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The baby she gave birth to is her husbands and he has even offered to have the courts set her free if she returns, but @placeholder has refused.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;entities&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Badam Bagh&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Nuria&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Mariam&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;entity_spans&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Mariam&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Badam Bagh&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Nuria&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Nuria&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Badam Bagh&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Badam Bagh&quot;</span><span class="w"> </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">86</span><span class="p">,</span><span class="w"> </span><span class="mi">178</span><span class="p">,</span><span class="w"> </span><span class="mi">197</span><span class="p">,</span><span class="w"> </span><span class="mi">357</span><span class="p">,</span><span class="w"> </span><span class="mi">535</span><span class="p">,</span><span class="w"> </span><span class="mi">627</span><span class="p">,</span><span class="w"> </span><span class="mi">672</span><span class="w"> </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;end&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">97</span><span class="p">,</span><span class="w"> </span><span class="mi">184</span><span class="p">,</span><span class="w"> </span><span class="mi">207</span><span class="p">,</span><span class="w"> </span><span class="mi">362</span><span class="p">,</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span><span class="w"> </span><span class="mi">637</span><span class="p">,</span><span class="w"> </span><span class="mi">682</span><span class="w"> </span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;answers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Nuria&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这里给出了一篇文章（<code class="docutils literal notranslate"><span class="pre">&quot;passage&quot;</span></code>）、一个查询（<code class="docutils literal notranslate"><span class="pre">&quot;query&quot;</span></code>）和4个候选的实体（<code class="docutils literal notranslate"><span class="pre">&quot;entities&quot;</span></code>）。候选的实体用于替换查询中的<code class="docutils literal notranslate"><span class="pre">&quot;&#64;placeholder&quot;</span></code>，模型需要预测使用哪些实体替换<code class="docutils literal notranslate"><span class="pre">&quot;&#64;placeholder&quot;</span></code>是正确的。这里的<code class="docutils literal notranslate"><span class="pre">&quot;start&quot;</span></code>和<code class="docutils literal notranslate"><span class="pre">&quot;end&quot;</span></code>表示实体在句子中开始和结束的位置，便于在Transformer模型中特定的位置进行特征抽取。</p>
+</div>
+<div class="section" id="recognizing-textual-entailment-rte">
+<h3><span class="section-number">1.3.5. </span>Recognizing Textual Entailment (RTE)<a class="headerlink" href="#recognizing-textual-entailment-rte" title="Permalink to this heading">¶</a></h3>
+<p>在文本蕴涵识别（Recognizing Textual Entailment,
+RTE）任务中，Transformer模型需要阅读前提（Premise）并检查一个假设（Hypothesis），并预测假设蕴涵状态的标签，与Commitment
+Bank（CB）类似。</p>
+<p>数据示例如下：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;premise&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;U.S. crude settled $1.32 lower at $42.83 a barrel.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;hypothesis&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crude the light American lowered to the closing 1.32 dollars, to 42.83 dollars the barrel.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;not_entailment&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这里的假设与前提是非蕴含的关系，因此标签为<code class="docutils literal notranslate"><span class="pre">&quot;not_entailment&quot;</span></code>.</p>
+</div>
+<div class="section" id="words-in-context-wic">
+<h3><span class="section-number">1.3.6. </span>Words in Context (WiC)<a class="headerlink" href="#words-in-context-wic" title="Permalink to this heading">¶</a></h3>
+<p>在上下文中的词语（WiC）和随后的Winograd任务中，测试模型处理模棱两可的词语的能力。在WiC任务中，多任务Transformer模型需要分析两个句子，确定目标词语在这两个句子中是否具有相同的意思。</p>
+<p>数据示例如下：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;word&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;place&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sentence1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Do you want to come over to my place later?&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sentence2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A political system with no place for the less prominent groups.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;start1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;start2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;end1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;end2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这里，两个句子中的<code class="docutils literal notranslate"><span class="pre">&quot;place&quot;</span></code>不是同一个意思，因此标签为<code class="docutils literal notranslate"><span class="pre">false</span></code>.
+这里的<code class="docutils literal notranslate"><span class="pre">&quot;start1&quot;</span></code>和<code class="docutils literal notranslate"><span class="pre">&quot;end1&quot;</span></code>表示该单词在第1个句子中的开始和结束的位置，<code class="docutils literal notranslate"><span class="pre">&quot;start2&quot;</span></code>和<code class="docutils literal notranslate"><span class="pre">&quot;end2&quot;</span></code>表示该单词在第2个句子中的开始和结束的位置.</p>
+</div>
+<div class="section" id="the-winograd-schema-challenge-wsc">
+<h3><span class="section-number">1.3.7. </span>The Winograd schema challenge (WSC)<a class="headerlink" href="#the-winograd-schema-challenge-wsc" title="Permalink to this heading">¶</a></h3>
+<p>Winograd模式任务以Terry
+Winograd的名字命名。该数据集构成了一个共指消解问题。具体而言，模型需要预测句子中的代词与某个名词是否有共指关系。</p>
+<p>示例数据如下：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;I poured water from the bottle into the cup until it was full.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;span1_index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;span2_index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;span1_text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;the cup&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;span2_text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;it&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这里的名词是<code class="docutils literal notranslate"><span class="pre">&quot;the</span> <span class="pre">cup&quot;</span></code>，代词是<code class="docutils literal notranslate"><span class="pre">&quot;it&quot;</span></code>，且在句子中，这个<code class="docutils literal notranslate"><span class="pre">&quot;it&quot;</span></code>指的就是<code class="docutils literal notranslate"><span class="pre">&quot;the</span> <span class="pre">cup&quot;</span></code>，二者是共指关系，因此标签为<code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</div>
+</div>
+</div>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">1. Transformer的性能 VS 人类基准</a><ul>
+<li><a class="reference internal" href="#id1">1.1. 使用度量指标来评估模型</a><ul>
+<li><a class="reference internal" href="#accuracy">1.1.1. 准确率（Accuracy）</a></li>
+<li><a class="reference internal" href="#f1-f1-score">1.1.2. F1评分（F1-score）</a></li>
+<li><a class="reference internal" href="#mcc">1.1.3. 马修斯相关系数（MCC）</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#benchmark">1.2. 标杆（Benchmark）任务和数据集</a><ul>
+<li><a class="reference internal" href="#gluesuperglue">1.2.1. 从GLUE到SuperGLUE</a></li>
+<li><a class="reference internal" href="#id2">1.2.2. 引入更高的人类基准标准</a></li>
+<li><a class="reference internal" href="#superglue">1.2.3. SuperGLUE评分</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#supergluebenchmark">1.3. SuperGLUE中的Benchmark任务</a><ul>
+<li><a class="reference internal" href="#boolq">1.3.1. BoolQ</a></li>
+<li><a class="reference internal" href="#commitment-bank-cb">1.3.2. Commitment Bank (CB)</a></li>
+<li><a class="reference internal" href="#multi-sentence-reading-comprehension-multirc">1.3.3. Multi-Sentence Reading Comprehension (MultiRC)</a></li>
+<li><a class="reference internal" href="#reading-comprehension-with-commonsense-reasoning-dataset-record">1.3.4. Reading Comprehension with Commonsense Reasoning Dataset (ReCoRD)</a></li>
+<li><a class="reference internal" href="#recognizing-textual-entailment-rte">1.3.5. Recognizing Textual Entailment (RTE)</a></li>
+<li><a class="reference internal" href="#words-in-context-wic">1.3.6. Words in Context (WiC)</a></li>
+<li><a class="reference internal" href="#the-winograd-schema-challenge-wsc">1.3.7. The Winograd schema challenge (WSC)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+  </div>
+        
+        </main>
+    </div>
+  </body>
+</html>

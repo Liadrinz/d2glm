@@ -89,16 +89,16 @@ Architecture）来利用NVIDIA GPU的并行计算能力，用于我们的多头�
 .. parsed-literal::
     :class: output
 
-    Mon Apr 22 15:28:45 2024       
+    Fri May 10 14:51:27 2024       
     +---------------------------------------------------------------------------------------+
-    | NVIDIA-SMI 545.30                 Driver Version: 546.09       CUDA Version: 12.3     |
+    | NVIDIA-SMI 545.46                 Driver Version: 546.80       CUDA Version: 12.3     |
     |-----------------------------------------+----------------------+----------------------+
     | GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
     | Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
     |                                         |                      |               MIG M. |
     |=========================================+======================+======================|
     |   0  NVIDIA GeForce RTX 3060 ...    On  | 00000000:01:00.0 Off |                  N/A |
-    | N/A   48C    P8               8W /  60W |      0MiB /  6144MiB |      0%      Default |
+    | N/A   48C    P8              10W /  63W |     17MiB /  6144MiB |      0%      Default |
     |                                         |                      |                  N/A |
     +-----------------------------------------+----------------------+----------------------+
                                                                                              
@@ -196,74 +196,74 @@ Architecture）来利用NVIDIA GPU的并行计算能力，用于我们的多头�
       </thead>
       <tbody>
         <tr>
-          <th>1281</th>
+          <th>1151</th>
           <td>r-67</td>
-          <td>1</td>
-          <td>NaN</td>
-          <td>i went to the store and have bought some excel...</td>
+          <td>0</td>
+          <td>?*</td>
+          <td>we elected the man who he had brought with him...</td>
         </tr>
         <tr>
-          <th>1479</th>
-          <td>r-67</td>
+          <th>3220</th>
+          <td>l-93</td>
           <td>1</td>
           <td>NaN</td>
-          <td>it is not true that that it would confuse the ...</td>
+          <td>oil gushed from the well .</td>
         </tr>
         <tr>
-          <th>3687</th>
-          <td>ks08</td>
-          <td>1</td>
-          <td>NaN</td>
-          <td>no doubt that he was forced to leave his famil...</td>
-        </tr>
-        <tr>
-          <th>7401</th>
+          <th>7617</th>
           <td>sks13</td>
           <td>0</td>
           <td>*</td>
-          <td>they are special of bill .</td>
+          <td>i had a realization of there .</td>
         </tr>
         <tr>
-          <th>2772</th>
+          <th>5163</th>
+          <td>ks08</td>
+          <td>1</td>
+          <td>NaN</td>
+          <td>was it for this that we suffered and toiled ?</td>
+        </tr>
+        <tr>
+          <th>7516</th>
+          <td>sks13</td>
+          <td>1</td>
+          <td>NaN</td>
+          <td>he should decide soon .</td>
+        </tr>
+        <tr>
+          <th>8462</th>
+          <td>ad03</td>
+          <td>0</td>
+          <td>*</td>
+          <td>him book</td>
+        </tr>
+        <tr>
+          <th>2561</th>
           <td>l-93</td>
-          <td>1</td>
-          <td>NaN</td>
-          <td>steve tossed the ball into the garden .</td>
+          <td>0</td>
+          <td>*</td>
+          <td>i funneled the bottle with the mixture .</td>
         </tr>
         <tr>
-          <th>8152</th>
-          <td>ad03</td>
+          <th>1027</th>
+          <td>bc01</td>
           <td>1</td>
           <td>NaN</td>
-          <td>many fish are in the sea .</td>
+          <td>everyone reported that max and some lady disap...</td>
         </tr>
         <tr>
-          <th>6304</th>
-          <td>c_13</td>
+          <th>1321</th>
+          <td>r-67</td>
           <td>1</td>
           <td>NaN</td>
-          <td>calvin has dated every girl who jeff has .</td>
+          <td>who ate what ?</td>
         </tr>
         <tr>
-          <th>8187</th>
-          <td>ad03</td>
-          <td>1</td>
-          <td>NaN</td>
-          <td>alison and david soaked their feet in the kitchen</td>
-        </tr>
-        <tr>
-          <th>4728</th>
+          <th>4308</th>
           <td>ks08</td>
           <td>0</td>
           <td>*</td>
-          <td>seoul was slept in by the businessman last nig...</td>
-        </tr>
-        <tr>
-          <th>2624</th>
-          <td>l-93</td>
-          <td>1</td>
-          <td>NaN</td>
-          <td>the king banished the general from the army .</td>
+          <td>it seemed to be intelligent .</td>
         </tr>
       </tbody>
     </table>
@@ -996,8 +996,11 @@ BERT下游模型是使用\ ``in_domain_train.tsv``\ 数据集进行训练的。�
        predicted_classes.append(batch_predictions)
        true_labels.append(label_ids)
 
+.. _chapter-2-section-2-mcc:
+
 使用马修斯相关系数（MCC）进行评估
 ---------------------------------
+
 
 马修斯相关系数（MCC）的公式如下：
 

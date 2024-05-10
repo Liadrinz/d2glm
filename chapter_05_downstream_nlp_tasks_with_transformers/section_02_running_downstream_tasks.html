@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>2. 运行下游任务 &#8212; Transformer for NLP 0.0.1 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fontawesome/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/d2l.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/d2l.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link is-active"><span class="section-number">2. </span>运行下游任务</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="../search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="../_sources/chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.rst.txt" rel="nofollow">
+  <i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+
+	<script type="text/javascript" src="../_static/sphinx_materialdesign_theme.js "></script>
+    <header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+
+    <div class="document">
+        <div class="page-content" role="main">
+        
+  <div class="section" id="id1">
+<h1><span class="section-number">2. </span>运行下游任务<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
+<p>下游任务是对预训练的Transformer模型进行微调，并继承其模型和参数的任务。</p>
+<p>因此，下游任务是站在预训练模型运行微调任务的角度来说的。这意味着，根据模型的不同，如果某个任务没有被用于完全预训练模型，那么它就是下游任务。在本节中，我们将把所有任务都视为下游任务，因为我们没有对它们进行预训练。</p>
+<p>模型会不断发展，数据库、基准方法、准确度评估方法和排行榜标准也会随之演变。但是，通过本章的下游任务所反映出的人类思维结构将保持不变。</p>
+<p>现在详细介绍一些下游任务。</p>
+<div class="section" id="cola">
+<h2><span class="section-number">2.1. </span>CoLA<a class="headerlink" href="#cola" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://nyu-mll.github.io/CoLA/">语言可接受性语料库（Corpus of Linguistic Acceptability,
+CoLA）</a>是GLUE任务中的一个任务，包含了数千个英语句子样本及其语法可接受性标签。</p>
+<p>CoLA的目标是是评估NLP模型对句子的语言可接受性进行判断的语言能力，期望NLP模型能够相应地对句子进行分类。</p>
+<p>这些句子被标记为语法正确或语法错误。如果句子不符合语法规范，则标记为0。如果句子符合语法规范，则标记为1。例如：</p>
+<ul class="simple">
+<li><p>对于句子 ‘we yelled ourselves hoarse.’，分类标记为1。</p></li>
+<li><p>对于句子 ‘we yelled ourselves.’，分类标记为0。</p></li>
+</ul>
+<p>在:ref:<cite>chapter-03-section-02</cite>中我们叙述了在BERT预训练模型上运行CoLA下游任务的详细过程和代码，其大致流程如下：</p>
+<ul class="simple">
+<li><p>加载下游任务（CoLA）数据集</p></li>
+<li><p>加载预训练模型（BERT）</p></li>
+<li><p>使用下游任务数据集微调预训练模型</p></li>
+<li><p>使用MCC指标评估微调后模型的性能</p></li>
+</ul>
+</div>
+<div class="section" id="sst-2">
+<h2><span class="section-number">2.2. </span>SST-2<a class="headerlink" href="#sst-2" title="Permalink to this heading">¶</a></h2>
+<p>Stanford Sentiment TreeBank (SST-2)
+是一个电影评论的数据集。在本节中，我们将描述SST-2（二分类）任务。然而，SST-2不仅可以做二分类任务，还可以对情感从0（负面）到n（正面）进行多分类。</p>
+<p>在本节中，我们将使用Hugging Face Transformer
+Pipeline模型运行从SST中提取的样本，以说明二元分类。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;sentiment-analysis&quot;</span><span class="p">)</span>
+<span class="n">review1</span> <span class="o">=</span> <span class="s2">&quot;If you sometimes like to go to the movies to have fun , Wasabi is a good place to start.&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nlp</span><span class="p">(</span><span class="n">review1</span><span class="p">),</span> <span class="n">review1</span><span class="p">)</span>
+<span class="n">review2</span> <span class="o">=</span> <span class="s2">&quot;Effective but too-tepid biopic.&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nlp</span><span class="p">(</span><span class="n">review2</span><span class="p">),</span> <span class="n">review2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>这里的<code class="docutils literal notranslate"><span class="pre">nlp</span> <span class="pre">=</span> <span class="pre">pipeline(&quot;sentiment-analysis&quot;)</span></code>初始化了一个已经进行过情感分类下游任务的模型，<code class="docutils literal notranslate"><span class="pre">nlp(review1)</span></code>表示对<code class="docutils literal notranslate"><span class="pre">review1</span></code>进行情感分类。</p>
+<p>从分类输出结果中可以看出，<code class="docutils literal notranslate"><span class="pre">review1</span></code>被分类为积极情感，<code class="docutils literal notranslate"><span class="pre">review2</span></code>被分类为消极情感，且分数都接近1.0，表明置信度很高。</p>
+</div>
+<div class="section" id="mrpc">
+<h2><span class="section-number">2.3. </span>MRPC<a class="headerlink" href="#mrpc" title="Permalink to this heading">¶</a></h2>
+<p>Microsoft Research Paraphrase Corpus
+(MRPC)是GLUE任务中的一个任务，它包含从网络新闻来源中提取的句子对。每个句子对都由人工标注两个句子是否等价。等价的判断基于以下属性：</p>
+<ul class="simple">
+<li><p>释义等价（Paraphrase equivalent）</p></li>
+<li><p>语义等价（Semantic equivalent）</p></li>
+</ul>
+<p>我们尝试运行一下MRPC任务的一个示例：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">TFAutoModelForSequenceClassification</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;bert-base-cased-finetuned-mrpc&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">TFAutoModelForSequenceClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;bert-base-cased-finetuned-mrpc&quot;</span><span class="p">)</span>
+<span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;not paraphrase&quot;</span><span class="p">,</span> <span class="s2">&quot;is paraphrase&quot;</span><span class="p">]</span>
+<span class="n">sequence_A</span> <span class="o">=</span> <span class="s2">&quot;The DVD-CCA then appealed to the state Supreme Court.&quot;</span>
+<span class="n">sequence_B</span> <span class="o">=</span> <span class="s2">&quot;The DVD CCA appealed that decision to the U.S. Supreme Court.&quot;</span>
+<span class="n">paraphrase</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode_plus</span><span class="p">(</span><span class="n">sequence_A</span><span class="p">,</span> <span class="n">sequence_B</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;tf&quot;</span><span class="p">)</span>
+<span class="n">paraphrase_classification_logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">paraphrase</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">paraphrase_results</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">paraphrase_classification_logits</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sequence_B</span><span class="p">,</span> <span class="s2">&quot;should be a paraphrase&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">classes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">paraphrase_results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>上述代码输出了<code class="docutils literal notranslate"><span class="pre">sequence_A</span></code>和<code class="docutils literal notranslate"><span class="pre">sequence_B</span></code>不等价和等价的概率。</p>
+</div>
+</div>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">2. 运行下游任务</a><ul>
+<li><a class="reference internal" href="#cola">2.1. CoLA</a></li>
+<li><a class="reference internal" href="#sst-2">2.2. SST-2</a></li>
+<li><a class="reference internal" href="#mrpc">2.3. MRPC</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+  </div>
+        
+        </main>
+    </div>
+  </body>
+</html>

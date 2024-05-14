@@ -107,7 +107,10 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/section.html">4.1. 从头开始预训练</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
 <li class="toctree-l2"><a class="reference internal" href="chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
@@ -161,7 +164,10 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/section.html">4.1. 从头开始预训练</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
 <li class="toctree-l2"><a class="reference internal" href="chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
@@ -203,23 +209,7 @@ Show Source
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#id1">4.1. 第1步：加载数据集</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#hugging-face-transformers">4.2. 第2步：安装Hugging Face transformers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#tokenizer">4.3. 第3步：训练分词器（tokenizer）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#id2">4.4. 第4步：将分词器保存到磁盘</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#id3">4.5. 第5步：加载训练的分词器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#gpucuda">4.6. 第6步：检查资源：GPU和CUDA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#id4">4.7. 第7步：定义模型的配置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#transformerstokenizer">4.8. 第8步：在transformers中重新加载tokenizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#id5">4.9. 第9步：从头初始化模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#id7">4.10. 第10步：构建数据集</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#id8">4.11. 第11步：定义数据整合器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#id9">4.12. 第12步：初始化训练器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#id10">4.13. 第13步：预训练模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#id11">4.14. 第14步：将最终的模型（包括分词器和配置）保存到磁盘上</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#fillmaskpipeline">4.15. 第15步：使用<code class="docutils literal notranslate"><span class="pre">FillMaskPipeline</span></code>进行语言建模</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#id12">4.16. 后续步骤</a></li>
-<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/index.html#id13">4.17. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_04_pretraining_a_roberta_model_from_scratch/section.html">4.1. 从头开始预训练</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>

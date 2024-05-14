@@ -26,7 +26,7 @@
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="5. 使用Transformer进行下游NLP任务" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html" />
+    <link rel="next" title="4.1. 从头开始预训练" href="section.html" />
     <link rel="prev" title="3.3. 练习" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html" /> 
   </head>
 <body>
@@ -108,7 +108,10 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">4. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section.html">4.1. 从头开始预训练</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
@@ -162,7 +165,10 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">4. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section.html">4.1. 从头开始预训练</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
@@ -207,508 +213,29 @@ File）和词表文件（Vocabulary File），并在预训练过程中使用它�
 <li><p>保存模型</p></li>
 <li><p>将模型应用到下游的MLM任务</p></li>
 </ul>
-<p>在本章中，我们将使用Hugging
-Face为类似BERT的模型提供的构建块来训练一个名为KantaiBERT的transformer模型。我们在第三章:ref:<cite>chapter-3</cite>中介绍了我们将使用的模型的构建块的理论知识。</p>
-<p>KantaiBERT是一种基于BERT架构的，类似于RoBERTa（Robustly Optimized BERT
-Pretraining Approach）的模型。</p>
-<p>原始的BERT模型为原始的transformer模型带来了创新的特性，而RoBERTa通过改进预训练过程的机制，进一步提高了transformer在下游任务中的性能。</p>
-<p>例如，RoBERTa不使用WordPiece分词，而是采用字节级别的字节对编码（Byte-Pair
-Encoding，BPE）。这种方法为各种BERT和类BERT模型铺平了道路。</p>
-<p>在本章中，KantaiBERT和BERT一样，将使用Masked Language
-Modeling（MLM）进行训练。MLM是一种语言建模技术，它会在序列中掩盖一个单词，然后transformer模型必须训练以预测被掩盖的单词。</p>
-<p>KantaiBERT将作为一个小型模型进行训练，它由6层、12个注意力头和84,095,008个参数组成。这个参数数量似乎很多，但是这些参数分布在12个注意力头上，使得它成为一个相对较小的模型。小型模型将使预训练过程更加平滑，每个步骤都可以实时查看结果，而无需等待几个小时。</p>
-<p>KantaiBERT是类似DistilBERT的模型，因为它具有相同的6层和12个注意力头的架构。DistilBERT意思是进行知识蒸馏（Knowledge
-Distillation）后的BERT模型，其参数量比原始BERT模型少。类似地，KantaiBERT也是蒸馏后的RoBERTa模型，其参数数量比原始RoBERTa模型少。因此，它的运行速度更快，但结果略微比RoBERTa模型的精确度较低。</p>
-<div class="section" id="id1">
-<h2><span class="section-number">4.1. </span>第1步：加载数据集<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
-<p>通过使用预先准备好的数据集，我们可以客观地训练和比较transformer模型。</p>
-<p>这里选择使用伊曼努尔·康德（1724-1804）的作品，他是启蒙时代的典范，也是一位德国哲学家。这个想法是为了在下游推理任务中引入类人的逻辑和预训练的推理能力。</p>
-<p><a class="reference external" href="https://www.gutenberg.org">Gutenberg</a>中提供了众多免费的电子书，可以下载为文本格式。你也可以使用其他书作为自定义的数据集。</p>
-<p>这里收集了伊曼努尔·康德的以下三本书中的语料作为训练数据，并将其命名为<code class="docutils literal notranslate"><span class="pre">kant.txt</span></code>:</p>
-<ul class="simple">
-<li><p>纯粹理性批判（The Critique of Pure Reason）</p></li>
-<li><p>实践理性批判（The Critique of Practical Reason）</p></li>
-<li><p>道德形而上学基础（Fundamental Principles of the Metaphysic of
-Morals）</p></li>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="section.html">4.1. 从头开始预训练</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section.html#id2">4.1.1. 第1步：加载数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#hugging-face-transformers">4.1.2. 第2步：安装Hugging Face transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#tokenizer">4.1.3. 第3步：训练分词器（tokenizer）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#id3">4.1.4. 第4步：将分词器保存到磁盘</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#id4">4.1.5. 第5步：加载训练的分词器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#gpucuda">4.1.6. 第6步：检查资源：GPU和CUDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#id5">4.1.7. 第7步：定义模型的配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#transformerstokenizer">4.1.8. 第8步：在transformers中重新加载tokenizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#id6">4.1.9. 第9步：从头初始化模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#id8">4.1.10. 第10步：构建数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#id9">4.1.11. 第11步：定义数据整合器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#id10">4.1.12. 第12步：初始化训练器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#id11">4.1.13. 第13步：预训练模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#id12">4.1.14. 第14步：将最终的模型（包括分词器和配置）保存到磁盘上</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#fillmaskpipeline">4.1.15. 第15步：使用<code class="docutils literal notranslate"><span class="pre">FillMaskPipeline</span></code>进行语言建模</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#id13">4.1.16. 后续步骤</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html#id14">4.1.17. 练习</a></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">kant.txt</span></code>提供了一个小型训练数据集，用于训练本章的transformer模型。所得到的结果仍然是实验性的。对于一个真实需要落地的项目，可能需要添加更多的语料。</p>
-<p>可以使用以下命令下载<code class="docutils literal notranslate"><span class="pre">kant.txt</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!curl -L https://raw.githubusercontent.com/Denis2054/Transformers-for-NLP-2nd-Edition/master/Chapter04/kant.txt --output &quot;kant.txt&quot;
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="p">:</span><span class="n">class</span><span class="p">:</span> <span class="n">output</span>
-
-    <span class="o">%</span> <span class="n">Total</span>    <span class="o">%</span> <span class="n">Received</span> <span class="o">%</span> <span class="n">Xferd</span>  <span class="n">Average</span> <span class="n">Speed</span>   <span class="n">Time</span>    <span class="n">Time</span>     <span class="n">Time</span>  <span class="n">Current</span>
-                                   <span class="n">Dload</span>  <span class="n">Upload</span>   <span class="n">Total</span>   <span class="n">Spent</span>    <span class="n">Left</span>  <span class="n">Speed</span>
-
-<span class="mi">0</span>     <span class="mi">0</span>    <span class="mi">0</span>     <span class="mi">0</span>    <span class="mi">0</span>     <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span> <span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span> <span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span> <span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span>     <span class="mi">0</span>
-<span class="mi">0</span>     <span class="mi">0</span>    <span class="mi">0</span>     <span class="mi">0</span>    <span class="mi">0</span>     <span class="mi">0</span>      <span class="mi">0</span>      <span class="mi">0</span> <span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span> <span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span> <span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span>     <span class="mi">0</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="p">:</span><span class="n">class</span><span class="p">:</span> <span class="n">output</span>
-
-
-<span class="mi">68</span> <span class="mf">10.7</span><span class="n">M</span>   <span class="mi">68</span> <span class="mi">7519</span><span class="n">k</span>    <span class="mi">0</span>     <span class="mi">0</span>  <span class="mi">7504</span><span class="n">k</span>      <span class="mi">0</span>  <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">01</span>  <span class="mi">0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">01</span> <span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span> <span class="mi">7497</span><span class="n">k</span>
-</pre></div>
-</div>
-<p>100 10.7M  100 10.7M    0     0  8143k      0  0:00:01  0:00:01 –:–:– 8137k</p>
-</div>
-<div class="section" id="hugging-face-transformers">
-<h2><span class="section-number">4.2. </span>第2步：安装Hugging Face transformers<a class="headerlink" href="#hugging-face-transformers" title="Permalink to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install transformers
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Looking</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">simple</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">transformers</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="mf">4.39.2</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">filelock</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">3.13.4</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">huggingface</span><span class="o">-</span><span class="n">hub</span><span class="o">&lt;</span><span class="mf">1.0</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">0.19.3</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">0.22.2</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">numpy</span><span class="o">&gt;=</span><span class="mf">1.17</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">1.26.4</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">packaging</span><span class="o">&gt;=</span><span class="mf">20.0</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">24.0</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">pyyaml</span><span class="o">&gt;=</span><span class="mf">5.1</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">6.0.1</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">regex</span><span class="o">!=</span><span class="mf">2019.12.17</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">2023.12.25</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">requests</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">2.31.0</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">tokenizers</span><span class="o">&lt;</span><span class="mf">0.19</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">0.14</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">0.15.2</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">safetensors</span><span class="o">&gt;=</span><span class="mf">0.4.1</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">0.4.2</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">tqdm</span><span class="o">&gt;=</span><span class="mf">4.27</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">4.66.2</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">fsspec</span><span class="o">&gt;=</span><span class="mf">2023.5.0</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">huggingface</span><span class="o">-</span><span class="n">hub</span><span class="o">&lt;</span><span class="mf">1.0</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">0.19.3</span><span class="o">-&gt;</span><span class="n">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">2023.10.0</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">typing</span><span class="o">-</span><span class="n">extensions</span><span class="o">&gt;=</span><span class="mf">3.7.4.3</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">huggingface</span><span class="o">-</span><span class="n">hub</span><span class="o">&lt;</span><span class="mf">1.0</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">0.19.3</span><span class="o">-&gt;</span><span class="n">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">4.10.0</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">charset</span><span class="o">-</span><span class="n">normalizer</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="o">&gt;=</span><span class="mi">2</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">requests</span><span class="o">-&gt;</span><span class="n">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">3.3.2</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">idna</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">2.5</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">requests</span><span class="o">-&gt;</span><span class="n">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">2.10</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">urllib3</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">1.21.1</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">requests</span><span class="o">-&gt;</span><span class="n">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">2.2.1</span><span class="p">)</span>
-<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">certifi</span><span class="o">&gt;=</span><span class="mf">2017.4.17</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">requests</span><span class="o">-&gt;</span><span class="n">transformers</span><span class="p">)</span> <span class="p">(</span><span class="mf">2024.2.2</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">Running</span> <span class="n">pip</span> <span class="k">as</span> <span class="n">the</span> <span class="s1">&#39;root&#39;</span> <span class="n">user</span> <span class="n">can</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">broken</span> <span class="n">permissions</span> <span class="ow">and</span> <span class="n">conflicting</span> <span class="n">behaviour</span> <span class="k">with</span> <span class="n">the</span> <span class="n">system</span> <span class="n">package</span> <span class="n">manager</span><span class="o">.</span> <span class="n">It</span> <span class="ow">is</span> <span class="n">recommended</span> <span class="n">to</span> <span class="n">use</span> <span class="n">a</span> <span class="n">virtual</span> <span class="n">environment</span> <span class="n">instead</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pip</span><span class="o">.</span><span class="n">pypa</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">warnings</span><span class="o">/</span><span class="n">venv</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="tokenizer">
-<h2><span class="section-number">4.3. </span>第3步：训练分词器（tokenizer）<a class="headerlink" href="#tokenizer" title="Permalink to this heading">¶</a></h2>
-<p>在本节中，我们不使用预训练的分词器（如GPT-2的预训练分词器），而是从头开始训练一个分词器。</p>
-<p>我们将使用<code class="docutils literal notranslate"><span class="pre">kant.txt</span></code>来训练Hugging
-Face的<code class="docutils literal notranslate"><span class="pre">ByteLevelBPETokenizer</span></code>. 一个BPE（Byte-Pair
-Encoding）分词器会将一个字符串或单词分解为子字符串或子词。除了其他许多优点外，这种方法有两个主要优势：</p>
-<ul class="simple">
-<li><p>分词器可以将单词分解为最小的组成部分，然后将这些小组件合并为统计上有趣的组合。例如，“smaller”和“smallest”可以变为“small”，“er”和“est”。分词器还可以进一步拆分，例如，我们可以得到“sm”和“all”。无论如何，单词都被拆分为子词标记和更小的子词部分，例如“sm”和“all”，而不是简单的“small”。</p></li>
-<li><p>使用WordPiece级别的编码，被分类为未知（unk_token）的字符串块将基本上消失。</p></li>
+</li>
 </ul>
-<p>在这个模型中，我们将使用以下参数来训练分词器：</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">files=/path/to/dataset</span></code>是数据集的路径</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">vocab_size=52000</span></code>是词表大小</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">min_frequency=2</span></code>是最小频率的阈值</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">special_tokens=[]</span></code>是特殊token的列表</p></li>
-</ul>
-<p>这里，特殊token包括：</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code>: 开始token</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;pad&gt;</span></code>: 填充token</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;/s&gt;</span></code>: 结束token</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;unk&gt;</span></code>: 未知token</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;mask&gt;</span></code>: 用于MLM的掩码token</p></li>
-</ul>
-<p>我们来看某个句子中的两个单词：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span><span class="n">the</span> <span class="n">tokenizer</span><span class="o">...</span>
-</pre></div>
-</div>
-<p>分词器的第一步是将字符串变为tokens:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Ġthe&#39;</span><span class="p">,</span> <span class="s1">&#39;Ġtoken&#39;</span><span class="p">,</span> <span class="s1">&#39;izer&#39;</span><span class="p">,</span>
-</pre></div>
-</div>
-<p>其中<code class="docutils literal notranslate"><span class="pre">Ġ</span></code>表示空格信息。</p>
-<p>下一步是使用token的索引来代替token:</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 30%" />
-<col style="width: 40%" />
-<col style="width: 30%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>‘Ġthe’</p></th>
-<th class="head"><p>‘Ġtoken’</p></th>
-<th class="head"><p>‘izer’</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>150</p></td>
-<td><p>5430</p></td>
-<td><p>4712</p></td>
-</tr>
-</tbody>
-</table>
-<p>整个流程代码如下：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">time</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">tokenizers</span> <span class="kn">import</span> <span class="n">ByteLevelBPETokenizer</span>
-
-<span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;**/*.txt&quot;</span><span class="p">)]</span>
-<span class="c1"># 初始化一个分词器</span>
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">ByteLevelBPETokenizer</span><span class="p">()</span>
-<span class="c1"># 自定义训练</span>
-<span class="n">tokenizer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">files</span><span class="o">=</span><span class="n">paths</span><span class="p">,</span>
-    <span class="n">vocab_size</span><span class="o">=</span><span class="mi">52000</span><span class="p">,</span>
-    <span class="n">min_frequency</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-    <span class="n">special_tokens</span><span class="o">=</span><span class="p">[</span>
-        <span class="s2">&quot;&lt;s&gt;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;&lt;pad&gt;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;&lt;/s&gt;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;&lt;mask&gt;&quot;</span><span class="p">,</span>
-    <span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CPU</span> <span class="n">times</span><span class="p">:</span> <span class="n">user</span> <span class="mf">14.5</span> <span class="n">s</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="mf">8.35</span> <span class="n">s</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="mf">22.9</span> <span class="n">s</span>
-<span class="n">Wall</span> <span class="n">time</span><span class="p">:</span> <span class="mf">3.65</span> <span class="n">s</span>
-</pre></div>
-</div>
-<p>可以看到，上述代码输出了训练运行的时间。现在，tokenizer被训练好了，我们准备把tokenizer保存下来。</p>
-</div>
-<div class="section" id="id2">
-<h2><span class="section-number">4.4. </span>第4步：将分词器保存到磁盘<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
-<p>分词器被训练后会产生两个文件：</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">merges.txt</span></code>: 包含了合并的标记化子字符串（tokenized substrings）。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">vocab.json</span></code>: 包含了标记化子串的索引</p></li>
-</ul>
-<p>以下代码将上述代码所训练的tokenizer对应的两个文件保存到<code class="docutils literal notranslate"><span class="pre">KantaiBERT</span></code>目录下：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;KantaiBERT&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">tokenizer</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s2">&quot;KantaiBERT&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;KantaiBERT/vocab.json&#39;</span><span class="p">,</span> <span class="s1">&#39;KantaiBERT/merges.txt&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>在这个例子中，文件的大小较小。您可以双击打开这些文件来查看它们的内容。可以看到<code class="docutils literal notranslate"><span class="pre">merges.txt</span></code>包含了标记化的子字符串：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#version: 0.2 - Trained by &#39;huggingface/tokenizers&#39;</span>
-<span class="n">Ġ</span> <span class="n">t</span>
-<span class="n">h</span> <span class="n">e</span>
-<span class="n">Ġ</span> <span class="n">a</span>
-<span class="n">o</span> <span class="n">n</span>
-<span class="n">i</span> <span class="n">n</span>
-<span class="n">Ġ</span> <span class="n">o</span>
-<span class="n">Ġt</span> <span class="n">he</span>
-<span class="n">r</span> <span class="n">e</span>
-<span class="n">i</span> <span class="n">t</span>
-<span class="n">Ġo</span> <span class="n">f</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">vocab.json</span></code>包含了token的索引：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[…,&quot;Ġthink&quot;:955,&quot;preme&quot;:956,&quot;ĠE&quot;:957,&quot;Ġout&quot;:958,&quot;Ġdut&quot;:959, &quot;aly&quot;:960,&quot;Ġexp&quot;:961,…]
-</pre></div>
-</div>
-</div>
-<div class="section" id="id3">
-<h2><span class="section-number">4.5. </span>第5步：加载训练的分词器<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
-<p>我们本来可以直接加载Hugging
-Face上预训练的分词器，但是现在我们可以使用我们自己训练的分词器了：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tokenizers.implementations</span> <span class="kn">import</span> <span class="n">ByteLevelBPETokenizer</span>
-
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">ByteLevelBPETokenizer</span><span class="p">(</span>
-<span class="s2">&quot;./KantaiBERT/vocab.json&quot;</span><span class="p">,</span>
-<span class="s2">&quot;./KantaiBERT/merges.txt&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>tokenizer可以对一个序列进行编码：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">encoding</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;The Critique of Pure Reason.&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>可以看到，<code class="docutils literal notranslate"><span class="pre">&quot;The</span> <span class="pre">Critique</span> <span class="pre">of</span> <span class="pre">Pure</span> <span class="pre">Reason.&quot;</span></code>这句话变成了如下token序列：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">encoding</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Encoding</span><span class="p">(</span><span class="n">num_tokens</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">attributes</span><span class="o">=</span><span class="p">[</span><span class="n">ids</span><span class="p">,</span> <span class="n">type_ids</span><span class="p">,</span> <span class="n">tokens</span><span class="p">,</span> <span class="n">offsets</span><span class="p">,</span> <span class="n">attention_mask</span><span class="p">,</span> <span class="n">special_tokens_mask</span><span class="p">,</span> <span class="n">overflowing</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>为了将序列用于BERT模型及其变种的训练，我们需要让tokenizer对传入的序列进行后处理，加上开始token和结束token:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tokenizers.processors</span> <span class="kn">import</span> <span class="n">BertProcessing</span>
-
-<span class="c1"># 后处理</span>
-<span class="n">tokenizer</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">post_process</span> <span class="o">=</span> <span class="n">BertProcessing</span><span class="p">(</span>
-    <span class="p">(</span><span class="s2">&quot;&lt;/s&gt;&quot;</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">token_to_id</span><span class="p">(</span><span class="s2">&quot;&lt;/s&gt;&quot;</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;&lt;s&gt;&quot;</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">token_to_id</span><span class="p">(</span><span class="s2">&quot;&lt;s&gt;&quot;</span><span class="p">)),</span>
-<span class="p">)</span>
-<span class="c1"># 截断处理</span>
-<span class="n">tokenizer</span><span class="o">.</span><span class="n">enable_truncation</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>这样一来，再次调用tokenizer进行分词时，会得到包含特殊token的token序列：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;The Critique of Pure Reason.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tokens</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;The&#39;</span><span class="p">,</span> <span class="s1">&#39;ĠCritique&#39;</span><span class="p">,</span> <span class="s1">&#39;Ġof&#39;</span><span class="p">,</span> <span class="s1">&#39;ĠPure&#39;</span><span class="p">,</span> <span class="s1">&#39;ĠReason&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="gpucuda">
-<h2><span class="section-number">4.6. </span>第6步：检查资源：GPU和CUDA<a class="headerlink" href="#gpucuda" title="Permalink to this heading">¶</a></h2>
-<p>使用以下命令检查GPU:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!nvidia-smi
-</pre></div>
-</div>
-<p>以上命令会输出GPU的型号和显存等信息。</p>
-<p>使用以下python代码检查cuda是否可用：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-
-<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">False</span>
-</pre></div>
-</div>
-<p>输出为<code class="docutils literal notranslate"><span class="pre">True</span></code>说明cuda可用。</p>
-<p>这里建议使用<a class="reference external" href="https://colab.research.google.com/">Google
-Colab</a>或<a class="reference external" href="https://www.kaggle.com/code">Kaggle
-Notebook</a>，这样可以确保GPU和cuda是可用的。</p>
-<p>如果你使用自己的笔记本或者自己搭建的服务器上的GPU，请先安装CUDA和cuDNN（Google/问GPT）.</p>
-</div>
-<div class="section" id="id4">
-<h2><span class="section-number">4.7. </span>第7步：定义模型的配置<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h2>
-<p>我们将使用与DistilBERT
-transformer相同数量的层数和注意力头数，对一个RoBERTa类型的transformer模型进行预训练。该模型的词汇表大小将设置为52,000，具有12个注意力头和6个层：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">RobertaConfig</span>
-
-<span class="n">config</span> <span class="o">=</span> <span class="n">RobertaConfig</span><span class="p">(</span>
-    <span class="n">vocab_size</span><span class="o">=</span><span class="mi">52_000</span><span class="p">,</span>
-    <span class="n">max_position_embeddings</span><span class="o">=</span><span class="mi">514</span><span class="p">,</span>
-    <span class="n">num_attention_heads</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
-    <span class="n">num_hidden_layers</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
-    <span class="n">type_vocab_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>我们会在后续步骤中详细探索这些配置。</p>
-</div>
-<div class="section" id="transformerstokenizer">
-<h2><span class="section-number">4.8. </span>第8步：在transformers中重新加载tokenizer<a class="headerlink" href="#transformerstokenizer" title="Permalink to this heading">¶</a></h2>
-<p>我们现在准备好加载我们训练好的分词器，即使用RobertaTokenizer.from_pretained()加载我们的预训练分词器：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">RobertaTokenizer</span>
-
-<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">RobertaTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;./KantaiBERT&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="id5">
-<h2><span class="section-number">4.9. </span>第9步：从头初始化模型<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h2>
-<p>首先导入用于掩码语言建模（MLM）的RoBERTa模型：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">RobertaForMaskedLM</span>
-</pre></div>
-</div>
-<p>使用上面创建的配置来初始化模型：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">RobertaForMaskedLM</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>打印模型可以看到，它是一个有6层和12个注意力头的BERT模型：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RobertaForMaskedLM</span><span class="p">(</span>
-  <span class="p">(</span><span class="n">roberta</span><span class="p">):</span> <span class="n">RobertaModel</span><span class="p">(</span>
-    <span class="p">(</span><span class="n">embeddings</span><span class="p">):</span> <span class="n">RobertaEmbeddings</span><span class="p">(</span>
-      <span class="p">(</span><span class="n">word_embeddings</span><span class="p">):</span> <span class="n">Embedding</span><span class="p">(</span><span class="mi">52000</span><span class="p">,</span> <span class="mi">768</span><span class="p">,</span> <span class="n">padding_idx</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-      <span class="p">(</span><span class="n">position_embeddings</span><span class="p">):</span> <span class="n">Embedding</span><span class="p">(</span><span class="mi">514</span><span class="p">,</span> <span class="mi">768</span><span class="p">,</span> <span class="n">padding_idx</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-      <span class="p">(</span><span class="n">token_type_embeddings</span><span class="p">):</span> <span class="n">Embedding</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">768</span><span class="p">)</span>
-      <span class="p">(</span><span class="n">LayerNorm</span><span class="p">):</span> <span class="n">LayerNorm</span><span class="p">((</span><span class="mi">768</span><span class="p">,),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">elementwise_affine</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-      <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="p">(</span><span class="n">encoder</span><span class="p">):</span> <span class="n">RobertaEncoder</span><span class="p">(</span>
-      <span class="p">(</span><span class="n">layer</span><span class="p">):</span> <span class="n">ModuleList</span><span class="p">(</span>
-        <span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mi">5</span><span class="p">):</span> <span class="mi">6</span> <span class="n">x</span> <span class="n">RobertaLayer</span><span class="p">(</span>
-          <span class="p">(</span><span class="n">attention</span><span class="p">):</span> <span class="n">RobertaAttention</span><span class="p">(</span>
-            <span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="n">RobertaSelfAttention</span><span class="p">(</span>
-              <span class="p">(</span><span class="n">query</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-              <span class="p">(</span><span class="n">key</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-              <span class="p">(</span><span class="n">value</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-              <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-            <span class="p">)</span>
-            <span class="p">(</span><span class="n">output</span><span class="p">):</span> <span class="n">RobertaSelfOutput</span><span class="p">(</span>
-              <span class="p">(</span><span class="n">dense</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-              <span class="p">(</span><span class="n">LayerNorm</span><span class="p">):</span> <span class="n">LayerNorm</span><span class="p">((</span><span class="mi">768</span><span class="p">,),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">elementwise_affine</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-              <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-            <span class="p">)</span>
-          <span class="p">)</span>
-          <span class="p">(</span><span class="n">intermediate</span><span class="p">):</span> <span class="n">RobertaIntermediate</span><span class="p">(</span>
-            <span class="p">(</span><span class="n">dense</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">3072</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="p">(</span><span class="n">intermediate_act_fn</span><span class="p">):</span> <span class="n">GELUActivation</span><span class="p">()</span>
-          <span class="p">)</span>
-          <span class="p">(</span><span class="n">output</span><span class="p">):</span> <span class="n">RobertaOutput</span><span class="p">(</span>
-            <span class="p">(</span><span class="n">dense</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">3072</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="p">(</span><span class="n">LayerNorm</span><span class="p">):</span> <span class="n">LayerNorm</span><span class="p">((</span><span class="mi">768</span><span class="p">,),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">elementwise_affine</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-          <span class="p">)</span>
-        <span class="p">)</span>
-      <span class="p">)</span>
-    <span class="p">)</span>
-  <span class="p">)</span>
-  <span class="p">(</span><span class="n">lm_head</span><span class="p">):</span> <span class="n">RobertaLMHead</span><span class="p">(</span>
-    <span class="p">(</span><span class="n">dense</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">LayerNorm</span><span class="p">((</span><span class="mi">768</span><span class="p">,),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">elementwise_affine</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="p">(</span><span class="n">decoder</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">52000</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-  <span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>在继续之前，请花些时间仔细研究上述模型输出的细节。这样您将能够从内部了解模型。</p>
-<div class="section" id="id6">
-<h3><span class="section-number">4.9.1. </span>探索模型参数<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
-<p>上面的模型算规模较小的，共有84,095,008个参数，可以用代码查看其参数量：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">num_parameters</span><span class="p">())</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">83504416</span>
-</pre></div>
-</div>
-<p>代码打印的参数量只是一个大致的数，不同transformers版本之间可能有细微的差别。</p>
-<p>现在让我们来看看参数。我们首先将参数存储在<code class="docutils literal notranslate"><span class="pre">LP</span></code>中，并计算参数列表的长度：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">LP</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
-<span class="n">lp</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">LP</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">lp</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">106</span>
-</pre></div>
-</div>
-<p>输出显示，模型的参数中大约有108个矩阵和向量。这一数字在不同transformers版本之间也可能有不同。</p>
-<p>可以打印每个矩阵和向量来查看参数的详情：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">lp</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">LP</span><span class="p">[</span><span class="n">p</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>模型总参数量的计算方法是，把里面每一个向量和矩阵所包含的元素的数量加起来。</p>
-</div>
-</div>
-<div class="section" id="id7">
-<h2><span class="section-number">4.10. </span>第10步：构建数据集<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h2>
-<p>现在我们将逐行加载数据集，以生成用于批量训练的样本：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">time</span>
-<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">LineByLineTextDataset</span>
-
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">LineByLineTextDataset</span><span class="p">(</span>
-<span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
-<span class="n">file_path</span><span class="o">=</span><span class="s2">&quot;./kant.txt&quot;</span><span class="p">,</span>
-<span class="n">block_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<pre class="output literal-block">2024-04-22 15:53:39.741817: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable <cite>TF_ENABLE_ONEDNN_OPTS=0</cite>.
-2024-04-22 15:53:39.777797: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.</pre>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">22</span> <span class="mi">15</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mf">40.389455</span><span class="p">:</span> <span class="n">W</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">tf2tensorrt</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">py_utils</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">38</span><span class="p">]</span> <span class="n">TF</span><span class="o">-</span><span class="n">TRT</span> <span class="ne">Warning</span><span class="p">:</span> <span class="n">Could</span> <span class="ow">not</span> <span class="n">find</span> <span class="n">TensorRT</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CPU</span> <span class="n">times</span><span class="p">:</span> <span class="n">user</span> <span class="mf">14.7</span> <span class="n">s</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="mf">1.13</span> <span class="n">s</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="mf">15.8</span> <span class="n">s</span>
-<span class="n">Wall</span> <span class="n">time</span><span class="p">:</span> <span class="mf">14.2</span> <span class="n">s</span>
-</pre></div>
-</div>
-<p>其中<code class="docutils literal notranslate"><span class="pre">block_size</span> <span class="pre">=</span> <span class="pre">128</span></code>限制了一条数据的长度。输出显示，Hugging
-Face在优化数据处理时间方面投入了相当多的资源。墙时（wall
-time），即处理器实际活动的时间，已经得到了优化。</p>
-</div>
-<div class="section" id="id8">
-<h2><span class="section-number">4.11. </span>第11步：定义数据整合器<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h2>
-<p>在初始化训练器之前，我们需要运行一个数据整合器（data
-collator）。数据整合器会从数据集中获取样本并将它们整合成批次。其结果是类似字典的对象。</p>
-<p>通过设置数据整合器的参数<code class="docutils literal notranslate"><span class="pre">mlm=True</span></code>，我们可以将数据处理为MLM训练所需的形式，整合器将会在文本中加入掩码token
-<code class="docutils literal notranslate"><span class="pre">&lt;mask&gt;</span></code>.</p>
-<p>我们还设置了训练MLM的掩码标记数量，即<code class="docutils literal notranslate"><span class="pre">mlm_probability=0.15</span></code>，表示每个token有15%的概率被掩蔽掉。</p>
-<p>现在我们使用我们的分词器初始化数据整合器，激活MLM，并将掩码标记的比例设置为0.15：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">DataCollatorForLanguageModeling</span>
-
-<span class="n">data_collator</span> <span class="o">=</span> <span class="n">DataCollatorForLanguageModeling</span><span class="p">(</span>
-    <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">mlm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mlm_probability</span><span class="o">=</span><span class="mf">0.15</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="id9">
-<h2><span class="section-number">4.12. </span>第12步：初始化训练器<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h2>
-<p>前面的步骤已经准备好了初始化训练器所需的信息：数据集、分词器、模型以及数据整合器。</p>
-<p>现在我们可以初始化训练器了。由于只是为了演示，我们将对模型进行快速训练，训练的轮数被限制为一轮。由于我们可以共享批次并进行多进程训练任务，所以GPU非常有用：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">Trainer</span><span class="p">,</span> <span class="n">TrainingArguments</span>
-
-<span class="n">training_args</span> <span class="o">=</span> <span class="n">TrainingArguments</span><span class="p">(</span>
-    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;./KantaiBERT&quot;</span><span class="p">,</span>
-    <span class="n">overwrite_output_dir</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">num_train_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
-    <span class="n">save_steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
-    <span class="n">save_total_limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
-    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
-    <span class="n">args</span><span class="o">=</span><span class="n">training_args</span><span class="p">,</span>
-    <span class="n">data_collator</span><span class="o">=</span><span class="n">data_collator</span><span class="p">,</span>
-    <span class="n">train_dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">bitsandbytes</span><span class="o">/</span><span class="n">libbitsandbytes_cpu</span><span class="o">.</span><span class="n">so</span><span class="p">:</span> <span class="n">undefined</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">cadam32bit_grad_fp32</span>
-</pre></div>
-</div>
-<p>现在模型准备好进行训练了。</p>
-</div>
-<div class="section" id="id10">
-<h2><span class="section-number">4.13. </span>第13步：预训练模型<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">time</span>
-<span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>输出实时显示训练过程，包括损失（loss）、学习率（learning
-rate）、轮数（epoch）和训练步数（steps）：</p>
-</div>
-<div class="section" id="id11">
-<h2><span class="section-number">4.14. </span>第14步：将最终的模型（包括分词器和配置）保存到磁盘上<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;./KantaiBERT&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>可以在文件系统中看到，<code class="docutils literal notranslate"><span class="pre">KantaiBERT</span></code>目录下多出来了<code class="docutils literal notranslate"><span class="pre">config.json</span></code>,
-<code class="docutils literal notranslate"><span class="pre">pytorch_model.bin</span></code>和<code class="docutils literal notranslate"><span class="pre">training_args.bin</span></code>文件，以及与分词器相关的<code class="docutils literal notranslate"><span class="pre">merges.txt</span></code>和<code class="docutils literal notranslate"><span class="pre">vocab.json</span></code>文件。</p>
-<p>至此，我们就从头开始构建了一个预训练模型，接下来我们构建一个流水线（pipeline）来使用这个模型。</p>
-</div>
-<div class="section" id="fillmaskpipeline">
-<h2><span class="section-number">4.15. </span>第15步：使用<code class="docutils literal notranslate"><span class="pre">FillMaskPipeline</span></code>进行语言建模<a class="headerlink" href="#fillmaskpipeline" title="Permalink to this heading">¶</a></h2>
-<p>现在我们将进行填充掩码（fill-mask）任务，我们将使用我们训练过的模型和训练过的分词器来执行MLM：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
-<span class="n">fill_mask</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
-    <span class="s2">&quot;fill-mask&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;./KantaiBERT&quot;</span><span class="p">,</span>
-    <span class="n">tokenizer</span><span class="o">=</span><span class="s2">&quot;./KantaiBERT&quot;</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>现在我们可以让模型像伊曼努尔·康德一样思考：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fill_mask</span><span class="p">(</span><span class="s2">&quot;Human thinking involves human &lt;mask&gt;.&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>模型会根据从数据集中学到的知识来确定<code class="docutils literal notranslate"><span class="pre">&lt;mask&gt;</span></code>应该是什么词.</p>
-</div>
-<div class="section" id="id12">
-<h2><span class="section-number">4.16. </span>后续步骤<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h2>
-<p>你已经从头开始训练了一个Transformer模型。花些时间想象一下，在个人或企业环境中你可以做什么。你可以为特定任务创建一个数据集，并从头开始训练它。利用你的兴趣领域或公司项目，来探索这个迷人的Transformer构建工具的世界！</p>
-<p>一旦你训练出一个你喜欢的模型，你可以与Hugging
-Face社区分享它。你的模型将出现在<a class="reference external" href="https://huggingface.co/models">Hugging
-Face模型页面</a></p>
-<p>你可以按照<a class="reference external" href="https://huggingface.co/transformers/model_sharing.html">这个页面上的说明</a>，通过几个步骤上传你的模型。</p>
-<p>你也可以下载Hugging
-Face社区分享的模型，以获取关于你个人和专业项目的新想法。</p>
-</div>
-<div class="section" id="id13">
-<h2><span class="section-number">4.17. </span>练习<a class="headerlink" href="#id13" title="Permalink to this heading">¶</a></h2>
-<ol class="arabic simple">
-<li><p>RoBERTa与BERT的联系和区别在哪里？</p></li>
-<li><p>上述步骤预训练的KantaiBERT与RoBERTa预训练模型有什么联系和区别？</p></li>
-<li><p>跟随上述步骤完成对KantaiBERT的预训练。</p></li>
-</ol>
 </div>
 </div>
 
@@ -716,37 +243,6 @@ Face社区分享的模型，以获取关于你个人和专业项目的新想法�
         </div>
         <div class="side-doc-outline">
             <div class="side-doc-outline--content"> 
-<div class="localtoc">
-    <p class="caption">
-      <span class="caption-text">Table Of Contents</span>
-    </p>
-    <ul>
-<li><a class="reference internal" href="#">4. 从头开始预训练RoBERTa模型</a><ul>
-<li><a class="reference internal" href="#id1">4.1. 第1步：加载数据集</a></li>
-<li><a class="reference internal" href="#hugging-face-transformers">4.2. 第2步：安装Hugging Face transformers</a></li>
-<li><a class="reference internal" href="#tokenizer">4.3. 第3步：训练分词器（tokenizer）</a></li>
-<li><a class="reference internal" href="#id2">4.4. 第4步：将分词器保存到磁盘</a></li>
-<li><a class="reference internal" href="#id3">4.5. 第5步：加载训练的分词器</a></li>
-<li><a class="reference internal" href="#gpucuda">4.6. 第6步：检查资源：GPU和CUDA</a></li>
-<li><a class="reference internal" href="#id4">4.7. 第7步：定义模型的配置</a></li>
-<li><a class="reference internal" href="#transformerstokenizer">4.8. 第8步：在transformers中重新加载tokenizer</a></li>
-<li><a class="reference internal" href="#id5">4.9. 第9步：从头初始化模型</a><ul>
-<li><a class="reference internal" href="#id6">4.9.1. 探索模型参数</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id7">4.10. 第10步：构建数据集</a></li>
-<li><a class="reference internal" href="#id8">4.11. 第11步：定义数据整合器</a></li>
-<li><a class="reference internal" href="#id9">4.12. 第12步：初始化训练器</a></li>
-<li><a class="reference internal" href="#id10">4.13. 第13步：预训练模型</a></li>
-<li><a class="reference internal" href="#id11">4.14. 第14步：将最终的模型（包括分词器和配置）保存到磁盘上</a></li>
-<li><a class="reference internal" href="#fillmaskpipeline">4.15. 第15步：使用<code class="docutils literal notranslate"><span class="pre">FillMaskPipeline</span></code>进行语言建模</a></li>
-<li><a class="reference internal" href="#id12">4.16. 后续步骤</a></li>
-<li><a class="reference internal" href="#id13">4.17. 练习</a></li>
-</ul>
-</li>
-</ul>
-
-</div>
             </div>
         </div>
 
@@ -759,11 +255,11 @@ Face社区分享的模型，以获取关于你个人和专业项目的新想法�
             <div>3.3. 练习</div>
          </div>
      </a>
-     <a id="button-next" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="section.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
          <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>5. 使用Transformer进行下游NLP任务</div>
+            <div>4.1. 从头开始预训练</div>
         </div>
      </a>
   </div>

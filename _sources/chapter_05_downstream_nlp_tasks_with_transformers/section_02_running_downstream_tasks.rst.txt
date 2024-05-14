@@ -45,13 +45,58 @@ Pipeline模型运行从SST中提取的样本，以说明二元分类。
 
 .. code:: python
 
-   from transformers import pipeline
+    from transformers import pipeline
+    
+    nlp = pipeline("sentiment-analysis")
+    review1 = "If you sometimes like to go to the movies to have fun , Wasabi is a good place to start."
+    print(nlp(review1), review1)
+    review2 = "Effective but too-tepid biopic."
+    print(nlp(review2), review2)
 
-   nlp = pipeline("sentiment-analysis")
-   review1 = "If you sometimes like to go to the movies to have fun , Wasabi is a good place to start."
-   print(nlp(review1), review1)
-   review2 = "Effective but too-tepid biopic."
-   print(nlp(review2), review2)
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    2024-05-14 11:40:46.540771: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+    2024-05-14 11:40:46.584716: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+    To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    2024-05-14 11:40:47.283454: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    No model was supplied, defaulted to distilbert/distilbert-base-uncased-finetuned-sst-2-english and revision af0f99b (https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english).
+    Using a pipeline without specifying a model name and revision in production is not recommended.
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    [{'label': 'POSITIVE', 'score': 0.9998257756233215}] If you sometimes like to go to the movies to have fun , Wasabi is a good place to start.
+    [{'label': 'NEGATIVE', 'score': 0.9974064230918884}] Effective but too-tepid biopic.
+
 
 这里的\ ``nlp = pipeline("sentiment-analysis")``\ 初始化了一个已经进行过情感分类下游任务的模型，\ ``nlp(review1)``\ 表示对\ ``review1``\ 进行情感分类。
 
@@ -74,20 +119,65 @@ Microsoft Research Paraphrase Corpus
 
 .. code:: python
 
-   from transformers import AutoTokenizer, TFAutoModelForSequenceClassification
-   import tensorflow as tf
+    import tensorflow as tf
+    from transformers import AutoTokenizer, TFAutoModelForSequenceClassification
+    
+    tokenizer = AutoTokenizer.from_pretrained("google-bert/bert-base-cased-finetuned-mrpc")
+    model = TFAutoModelForSequenceClassification.from_pretrained("google-bert/bert-base-cased-finetuned-mrpc")
+    classes = ["not paraphrase", "is paraphrase"]
+    sequence_A = "The DVD-CCA then appealed to the state Supreme Court."
+    sequence_B = "The DVD CCA appealed that decision to the U.S. Supreme Court."
+    paraphrase = tokenizer.encode_plus(sequence_A, sequence_B, return_tensors="tf")
+    paraphrase_classification_logits = model(paraphrase)[0]
+    paraphrase_results = tf.nn.softmax(paraphrase_classification_logits, axis=1).numpy()[0]
+    print(sequence_B, "should be a paraphrase")
+    for i in range(len(classes)):
+        print(f"{classes[i]}: {round(paraphrase_results[i] * 100)}%")
 
 
-   tokenizer = AutoTokenizer.from_pretrained("bert-base-cased-finetuned-mrpc")
-   model = TFAutoModelForSequenceClassification.from_pretrained("bert-base-cased-finetuned-mrpc")
-   classes = ["not paraphrase", "is paraphrase"]
-   sequence_A = "The DVD-CCA then appealed to the state Supreme Court."
-   sequence_B = "The DVD CCA appealed that decision to the U.S. Supreme Court."
-   paraphrase = tokenizer.encode_plus(sequence_A, sequence_B, return_tensors="tf")
-   paraphrase_classification_logits = model(paraphrase)[0]
-   paraphrase_results = tf.nn.softmax(paraphrase_classification_logits, axis=1).numpy()[0]
-   print(sequence_B, "should be a paraphrase")
-   for i in range(len(classes)):
-       print(f"{classes[i]}: {round(paraphrase_results[i] * 100)}%")
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    2024-05-14 11:40:50.690510: E external/local_xla/xla/stream_executor/cuda/cuda_driver.cc:282] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Some layers from the model checkpoint at google-bert/bert-base-cased-finetuned-mrpc were not used when initializing TFBertForSequenceClassification: ['dropout_183']
+    - This IS expected if you are initializing TFBertForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+    - This IS NOT expected if you are initializing TFBertForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    All the layers of TFBertForSequenceClassification were initialized from the model checkpoint at google-bert/bert-base-cased-finetuned-mrpc.
+    If your task is similar to the task the model of the checkpoint was trained on, you can already use TFBertForSequenceClassification for predictions without further training.
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    The DVD CCA appealed that decision to the U.S. Supreme Court. should be a paraphrase
+    not paraphrase: 8%
+    is paraphrase: 92%
+
 
 上述代码输出了\ ``sequence_A``\ 和\ ``sequence_B``\ 不等价和等价的概率。

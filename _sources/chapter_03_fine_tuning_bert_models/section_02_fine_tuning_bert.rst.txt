@@ -79,14 +79,37 @@ Architecture）来利用NVIDIA GPU的并行计算能力，用于我们的多头�
 .. code:: python
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    !nvidia-smi
+
 
 .. raw:: latex
 
-   \diilbookstyleinputcell
+   \diilbookstyleoutputcell
 
-.. code:: python
+.. parsed-literal::
+    :class: output
 
-   !nvidia-smi
+    Wed May 15 10:55:19 2024       
+    +---------------------------------------------------------------------------------------+
+    | NVIDIA-SMI 545.46                 Driver Version: 546.80       CUDA Version: 12.3     |
+    |-----------------------------------------+----------------------+----------------------+
+    | GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+    |                                         |                      |               MIG M. |
+    |=========================================+======================+======================|
+    |   0  NVIDIA GeForce RTX 3060 ...    On  | 00000000:01:00.0 Off |                  N/A |
+    | N/A   49C    P8               8W /  60W |      0MiB /  6144MiB |      0%      Default |
+    |                                         |                      |                  N/A |
+    +-----------------------------------------+----------------------+----------------------+
+                                                                                             
+    +---------------------------------------------------------------------------------------+
+    | Processes:                                                                            |
+    |  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+    |        ID   ID                                                             Usage      |
+    |=======================================================================================|
+    |  No running processes found                                                           |
+    +---------------------------------------------------------------------------------------+
+
 
 输出结果可能会因Google Colab的配置而有所不同。
 
@@ -173,74 +196,74 @@ Architecture）来利用NVIDIA GPU的并行计算能力，用于我们的多头�
       </thead>
       <tbody>
         <tr>
-          <th>3457</th>
-          <td>ks08</td>
-          <td>1</td>
-          <td>NaN</td>
-          <td>much evidence is needed .</td>
+          <th>6332</th>
+          <td>c_13</td>
+          <td>0</td>
+          <td>*</td>
+          <td>heidi said that bill 's pictures of herself we...</td>
         </tr>
         <tr>
-          <th>2084</th>
+          <th>5522</th>
+          <td>b_73</td>
+          <td>1</td>
+          <td>NaN</td>
+          <td>john wants to come up with a solution as good ...</td>
+        </tr>
+        <tr>
+          <th>814</th>
+          <td>bc01</td>
+          <td>1</td>
+          <td>NaN</td>
+          <td>there are arriving three men at that station .</td>
+        </tr>
+        <tr>
+          <th>1853</th>
+          <td>r-67</td>
+          <td>1</td>
+          <td>NaN</td>
+          <td>him , they let him go yesterday .</td>
+        </tr>
+        <tr>
+          <th>5754</th>
+          <td>c_13</td>
+          <td>1</td>
+          <td>NaN</td>
+          <td>john said martha sang the aria with gusto .</td>
+        </tr>
+        <tr>
+          <th>6263</th>
+          <td>c_13</td>
+          <td>1</td>
+          <td>NaN</td>
+          <td>to behave oneself in public is expected .</td>
+        </tr>
+        <tr>
+          <th>2099</th>
           <td>rhl07</td>
           <td>1</td>
           <td>NaN</td>
-          <td>max offered help to the victims , but they ref...</td>
+          <td>alex read the newspaper for an hour .</td>
         </tr>
         <tr>
-          <th>6314</th>
-          <td>c_13</td>
-          <td>1</td>
-          <td>NaN</td>
-          <td>what does calvin like .</td>
-        </tr>
-        <tr>
-          <th>5863</th>
-          <td>c_13</td>
-          <td>1</td>
-          <td>NaN</td>
-          <td>linguistics students like phonetics tutorials .</td>
-        </tr>
-        <tr>
-          <th>7493</th>
-          <td>sks13</td>
-          <td>1</td>
-          <td>NaN</td>
-          <td>mary send a book .</td>
-        </tr>
-        <tr>
-          <th>6002</th>
-          <td>c_13</td>
-          <td>0</td>
-          <td>*</td>
-          <td>i must can eat plums .</td>
-        </tr>
-        <tr>
-          <th>7210</th>
-          <td>sks13</td>
-          <td>0</td>
-          <td>*</td>
-          <td>what mary donated was a lot of money to npr .</td>
-        </tr>
-        <tr>
-          <th>8407</th>
+          <th>7857</th>
           <td>ad03</td>
           <td>0</td>
           <td>*</td>
-          <td>gilgamesh flew not the broomstick .</td>
+          <td>which poem did you hear those recitals of last...</td>
         </tr>
         <tr>
-          <th>3255</th>
-          <td>l-93</td>
-          <td>1</td>
-          <td>NaN</td>
-          <td>idaho potatoes bake beautifully .</td>
+          <th>5309</th>
+          <td>b_82</td>
+          <td>0</td>
+          <td>*</td>
+          <td>because she 's so pleasant , mary i really lik...</td>
         </tr>
         <tr>
-          <th>7619</th>
-          <td>sks13</td>
+          <th>428</th>
+          <td>bc01</td>
           <td>1</td>
           <td>NaN</td>
-          <td>there were several doctors available .</td>
+          <td>in general , he understands what 's going on .</td>
         </tr>
       </tbody>
     </table>

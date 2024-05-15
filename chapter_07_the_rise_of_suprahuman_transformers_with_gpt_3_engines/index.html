@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>超人类Transformer的崛起：GPT-3引擎 &#8212; Transformer for NLP 0.0.1 documentation</title>
+    <title>7. GPT-3的崛起 &#8212; Transformer for NLP 0.0.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
@@ -25,14 +25,16 @@
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7.1. 利用GPT-3进行超人类NLP任务" href="section_01_suprahuman_nlp_with_gpt3-transformer-models.html" />
+    <link rel="prev" title="6.4. 使用Trax进行翻译" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html" /> 
   </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
     <div class="mdl-layout__header-row">
         
         <nav class="mdl-navigation breadcrumb">
-            <a class="mdl-navigation__link is-active">超人类Transformer的崛起：GPT-3引擎</a>
+            <a class="mdl-navigation__link is-active"><span class="section-number">7. </span>GPT-3的崛起</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -86,7 +88,7 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
@@ -122,6 +124,17 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. GPT-3的崛起</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_01_suprahuman_nlp_with_gpt3-transformer-models.html">7.1. 利用GPT-3进行超人类NLP任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_the_architecture_of_openai_gpt_transformer_models.html">7.2. GPT模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_generic_text_completion_with_gpt2.html">7.3. 利用GPT-2进行通用的文本补全任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_04_training_a_custom_gpt2_language_model.html">7.4. 训练自定义的GPT-2语言模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_05_running_openai_gpt3_tasks.html">7.5. 运行GPT-3的任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_06_comparing_the_output_of_gpt2_and_gpt3.html">7.6. 比较GPT-2与GPT-3的输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_07_fine_tuning_gpt3.html">7.7. 微调GPT-3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_08_the_role_of_an_industry_40_ai_specialist.html">7.8. 工业4.0下AI专家的角色</a></li>
 </ul>
 </li>
 </ul>
@@ -152,7 +165,7 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
@@ -190,6 +203,17 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. GPT-3的崛起</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_01_suprahuman_nlp_with_gpt3-transformer-models.html">7.1. 利用GPT-3进行超人类NLP任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_the_architecture_of_openai_gpt_transformer_models.html">7.2. GPT模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_generic_text_completion_with_gpt2.html">7.3. 利用GPT-2进行通用的文本补全任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_04_training_a_custom_gpt2_language_model.html">7.4. 训练自定义的GPT-2语言模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_05_running_openai_gpt3_tasks.html">7.5. 运行GPT-3的任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_06_comparing_the_output_of_gpt2_and_gpt3.html">7.6. 比较GPT-2与GPT-3的输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_07_fine_tuning_gpt3.html">7.7. 微调GPT-3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_08_the_role_of_an_industry_40_ai_specialist.html">7.8. 工业4.0下AI专家的角色</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -201,8 +225,61 @@ Show Source
     <div class="document">
         <div class="page-content" role="main">
         
-  <div class="section" id="transformer-gpt-3">
-<span id="chapter-7"></span><h1>超人类Transformer的崛起：GPT-3引擎<a class="headerlink" href="#transformer-gpt-3" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="gpt-3">
+<span id="chapter-7"></span><h1><span class="section-number">7. </span>GPT-3的崛起<a class="headerlink" href="#gpt-3" title="Permalink to this heading">¶</a></h1>
+<p>2020年,<a class="reference external" href="https://arxiv.org/pdf/2005.14165">Brown等人(2020)</a>描述了OpenAI
+GPT-3模型的训练过程,该模型包含1750亿个参数,采用了从Common
+Crawl数据中提取的4000亿字节对编码令牌这样的大型数据集进行学习。OpenAI在微软Azure超级计算机上进行了训练,拥有28.5万个CPU和1万个GPU。</p>
+<p>OpenAI
+GPT-3引擎的机器智能以及它们的超级计算机,让<a class="reference external" href="https://arxiv.org/pdf/2005.14165">Brown等人(2020)</a>进行了零样本实验。其思路是使用经过训练的模型进行下游任务,而无需进一步训练参数。目标是让训练好的模型<strong>直接</strong>投入到多任务生产中,提供一个API,甚至可以执行它未经训练的任务。</p>
+<p>超人类云端AI引擎时代由此诞生。OpenAI的API不需要高级软件技能或AI知识。你可能会想知道我为什么使用“超人类”这个词。你会发现,在许多情况下,GPT-3引擎可以和人类一样出色地执行许多任务。当前最重要的是理解GPT模型是如何构建和运行的,才能欣赏它的魔力。</p>
+<p>这一章将首先研究transformer模型的架构和规模的演进。我们将探讨使用经过训练的transformer模型进行下游任务的零样本挑战,并探索GPT
+transformer模型的创新架构。OpenAI提供了特别训练过的模型版本,称为引擎。</p>
+<p>我们将使用OpenAI仓库中的一个3.45亿参数的GPT-2
+transformer模型,基于TensorFlow框架。我们必须亲自动手,才能真正理解GPT模型。我们将与模型互动,生成由通用条件句进行条件化的文本补全。</p>
+<p>接下来,我们将使用一个1.17亿参数的定制GPT-2模型。我们将对在第4章:ref:<cite>chapter-4</cite>中使用的Kant高级概念数据集进行标记。</p>
+<p>本章还将探讨使用GPT-3引擎,它不需要数据科学家、人工智能专家,甚至是有经验的开发人员就可以开始使用。但这并不意味着后续就不需要数据科学家或AI专家了。</p>
+<p>我们会发现,GPT-3引擎有时需要微调。我们将运行一个Google
+Colab笔记本来微调一个GPT-3 Ada引擎。</p>
+<p>本章将以4.0时代AI专家的新思维模式和技能集作为结尾。</p>
+<p>通过本章的学习,你将了解GPT模型是如何构建的,以及如何使用无缝的GPT-3
+API。你将理解4.0时代的AI专家在2020年代可以完成的令人振奋的任务!</p>
+<p>本章涵盖了以下主题:</p>
+<ul class="simple">
+<li><p>从GPT-3模型开始</p></li>
+<li><p>OpenAI GPT模型的架构</p></li>
+<li><p>定义零样本transformer模型</p></li>
+<li><p>从少样本到单样本的路径</p></li>
+<li><p>构建接近人类的GPT-2文本补全模型</p></li>
+<li><p>实现并运行345M参数模型</p></li>
+<li><p>与标准GPT-2模型进行交互</p></li>
+<li><p>训练117M参数的GPT-2语言建模模型</p></li>
+<li><p>导入定制和特定的数据集</p></li>
+<li><p>编码定制数据集</p></li>
+<li><p>对模型进行条件化</p></li>
+<li><p>针对特定文本补全任务对GPT-2模型进行条件化</p></li>
+<li><p>Fine-tuning GPT-3模型</p></li>
+<li><p>4.0时代AI专家的角色</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="section_01_suprahuman_nlp_with_gpt3-transformer-models.html">7.1. 利用GPT-3进行超人类NLP任务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section_02_the_architecture_of_openai_gpt_transformer_models.html">7.2. GPT模型架构</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_02_the_architecture_of_openai_gpt_transformer_models.html#transformer">7.2.1. 十亿级参数Transformer模型的崛起</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_the_architecture_of_openai_gpt_transformer_models.html#id1">7.2.2. Transformer模型规模的增长</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_the_architecture_of_openai_gpt_transformer_models.html#zero-shot">7.2.3. 从微调到零样本（Zero-shot）模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_the_architecture_of_openai_gpt_transformer_models.html#id9">7.2.4. GPT解码器架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_the_architecture_of_openai_gpt_transformer_models.html#gpt-3">7.2.5. GPT-3引擎</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="section_03_generic_text_completion_with_gpt2.html">7.3. 利用GPT-2进行通用的文本补全任务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section_04_training_a_custom_gpt2_language_model.html">7.4. 训练自定义的GPT-2语言模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section_05_running_openai_gpt3_tasks.html">7.5. 运行GPT-3的任务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section_06_comparing_the_output_of_gpt2_and_gpt3.html">7.6. 比较GPT-2与GPT-3的输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section_07_fine_tuning_gpt3.html">7.7. 微调GPT-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section_08_the_role_of_an_industry_40_ai_specialist.html">7.8. 工业4.0下AI专家的角色</a></li>
+</ul>
+</div>
 </div>
 
 
@@ -214,6 +291,20 @@ Show Source
 
       <div class="clearer"></div>
     </div><div class="pagenation">
+     <a id="button-prev" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>6.4. 使用Trax进行翻译</div>
+         </div>
+     </a>
+     <a id="button-next" href="section_01_suprahuman_nlp_with_gpt3-transformer-models.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>7.1. 利用GPT-3进行超人类NLP任务</div>
+        </div>
+     </a>
   </div>
         
         </main>

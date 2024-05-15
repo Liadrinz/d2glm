@@ -14,3 +14,4 @@ Transformer for NLP
    chapter_04_pretraining_a_roberta_model_from_scratch/index
    chapter_05_downstream_nlp_tasks_with_transformers/index
    chapter_06_machine_translation_with_the_transformer/index
+   chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/index

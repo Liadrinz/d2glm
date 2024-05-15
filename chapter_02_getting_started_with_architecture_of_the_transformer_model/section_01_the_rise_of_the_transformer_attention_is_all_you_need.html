@@ -111,12 +111,21 @@ Show Source
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -168,12 +177,21 @@ Show Source
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -191,10 +209,10 @@ Show Source
 <h1><span class="section-number">2.1. </span>Transformer模型架构<a class="headerlink" href="#transformer" title="Permalink to this heading">¶</a></h1>
 <p>在<em>Attention is All You
 Need</em>这篇论文中，原始的Transformer模型由6层的堆栈组成，其中第<span class="math notranslate nohighlight">\(l\)</span>层的输出是第<span class="math notranslate nohighlight">\(l+1\)</span>层的输入，直到最后一层。如图
-<a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html#fig-1"><span class="std std-numref">Fig. 3.1.1</span></a>
+<a class="reference internal" href="#ch2-sec1-fig-1"><span class="std std-numref">Fig. 2.1.1</span></a>
 所示，左边是一个6层的编码器堆栈，右边是一个6层的解码器堆栈。</p>
 <div class="figure align-default" id="id20">
-<span id="fig-1"></span><img alt="../_images/transformers.svg" src="../_images/transformers.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.1 </span><span class="caption-text">Transformer原始模型的架构</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+<span id="ch2-sec1-fig-1"></span><img alt="../_images/transformers.svg" src="../_images/transformers.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.1 </span><span class="caption-text">Transformer原始模型的架构</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
 </div>
 <p>图中左边，输入数据在Transformer的编码器部分经过了一个注意力子层（Multi-Head
 Attention）和一个前馈子层（Feedforward）。图中右边，目标输出数据在Transformer的解码器部分经过了两个注意力子层（Masked
@@ -206,9 +224,9 @@ Attention）和一个前馈网络子层（Feedforward）。我们注意到，Tra
 </pre></div>
 </div>
 <p>注意力机制会在两个词向量之间执行点积运算，并且确定一个单词与其他所有单词的关系中最强的关系，包含与自身的关系（“cat”到“cat”）。图
-<a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html#fig-2"><span class="std std-numref">Fig. 3.1.2</span></a> 可视化了注意力机制作用在一个句子上的过程。</p>
+<a class="reference internal" href="#ch2-sec1-fig-2"><span class="std std-numref">Fig. 2.1.2</span></a> 可视化了注意力机制作用在一个句子上的过程。</p>
 <div class="figure align-default" id="id21">
-<span id="fig-2"></span><img alt="../_images/2024-03-20-11-11-25.png" src="../_images/2024-03-20-11-11-25.png" />
+<span id="ch2-sec1-fig-2"></span><img alt="../_images/2024-03-20-11-11-25.png" src="../_images/2024-03-20-11-11-25.png" />
 <p class="caption"><span class="caption-number">Fig. 2.1.2 </span><span class="caption-text">单词“cat”对其他所有单词的注意力</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
 </div>
 <p>注意力机制将提供单词之间更深入的关系，并产生更好的结果。</p>
@@ -225,10 +243,10 @@ Attention）。多头注意力机制的优势如下：</p>
 <div class="section" id="id1">
 <h2><span class="section-number">2.1.1. </span>Transformer编码器<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
 <p>原始Transformer模型的编码器和解码器的层都是一堆叠的层。编码器堆栈的每一层具有如图
-<a class="reference internal" href="#fig-3"><span class="std std-numref">Fig. 2.1.3</span></a>
+<a class="reference internal" href="#ch2-sec1-fig-3"><span class="std std-numref">Fig. 2.1.3</span></a>
 所示的结构。图中分别展示了第1层、中间层和第<span class="math notranslate nohighlight">\(N\)</span>层的情况，因为它们的两端连接着不同的其他模块。</p>
 <div class="figure align-default" id="id22">
-<span id="fig-3"></span><img alt="../_images/transformer-encoder-layer.svg" src="../_images/transformer-encoder-layer.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.3 </span><span class="caption-text">Transformer编码器的每一层</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+<span id="ch2-sec1-fig-3"></span><img alt="../_images/transformer-encoder-layer.svg" src="../_images/transformer-encoder-layer.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.3 </span><span class="caption-text">Transformer编码器的每一层</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
 </div>
 <p>原始Transformer模型中，所有编码器层的结构是相同的。每一层包含两个主要的子层：多头注意力机制（Multi-Head
 Attention）和全连接的逐位置前馈网络（Fully Connected Position-wise
@@ -476,9 +494,9 @@ rug.”，其中“black”在第1个位置（从0开始），“brown”在第9
 <h3><span class="section-number">2.1.1.3. </span>多头注意力子层<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
 <p>多头注意力（Multi-head Attention）子层包含八个注意力头（Attention
 Head）和一个归一化层，归一化层对注意力头的输出进行归一化，并添加残差连接，如图
-<a class="reference internal" href="#fig-4"><span class="std std-numref">Fig. 2.1.6</span></a> 所示。</p>
+<a class="reference internal" href="#ch2-sec1-fig-4"><span class="std std-numref">Fig. 2.1.6</span></a> 所示。</p>
 <div class="figure align-default" id="id25">
-<span id="fig-5"></span><span id="fig-4"></span><img alt="../_images/multi-head-attention-sublayer.svg" src="../_images/multi-head-attention-sublayer.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.6 </span><span class="caption-text">多头注意力子层</span><a class="headerlink" href="#id25" title="Permalink to this image">¶</a></p>
+<span id="ch2-sec1-fig-5"></span><span id="ch2-sec1-fig-4"></span><img alt="../_images/multi-head-attention-sublayer.svg" src="../_images/multi-head-attention-sublayer.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.6 </span><span class="caption-text">多头注意力子层</span><a class="headerlink" href="#id25" title="Permalink to this image">¶</a></p>
 </div>
 <p>本节从注意力层的架构开始，然后使用Python实现了多头注意力的示例代码，最后描述了归一化层中的归一化处理和残差连接。</p>
 <p>让我们从多头注意力的架构开始。</p>
@@ -494,7 +512,7 @@ dry-cleaned.”，如果不看上下文，“it”可能指代“cat”，也可
 <p>同理，整个句子<span class="math notranslate nohighlight">\(\mathbf{x}=(x_1,\cdots,x_N)\)</span>可以表示为一个大小为<span class="math notranslate nohighlight">\(N \times d_\text{model} = N \times 512\)</span>的矩阵<span class="math notranslate nohighlight">\(\mathbf{X}=(\text{WE}(x_1),\cdots,\text{WE}(x_N))\)</span>，我们称为词序列矩阵。</p>
 <p>词序列矩阵<span class="math notranslate nohighlight">\(\mathbf{X}\)</span>会被输入到多头注意力（Multi-Head
 Attention）子层的每个注意力头（Attention Head）中，如图
-<a class="reference internal" href="#fig-5"><span class="std std-numref">Fig. 2.1.6</span></a> 所示。</p>
+<a class="reference internal" href="#ch2-sec1-fig-5"><span class="std std-numref">Fig. 2.1.6</span></a> 所示。</p>
 <div class="figure align-default">
 <img alt="../_images/8-attention-heads.svg" src="../_images/8-attention-heads.svg" /></div>
 <p>中间蓝色的部分分别表示<span class="math notranslate nohighlight">\(m=8\)</span>个注意力头，<span class="math notranslate nohighlight">\(\mathbf{Z}_1,\cdots,\mathbf{Z}_8\)</span>分别对应每个头的输出，输出均为<span class="math notranslate nohighlight">\(N \times d_k\)</span>的矩阵.
@@ -502,9 +520,10 @@ Attention）子层的每个注意力头（Attention Head）中，如图
 <p>最终，所有注意力头的输出拼接为最终输出<span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>，为<span class="math notranslate nohighlight">\(N\times d_k\times m = N\times d_\text{model}\)</span>的矩阵。</p>
 <p><span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>再经过一次线性变换得到多头注意力子层的最终的输出<span class="math notranslate nohighlight">\(\mathbf{H}\)</span>（未经归一化和残差连接），<span class="math notranslate nohighlight">\(\mathbf{H}\)</span>的形状与<span class="math notranslate nohighlight">\(\mathbf{Z}\)</span>相同。</p>
 <p>注意力头内部采用的是比例缩放点积注意力（Scaled Dot-Product
-Attention）运算。以Head 1为例，其内部结构如图 <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig-6</span></code> 所示。</p>
+Attention）运算。以Head 1为例，其内部结构如图 <a class="reference internal" href="#ch2-sec1-fig-6"><span class="std std-numref">Fig. 2.1.7</span></a>
+所示。</p>
 <div class="figure align-default" id="id26">
-<img alt="../_images/scaled-dot-product.svg" src="../_images/scaled-dot-product.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.7 </span><span class="caption-text">注意力头内部的点积注意力</span><a class="headerlink" href="#id26" title="Permalink to this image">¶</a></p>
+<span id="ch2-sec1-fig-6"></span><img alt="../_images/scaled-dot-product.svg" src="../_images/scaled-dot-product.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.7 </span><span class="caption-text">注意力头内部的点积注意力</span><a class="headerlink" href="#id26" title="Permalink to this image">¶</a></p>
 </div>
 <p>可以看到，输入矩阵<span class="math notranslate nohighlight">\(\mathbf{X}\)</span>被施加了三种线性变换，线性变换的权重分别为<span class="math notranslate nohighlight">\(\mathbf{W}^Q_1,\mathbf{W}^K_1,\mathbf{W}^V_1\)</span>，并分别得到新的矩阵<span class="math notranslate nohighlight">\(\mathbf{Q}_1,\mathbf{K}_1,\mathbf{V}_1\)</span>:</p>
 <ul class="simple">
@@ -521,7 +540,7 @@ Matrix），其大小为<span class="math notranslate nohighlight">\(d_\text{mod
 <span class="math notranslate nohighlight">\(\mathbf{V}_1=\mathbf{X}\mathbf{W}^V_1\)</span>称为值矩阵（Value
 Matrix），其形状为<span class="math notranslate nohighlight">\(N \times d_v\)</span>.</p></li>
 </ul>
-<p>图 <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig-6</span></code>
+<p>图 <a class="reference internal" href="#ch2-sec1-fig-6"><span class="std std-numref">Fig. 2.1.7</span></a>
 中所示的<span class="math notranslate nohighlight">\(\mathbf{Q}_1,\mathbf{K}_1,\mathbf{V}_1\)</span>三者之间的运算称为缩放点积注意力（Scaled
 Dot-Product Attention），其中:</p>
 <ul class="simple">
@@ -789,9 +808,10 @@ Dot-Product Attention），其中:</p>
 <div class="section" id="id13">
 <h4><span class="section-number">2.1.1.3.10. </span>归一化和残差连接<a class="headerlink" href="#id13" title="Permalink to this heading">¶</a></h4>
 <p>每一个子层（包括多头注意力子层和前馈子层）之后都有一个层后归一化模块（Post-Layer
-Normalization Post-LN），如图 <a class="reference internal" href="#fig-7"><span class="std std-numref">Fig. 2.1.8</span></a> 中“Add &amp; Norm”所示。</p>
+Normalization Post-LN），如图 <a class="reference internal" href="#ch2-sec1-fig-7"><span class="std std-numref">Fig. 2.1.8</span></a> 中“Add &amp;
+Norm”所示。</p>
 <div class="figure align-default" id="id27">
-<span id="fig-7"></span><img alt="../_images/multi-head-attention-sublayer.svg" src="../_images/multi-head-attention-sublayer.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.8 </span><span class="caption-text">层归一化</span><a class="headerlink" href="#id27" title="Permalink to this image">¶</a></p>
+<span id="ch2-sec1-fig-7"></span><img alt="../_images/multi-head-attention-sublayer.svg" src="../_images/multi-head-attention-sublayer.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.8 </span><span class="caption-text">层归一化</span><a class="headerlink" href="#id27" title="Permalink to this image">¶</a></p>
 </div>
 <p>Post-LN包含一个残差连接（Residual Connection）和一个层归一化（Layer
 Normalization）过程。残差连接简单来说就是把子层的输入加到子层的输出上。残差连接的目标是确保关键信息不会丢失。整个Post-LN过程可以表述为以下公式：</p>
@@ -820,9 +840,9 @@ Normalization）过程。残差连接简单来说就是把子层的输入加到�
 <h3><span class="section-number">2.1.1.4. </span>前馈网络子层<a class="headerlink" href="#id14" title="Permalink to this heading">¶</a></h3>
 <p>前馈网络（Feedforward Network,
 FFN）子层的输入是上一子层（多头注意力子层）的post-LN模块的输出，如图
-<a class="reference internal" href="#fig-8"><span class="std std-numref">Fig. 2.1.9</span></a> 所示：</p>
+<a class="reference internal" href="#ch2-sec1-fig-8"><span class="std std-numref">Fig. 2.1.9</span></a> 所示：</p>
 <div class="figure align-default" id="id28">
-<span id="fig-8"></span><img alt="../_images/feedforward-sublayer.svg" src="../_images/feedforward-sublayer.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.9 </span><span class="caption-text">前馈子层</span><a class="headerlink" href="#id28" title="Permalink to this image">¶</a></p>
+<span id="ch2-sec1-fig-8"></span><img alt="../_images/feedforward-sublayer.svg" src="../_images/feedforward-sublayer.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.9 </span><span class="caption-text">前馈子层</span><a class="headerlink" href="#id28" title="Permalink to this image">¶</a></p>
 </div>
 <p>FFN子层具有以下特性：</p>
 <ul class="simple">
@@ -831,11 +851,11 @@ FCN）</a></p></li>
 <li><p>FFN采用逐位置的计算过程，采用相同的方式单独对每个位置进行计算</p></li>
 <li><p>FFN包含两个全连接层，并且使用ReLU激活函数</p></li>
 <li><p>FFN整体的输入和输出都是长度为<span class="math notranslate nohighlight">\(d_\text{model}=512\)</span>的向量，隐藏层（中间层）的输入输出维度为<span class="math notranslate nohighlight">\(d_\text{ff}=2048\)</span>，如图
-<a class="reference internal" href="#fig-9"><span class="std std-numref">Fig. 2.1.10</span></a> 所示</p></li>
+<a class="reference internal" href="#ch2-sec1-fig-9"><span class="std std-numref">Fig. 2.1.10</span></a> 所示</p></li>
 <li><p>FFN可以被视为两个卷积核为1的<a class="reference external" href="https://paulxiong.medium.com/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%88%9D%E5%AD%A6%E8%80%85%E6%8C%87%E5%8D%97-31e177fdded2">卷积层</a></p></li>
 </ul>
 <div class="figure align-default" id="id29">
-<span id="fig-9"></span><img alt="../_images/FFN-inner.svg" src="../_images/FFN-inner.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.10 </span><span class="caption-text">FFN内部结构</span><a class="headerlink" href="#id29" title="Permalink to this image">¶</a></p>
+<span id="ch2-sec1-fig-9"></span><img alt="../_images/FFN-inner.svg" src="../_images/FFN-inner.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.10 </span><span class="caption-text">FFN内部结构</span><a class="headerlink" href="#id29" title="Permalink to this image">¶</a></p>
 </div>
 <p>FFN的输出跟多头注意力的输出一样需要经过post-LN层，得到整个FFN子层的输出。FFN子层的输出会被作为编码器中下一个多头注意力子层的输入。编码器中最后一层FFN子层的输出则会被作为解码器中多头注意力子层的输入。</p>
 <p>接下来我们来看解码器的结构。</p>
@@ -844,9 +864,9 @@ FCN）</a></p></li>
 <div class="section" id="id15">
 <h2><span class="section-number">2.1.2. </span>Transformer解码器<a class="headerlink" href="#id15" title="Permalink to this heading">¶</a></h2>
 <p>Transformer模型的解码器与编码器类似，都是通过多层堆叠起来的。每一个解码器层的结构如图
-<a class="reference internal" href="#fig-10"><span class="std std-numref">Fig. 2.1.11</span></a> 所示。</p>
+<a class="reference internal" href="#ch2-sec1-fig-10"><span class="std std-numref">Fig. 2.1.11</span></a> 所示。</p>
 <div class="figure align-default" id="id30">
-<span id="fig-10"></span><img alt="../_images/transformer-decoder-layer.svg" src="../_images/transformer-decoder-layer.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.11 </span><span class="caption-text">Transformer解码器的每一层</span><a class="headerlink" href="#id30" title="Permalink to this image">¶</a></p>
+<span id="ch2-sec1-fig-10"></span><img alt="../_images/transformer-decoder-layer.svg" src="../_images/transformer-decoder-layer.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.11 </span><span class="caption-text">Transformer解码器的每一层</span><a class="headerlink" href="#id30" title="Permalink to this image">¶</a></p>
 </div>
 <p>每一个解码器层由三个子层组成：掩蔽多头注意力子层（Masked Multi-head
 Attention Layer）、多头注意力子层以及前馈网络子层。</p>
@@ -881,10 +901,10 @@ Encoding）的输出也只与第一层解码器相连。</p>
 </div>
 <p>Transformer是一个<a class="reference external" href="https://aws.amazon.com/cn/what-is/autoregressive-models/">自回归模型</a>。在自回归模型中，每一个token的预测都基于先前已有的token序列。将输出序列<span class="math notranslate nohighlight">\(\mathbf{y}\)</span>中第<span class="math notranslate nohighlight">\(t\)</span>个token记作<span class="math notranslate nohighlight">\(y_t\)</span>。在自回归模型中，要预测<span class="math notranslate nohighlight">\(y_t\)</span>，则<span class="math notranslate nohighlight">\(y_1,\cdots,y_{t-1}\)</span>必须是已知的。自回归模型会计算给定<span class="math notranslate nohighlight">\(y_1,\cdots,y_{t-1}\)</span>的条件下<span class="math notranslate nohighlight">\(y_t\)</span>的概率，即<span class="math notranslate nohighlight">\(p(y_t|y_1,\cdots,y_{t-1})\)</span>.</p>
 <p>掩蔽多头注意力层通过对注意力权重矩阵进行掩码操作来实现自回归机制。图
-<a class="reference internal" href="#fig-11"><span class="std std-numref">Fig. 2.1.13</span></a>
+<a class="reference internal" href="#ch2-sec1-fig-11"><span class="std std-numref">Fig. 2.1.13</span></a>
 展示了掩蔽多头注意力与普通多头注意力中注意力头内部的点积注意力的区别。</p>
 <div class="figure align-default" id="id32">
-<span id="fig-11"></span><img alt="../_images/normal-attention-vs-masked-attention.svg" src="../_images/normal-attention-vs-masked-attention.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.13 </span><span class="caption-text">掩蔽多头注意力与普通多头注意力中注意力头内部的点积注意力</span><a class="headerlink" href="#id32" title="Permalink to this image">¶</a></p>
+<span id="ch2-sec1-fig-11"></span><img alt="../_images/normal-attention-vs-masked-attention.svg" src="../_images/normal-attention-vs-masked-attention.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.13 </span><span class="caption-text">掩蔽多头注意力与普通多头注意力中注意力头内部的点积注意力</span><a class="headerlink" href="#id32" title="Permalink to this image">¶</a></p>
 </div>
 <p>可以看到，掩蔽多头注意力机制在比例缩放操作（Scale）之后进行了掩蔽（Mask）操作。</p>
 <p>掩蔽注意力机制中比例缩放点积注意力使用公式表示为：</p>
@@ -971,10 +991,10 @@ Encoding）的输出也只与第一层解码器相连。</p>
 <li><p>解码器层中的掩蔽多头注意力也是自注意力，因为其<span class="math notranslate nohighlight">\(\mathbf{Q}, \mathbf{K}, \mathbf{V}\)</span>均来源于输出序列<span class="math notranslate nohighlight">\(\mathbf{Y}\)</span>.</p></li>
 </ul>
 <p>而解码器中位于中间的多头注意力层则是交叉注意力，因为其<span class="math notranslate nohighlight">\(\mathbf{Q}\)</span>来源于输出序列<span class="math notranslate nohighlight">\(\mathbf{Y}\)</span>，而其<span class="math notranslate nohighlight">\(\mathbf{K}\)</span>和<span class="math notranslate nohighlight">\(\mathbf{V}\)</span>来源于输入序列<span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p>
-<p>图 <a class="reference internal" href="#fig-13"><span class="std std-numref">Fig. 2.1.15</span></a>
+<p>图 <a class="reference internal" href="#ch2-sec1-fig-13"><span class="std std-numref">Fig. 2.1.15</span></a>
 展示了编码器中的自注意力、解码器中的自注意力以及解码器中的交叉注意力之间的区别。</p>
 <div class="figure align-default" id="id34">
-<span id="fig-13"></span><img alt="../_images/self-attention-vs-cross-attention.svg" src="../_images/self-attention-vs-cross-attention.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.15 </span><span class="caption-text">编码器中的自注意力、解码器中的自注意力以及解码器中的交叉注意力</span><a class="headerlink" href="#id34" title="Permalink to this image">¶</a></p>
+<span id="ch2-sec1-fig-13"></span><img alt="../_images/self-attention-vs-cross-attention.svg" src="../_images/self-attention-vs-cross-attention.svg" /><p class="caption"><span class="caption-number">Fig. 2.1.15 </span><span class="caption-text">编码器中的自注意力、解码器中的自注意力以及解码器中的交叉注意力</span><a class="headerlink" href="#id34" title="Permalink to this image">¶</a></p>
 </div>
 <p>其中交叉注意力中<span class="math notranslate nohighlight">\(\mathbf{K}_1\)</span>和<span class="math notranslate nohighlight">\(\mathbf{V}_1\)</span>的计算都来源于编码器的最终输出<span class="math notranslate nohighlight">\(\mathbf{H}(\mathbf{X})\)</span>，归根结底来源于输入序列<span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p>
 <p>交叉注意力的目的是计算输出序列中每个单词对输入序列中每个单词的注意力。</p>

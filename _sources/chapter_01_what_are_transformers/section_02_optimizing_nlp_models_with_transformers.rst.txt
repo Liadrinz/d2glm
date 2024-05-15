@@ -11,10 +11,10 @@ Head），它取代了NLP神经网络中的RNN层。
 
 Transformer的核心概念可以粗略地概括为“混合标记（Mixing
 Tokens）”。自然语言处理模型首先将单词序列转换为标记（Token）。循环神经网络（RNN）通过循环函数顺序地分析标记。而Transformer则不按顺序分析标记，而是将每个标记与序列中的其他标记相关联，如图
-:numref:`fig-1`
+:numref:`ch1-sec2-fig-1`
 所示。读者可以在\ `这里 <https://github.com/jessevig/bertviz>`__\ 尝试自定义的可视化。
 
-.. _fig-1:
+.. _ch1-sec2-fig-1:
 
 .. figure:: screenshots/2024-03-19-10-06-17.png
 
@@ -22,7 +22,7 @@ Tokens）”。自然语言处理模型首先将单词序列转换为标记（To
 
 
 我们将在“:ref:`chapter-2`”中详细介绍注意力头的细节。目前来说，从图
-:numref:`fig-1`
+:numref:`ch1-sec2-fig-1`
 可以得出的结论是，序列中的每个单词（标记）都与序列中的所有其他单词相关联。这个模型为工业4.0的自然语言处理打开了大门。
 
 接下来让我们简要回顾一下transformer的背景。
@@ -62,10 +62,10 @@ Little）在1974年写了《大脑中持久态的存在》（\ *The existence of
 persistent
 states*\ ），约翰·霍普菲尔德受其启发，为学习过程奠定了几十年的理论基础。RNN得到了进一步发展，而我们今天所熟知的LSTM也随之出现。
 
-循环神经网络（RNN）能够高效地记忆序列的持久状态，如图 :numref:`fig-2`
-所示：
+循环神经网络（RNN）能够高效地记忆序列的持久状态，如图
+:numref:`ch1-sec2-fig-2` 所示：
 
-.. _fig-2:
+.. _ch1-sec2-fig-2:
 
 .. figure:: screenshots/rnn-process.svg
 

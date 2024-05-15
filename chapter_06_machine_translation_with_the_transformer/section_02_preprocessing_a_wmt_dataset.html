@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>&lt;no title&gt; &#8212; Transformer for NLP 0.0.1 documentation</title>
+    <title>6.2. 预处理WMT数据集 &#8212; Transformer for NLP 0.0.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
@@ -25,14 +25,17 @@
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.3. 使用BLEU评估机器翻译的质量" href="section_03_evaluating_machine_translation_with_bleu.html" />
+    <link rel="prev" title="6.1. 机器翻译的定义" href="section_01_defining_machine_translation.html" /> 
   </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
     <div class="mdl-layout__header-row">
         
         <nav class="mdl-navigation breadcrumb">
-            <a class="mdl-navigation__link is-active">&lt;no title&gt;</a>
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">6. </span>基于Transformer的机器翻译</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active"><span class="section-number">6.2. </span>预处理WMT数据集</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -86,30 +89,42 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">1. Transformer的性能 VS 人类基准</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">6. 基于Transformer的机器翻译</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -140,30 +155,42 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">1. Transformer的性能 VS 人类基准</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">6. 基于Transformer的机器翻译</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -177,16 +204,316 @@ Show Source
     <div class="document">
         <div class="page-content" role="main">
         
-  
+  <div class="section" id="wmt">
+<h1><span class="section-number">6.2. </span>预处理WMT数据集<a class="headerlink" href="#wmt" title="Permalink to this heading">¶</a></h1>
+<p>Vaswani等人（2017年）在WMT
+2014年英德翻译任务和英法翻译任务中展示了Transformer的成就。Transformer在这些任务中取得了最先进的BLEU分数。</p>
+<p>2014年的WMT包含了多个欧洲语言的数据集。其中一个数据集包含了来自欧洲议会语料库第7版的数据。我们将使用来自<a class="reference external" href="https://www.statmt.org/europarl/v7/fr-en.tgz">《欧洲议会会议平行语料库》（the
+European Parliament Proceedings Parallel
+Corpus）（1996-2011年）的法英（French-English）数据集</a>。</p>
+<p>下载上述链接中的文件并将其解压缩，可以得到两个平行语料文件：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">europarl-v7.fr-en.en</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">europarl-v7.fr-en.fr</span></code></p></li>
+</ul>
+<p>其中<code class="docutils literal notranslate"><span class="pre">.en</span></code>结尾的是英文，<code class="docutils literal notranslate"><span class="pre">.fr</span></code>结尾的是法文，二者之间每行一一对应。</p>
+<p>我们将对上述平行语料进行预处理。</p>
+<div class="section" id="id1">
+<h2><span class="section-number">6.2.1. </span>下载数据集<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!wget https://www.statmt.org/europarl/v7/fr-en.tgz
+!tar -xvf fr-en.tgz
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">6.2.2. </span>预处理原始数据<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<p>以下代码用于处理上述两个平行语料文件。</p>
+<p>首先定义一些函数：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 加载文件中的文本</span>
+<span class="k">def</span> <span class="nf">load_doc</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rt&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="c1"># 按换行符进行分割，得到每行的要翻译的句子</span>
+<span class="k">def</span> <span class="nf">to_sentences</span><span class="p">(</span><span class="n">doc</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">doc</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 获取最短和最长句子的长度</span>
+<span class="k">def</span> <span class="nf">sentence_lengths</span><span class="p">(</span><span class="n">sentences</span><span class="p">):</span>
+    <span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">lengths</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>导入的句子行必须进行清洗，以避免训练无用和带有噪音的标记。行进行规范化处理，按空格进行分词，并转换为小写。从每个标记中删除标点符号，删除非可打印字符，并排除包含数字的标记。清洗后的行以字符串形式存储。</p>
+<p>以下是清洗代码（不适用于中文）：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># clean lines</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+
+
+<span class="k">def</span> <span class="nf">clean_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+    <span class="n">cleaned</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="c1"># 正则表达式，用于过滤字符</span>
+    <span class="n">re_print</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[^</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">printable</span><span class="p">))</span>
+    <span class="c1"># 准备转换表，用于去除标点符号</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="c1"># 标准化unicode字符</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFD&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+        <span class="c1"># 使用空格进行分词</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="c1"># 转小写</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">line</span><span class="p">]</span>
+        <span class="c1"># 去除标点符号</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">line</span><span class="p">]</span>
+        <span class="c1"># 去除不可打印的字符</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="p">[</span><span class="n">re_print</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">line</span><span class="p">]</span>
+        <span class="c1"># 去除包含数字的token</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">line</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()]</span>
+        <span class="c1"># 保存为字符串</span>
+        <span class="n">cleaned</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">cleaned</span>
+</pre></div>
+</div>
+<p>我们已经定义了准备数据集时将调用的关键函数。现在我们加载并清理英文数据：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;europarl-v7.fr-en.en&#39;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">load_doc</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="n">sentences</span> <span class="o">=</span> <span class="n">to_sentences</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+<span class="n">minlen</span><span class="p">,</span> <span class="n">maxlen</span> <span class="o">=</span> <span class="n">sentence_lengths</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;English data: sentences=</span><span class="si">%d</span><span class="s1">, min=</span><span class="si">%d</span><span class="s1">, max=</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">),</span> <span class="n">minlen</span><span class="p">,</span> <span class="n">maxlen</span><span class="p">))</span>
+<span class="n">cleanf</span> <span class="o">=</span> <span class="n">clean_lines</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">English</span> <span class="n">data</span><span class="p">:</span> <span class="n">sentences</span><span class="o">=</span><span class="mi">2007723</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">668</span>
+</pre></div>
+</div>
+<p>数据集现在干净了，我们使用<code class="docutils literal notranslate"><span class="pre">pickle</span></code>将其保存为序列化的文件，命名为<code class="docutils literal notranslate"><span class="pre">English.pkl</span></code>：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;English.pkl&#39;</span>
+<span class="n">outfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">cleanf</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+<span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s2">&quot; saved&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">English</span><span class="o">.</span><span class="n">pkl</span>  <span class="n">saved</span>
+</pre></div>
+</div>
+<p>输出显示了数据集的关键信息，并确认<code class="docutils literal notranslate"><span class="pre">English.pkl</span></code>已被保存。</p>
+<p>我们对法文数据也进行同样的处理：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;europarl-v7.fr-en.fr&#39;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">load_doc</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="n">sentences</span> <span class="o">=</span> <span class="n">to_sentences</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+<span class="n">minlen</span><span class="p">,</span> <span class="n">maxlen</span> <span class="o">=</span> <span class="n">sentence_lengths</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;French data: sentences=</span><span class="si">%d</span><span class="s1">, min=</span><span class="si">%d</span><span class="s1">, max=</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">),</span> <span class="n">minlen</span><span class="p">,</span> <span class="n">maxlen</span><span class="p">))</span>
+<span class="n">cleanf</span> <span class="o">=</span> <span class="n">clean_lines</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;French.pkl&#39;</span>
+<span class="n">outfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">cleanf</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+<span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s2">&quot; saved&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">French</span> <span class="n">data</span><span class="p">:</span> <span class="n">sentences</span><span class="o">=</span><span class="mi">2007723</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">693</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">French</span><span class="o">.</span><span class="n">pkl</span>  <span class="n">saved</span>
+</pre></div>
+</div>
+<p>主要的预处理已完成。但我们仍然需要确保数据集不包含噪音和易混淆的标记。</p>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">6.2.3. </span>进一步预处理<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
+<p>现在，我们定义了两个函数，用于加载在前一部分中清理过的数据集，并在进一步预处理完成后保存句子：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+
+<span class="c1"># 加载一个干净的数据集</span>
+<span class="k">def</span> <span class="nf">load_clean_sentences</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+
+<span class="c1"># 保存进一步预处理后的句子</span>
+<span class="k">def</span> <span class="nf">save_clean_sentences</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saved: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>一个单词在数据集中出现的频次非常重要。例如，如果一个词在包含两百万行的数据集中只出现一次，那么我们将浪费宝贵的GPU资源来学习它。现在我们定义一个函数来统计单词出现的频次：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 为所有单词创建一个频率表</span>
+<span class="k">def</span> <span class="nf">to_vocab</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+    <span class="n">vocab</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">vocab</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vocab</span>
+</pre></div>
+</div>
+<p>使用以下函数可以过滤掉所有频次小于<code class="docutils literal notranslate"><span class="pre">min_occurrence</span></code>的单词：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 过滤掉所有频次小于min_occurence的单词</span>
+<span class="k">def</span> <span class="nf">trim_vocab</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="n">min_occurrence</span><span class="p">):</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="n">vocab</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;=</span> <span class="n">min_occurrence</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>现在我们需要处理词表外词汇（Out-Of-Vocabulary Words, OOV
+Words）。OOV词汇可以是拼写错误的单词、缩写词或任何不符合标准词汇表示的单词。我们可以使用自动拼写纠正，但这并不能解决所有问题。在这个例子中，我们将简单地用<code class="docutils literal notranslate"><span class="pre">unk</span></code>（Unknown）标记替换OOV词汇：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 将每行中的OOV词汇标记为unk</span>
+<span class="k">def</span> <span class="nf">update_dataset</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">vocab</span><span class="p">):</span>
+    <span class="n">new_lines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+        <span class="n">new_tokens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">vocab</span><span class="p">:</span>
+                <span class="n">new_tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;unk&#39;</span><span class="p">)</span>
+        <span class="n">new_line</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_tokens</span><span class="p">)</span>
+        <span class="n">new_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_line</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_lines</span>
+</pre></div>
+</div>
+<p>以上定义了我们所需的功能函数，现在我们在清洗干净的数据的基础上来运行进一步的预处理：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 加载英文数据集</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;English.pkl&#39;</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">load_clean_sentences</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="c1"># 计算词汇频次</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">to_vocab</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;English Vocabulary: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))</span>
+<span class="c1"># 过滤掉出现不足5次的词汇</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">trim_vocab</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;New English Vocabulary: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))</span>
+<span class="c1"># 将OOV词汇标为unk</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">update_dataset</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">vocab</span><span class="p">)</span>
+<span class="c1"># 保存进一步处理后的数据集</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;english_vocab.pkl&#39;</span>
+<span class="n">save_clean_sentences</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<span class="c1"># 检查前20条</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;line&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">English</span> <span class="n">Vocabulary</span><span class="p">:</span> <span class="mi">105357</span>
+<span class="n">New</span> <span class="n">English</span> <span class="n">Vocabulary</span><span class="p">:</span> <span class="mi">41746</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Saved</span><span class="p">:</span> <span class="n">english_vocab</span><span class="o">.</span><span class="n">pkl</span>
+<span class="n">line</span> <span class="mi">0</span> <span class="p">:</span> <span class="n">resumption</span> <span class="n">of</span> <span class="n">the</span> <span class="n">session</span>
+<span class="n">line</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">i</span> <span class="n">declare</span> <span class="n">resumed</span> <span class="n">the</span> <span class="n">session</span> <span class="n">of</span> <span class="n">the</span> <span class="n">european</span> <span class="n">parliament</span> <span class="n">adjourned</span> <span class="n">on</span> <span class="n">friday</span> <span class="n">december</span> <span class="ow">and</span> <span class="n">i</span> <span class="n">would</span> <span class="n">like</span> <span class="n">once</span> <span class="n">again</span> <span class="n">to</span> <span class="n">wish</span> <span class="n">you</span> <span class="n">a</span> <span class="n">happy</span> <span class="n">new</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hope</span> <span class="n">that</span> <span class="n">you</span> <span class="n">enjoyed</span> <span class="n">a</span> <span class="n">pleasant</span> <span class="n">festive</span> <span class="n">period</span>
+<span class="n">line</span> <span class="mi">2</span> <span class="p">:</span> <span class="n">although</span> <span class="k">as</span> <span class="n">you</span> <span class="n">will</span> <span class="n">have</span> <span class="n">seen</span> <span class="n">the</span> <span class="n">dreaded</span> <span class="n">millennium</span> <span class="n">bug</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">materialise</span> <span class="n">still</span> <span class="n">the</span> <span class="n">people</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">number</span> <span class="n">of</span> <span class="n">countries</span> <span class="n">suffered</span> <span class="n">a</span> <span class="n">series</span> <span class="n">of</span> <span class="n">natural</span> <span class="n">disasters</span> <span class="n">that</span> <span class="n">truly</span> <span class="n">were</span> <span class="n">dreadful</span>
+<span class="n">line</span> <span class="mi">3</span> <span class="p">:</span> <span class="n">you</span> <span class="n">have</span> <span class="n">requested</span> <span class="n">a</span> <span class="n">debate</span> <span class="n">on</span> <span class="n">this</span> <span class="n">subject</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">course</span> <span class="n">of</span> <span class="n">the</span> <span class="nb">next</span> <span class="n">few</span> <span class="n">days</span> <span class="n">during</span> <span class="n">this</span> <span class="n">partsession</span>
+<span class="n">line</span> <span class="mi">4</span> <span class="p">:</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">meantime</span> <span class="n">i</span> <span class="n">should</span> <span class="n">like</span> <span class="n">to</span> <span class="n">observe</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">s</span> <span class="n">silence</span> <span class="k">as</span> <span class="n">a</span> <span class="n">number</span> <span class="n">of</span> <span class="n">members</span> <span class="n">have</span> <span class="n">requested</span> <span class="n">on</span> <span class="n">behalf</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">victims</span> <span class="n">concerned</span> <span class="n">particularly</span> <span class="n">those</span> <span class="n">of</span> <span class="n">the</span> <span class="n">terrible</span> <span class="n">storms</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">various</span> <span class="n">countries</span> <span class="n">of</span> <span class="n">the</span> <span class="n">european</span> <span class="n">union</span>
+<span class="n">line</span> <span class="mi">5</span> <span class="p">:</span> <span class="n">please</span> <span class="n">rise</span> <span class="n">then</span> <span class="k">for</span> <span class="n">this</span> <span class="n">minute</span> <span class="n">s</span> <span class="n">silence</span>
+<span class="n">line</span> <span class="mi">6</span> <span class="p">:</span> <span class="n">the</span> <span class="n">house</span> <span class="n">rose</span> <span class="ow">and</span> <span class="n">observed</span> <span class="n">a</span> <span class="n">minute</span> <span class="n">s</span> <span class="n">silence</span>
+<span class="n">line</span> <span class="mi">7</span> <span class="p">:</span> <span class="n">madam</span> <span class="n">president</span> <span class="n">on</span> <span class="n">a</span> <span class="n">point</span> <span class="n">of</span> <span class="n">order</span>
+<span class="n">line</span> <span class="mi">8</span> <span class="p">:</span> <span class="n">you</span> <span class="n">will</span> <span class="n">be</span> <span class="n">aware</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">press</span> <span class="ow">and</span> <span class="n">television</span> <span class="n">that</span> <span class="n">there</span> <span class="n">have</span> <span class="n">been</span> <span class="n">a</span> <span class="n">number</span> <span class="n">of</span> <span class="n">bomb</span> <span class="n">explosions</span> <span class="ow">and</span> <span class="n">killings</span> <span class="ow">in</span> <span class="n">sri</span> <span class="n">lanka</span>
+<span class="n">line</span> <span class="mi">9</span> <span class="p">:</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">people</span> <span class="n">assassinated</span> <span class="n">very</span> <span class="n">recently</span> <span class="ow">in</span> <span class="n">sri</span> <span class="n">lanka</span> <span class="n">was</span> <span class="n">mr</span> <span class="n">unk</span> <span class="n">unk</span> <span class="n">who</span> <span class="n">had</span> <span class="n">visited</span> <span class="n">the</span> <span class="n">european</span> <span class="n">parliament</span> <span class="n">just</span> <span class="n">a</span> <span class="n">few</span> <span class="n">months</span> <span class="n">ago</span>
+<span class="n">line</span> <span class="mi">10</span> <span class="p">:</span> <span class="n">would</span> <span class="n">it</span> <span class="n">be</span> <span class="n">appropriate</span> <span class="k">for</span> <span class="n">you</span> <span class="n">madam</span> <span class="n">president</span> <span class="n">to</span> <span class="n">write</span> <span class="n">a</span> <span class="n">letter</span> <span class="n">to</span> <span class="n">the</span> <span class="n">sri</span> <span class="n">lankan</span> <span class="n">president</span> <span class="n">expressing</span> <span class="n">parliaments</span> <span class="n">regret</span> <span class="n">at</span> <span class="n">his</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">other</span> <span class="n">violent</span> <span class="n">deaths</span> <span class="ow">in</span> <span class="n">sri</span> <span class="n">lanka</span> <span class="ow">and</span> <span class="n">urging</span> <span class="n">her</span> <span class="n">to</span> <span class="n">do</span> <span class="n">everything</span> <span class="n">she</span> <span class="n">possibly</span> <span class="n">can</span> <span class="n">to</span> <span class="n">seek</span> <span class="n">a</span> <span class="n">peaceful</span> <span class="n">reconciliation</span> <span class="n">to</span> <span class="n">a</span> <span class="n">very</span> <span class="n">difficult</span> <span class="n">situation</span>
+<span class="n">line</span> <span class="mi">11</span> <span class="p">:</span> <span class="n">yes</span> <span class="n">mr</span> <span class="n">evans</span> <span class="n">i</span> <span class="n">feel</span> <span class="n">an</span> <span class="n">initiative</span> <span class="n">of</span> <span class="n">the</span> <span class="nb">type</span> <span class="n">you</span> <span class="n">have</span> <span class="n">just</span> <span class="n">suggested</span> <span class="n">would</span> <span class="n">be</span> <span class="n">entirely</span> <span class="n">appropriate</span>
+<span class="n">line</span> <span class="mi">12</span> <span class="p">:</span> <span class="k">if</span> <span class="n">the</span> <span class="n">house</span> <span class="n">agrees</span> <span class="n">i</span> <span class="n">shall</span> <span class="n">do</span> <span class="k">as</span> <span class="n">mr</span> <span class="n">evans</span> <span class="n">has</span> <span class="n">suggested</span>
+<span class="n">line</span> <span class="mi">13</span> <span class="p">:</span> <span class="n">madam</span> <span class="n">president</span> <span class="n">on</span> <span class="n">a</span> <span class="n">point</span> <span class="n">of</span> <span class="n">order</span>
+<span class="n">line</span> <span class="mi">14</span> <span class="p">:</span> <span class="n">i</span> <span class="n">would</span> <span class="n">like</span> <span class="n">your</span> <span class="n">advice</span> <span class="n">about</span> <span class="n">rule</span> <span class="n">concerning</span> <span class="n">inadmissibility</span>
+<span class="n">line</span> <span class="mi">15</span> <span class="p">:</span> <span class="n">my</span> <span class="n">question</span> <span class="n">relates</span> <span class="n">to</span> <span class="n">something</span> <span class="n">that</span> <span class="n">will</span> <span class="n">come</span> <span class="n">up</span> <span class="n">on</span> <span class="n">thursday</span> <span class="ow">and</span> <span class="n">which</span> <span class="n">i</span> <span class="n">will</span> <span class="n">then</span> <span class="k">raise</span> <span class="n">again</span>
+<span class="n">line</span> <span class="mi">16</span> <span class="p">:</span> <span class="n">the</span> <span class="n">cunha</span> <span class="n">report</span> <span class="n">on</span> <span class="n">multiannual</span> <span class="n">guidance</span> <span class="n">programmes</span> <span class="n">comes</span> <span class="n">before</span> <span class="n">parliament</span> <span class="n">on</span> <span class="n">thursday</span> <span class="ow">and</span> <span class="n">contains</span> <span class="n">a</span> <span class="n">proposal</span> <span class="ow">in</span> <span class="n">paragraph</span> <span class="n">that</span> <span class="n">a</span> <span class="n">form</span> <span class="n">of</span> <span class="n">quota</span> <span class="n">penalties</span> <span class="n">should</span> <span class="n">be</span> <span class="n">introduced</span> <span class="k">for</span> <span class="n">countries</span> <span class="n">which</span> <span class="n">fail</span> <span class="n">to</span> <span class="n">meet</span> <span class="n">their</span> <span class="n">fleet</span> <span class="n">reduction</span> <span class="n">targets</span> <span class="n">annually</span>
+<span class="n">line</span> <span class="mi">17</span> <span class="p">:</span> <span class="n">it</span> <span class="n">says</span> <span class="n">that</span> <span class="n">this</span> <span class="n">should</span> <span class="n">be</span> <span class="n">done</span> <span class="n">despite</span> <span class="n">the</span> <span class="n">principle</span> <span class="n">of</span> <span class="n">relative</span> <span class="n">stability</span>
+<span class="n">line</span> <span class="mi">18</span> <span class="p">:</span> <span class="n">i</span> <span class="n">believe</span> <span class="n">that</span> <span class="n">the</span> <span class="n">principle</span> <span class="n">of</span> <span class="n">relative</span> <span class="n">stability</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">fundamental</span> <span class="n">legal</span> <span class="n">principle</span> <span class="n">of</span> <span class="n">the</span> <span class="n">common</span> <span class="n">fisheries</span> <span class="n">policy</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">proposal</span> <span class="n">to</span> <span class="n">subvert</span> <span class="n">it</span> <span class="n">would</span> <span class="n">be</span> <span class="n">legally</span> <span class="n">inadmissible</span>
+<span class="n">line</span> <span class="mi">19</span> <span class="p">:</span> <span class="n">i</span> <span class="n">want</span> <span class="n">to</span> <span class="n">know</span> <span class="n">whether</span> <span class="n">one</span> <span class="n">can</span> <span class="k">raise</span> <span class="n">an</span> <span class="n">objection</span> <span class="n">of</span> <span class="n">that</span> <span class="n">kind</span> <span class="n">to</span> <span class="n">what</span> <span class="ow">is</span> <span class="n">merely</span> <span class="n">a</span> <span class="n">report</span> <span class="ow">not</span> <span class="n">a</span> <span class="n">legislative</span> <span class="n">proposal</span> <span class="ow">and</span> <span class="n">whether</span> <span class="n">that</span> <span class="ow">is</span> <span class="n">something</span> <span class="n">i</span> <span class="n">can</span> <span class="n">competently</span> <span class="n">do</span> <span class="n">on</span> <span class="n">thursday</span>
+</pre></div>
+</div>
+<p>法文数据处理流程相同：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 加载法文数据集</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;French.pkl&#39;</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">load_clean_sentences</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="c1"># 计算词汇频次</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">to_vocab</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;French Vocabulary: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))</span>
+<span class="c1"># 过滤掉出现不足5次的词汇</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">trim_vocab</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;New French Vocabulary: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))</span>
+<span class="c1"># 将OOV词汇标为unk</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">update_dataset</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">vocab</span><span class="p">)</span>
+<span class="c1"># 保存进一步处理后的数据集</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;french_vocab.pkl&#39;</span>
+<span class="n">save_clean_sentences</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<span class="c1"># 检查前20条</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;line&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">French</span> <span class="n">Vocabulary</span><span class="p">:</span> <span class="mi">141642</span>
+<span class="n">New</span> <span class="n">French</span> <span class="n">Vocabulary</span><span class="p">:</span> <span class="mi">58800</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Saved</span><span class="p">:</span> <span class="n">french_vocab</span><span class="o">.</span><span class="n">pkl</span>
+<span class="n">line</span> <span class="mi">0</span> <span class="p">:</span> <span class="n">reprise</span> <span class="n">de</span> <span class="n">la</span> <span class="n">session</span>
+<span class="n">line</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">je</span> <span class="n">declare</span> <span class="n">reprise</span> <span class="n">la</span> <span class="n">session</span> <span class="n">du</span> <span class="n">parlement</span> <span class="n">europeen</span> <span class="n">qui</span> <span class="n">avait</span> <span class="n">ete</span> <span class="n">interrompue</span> <span class="n">le</span> <span class="n">vendredi</span> <span class="n">decembre</span> <span class="n">dernier</span> <span class="n">et</span> <span class="n">je</span> <span class="n">vous</span> <span class="n">renouvelle</span> <span class="n">tous</span> <span class="n">mes</span> <span class="n">vux</span> <span class="n">en</span> <span class="n">esperant</span> <span class="n">que</span> <span class="n">vous</span> <span class="n">avez</span> <span class="n">passe</span> <span class="n">de</span> <span class="n">bonnes</span> <span class="n">vacances</span>
+<span class="n">line</span> <span class="mi">2</span> <span class="p">:</span> <span class="n">comme</span> <span class="n">vous</span> <span class="n">avez</span> <span class="n">pu</span> <span class="n">le</span> <span class="n">constater</span> <span class="n">le</span> <span class="n">grand</span> <span class="n">bogue</span> <span class="n">de</span> <span class="n">lan</span> <span class="n">ne</span> <span class="n">sest</span> <span class="n">pas</span> <span class="n">produit</span> <span class="n">en</span> <span class="n">revanche</span> <span class="n">les</span> <span class="n">citoyens</span> <span class="n">dun</span> <span class="n">certain</span> <span class="n">nombre</span> <span class="n">de</span> <span class="n">nos</span> <span class="n">pays</span> <span class="n">ont</span> <span class="n">ete</span> <span class="n">victimes</span> <span class="n">de</span> <span class="n">catastrophes</span> <span class="n">naturelles</span> <span class="n">qui</span> <span class="n">ont</span> <span class="n">vraiment</span> <span class="n">ete</span> <span class="n">terribles</span>
+<span class="n">line</span> <span class="mi">3</span> <span class="p">:</span> <span class="n">vous</span> <span class="n">avez</span> <span class="n">souhaite</span> <span class="n">un</span> <span class="n">debat</span> <span class="n">a</span> <span class="n">ce</span> <span class="n">sujet</span> <span class="n">dans</span> <span class="n">les</span> <span class="n">prochains</span> <span class="n">jours</span> <span class="n">au</span> <span class="n">cours</span> <span class="n">de</span> <span class="n">cette</span> <span class="n">periode</span> <span class="n">de</span> <span class="n">session</span>
+<span class="n">line</span> <span class="mi">4</span> <span class="p">:</span> <span class="n">en</span> <span class="n">attendant</span> <span class="n">je</span> <span class="n">souhaiterais</span> <span class="n">comme</span> <span class="n">un</span> <span class="n">certain</span> <span class="n">nombre</span> <span class="n">de</span> <span class="n">collegues</span> <span class="n">me</span> <span class="n">lont</span> <span class="n">demande</span> <span class="n">que</span> <span class="n">nous</span> <span class="n">observions</span> <span class="n">une</span> <span class="n">minute</span> <span class="n">de</span> <span class="n">silence</span> <span class="n">pour</span> <span class="n">toutes</span> <span class="n">les</span> <span class="n">victimes</span> <span class="n">des</span> <span class="n">tempetes</span> <span class="n">notamment</span> <span class="n">dans</span> <span class="n">les</span> <span class="n">differents</span> <span class="n">pays</span> <span class="n">de</span> <span class="n">lunion</span> <span class="n">europeenne</span> <span class="n">qui</span> <span class="n">ont</span> <span class="n">ete</span> <span class="n">touches</span>
+<span class="n">line</span> <span class="mi">5</span> <span class="p">:</span> <span class="n">je</span> <span class="n">vous</span> <span class="n">invite</span> <span class="n">a</span> <span class="n">vous</span> <span class="n">lever</span> <span class="n">pour</span> <span class="n">cette</span> <span class="n">minute</span> <span class="n">de</span> <span class="n">silence</span>
+<span class="n">line</span> <span class="mi">6</span> <span class="p">:</span> <span class="n">le</span> <span class="n">parlement</span> <span class="n">debout</span> <span class="n">observe</span> <span class="n">une</span> <span class="n">minute</span> <span class="n">de</span> <span class="n">silence</span>
+<span class="n">line</span> <span class="mi">7</span> <span class="p">:</span> <span class="n">madame</span> <span class="n">la</span> <span class="n">presidente</span> <span class="n">cest</span> <span class="n">une</span> <span class="n">motion</span> <span class="n">de</span> <span class="n">procedure</span>
+<span class="n">line</span> <span class="mi">8</span> <span class="p">:</span> <span class="n">vous</span> <span class="n">avez</span> <span class="n">probablement</span> <span class="n">appris</span> <span class="n">par</span> <span class="n">la</span> <span class="n">presse</span> <span class="n">et</span> <span class="n">par</span> <span class="n">la</span> <span class="n">television</span> <span class="n">que</span> <span class="n">plusieurs</span> <span class="n">attentats</span> <span class="n">a</span> <span class="n">la</span> <span class="n">bombe</span> <span class="n">et</span> <span class="n">crimes</span> <span class="n">ont</span> <span class="n">ete</span> <span class="n">perpetres</span> <span class="n">au</span> <span class="n">sri</span> <span class="n">lanka</span>
+<span class="n">line</span> <span class="mi">9</span> <span class="p">:</span> <span class="n">lune</span> <span class="n">des</span> <span class="n">personnes</span> <span class="n">qui</span> <span class="n">vient</span> <span class="n">detre</span> <span class="n">assassinee</span> <span class="n">au</span> <span class="n">sri</span> <span class="n">lanka</span> <span class="n">est</span> <span class="n">m</span> <span class="n">unk</span> <span class="n">unk</span> <span class="n">qui</span> <span class="n">avait</span> <span class="n">rendu</span> <span class="n">visite</span> <span class="n">au</span> <span class="n">parlement</span> <span class="n">europeen</span> <span class="n">il</span> <span class="n">y</span> <span class="n">a</span> <span class="n">quelques</span> <span class="n">mois</span> <span class="n">a</span> <span class="n">peine</span>
+<span class="n">line</span> <span class="mi">10</span> <span class="p">:</span> <span class="n">ne</span> <span class="n">pensezvous</span> <span class="n">pas</span> <span class="n">madame</span> <span class="n">la</span> <span class="n">presidente</span> <span class="n">quil</span> <span class="n">conviendrait</span> <span class="n">decrire</span> <span class="n">une</span> <span class="n">lettre</span> <span class="n">au</span> <span class="n">president</span> <span class="n">du</span> <span class="n">sri</span> <span class="n">lanka</span> <span class="n">pour</span> <span class="n">lui</span> <span class="n">communiquer</span> <span class="n">que</span> <span class="n">le</span> <span class="n">parlement</span> <span class="n">deplore</span> <span class="n">les</span> <span class="n">morts</span> <span class="n">violentes</span> <span class="n">dont</span> <span class="n">celle</span> <span class="n">de</span> <span class="n">m</span> <span class="n">unk</span> <span class="n">et</span> <span class="n">pour</span> <span class="n">linviter</span> <span class="n">instamment</span> <span class="n">a</span> <span class="n">faire</span> <span class="n">tout</span> <span class="n">ce</span> <span class="n">qui</span> <span class="n">est</span> <span class="n">en</span> <span class="n">son</span> <span class="n">pouvoir</span> <span class="n">pour</span> <span class="n">chercher</span> <span class="n">une</span> <span class="n">reconciliation</span> <span class="n">pacifique</span> <span class="n">et</span> <span class="n">mettre</span> <span class="n">un</span> <span class="n">terme</span> <span class="n">a</span> <span class="n">cette</span> <span class="n">situation</span> <span class="n">particulierement</span> <span class="n">difficile</span>
+<span class="n">line</span> <span class="mi">11</span> <span class="p">:</span> <span class="n">oui</span> <span class="n">monsieur</span> <span class="n">evans</span> <span class="n">je</span> <span class="n">pense</span> <span class="n">quune</span> <span class="n">initiative</span> <span class="n">dans</span> <span class="n">le</span> <span class="n">sens</span> <span class="n">que</span> <span class="n">vous</span> <span class="n">venez</span> <span class="n">de</span> <span class="n">suggerer</span> <span class="n">serait</span> <span class="n">tout</span> <span class="n">a</span> <span class="n">fait</span> <span class="n">appropriee</span>
+<span class="n">line</span> <span class="mi">12</span> <span class="p">:</span> <span class="n">si</span> <span class="n">lassemblee</span> <span class="n">en</span> <span class="n">est</span> <span class="n">daccord</span> <span class="n">je</span> <span class="n">ferai</span> <span class="n">comme</span> <span class="n">m</span> <span class="n">evans</span> <span class="n">la</span> <span class="n">suggere</span>
+<span class="n">line</span> <span class="mi">13</span> <span class="p">:</span> <span class="n">madame</span> <span class="n">la</span> <span class="n">presidente</span> <span class="n">cest</span> <span class="n">une</span> <span class="n">motion</span> <span class="n">de</span> <span class="n">procedure</span>
+<span class="n">line</span> <span class="mi">14</span> <span class="p">:</span> <span class="n">je</span> <span class="n">voudrais</span> <span class="n">vous</span> <span class="n">demander</span> <span class="n">un</span> <span class="n">conseil</span> <span class="n">au</span> <span class="n">sujet</span> <span class="n">de</span> <span class="n">larticle</span> <span class="n">qui</span> <span class="n">concerne</span> <span class="n">lirrecevabilite</span>
+<span class="n">line</span> <span class="mi">15</span> <span class="p">:</span> <span class="n">ma</span> <span class="n">question</span> <span class="n">porte</span> <span class="n">sur</span> <span class="n">un</span> <span class="n">sujet</span> <span class="n">qui</span> <span class="n">est</span> <span class="n">a</span> <span class="n">lordre</span> <span class="n">du</span> <span class="n">jour</span> <span class="n">du</span> <span class="n">jeudi</span> <span class="n">et</span> <span class="n">que</span> <span class="n">je</span> <span class="n">souleverai</span> <span class="n">donc</span> <span class="n">une</span> <span class="n">nouvelle</span> <span class="n">fois</span>
+<span class="n">line</span> <span class="mi">16</span> <span class="p">:</span> <span class="n">le</span> <span class="n">paragraphe</span> <span class="n">du</span> <span class="n">rapport</span> <span class="n">cunha</span> <span class="n">sur</span> <span class="n">les</span> <span class="n">programmes</span> <span class="n">dorientation</span> <span class="n">pluriannuels</span> <span class="n">qui</span> <span class="n">sera</span> <span class="n">soumis</span> <span class="n">au</span> <span class="n">parlement</span> <span class="n">ce</span> <span class="n">jeudi</span> <span class="n">propose</span> <span class="n">dintroduire</span> <span class="n">des</span> <span class="n">sanctions</span> <span class="n">applicables</span> <span class="n">aux</span> <span class="n">pays</span> <span class="n">qui</span> <span class="n">ne</span> <span class="n">respectent</span> <span class="n">pas</span> <span class="n">les</span> <span class="n">objectifs</span> <span class="n">annuels</span> <span class="n">de</span> <span class="n">reduction</span> <span class="n">de</span> <span class="n">leur</span> <span class="n">flotte</span>
+<span class="n">line</span> <span class="mi">17</span> <span class="p">:</span> <span class="n">il</span> <span class="n">precise</span> <span class="n">que</span> <span class="n">cela</span> <span class="n">devrait</span> <span class="n">etre</span> <span class="n">fait</span> <span class="n">malgre</span> <span class="n">le</span> <span class="n">principe</span> <span class="n">de</span> <span class="n">stabilite</span> <span class="n">relative</span>
+<span class="n">line</span> <span class="mi">18</span> <span class="p">:</span> <span class="n">a</span> <span class="n">mon</span> <span class="n">sens</span> <span class="n">le</span> <span class="n">principe</span> <span class="n">de</span> <span class="n">stabilite</span> <span class="n">relative</span> <span class="n">est</span> <span class="n">un</span> <span class="n">principe</span> <span class="n">juridique</span> <span class="n">fondamental</span> <span class="n">de</span> <span class="n">la</span> <span class="n">politique</span> <span class="n">commune</span> <span class="n">de</span> <span class="n">la</span> <span class="n">peche</span> <span class="n">et</span> <span class="n">toute</span> <span class="n">proposition</span> <span class="n">le</span> <span class="n">bouleversant</span> <span class="n">serait</span> <span class="n">juridiquement</span> <span class="n">irrecevable</span>
+<span class="n">line</span> <span class="mi">19</span> <span class="p">:</span> <span class="n">je</span> <span class="n">voudrais</span> <span class="n">savoir</span> <span class="n">si</span> <span class="n">lon</span> <span class="n">peut</span> <span class="n">avancer</span> <span class="n">une</span> <span class="n">objection</span> <span class="n">de</span> <span class="n">ce</span> <span class="nb">type</span> <span class="n">a</span> <span class="n">ce</span> <span class="n">qui</span> <span class="n">nest</span> <span class="n">quun</span> <span class="n">rapport</span> <span class="n">pas</span> <span class="n">une</span> <span class="n">proposition</span> <span class="n">legislative</span> <span class="n">et</span> <span class="n">si</span> <span class="n">je</span> <span class="n">suis</span> <span class="n">habilite</span> <span class="n">a</span> <span class="n">le</span> <span class="n">faire</span> <span class="n">ce</span> <span class="n">jeudi</span>
+</pre></div>
+</div>
+<p>以上展示了在训练之前需要如何处理原始数据。数据集现在准备好了，可以输入到Transformer模型中进行训练。</p>
+<p>对于法译英任务，法文数据集的每一行是要翻译的句子，英文数据集的每一行是机器翻译模型的参考翻译。机器翻译模型必须生成与参考翻译相匹配的英文候选翻译。</p>
+<p>在下一节中，BLEU提供了一种评估机器翻译模型生成的候选翻译的方法。</p>
+</div>
+</div>
+
 
         </div>
         <div class="side-doc-outline">
             <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">6.2. 预处理WMT数据集</a><ul>
+<li><a class="reference internal" href="#id1">6.2.1. 下载数据集</a></li>
+<li><a class="reference internal" href="#id2">6.2.2. 预处理原始数据</a></li>
+<li><a class="reference internal" href="#id3">6.2.3. 进一步预处理</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
             </div>
         </div>
 
       <div class="clearer"></div>
     </div><div class="pagenation">
+     <a id="button-prev" href="section_01_defining_machine_translation.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>6.1. 机器翻译的定义</div>
+         </div>
+     </a>
+     <a id="button-next" href="section_03_evaluating_machine_translation_with_bleu.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>6.3. 使用BLEU评估机器翻译的质量</div>
+        </div>
+     </a>
   </div>
         
         </main>

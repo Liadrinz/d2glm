@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>&lt;no title&gt; &#8212; Transformer for NLP 0.0.1 documentation</title>
+    <title>6.3. 使用BLEU评估机器翻译的质量 &#8212; Transformer for NLP 0.0.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
@@ -24,15 +24,19 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/d2l.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.4. 使用Trax进行翻译" href="section_04_translations_with_trax.html" />
+    <link rel="prev" title="6.2. 预处理WMT数据集" href="section_02_preprocessing_a_wmt_dataset.html" /> 
   </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
     <div class="mdl-layout__header-row">
         
         <nav class="mdl-navigation breadcrumb">
-            <a class="mdl-navigation__link is-active">&lt;no title&gt;</a>
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">6. </span>基于Transformer的机器翻译</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active"><span class="section-number">6.3. </span>使用BLEU评估机器翻译的质量</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -86,30 +90,42 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">1. Transformer的性能 VS 人类基准</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">6. 基于Transformer的机器翻译</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -140,30 +156,42 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">1. Transformer的性能 VS 人类基准</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">6. 基于Transformer的机器翻译</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -177,16 +205,116 @@ Show Source
     <div class="document">
         <div class="page-content" role="main">
         
-  
+  <div class="section" id="bleu">
+<h1><span class="section-number">6.3. </span>使用BLEU评估机器翻译的质量<a class="headerlink" href="#bleu" title="Permalink to this heading">¶</a></h1>
+<p><a class="reference external" href="https://aclanthology.org/P02-1040.pdf">Papineni等人（2002年）</a>提出了一种评估人类翻译的有效方法。人类基准很难定义。然而，他们意识到，如果我们逐字逐词地将人类翻译与机器翻译进行比较，我们可以获得有效的结果。</p>
+<p><a class="reference external" href="https://aclanthology.org/P02-1040.pdf">Papineni等人（2002年）</a>将他们的方法命名为双语评估替补分数（BiLingual
+Evaluation Understudy Score, BLEU）。</p>
+<p>本章介绍如何使用<a class="reference external" href="http://www.nltk.org/api/nltk.translate.html#nltk.translate.bleu_score.sentence_bleu">自然语言工具包（Natural Language Toolkit,
+NLTK）</a>来计算BLEU分数。</p>
+<div class="section" id="n-gram">
+<h2><span class="section-number">6.3.1. </span>N-gram<a class="headerlink" href="#n-gram" title="Permalink to this heading">¶</a></h2>
+<p>N-gram是一种在自然语言处理和文本分析中常用的技术。它是一种基于文本中连续N个项（例如单词、字母或音节）的序列进行建模和分析的方法。</p>
+<p>在N-gram中，N代表项的数量。例如，一个2-gram（也称为bigram）表示由两个连续项组成的序列，如单词序列“the
+cat”。类似地，一个3-gram（也称为trigram）由三个连续项组成，如单词序列“I
+am a”。</p>
+<p>BLEU分数的评估一般考虑1-gram到4-gram.</p>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">6.3.2. </span>几何评估<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<p>BLEU方法将候选句子的部分与参考句子或多个参考句子进行比较。</p>
+<p>以下代码模拟了机器翻译模型生成的候选翻译与数据集中实际翻译参考之间的比较。请记住，一句话可能会被重复多次，并由不同的翻译人员以不同的方式翻译，这使得找到有效的评估策略变得具有挑战性。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.translate.bleu_score</span> <span class="kn">import</span> <span class="n">sentence_bleu</span>
+
+<span class="c1">#Example 1</span>
+<span class="n">reference</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;likes&#39;</span><span class="p">,</span> <span class="s1">&#39;milk&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;likes&#39;</span> <span class="s1">&#39;milk&#39;</span><span class="p">]]</span>
+<span class="n">candidate</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;likes&#39;</span><span class="p">,</span> <span class="s1">&#39;milk&#39;</span><span class="p">]</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">sentence_bleu</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">candidate</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Example 1&#39;</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
+<span class="c1">#Example 2</span>
+<span class="n">reference</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;likes&#39;</span><span class="p">,</span> <span class="s1">&#39;milk&#39;</span><span class="p">]]</span>
+<span class="n">candidate</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;likes&#39;</span><span class="p">,</span> <span class="s1">&#39;milk&#39;</span><span class="p">]</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">sentence_bleu</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">candidate</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Example 2&#39;</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Example</span> <span class="mi">1</span> <span class="mf">1.0</span>
+<span class="n">Example</span> <span class="mi">2</span> <span class="mf">1.0</span>
+</pre></div>
+</div>
+<p>候选翻译<span class="math notranslate nohighlight">\(C\)</span>、参考翻译<span class="math notranslate nohighlight">\(R\)</span>以及在<span class="math notranslate nohighlight">\(C\)</span>中找到的正确N-gram数量<span class="math notranslate nohighlight">\(N\)</span>之间的直接评估<span class="math notranslate nohighlight">\(P\)</span>可以表示为一个几何函数：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-06-machine-translation-with-the-transformer-section-03-evaluating-machine-translation-with-bleu-0">
+<span class="eqno">(6.3.1)<a class="headerlink" href="#equation-chapter-06-machine-translation-with-the-transformer-section-03-evaluating-machine-translation-with-bleu-0" title="Permalink to this equation">¶</a></span>\[P(N,C,R)=\prod_{i=1}^Np_i\]</div>
+<p>其中<span class="math notranslate nohighlight">\(p_i\)</span>表示第<span class="math notranslate nohighlight">\(i\)</span>个N-gram是否出现在参考翻译中，如果出现则取值1，否则取值0.</p>
+<p>然而这种直接的几何评估方法缺乏灵活性，例如：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 3</span>
+<span class="n">reference</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;likes&#39;</span><span class="p">,</span> <span class="s1">&#39;milk&#39;</span><span class="p">]]</span>
+<span class="n">candidate</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;enjoys&#39;</span><span class="p">,</span><span class="s1">&#39;milk&#39;</span><span class="p">]</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">sentence_bleu</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">candidate</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Example 3&#39;</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Example</span> <span class="mi">3</span> <span class="mf">1.0547686614863434e-154</span>
+</pre></div>
+</div>
+<p>人类可以看出来，候选翻译与参考翻译是同一个意思，我们也期望机器至少能判断两个句子有一定的相似性。</p>
+<p>但是上面的代码输出的BLEU分数接近0，原因在于候选翻译中没有3-gram或4-gram出现在参考翻译中。为了改善这一情况，可以使用平滑评估</p>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">6.3.3. </span>平滑评估<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.translate.bleu_score</span> <span class="kn">import</span> <span class="n">SmoothingFunction</span>
+
+<span class="c1"># Example 3</span>
+<span class="n">reference</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;likes&#39;</span><span class="p">,</span> <span class="s1">&#39;milk&#39;</span><span class="p">]]</span>
+<span class="n">candidate</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;enjoys&#39;</span><span class="p">,</span><span class="s1">&#39;milk&#39;</span><span class="p">]</span>
+<span class="n">smoothing</span> <span class="o">=</span> <span class="n">SmoothingFunction</span><span class="p">()</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">sentence_bleu</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">candidate</span><span class="p">,</span> <span class="n">smoothing_function</span><span class="o">=</span><span class="n">smoothing</span><span class="o">.</span><span class="n">method2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Example 3 (Smoothed)&#39;</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Example</span> <span class="mi">3</span> <span class="p">(</span><span class="n">Smoothed</span><span class="p">)</span> <span class="mf">0.5</span>
+</pre></div>
+</div>
+</div>
+</div>
+
 
         </div>
         <div class="side-doc-outline">
             <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">6.3. 使用BLEU评估机器翻译的质量</a><ul>
+<li><a class="reference internal" href="#n-gram">6.3.1. N-gram</a></li>
+<li><a class="reference internal" href="#id1">6.3.2. 几何评估</a></li>
+<li><a class="reference internal" href="#id2">6.3.3. 平滑评估</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
             </div>
         </div>
 
       <div class="clearer"></div>
     </div><div class="pagenation">
+     <a id="button-prev" href="section_02_preprocessing_a_wmt_dataset.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>6.2. 预处理WMT数据集</div>
+         </div>
+     </a>
+     <a id="button-next" href="section_04_translations_with_trax.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>6.4. 使用Trax进行翻译</div>
+        </div>
+     </a>
   </div>
         
         </main>

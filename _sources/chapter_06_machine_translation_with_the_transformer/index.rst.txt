@@ -26,20 +26,14 @@ Transformer模型在2017年的英德翻译和英法翻译任务中取得了最�
 -  预处理WMT数据集
 -  使用BLEU评估机器翻译
 -  几何评估
--  Chencherry平滑
+-  平滑评估
 -  介绍Google Translate的API
 -  使用Trax初始化英德翻译问题
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
 
    section_01_defining_machine_translation
-
    section_02_preprocessing_a_wmt_dataset
-
    section_03_evaluating_machine_translation_with_bleu
-
-   section_04_translation_with_google_translate
-
-   section_05_translations_with_trax
+   section_04_translations_with_trax

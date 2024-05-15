@@ -111,12 +111,21 @@ Show Source
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -168,12 +177,21 @@ Show Source
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -238,30 +256,10 @@ Colab已经在我们使用的虚拟机上预先安装了这些模块。</p>
 <h2><span class="section-number">3.2.4. </span>指定CUDA作为设备<a class="headerlink" href="#cuda" title="Permalink to this heading">¶</a></h2>
 <p>我们现在将指定torch使用CUDA（Compute Unified Device
 Architecture）来利用NVIDIA GPU的并行计算能力，用于我们的多头注意力模型：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>device = torch.device(&quot;cuda&quot; if torch.cuda.is_available() else &quot;cpu&quot;)
-!nvidia-smi
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Fri</span> <span class="n">May</span> <span class="mi">10</span> <span class="mi">14</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">27</span> <span class="mi">2024</span>
-<span class="o">+---------------------------------------------------------------------------------------+</span>
-<span class="o">|</span> <span class="n">NVIDIA</span><span class="o">-</span><span class="n">SMI</span> <span class="mf">545.46</span>                 <span class="n">Driver</span> <span class="n">Version</span><span class="p">:</span> <span class="mf">546.80</span>       <span class="n">CUDA</span> <span class="n">Version</span><span class="p">:</span> <span class="mf">12.3</span>     <span class="o">|</span>
-<span class="o">|-----------------------------------------+----------------------+----------------------+</span>
-<span class="o">|</span> <span class="n">GPU</span>  <span class="n">Name</span>                 <span class="n">Persistence</span><span class="o">-</span><span class="n">M</span> <span class="o">|</span> <span class="n">Bus</span><span class="o">-</span><span class="n">Id</span>        <span class="n">Disp</span><span class="o">.</span><span class="n">A</span> <span class="o">|</span> <span class="n">Volatile</span> <span class="n">Uncorr</span><span class="o">.</span> <span class="n">ECC</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">Fan</span>  <span class="n">Temp</span>   <span class="n">Perf</span>          <span class="n">Pwr</span><span class="p">:</span><span class="n">Usage</span><span class="o">/</span><span class="n">Cap</span> <span class="o">|</span>         <span class="n">Memory</span><span class="o">-</span><span class="n">Usage</span> <span class="o">|</span> <span class="n">GPU</span><span class="o">-</span><span class="n">Util</span>  <span class="n">Compute</span> <span class="n">M</span><span class="o">.</span> <span class="o">|</span>
-<span class="o">|</span>                                         <span class="o">|</span>                      <span class="o">|</span>               <span class="n">MIG</span> <span class="n">M</span><span class="o">.</span> <span class="o">|</span>
-<span class="o">|=========================================+======================+======================|</span>
-<span class="o">|</span>   <span class="mi">0</span>  <span class="n">NVIDIA</span> <span class="n">GeForce</span> <span class="n">RTX</span> <span class="mi">3060</span> <span class="o">...</span>    <span class="n">On</span>  <span class="o">|</span> <span class="mi">00000000</span><span class="p">:</span><span class="mi">01</span><span class="p">:</span><span class="mf">00.0</span> <span class="n">Off</span> <span class="o">|</span>                  <span class="n">N</span><span class="o">/</span><span class="n">A</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">N</span><span class="o">/</span><span class="n">A</span>   <span class="mi">48</span><span class="n">C</span>    <span class="n">P8</span>              <span class="mi">10</span><span class="n">W</span> <span class="o">/</span>  <span class="mi">63</span><span class="n">W</span> <span class="o">|</span>     <span class="mi">17</span><span class="n">MiB</span> <span class="o">/</span>  <span class="mi">6144</span><span class="n">MiB</span> <span class="o">|</span>      <span class="mi">0</span><span class="o">%</span>      <span class="n">Default</span> <span class="o">|</span>
-<span class="o">|</span>                                         <span class="o">|</span>                      <span class="o">|</span>                  <span class="n">N</span><span class="o">/</span><span class="n">A</span> <span class="o">|</span>
-<span class="o">+-----------------------------------------+----------------------+----------------------+</span>
-
-<span class="o">+---------------------------------------------------------------------------------------+</span>
-<span class="o">|</span> <span class="n">Processes</span><span class="p">:</span>                                                                            <span class="o">|</span>
-<span class="o">|</span>  <span class="n">GPU</span>   <span class="n">GI</span>   <span class="n">CI</span>        <span class="n">PID</span>   <span class="n">Type</span>   <span class="n">Process</span> <span class="n">name</span>                            <span class="n">GPU</span> <span class="n">Memory</span> <span class="o">|</span>
-<span class="o">|</span>        <span class="n">ID</span>   <span class="n">ID</span>                                                             <span class="n">Usage</span>      <span class="o">|</span>
-<span class="o">|=======================================================================================|</span>
-<span class="o">|</span>  <span class="n">No</span> <span class="n">running</span> <span class="n">processes</span> <span class="n">found</span>                                                           <span class="o">|</span>
-<span class="o">+---------------------------------------------------------------------------------------+</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!nvidia-smi
 </pre></div>
 </div>
 <p>输出结果可能会因Google Colab的配置而有所不同。</p>
@@ -314,74 +312,74 @@ domain_dev.tsv&quot;
   </thead>
   <tbody>
     <tr>
-      <th>1151</th>
-      <td>r-67</td>
-      <td>0</td>
-      <td>?*</td>
-      <td>we elected the man who he had brought with him...</td>
-    </tr>
-    <tr>
-      <th>3220</th>
-      <td>l-93</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>oil gushed from the well .</td>
-    </tr>
-    <tr>
-      <th>7617</th>
-      <td>sks13</td>
-      <td>0</td>
-      <td>*</td>
-      <td>i had a realization of there .</td>
-    </tr>
-    <tr>
-      <th>5163</th>
+      <th>3457</th>
       <td>ks08</td>
       <td>1</td>
       <td>NaN</td>
-      <td>was it for this that we suffered and toiled ?</td>
+      <td>much evidence is needed .</td>
     </tr>
     <tr>
-      <th>7516</th>
+      <th>2084</th>
+      <td>rhl07</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>max offered help to the victims , but they ref...</td>
+    </tr>
+    <tr>
+      <th>6314</th>
+      <td>c_13</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>what does calvin like .</td>
+    </tr>
+    <tr>
+      <th>5863</th>
+      <td>c_13</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>linguistics students like phonetics tutorials .</td>
+    </tr>
+    <tr>
+      <th>7493</th>
       <td>sks13</td>
       <td>1</td>
       <td>NaN</td>
-      <td>he should decide soon .</td>
+      <td>mary send a book .</td>
     </tr>
     <tr>
-      <th>8462</th>
+      <th>6002</th>
+      <td>c_13</td>
+      <td>0</td>
+      <td>*</td>
+      <td>i must can eat plums .</td>
+    </tr>
+    <tr>
+      <th>7210</th>
+      <td>sks13</td>
+      <td>0</td>
+      <td>*</td>
+      <td>what mary donated was a lot of money to npr .</td>
+    </tr>
+    <tr>
+      <th>8407</th>
       <td>ad03</td>
       <td>0</td>
       <td>*</td>
-      <td>him book</td>
+      <td>gilgamesh flew not the broomstick .</td>
     </tr>
     <tr>
-      <th>2561</th>
+      <th>3255</th>
       <td>l-93</td>
-      <td>0</td>
-      <td>*</td>
-      <td>i funneled the bottle with the mixture .</td>
-    </tr>
-    <tr>
-      <th>1027</th>
-      <td>bc01</td>
       <td>1</td>
       <td>NaN</td>
-      <td>everyone reported that max and some lady disap...</td>
+      <td>idaho potatoes bake beautifully .</td>
     </tr>
     <tr>
-      <th>1321</th>
-      <td>r-67</td>
+      <th>7619</th>
+      <td>sks13</td>
       <td>1</td>
       <td>NaN</td>
-      <td>who ate what ?</td>
-    </tr>
-    <tr>
-      <th>4308</th>
-      <td>ks08</td>
-      <td>0</td>
-      <td>*</td>
-      <td>it seemed to be intelligent .</td>
+      <td>there were several doctors available .</td>
     </tr>
   </tbody>
 </table>

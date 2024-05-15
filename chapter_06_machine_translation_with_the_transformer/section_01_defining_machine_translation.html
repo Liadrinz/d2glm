@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>&lt;no title&gt; &#8212; Transformer for NLP 0.0.1 documentation</title>
+    <title>6.1. 机器翻译的定义 &#8212; Transformer for NLP 0.0.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
@@ -24,15 +24,19 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/d2l.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.2. 预处理WMT数据集" href="section_02_preprocessing_a_wmt_dataset.html" />
+    <link rel="prev" title="6. 基于Transformer的机器翻译" href="index.html" /> 
   </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
     <div class="mdl-layout__header-row">
         
         <nav class="mdl-navigation breadcrumb">
-            <a class="mdl-navigation__link is-active">&lt;no title&gt;</a>
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">6. </span>基于Transformer的机器翻译</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active"><span class="section-number">6.1. </span>机器翻译的定义</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -86,30 +90,42 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">1. Transformer的性能 VS 人类基准</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">6. 基于Transformer的机器翻译</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -140,30 +156,42 @@ Show Source
         
             
             <nav class="mdl-navigation">
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1. Transformer的生态系统</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">2. 使用Transformer优化NLP模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">3. 我们需要什么资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">1. Transformer模型架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2. 模型训练和表现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">3. Hugging Face上的Transformer模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">4. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">1. BERT模型的架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">2. 微调BERT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3. 练习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">1. 从头开始预训练RoBERTa模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">1. Transformer的性能 VS 人类基准</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">6. 基于Transformer的机器翻译</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -177,16 +205,77 @@ Show Source
     <div class="document">
         <div class="page-content" role="main">
         
-  
+  <div class="section" id="ch6-sec1-fig-1">
+<span id="id1"></span><h1><span class="section-number">6.1. </span>机器翻译的定义<a class="headerlink" href="#ch6-sec1-fig-1" title="Permalink to this heading">¶</a></h1>
+<p>机器翻译是通过机器进行转换和输出来复现人类翻译的过程：</p>
+<div class="figure align-default">
+<img alt="../_images/mt-process.svg" src="../_images/mt-process.svg" /></div>
+<p><a class="reference internal" href="#ch6-sec1-fig-1"><span class="std std-numref">Section 6.1</span></a> 中的总体思路是让机器通过以下几个步骤来完成：</p>
+<ul class="simple">
+<li><p>选择要翻译的句子</p></li>
+<li><p>利用数亿个参数学习单词之间的关系</p></li>
+<li><p>学习单词彼此之间的多种表达方式</p></li>
+<li><p>使用机器转换将学习到的参数传递给新的序列</p></li>
+<li><p>为单词或序列选择候选翻译</p></li>
+</ul>
+<p>该过程始终从源语言A中选择一个要翻译的句子作为起点，最终生成一个包含语言B中翻译句子的输出结果。中间的计算过程涉及到转导操作。</p>
+<div class="section" id="id2">
+<h2><span class="section-number">6.1.1. </span>人类转导与翻译<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<p>例如，欧洲议会的人工口译员不会逐字逐句地进行翻译。逐字逐句的翻译通常没有意义，因为它们缺乏正确的语法结构，无法正确翻译，因为忽略了每个词的上下文。</p>
+<p>人类的转导过程是将语言A中的句子构建成一个认知表示，表示该句子的意义。在欧洲议会，口译员或笔译员将会将这种转导过程转化为语言B中对该句子的解释。</p>
+<p>我们将口译员或翻译员在语言B中完成的翻译称为参考句（Reference）。</p>
+<p>在现实生活中，人类翻译员不会将句子A翻译成句子B多次，而只会翻译一次。然而，在现实生活中，可能会有多个翻译员将句子A翻译成句子B。例如，您可以找到多个将蒙田的《论随笔》从法语翻译成英语的版本。如果您从原始的法语版本中选取一个句子A，您将会找到多个被标注为参考1到n的句子B的版本。</p>
+<p>如果您有一天去欧洲议会，您可能会注意到口译员只会连续翻译有限的时间，比如两个小时。然后另一个口译员接替上岗。两个口译员有不同的风格，就像作家有不同的风格一样。在同一天内，同一个人可能会多次重复源语言的句子A，但会翻译成多个参考句子B的版本：</p>
+<div class="math notranslate nohighlight" id="equation-chapter-06-machine-translation-with-the-transformer-section-01-defining-machine-translation-0">
+<span class="eqno">(6.1.1)<a class="headerlink" href="#equation-chapter-06-machine-translation-with-the-transformer-section-01-defining-machine-translation-0" title="Permalink to this equation">¶</a></span>\[\text{参考翻译} = \{\text{参考句1}, \text{参考句2}, \cdots, \text{参考句n}\}\]</div>
+<p>机器需要找到一种以与人类翻译员相同的方式进行思考的方法。</p>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">6.1.2. </span>机器转导与翻译<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
+<p>原始Transformer架构的转导过程使用编码器堆栈、解码器堆栈以及模型的所有参数来表示一个参考序列。我们将称该输出序列为参考句（Reference）。</p>
+<p>为什么不直接将输出的序列称为“输出预测（output
+prediction）”呢？原因在于，机器翻译问题中的输出预测并不是唯一的，而是具有多样性的。Transformer产生的只是我们可以参考的结果之一（就像人类翻译员一样），但如果我们以不同的方式进行训练或使用不同的Transformer模型，结果可能会发生变化。</p>
+<p>对机器翻译的评估证明了自然语言处理的进步。为了确定哪个解决方案更好，每个自然语言处理的挑战者、实验室或组织必须参考相同的数据集，以确保比较的有效性。</p>
+<p>接下来我们探索最经典的机器翻译数据集之一，WMT数据集。</p>
+</div>
+</div>
+
 
         </div>
         <div class="side-doc-outline">
             <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">6.1. 机器翻译的定义</a><ul>
+<li><a class="reference internal" href="#id2">6.1.1. 人类转导与翻译</a></li>
+<li><a class="reference internal" href="#id3">6.1.2. 机器转导与翻译</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
             </div>
         </div>
 
       <div class="clearer"></div>
     </div><div class="pagenation">
+     <a id="button-prev" href="index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>6. 基于Transformer的机器翻译</div>
+         </div>
+     </a>
+     <a id="button-next" href="section_02_preprocessing_a_wmt_dataset.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>6.2. 预处理WMT数据集</div>
+        </div>
+     </a>
   </div>
         
         </main>

@@ -1,1 +1,415 @@
 
+预处理WMT数据集
+===============
+
+Vaswani等人（2017年）在WMT
+2014年英德翻译任务和英法翻译任务中展示了Transformer的成就。Transformer在这些任务中取得了最先进的BLEU分数。
+
+2014年的WMT包含了多个欧洲语言的数据集。其中一个数据集包含了来自欧洲议会语料库第7版的数据。我们将使用来自\ `《欧洲议会会议平行语料库》（the
+European Parliament Proceedings Parallel
+Corpus）（1996-2011年）的法英（French-English）数据集 <https://www.statmt.org/europarl/v7/fr-en.tgz>`__\ 。
+
+下载上述链接中的文件并将其解压缩，可以得到两个平行语料文件：
+
+-  ``europarl-v7.fr-en.en``
+-  ``europarl-v7.fr-en.fr``
+
+其中\ ``.en``\ 结尾的是英文，\ ``.fr``\ 结尾的是法文，二者之间每行一一对应。
+
+我们将对上述平行语料进行预处理。
+
+下载数据集
+----------
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+   !wget https://www.statmt.org/europarl/v7/fr-en.tgz
+   !tar -xvf fr-en.tgz
+
+预处理原始数据
+--------------
+
+以下代码用于处理上述两个平行语料文件。
+
+首先定义一些函数：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    # 加载文件中的文本
+    def load_doc(filename):
+        file = open(filename, mode="rt", encoding="utf-8")
+        text = file.read()
+        file.close()
+        return text
+    
+    # 按换行符进行分割，得到每行的要翻译的句子
+    def to_sentences(doc):
+        return doc.strip().split("\n")
+    
+    # 获取最短和最长句子的长度
+    def sentence_lengths(sentences):
+        lengths = [len(s.split()) for s in sentences]
+        return min(lengths), max(lengths)
+
+导入的句子行必须进行清洗，以避免训练无用和带有噪音的标记。行进行规范化处理，按空格进行分词，并转换为小写。从每个标记中删除标点符号，删除非可打印字符，并排除包含数字的标记。清洗后的行以字符串形式存储。
+
+以下是清洗代码（不适用于中文）：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    # clean lines
+    import re
+    import string
+    import unicodedata
+    
+    
+    def clean_lines(lines):
+        cleaned = list()
+        # 正则表达式，用于过滤字符
+        re_print = re.compile('[^%s]' % re.escape(string.printable))
+        # 准备转换表，用于去除标点符号
+        table = str.maketrans('', '', string.punctuation)
+        for line in lines:
+            # 标准化unicode字符
+            line = unicodedata.normalize('NFD', line).encode('ascii', 'ignore')
+            line = line.decode('UTF-8')
+            # 使用空格进行分词
+            line = line.split()
+            # 转小写
+            line = [word.lower() for word in line]
+            # 去除标点符号
+            line = [word.translate(table) for word in line]
+            # 去除不可打印的字符
+            line = [re_print.sub('', w) for w in line]
+            # 去除包含数字的token
+            line = [word for word in line if word.isalpha()]
+            # 保存为字符串
+            cleaned.append(' '.join(line))
+        return cleaned
+
+我们已经定义了准备数据集时将调用的关键函数。现在我们加载并清理英文数据：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    filename = 'europarl-v7.fr-en.en'
+    doc = load_doc(filename)
+    sentences = to_sentences(doc)
+    minlen, maxlen = sentence_lengths(sentences)
+    print('English data: sentences=%d, min=%d, max=%d' % (len(sentences), minlen, maxlen))
+    cleanf = clean_lines(sentences)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    English data: sentences=2007723, min=0, max=668
+
+
+数据集现在干净了，我们使用\ ``pickle``\ 将其保存为序列化的文件，命名为\ ``English.pkl``\ ：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    import pickle
+    
+    filename = 'English.pkl'
+    outfile = open(filename,'wb')
+    pickle.dump(cleanf, outfile)
+    outfile.close()
+    print(filename," saved")
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    English.pkl  saved
+
+
+输出显示了数据集的关键信息，并确认\ ``English.pkl``\ 已被保存。
+
+我们对法文数据也进行同样的处理：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    filename = 'europarl-v7.fr-en.fr'
+    doc = load_doc(filename)
+    sentences = to_sentences(doc)
+    minlen, maxlen = sentence_lengths(sentences)
+    print('French data: sentences=%d, min=%d, max=%d' % (len(sentences), minlen, maxlen))
+    cleanf = clean_lines(sentences)
+    filename = 'French.pkl'
+    outfile = open(filename,'wb')
+    pickle.dump(cleanf, outfile)
+    outfile.close()
+    print(filename," saved")
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    French data: sentences=2007723, min=0, max=693
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    French.pkl  saved
+
+
+主要的预处理已完成。但我们仍然需要确保数据集不包含噪音和易混淆的标记。
+
+进一步预处理
+------------
+
+现在，我们定义了两个函数，用于加载在前一部分中清理过的数据集，并在进一步预处理完成后保存句子：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    from collections import Counter
+    
+    
+    # 加载一个干净的数据集
+    def load_clean_sentences(filename):
+        return pickle.load(open(filename, 'rb'))
+    
+    # 保存进一步预处理后的句子
+    def save_clean_sentences(sentences, filename):
+        pickle.dump(sentences, open(filename, 'wb'))
+        print('Saved: %s' % filename)
+
+一个单词在数据集中出现的频次非常重要。例如，如果一个词在包含两百万行的数据集中只出现一次，那么我们将浪费宝贵的GPU资源来学习它。现在我们定义一个函数来统计单词出现的频次：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    # 为所有单词创建一个频率表
+    def to_vocab(lines):
+        vocab = Counter()
+        for line in lines:
+            tokens = line.split()
+            vocab.update(tokens)
+        return vocab
+
+使用以下函数可以过滤掉所有频次小于\ ``min_occurrence``\ 的单词：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    # 过滤掉所有频次小于min_occurence的单词
+    def trim_vocab(vocab, min_occurrence):
+        tokens = [k for k,c in vocab.items() if c >= min_occurrence]
+        return set(tokens)
+
+现在我们需要处理词表外词汇（Out-Of-Vocabulary Words, OOV
+Words）。OOV词汇可以是拼写错误的单词、缩写词或任何不符合标准词汇表示的单词。我们可以使用自动拼写纠正，但这并不能解决所有问题。在这个例子中，我们将简单地用\ ``unk``\ （Unknown）标记替换OOV词汇：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    # 将每行中的OOV词汇标记为unk
+    def update_dataset(lines, vocab):
+        new_lines = list()
+        for line in lines:
+            new_tokens = list()
+            for token in line.split():
+                if token in vocab:
+                    new_tokens.append(token)
+                else:
+                    new_tokens.append('unk')
+            new_line = ' '.join(new_tokens)
+            new_lines.append(new_line)
+        return new_lines
+
+以上定义了我们所需的功能函数，现在我们在清洗干净的数据的基础上来运行进一步的预处理：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    # 加载英文数据集
+    filename = 'English.pkl'
+    lines = load_clean_sentences(filename)
+    # 计算词汇频次
+    vocab = to_vocab(lines)
+    print('English Vocabulary: %d' % len(vocab))
+    # 过滤掉出现不足5次的词汇
+    vocab = trim_vocab(vocab, 5)
+    print('New English Vocabulary: %d' % len(vocab))
+    # 将OOV词汇标为unk
+    lines = update_dataset(lines, vocab)
+    # 保存进一步处理后的数据集
+    filename = 'english_vocab.pkl'
+    save_clean_sentences(lines, filename)
+    # 检查前20条
+    for i in range(20):
+        print("line",i,":",lines[i])
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    English Vocabulary: 105357
+    New English Vocabulary: 41746
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Saved: english_vocab.pkl
+    line 0 : resumption of the session
+    line 1 : i declare resumed the session of the european parliament adjourned on friday december and i would like once again to wish you a happy new year in the hope that you enjoyed a pleasant festive period
+    line 2 : although as you will have seen the dreaded millennium bug failed to materialise still the people in a number of countries suffered a series of natural disasters that truly were dreadful
+    line 3 : you have requested a debate on this subject in the course of the next few days during this partsession
+    line 4 : in the meantime i should like to observe a minute s silence as a number of members have requested on behalf of all the victims concerned particularly those of the terrible storms in the various countries of the european union
+    line 5 : please rise then for this minute s silence
+    line 6 : the house rose and observed a minute s silence
+    line 7 : madam president on a point of order
+    line 8 : you will be aware from the press and television that there have been a number of bomb explosions and killings in sri lanka
+    line 9 : one of the people assassinated very recently in sri lanka was mr unk unk who had visited the european parliament just a few months ago
+    line 10 : would it be appropriate for you madam president to write a letter to the sri lankan president expressing parliaments regret at his and the other violent deaths in sri lanka and urging her to do everything she possibly can to seek a peaceful reconciliation to a very difficult situation
+    line 11 : yes mr evans i feel an initiative of the type you have just suggested would be entirely appropriate
+    line 12 : if the house agrees i shall do as mr evans has suggested
+    line 13 : madam president on a point of order
+    line 14 : i would like your advice about rule concerning inadmissibility
+    line 15 : my question relates to something that will come up on thursday and which i will then raise again
+    line 16 : the cunha report on multiannual guidance programmes comes before parliament on thursday and contains a proposal in paragraph that a form of quota penalties should be introduced for countries which fail to meet their fleet reduction targets annually
+    line 17 : it says that this should be done despite the principle of relative stability
+    line 18 : i believe that the principle of relative stability is a fundamental legal principle of the common fisheries policy and a proposal to subvert it would be legally inadmissible
+    line 19 : i want to know whether one can raise an objection of that kind to what is merely a report not a legislative proposal and whether that is something i can competently do on thursday
+
+
+法文数据处理流程相同：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    # 加载法文数据集
+    filename = 'French.pkl'
+    lines = load_clean_sentences(filename)
+    # 计算词汇频次
+    vocab = to_vocab(lines)
+    print('French Vocabulary: %d' % len(vocab))
+    # 过滤掉出现不足5次的词汇
+    vocab = trim_vocab(vocab, 5)
+    print('New French Vocabulary: %d' % len(vocab))
+    # 将OOV词汇标为unk
+    lines = update_dataset(lines, vocab)
+    # 保存进一步处理后的数据集
+    filename = 'french_vocab.pkl'
+    save_clean_sentences(lines, filename)
+    # 检查前20条
+    for i in range(20):
+        print("line",i,":",lines[i])
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    French Vocabulary: 141642
+    New French Vocabulary: 58800
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Saved: french_vocab.pkl
+    line 0 : reprise de la session
+    line 1 : je declare reprise la session du parlement europeen qui avait ete interrompue le vendredi decembre dernier et je vous renouvelle tous mes vux en esperant que vous avez passe de bonnes vacances
+    line 2 : comme vous avez pu le constater le grand bogue de lan ne sest pas produit en revanche les citoyens dun certain nombre de nos pays ont ete victimes de catastrophes naturelles qui ont vraiment ete terribles
+    line 3 : vous avez souhaite un debat a ce sujet dans les prochains jours au cours de cette periode de session
+    line 4 : en attendant je souhaiterais comme un certain nombre de collegues me lont demande que nous observions une minute de silence pour toutes les victimes des tempetes notamment dans les differents pays de lunion europeenne qui ont ete touches
+    line 5 : je vous invite a vous lever pour cette minute de silence
+    line 6 : le parlement debout observe une minute de silence
+    line 7 : madame la presidente cest une motion de procedure
+    line 8 : vous avez probablement appris par la presse et par la television que plusieurs attentats a la bombe et crimes ont ete perpetres au sri lanka
+    line 9 : lune des personnes qui vient detre assassinee au sri lanka est m unk unk qui avait rendu visite au parlement europeen il y a quelques mois a peine
+    line 10 : ne pensezvous pas madame la presidente quil conviendrait decrire une lettre au president du sri lanka pour lui communiquer que le parlement deplore les morts violentes dont celle de m unk et pour linviter instamment a faire tout ce qui est en son pouvoir pour chercher une reconciliation pacifique et mettre un terme a cette situation particulierement difficile
+    line 11 : oui monsieur evans je pense quune initiative dans le sens que vous venez de suggerer serait tout a fait appropriee
+    line 12 : si lassemblee en est daccord je ferai comme m evans la suggere
+    line 13 : madame la presidente cest une motion de procedure
+    line 14 : je voudrais vous demander un conseil au sujet de larticle qui concerne lirrecevabilite
+    line 15 : ma question porte sur un sujet qui est a lordre du jour du jeudi et que je souleverai donc une nouvelle fois
+    line 16 : le paragraphe du rapport cunha sur les programmes dorientation pluriannuels qui sera soumis au parlement ce jeudi propose dintroduire des sanctions applicables aux pays qui ne respectent pas les objectifs annuels de reduction de leur flotte
+    line 17 : il precise que cela devrait etre fait malgre le principe de stabilite relative
+    line 18 : a mon sens le principe de stabilite relative est un principe juridique fondamental de la politique commune de la peche et toute proposition le bouleversant serait juridiquement irrecevable
+    line 19 : je voudrais savoir si lon peut avancer une objection de ce type a ce qui nest quun rapport pas une proposition legislative et si je suis habilite a le faire ce jeudi
+
+
+以上展示了在训练之前需要如何处理原始数据。数据集现在准备好了，可以输入到Transformer模型中进行训练。
+
+对于法译英任务，法文数据集的每一行是要翻译的句子，英文数据集的每一行是机器翻译模型的参考翻译。机器翻译模型必须生成与参考翻译相匹配的英文候选翻译。
+
+在下一节中，BLEU提供了一种评估机器翻译模型生成的候选翻译的方法。

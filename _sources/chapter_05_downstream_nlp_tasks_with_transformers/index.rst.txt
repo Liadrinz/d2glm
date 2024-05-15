@@ -26,8 +26,7 @@ Transformer模型通过在设计良好的基准任务上超越其他模型，迅
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
 
    section_01_transformer_performances_versus_human_baselines
-
    section_02_running_downstream_tasks
+   section_03_exercise

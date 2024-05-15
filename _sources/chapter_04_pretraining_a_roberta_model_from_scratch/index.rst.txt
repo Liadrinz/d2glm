@@ -39,6 +39,6 @@ File）和词表文件（Vocabulary File），并在预训练过程中使用它�
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
 
-   section
+   section_01_pretraining_from_scratch
+   section_02_exercise

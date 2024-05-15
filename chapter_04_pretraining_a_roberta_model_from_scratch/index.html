@@ -26,7 +26,7 @@
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4.1. 从头开始预训练" href="section.html" />
+    <link rel="next" title="4.1. 从头开始预训练" href="section_01_pretraining_from_scratch.html" />
     <link rel="prev" title="3.3. 练习" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html" /> 
   </head>
 <body>
@@ -109,12 +109,21 @@ Show Source
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">4. 从头开始预训练RoBERTa模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="section.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_exercise.html">4.2. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -166,12 +175,21 @@ Show Source
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">4. 从头开始预训练RoBERTa模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="section.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_exercise.html">4.2. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -215,26 +233,26 @@ File）和词表文件（Vocabulary File），并在预训练过程中使用它�
 </ul>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="section.html">4.1. 从头开始预训练</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="section.html#id2">4.1.1. 第1步：加载数据集</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#hugging-face-transformers">4.1.2. 第2步：安装Hugging Face transformers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#tokenizer">4.1.3. 第3步：训练分词器（tokenizer）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#id3">4.1.4. 第4步：将分词器保存到磁盘</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#id4">4.1.5. 第5步：加载训练的分词器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#gpucuda">4.1.6. 第6步：检查资源：GPU和CUDA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#id5">4.1.7. 第7步：定义模型的配置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#transformerstokenizer">4.1.8. 第8步：在transformers中重新加载tokenizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#id6">4.1.9. 第9步：从头初始化模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#id8">4.1.10. 第10步：构建数据集</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#id9">4.1.11. 第11步：定义数据整合器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#id10">4.1.12. 第12步：初始化训练器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#id11">4.1.13. 第13步：预训练模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#id12">4.1.14. 第14步：将最终的模型（包括分词器和配置）保存到磁盘上</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#fillmaskpipeline">4.1.15. 第15步：使用<code class="docutils literal notranslate"><span class="pre">FillMaskPipeline</span></code>进行语言建模</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#id13">4.1.16. 后续步骤</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section.html#id14">4.1.17. 练习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#id2">4.1.1. 第1步：加载数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#hugging-face-transformers">4.1.2. 第2步：安装Hugging Face transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#tokenizer">4.1.3. 第3步：训练分词器（tokenizer）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#id3">4.1.4. 第4步：将分词器保存到磁盘</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#id4">4.1.5. 第5步：加载训练的分词器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#gpucuda">4.1.6. 第6步：检查资源：GPU和CUDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#id5">4.1.7. 第7步：定义模型的配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#transformerstokenizer">4.1.8. 第8步：在transformers中重新加载tokenizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#id6">4.1.9. 第9步：从头初始化模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#id8">4.1.10. 第10步：构建数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#id9">4.1.11. 第11步：定义数据整合器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#id10">4.1.12. 第12步：初始化训练器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#id11">4.1.13. 第13步：预训练模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#id12">4.1.14. 第14步：将最终的模型（包括分词器和配置）保存到磁盘上</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#fillmaskpipeline">4.1.15. 第15步：使用<code class="docutils literal notranslate"><span class="pre">FillMaskPipeline</span></code>进行语言建模</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_01_pretraining_from_scratch.html#id13">4.1.16. 后续步骤</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="section_02_exercise.html">4.2. 练习</a></li>
 </ul>
 </div>
 </div>
@@ -255,7 +273,7 @@ File）和词表文件（Vocabulary File），并在预训练过程中使用它�
             <div>3.3. 练习</div>
          </div>
      </a>
-     <a id="button-next" href="section.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="section_01_pretraining_from_scratch.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
          <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>

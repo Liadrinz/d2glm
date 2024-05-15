@@ -26,6 +26,7 @@
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5.3. 练习" href="section_03_exercise.html" />
     <link rel="prev" title="5.1. Transformer的性能 VS 人类基准" href="section_01_transformer_performances_versus_human_baselines.html" /> 
   </head>
 <body>
@@ -109,12 +110,21 @@ Show Source
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">5. 使用Transformer进行下游NLP任务</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -166,12 +176,21 @@ Show Source
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">5. 使用Transformer进行下游NLP任务</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
 </ul>
 </li>
 </ul>
@@ -185,8 +204,8 @@ Show Source
     <div class="document">
         <div class="page-content" role="main">
         
-  <div class="section" id="id1">
-<h1><span class="section-number">5.2. </span>运行下游任务<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="chapter-05-section-02">
+<span id="id1"></span><h1><span class="section-number">5.2. </span>运行下游任务<a class="headerlink" href="#chapter-05-section-02" title="Permalink to this heading">¶</a></h1>
 <p>下游任务是对预训练的Transformer模型进行微调，并继承其模型和参数的任务。</p>
 <p>因此，下游任务是站在预训练模型运行微调任务的角度来说的。这意味着，根据模型的不同，如果某个任务没有被用于完全预训练模型，那么它就是下游任务。在本节中，我们将把所有任务都视为下游任务，因为我们没有对它们进行预训练。</p>
 <p>模型会不断发展，数据库、基准方法、准确度评估方法和排行榜标准也会随之演变。但是，通过本章的下游任务所反映出的人类思维结构将保持不变。</p>
@@ -224,10 +243,10 @@ Pipeline模型运行从SST中提取的样本，以说明二元分类。</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">nlp</span><span class="p">(</span><span class="n">review2</span><span class="p">),</span> <span class="n">review2</span><span class="p">)</span>
 </pre></div>
 </div>
-<pre class="output literal-block">2024-05-14 11:40:46.540771: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable <cite>TF_ENABLE_ONEDNN_OPTS=0</cite>.
-2024-05-14 11:40:46.584716: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+<pre class="output literal-block">2024-05-15 10:11:03.140412: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable <cite>TF_ENABLE_ONEDNN_OPTS=0</cite>.
+2024-05-15 10:11:03.177974: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
 To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.</pre>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">14</span> <span class="mi">11</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mf">47.283454</span><span class="p">:</span> <span class="n">W</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">tf2tensorrt</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">py_utils</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">38</span><span class="p">]</span> <span class="n">TF</span><span class="o">-</span><span class="n">TRT</span> <span class="ne">Warning</span><span class="p">:</span> <span class="n">Could</span> <span class="ow">not</span> <span class="n">find</span> <span class="n">TensorRT</span>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">15</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">03.808763</span><span class="p">:</span> <span class="n">W</span> <span class="n">tensorflow</span><span class="o">/</span><span class="n">compiler</span><span class="o">/</span><span class="n">tf2tensorrt</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">py_utils</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">38</span><span class="p">]</span> <span class="n">TF</span><span class="o">-</span><span class="n">TRT</span> <span class="ne">Warning</span><span class="p">:</span> <span class="n">Could</span> <span class="ow">not</span> <span class="n">find</span> <span class="n">TensorRT</span>
 </pre></div>
 </div>
 <div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">No</span> <span class="n">model</span> <span class="n">was</span> <span class="n">supplied</span><span class="p">,</span> <span class="n">defaulted</span> <span class="n">to</span> <span class="n">distilbert</span><span class="o">/</span><span class="n">distilbert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span><span class="o">-</span><span class="n">finetuned</span><span class="o">-</span><span class="n">sst</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">english</span> <span class="ow">and</span> <span class="n">revision</span> <span class="n">af0f99b</span> <span class="p">(</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">huggingface</span><span class="o">.</span><span class="n">co</span><span class="o">/</span><span class="n">distilbert</span><span class="o">/</span><span class="n">distilbert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">uncased</span><span class="o">-</span><span class="n">finetuned</span><span class="o">-</span><span class="n">sst</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">english</span><span class="p">)</span><span class="o">.</span>
@@ -266,7 +285,7 @@ To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other ope
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">classes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">paraphrase_results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">14</span> <span class="mi">11</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mf">50.690510</span><span class="p">:</span> <span class="n">E</span> <span class="n">external</span><span class="o">/</span><span class="n">local_xla</span><span class="o">/</span><span class="n">xla</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_driver</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">282</span><span class="p">]</span> <span class="n">failed</span> <span class="n">call</span> <span class="n">to</span> <span class="n">cuInit</span><span class="p">:</span> <span class="n">CUDA_ERROR_NO_DEVICE</span><span class="p">:</span> <span class="n">no</span> <span class="n">CUDA</span><span class="o">-</span><span class="n">capable</span> <span class="n">device</span> <span class="ow">is</span> <span class="n">detected</span>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">15</span> <span class="mi">10</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mf">08.365345</span><span class="p">:</span> <span class="n">E</span> <span class="n">external</span><span class="o">/</span><span class="n">local_xla</span><span class="o">/</span><span class="n">xla</span><span class="o">/</span><span class="n">stream_executor</span><span class="o">/</span><span class="n">cuda</span><span class="o">/</span><span class="n">cuda_driver</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span><span class="mi">282</span><span class="p">]</span> <span class="n">failed</span> <span class="n">call</span> <span class="n">to</span> <span class="n">cuInit</span><span class="p">:</span> <span class="n">CUDA_ERROR_NO_DEVICE</span><span class="p">:</span> <span class="n">no</span> <span class="n">CUDA</span><span class="o">-</span><span class="n">capable</span> <span class="n">device</span> <span class="ow">is</span> <span class="n">detected</span>
 </pre></div>
 </div>
 <div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Some</span> <span class="n">layers</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">model</span> <span class="n">checkpoint</span> <span class="n">at</span> <span class="n">google</span><span class="o">-</span><span class="n">bert</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">cased</span><span class="o">-</span><span class="n">finetuned</span><span class="o">-</span><span class="n">mrpc</span> <span class="n">were</span> <span class="ow">not</span> <span class="n">used</span> <span class="n">when</span> <span class="n">initializing</span> <span class="n">TFBertForSequenceClassification</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;dropout_183&#39;</span><span class="p">]</span>
@@ -316,6 +335,13 @@ To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other ope
             <span class="pagenation-direction">Previous</span>
             <div>5.1. Transformer的性能 VS 人类基准</div>
          </div>
+     </a>
+     <a id="button-next" href="section_03_exercise.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>5.3. 练习</div>
+        </div>
      </a>
   </div>
         

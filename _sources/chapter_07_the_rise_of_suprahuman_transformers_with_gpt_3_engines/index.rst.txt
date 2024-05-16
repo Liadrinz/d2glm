@@ -55,8 +55,7 @@ API。你将理解4.0时代的AI专家在2020年代可以完成的令人振奋�
    section_01_suprahuman_nlp_with_gpt3-transformer-models
    section_02_the_architecture_of_openai_gpt_transformer_models
    section_03_generic_text_completion_with_gpt2
-   section_04_training_a_custom_gpt2_language_model
-   section_05_running_openai_gpt3_tasks
-   section_06_comparing_the_output_of_gpt2_and_gpt3
-   section_07_fine_tuning_gpt3
-   section_08_the_role_of_an_industry_40_ai_specialist
+   section_04_running_openai_gpt3_tasks
+   section_05_comparing_the_output_of_gpt2_and_gpt3
+   section_06_fine_tuning_gpt3
+   section_07_the_role_of_an_industry_40_ai_specialist

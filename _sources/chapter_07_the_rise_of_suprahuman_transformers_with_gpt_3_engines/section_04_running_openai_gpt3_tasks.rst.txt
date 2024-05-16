@@ -1,0 +1,500 @@
+
+运行GPT-3的任务
+===============
+
+在本节中，我们会以两种不同的方式来运行GPT-3任务：
+
+-  不使用代码，在线运行GPT-3任务
+-  使用代码运行GPT-3任务
+
+在线运行NLP任务
+---------------
+
+首先，让我们定义一组提示（prompt）和响应（response）的标准结构:
+
+-  ``N``\ = NLP任务的名称（输入）
+-  ``E``\ = 对GPT-3引擎的说明。E位于T之前（输入）
+-  ``T``\ = 我们希望GPT-3处理的文本或内容（输入）
+-  ``S``\ = 向GPT-3说明我们的期望。必要时添加在T之后（输入）
+-  ``R``\ = GPT-3的响应（输出）
+
+上述提示的结构只是一个指导性的框架。但GPT-3非常灵活，可能会有许多变化。实际应用中,我们可以根据具体需求灵活调整提示的结构和内容。
+
+下面我们为一些任务构建prompt.
+
+知识问答任务
+~~~~~~~~~~~~
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    N = ""
+    E = "Q: "
+    T = "Who was the president of the United States in 1965?"
+    S = "\nA:"
+    prompt = N + E + T + S
+    print(prompt)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Q: Who was the president of the United States in 1965?
+    A:
+
+
+这里\ ``E = "Q: "``\ 向GPT-3说明了接下来是一个问题，\ ``S = "\nA:"``\ 向GPT-3说明了我们期望它给出一个回答。
+
+另外，这里\ ``R``\ 就是GPt-3针对\ ``T``\ 所给出的回答。
+
+Movie to Emoji
+~~~~~~~~~~~~~~
+
+Movie to Emoji是一个使用emoji表情符号来表示电影名称的任务。
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    N = ""
+    E = "Back to Future: 👨👴🚗⌚\nBatman: 🤵🦇\n"
+    T = ""
+    S = "Transformers: "
+    prompt = N + E + T + S
+    print(prompt)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Back to Future: 👨👴🚗⌚
+    Batman: 🤵🦇
+    Transformers: 
+
+
+这里的\ ``E``\ 给了GPT-3两个示例（2-shot），\ ``S``\ 给出电影标题加冒号和空格，表示期望GPT-3能像示例中一样对新的电影标题生成emoji.
+
+这里GPT-3给出的\ ``R``\ 可以是\ ``🚗🤖``.
+
+给小学生解释问题
+~~~~~~~~~~~~~~~~
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    N = ""
+    E = "My second grader asked me what this passage means:\n\n"
+    T = """The initial conclusions can be divided into two categories: facts and
+    fiction. The facts are that OpenAI has one of the most powerful NLP services
+    in the world. The main facts are: OpenAI engines are powerful zero-shot that
+    require no hunting for all kinds of transformer models, no pre-training,
+    and no fine-tuning. The supercomputers used to train the models are unique.
+    If the prompt is well-designed, we obtain surprisingly accurate responses.
+    Implementing the NLP tasks in this section required a copy and paste action
+    that any software beginner can perform. Fiction begins with dystopian and
+    hype assertions AI will replace data scientists and AI specialists. Is that
+    true? Before answering that question, first ask yourself the following
+    questions about the example we just ran: How do we know the sentence was
+    incorrect in the first place? How do we know the answer is correct without
+    us humans reading and confirming this? How did the engine know it was a
+    grammar correction task? If the response is incorrect, how can we understand
+    what happened to help improve the prompt or revert to manual mode in a welldesigned human interface? The truth is that humans will need to intervene
+    to answers these questions manually, with rule-bases, quality control
+    automated pipelines, and many other tools. The facts are convincing. It is
+    true that running an NLP task requires little development. The fiction is
+    not convincing. Humans are still required. OpenAI engines are not there to
+    replace humans but to help them perform more high-level gratifying tasks.
+    You can now fly a jet without having to build it!\n\n"""
+    S = "\n\nI rephrase it for him, in plain language a second grader can understand: "
+    prompt = N + E + T + S
+    print(prompt)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    My second grader asked me what this passage means:
+    
+    The initial conclusions can be divided into two categories: facts and
+    fiction. The facts are that OpenAI has one of the most powerful NLP services
+    in the world. The main facts are: OpenAI engines are powerful zero-shot that
+    require no hunting for all kinds of transformer models, no pre-training,
+    and no fine-tuning. The supercomputers used to train the models are unique.
+    If the prompt is well-designed, we obtain surprisingly accurate responses.
+    Implementing the NLP tasks in this section required a copy and paste action
+    that any software beginner can perform. Fiction begins with dystopian and
+    hype assertions AI will replace data scientists and AI specialists. Is that
+    true? Before answering that question, first ask yourself the following
+    questions about the example we just ran: How do we know the sentence was
+    incorrect in the first place? How do we know the answer is correct without
+    us humans reading and confirming this? How did the engine know it was a
+    grammar correction task? If the response is incorrect, how can we understand
+    what happened to help improve the prompt or revert to manual mode in a welldesigned human interface? The truth is that humans will need to intervene
+    to answers these questions manually, with rule-bases, quality control
+    automated pipelines, and many other tools. The facts are convincing. It is
+    true that running an NLP task requires little development. The fiction is
+    not convincing. Humans are still required. OpenAI engines are not there to
+    replace humans but to help them perform more high-level gratifying tasks.
+    You can now fly a jet without having to build it!
+    
+    
+    
+    I rephrase it for him, in plain language a second grader can understand: 
+
+
+这里\ ``E``\ 告诉GPT-3，有一个二年级学生来询问文章的意思。\ ``T``\ 告诉GPT-3文章的正文。\ ``S``\ 的目的是期望GPT-3能在其后补全一段二年级学生可以听懂的文章释义。
+
+读者可以在OpenAI的官网或镜像网站尝试向GPT-3或其他模型发送以上prompt，看看GPT-3给出的回答怎么样。
+
+GPT-3引擎入门
+-------------
+
+OpenAI拥有世界上最强大的Transformer引擎之一。一个GPT-3模型可以执行数百种任务。GPT-3甚至可以做一些它没有被训练过的任务。
+
+这一部分介绍如何利用API来使用GPT-3引擎。
+
+第1步：安装
+~~~~~~~~~~~
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    !pip install openai
+    import openai
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Collecting openai
+      Downloading https://pypi.tuna.tsinghua.edu.cn/packages/16/35/10bb93c51c446370cf760ea0e722c78755bbe0572aeb4663bf8c19c9b082/openai-1.30.1-py3-none-any.whl (320 kB)
+    [?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.0/320.6 kB ? eta -:--:--
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ 317.4/320.6 kB 13.2 MB/s eta 0:00:01     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 320.6/320.6 kB 7.2 MB/s eta 0:00:00
+    [?25hRequirement already satisfied: anyio<5,>=3.5.0 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from openai) (4.3.0)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Collecting distro<2,>=1.7.0 (from openai)
+      Downloading https://pypi.tuna.tsinghua.edu.cn/packages/12/b3/231ffd4ab1fc9d679809f356cebee130ac7daa00d6d6f3206dd4fd137e9e/distro-1.9.0-py3-none-any.whl (20 kB)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Collecting httpx<1,>=0.23.0 (from openai)
+      Downloading https://pypi.tuna.tsinghua.edu.cn/packages/41/7b/ddacf6dcebb42466abd03f368782142baa82e08fc0c1f8eaa05b4bae87d5/httpx-0.27.0-py3-none-any.whl (75 kB)
+    [?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.0/75.6 kB ? eta -:--:--
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 75.6/75.6 kB 3.6 MB/s eta 0:00:00
+    [?25h
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Collecting pydantic<3,>=1.9.0 (from openai)
+      Downloading https://pypi.tuna.tsinghua.edu.cn/packages/ed/76/9a17032880ed27f2dbd490c77a3431cbc80f47ba81534131de3c2846e736/pydantic-2.7.1-py3-none-any.whl (409 kB)
+    [?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.0/409.3 kB ? eta -:--:--     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺ 399.4/409.3 kB 12.1 MB/s eta 0:00:01
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 409.3/409.3 kB 7.8 MB/s eta 0:00:00
+    [?25hRequirement already satisfied: sniffio in /root/miniconda3/envs/book/lib/python3.10/site-packages (from openai) (1.3.1)
+    Requirement already satisfied: tqdm>4 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from openai) (4.66.2)
+    Requirement already satisfied: typing-extensions<5,>=4.7 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from openai) (4.10.0)
+    Requirement already satisfied: idna>=2.8 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from anyio<5,>=3.5.0->openai) (2.10)
+    Requirement already satisfied: exceptiongroup>=1.0.2 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from anyio<5,>=3.5.0->openai) (1.2.0)
+    Requirement already satisfied: certifi in /root/miniconda3/envs/book/lib/python3.10/site-packages (from httpx<1,>=0.23.0->openai) (2024.2.2)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Collecting httpcore==1.* (from httpx<1,>=0.23.0->openai)
+      Downloading https://pypi.tuna.tsinghua.edu.cn/packages/78/d4/e5d7e4f2174f8a4d63c8897d79eb8fe2503f7ecc03282fee1fa2719c2704/httpcore-1.0.5-py3-none-any.whl (77 kB)
+    [?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.0/77.9 kB ? eta -:--:--
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 77.9/77.9 kB 3.3 MB/s eta 0:00:00
+    [?25hCollecting h11<0.15,>=0.13 (from httpcore==1.*->httpx<1,>=0.23.0->openai)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+      Downloading https://pypi.tuna.tsinghua.edu.cn/packages/95/04/ff642e65ad6b90db43e668d70ffb6736436c7ce41fcc549f4e9472234127/h11-0.14.0-py3-none-any.whl (58 kB)
+    [?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.0/58.3 kB ? eta -:--:--     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.3/58.3 kB 3.3 MB/s eta 0:00:00
+    [?25h
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Collecting annotated-types>=0.4.0 (from pydantic<3,>=1.9.0->openai)
+      Downloading https://pypi.tuna.tsinghua.edu.cn/packages/28/78/d31230046e58c207284c6b2c4e8d96e6d3cb4e52354721b944d3e1ee4aa5/annotated_types-0.6.0-py3-none-any.whl (12 kB)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Collecting pydantic-core==2.18.2 (from pydantic<3,>=1.9.0->openai)
+      Downloading https://pypi.tuna.tsinghua.edu.cn/packages/a6/a5/c351d83454267964d24b79e9116d716157071df4682f865d1274235a0cac/pydantic_core-2.18.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+    [?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.0/2.1 MB ? eta -:--:--
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+         ━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.4/2.1 MB 12.7 MB/s eta 0:00:01     ━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━ 0.8/2.1 MB 12.4 MB/s eta 0:00:01
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+         ━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━ 1.2/2.1 MB 12.0 MB/s eta 0:00:01
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━ 1.6/2.1 MB 12.1 MB/s eta 0:00:01     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ 2.0/2.1 MB 11.9 MB/s eta 0:00:01
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ 2.0/2.1 MB 11.9 MB/s eta 0:00:01     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 9.9 MB/s eta 0:00:00
+    [?25h
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Installing collected packages: pydantic-core, h11, distro, annotated-types, pydantic, httpcore, httpx, openai
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+      Attempting uninstall: h11
+        Found existing installation: h11 0.9.0
+        Uninstalling h11-0.9.0:
+          Successfully uninstalled h11-0.9.0
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+      Attempting uninstall: pydantic
+        Found existing installation: pydantic 1.8.2
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+        Uninstalling pydantic-1.8.2:
+          Successfully uninstalled pydantic-1.8.2
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+      Attempting uninstall: httpcore
+        Found existing installation: httpcore 0.9.1
+        Uninstalling httpcore-0.9.1:
+          Successfully uninstalled httpcore-0.9.1
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+      Attempting uninstall: httpx
+        Found existing installation: httpx 0.13.3
+        Uninstalling httpx-0.13.3:
+          Successfully uninstalled httpx-0.13.3
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+    googletrans 3.1.0a0 requires httpx==0.13.3, but you have httpx 0.27.0 which is incompatible.
+    spacy 3.3.3 requires pydantic!=1.8,!=1.8.1,<1.9.0,>=1.7.4, but you have pydantic 2.7.1 which is incompatible.
+    spacy 3.3.3 requires typing-extensions<4.6.0,>=3.7.4.1, but you have typing-extensions 4.10.0 which is incompatible.
+    thinc 8.0.17 requires pydantic!=1.8,!=1.8.1,<1.9.0,>=1.7.4, but you have pydantic 2.7.1 which is incompatible.
+    Successfully installed annotated-types-0.6.0 distro-1.9.0 h11-0.14.0 httpcore-1.0.5 httpx-0.27.0 openai-1.30.1 pydantic-2.7.1 pydantic-core-2.18.2
+    WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+    
+
+第2步：输入API key
+~~~~~~~~~~~~~~~~~~
+
+首先需要去OpenAI官网或代理机构（x宝，x夕夕）购买一个API
+key，然后通过代码配置api_key:
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+   openai.api_key = "[REPLACE THIS WITH YOUR API KEY]"
+
+第3步：运行NLP任务
+~~~~~~~~~~~~~~~~~~
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+   response = openai.Completion.create(
+       engine="davinci",
+       prompt="Original: She no went to the market.\nStandard American English:",
+       temperature=0,
+       max_tokens=60,
+       top_p=1.0,
+       frequency_penalty=0.0,
+       presence_penalty=0.0,
+       stop=["\n"]
+   )
+   print(response)
+
+上面代码中的prompt描述了一个任务：将“She no went to the
+market.”这个句子转换为标准英语。
+
+小结
+----
+
+可以看到，通过构建GPT-3可以理解的prompt，未经微调的GPT-3也可以很好地完成prompt中指定的任务。因此，开发者可以利用GPT-3的这一特性自行封装许多功能性的模块并用于具体的业务场景中。

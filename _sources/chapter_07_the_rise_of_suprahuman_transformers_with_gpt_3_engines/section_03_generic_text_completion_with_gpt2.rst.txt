@@ -7,7 +7,7 @@
 定义文本补全函数
 ----------------
 
-我们定义一个函数，指定模型、分词器以及提示词（prompt），输出补全在prompt之后的内容：
+我们定义一个函数，输入模型、分词器以及提示词（prompt），输出补全在prompt之后的内容：
 
 .. raw:: latex
 
@@ -41,10 +41,10 @@
 
 .. code:: python
 
-    from transformers import GPT2LMHeadModel, GPT2Tokenizer
+    from transformers import AutoTokenizer, GPT2LMHeadModel
     
     model = GPT2LMHeadModel.from_pretrained("gpt2")
-    tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+    tokenizer = AutoTokenizer.from_pretrained("gpt2")
 
 文本补全
 --------

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>7.4. 运行GPT-3的任务 &#8212; Transformer for NLP 0.0.1 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fontawesome/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/d2l.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/d2l.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7.5. 比较GPT-2与GPT-3的输出" href="section_05_comparing_the_output_of_gpt2_and_gpt3.html" />
+    <link rel="prev" title="7.3. 利用GPT-2进行通用的文本补全任务" href="section_03_generic_text_completion_with_gpt2.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">7. </span>GPT-3的崛起</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active"><span class="section-number">7.4. </span>运行GPT-3的任务</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="../search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="../_sources/chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_04_running_openai_gpt3_tasks.rst.txt" rel="nofollow">
+  <i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. GPT-3的崛起</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_suprahuman_nlp_with_gpt3-transformer-models.html">7.1. 利用GPT-3进行超人类NLP任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_the_architecture_of_openai_gpt_transformer_models.html">7.2. GPT模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_generic_text_completion_with_gpt2.html">7.3. 利用GPT-2进行通用的文本补全任务</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.4. 运行GPT-3的任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_05_comparing_the_output_of_gpt2_and_gpt3.html">7.5. 比较GPT-2与GPT-3的输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_06_fine_tuning_gpt3.html">7.6. 微调GPT-3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_07_the_role_of_an_industry_40_ai_specialist.html">7.7. 工业4.0下AI专家的角色</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+
+	<script type="text/javascript" src="../_static/sphinx_materialdesign_theme.js "></script>
+    <header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. GPT-3的崛起</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_suprahuman_nlp_with_gpt3-transformer-models.html">7.1. 利用GPT-3进行超人类NLP任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_the_architecture_of_openai_gpt_transformer_models.html">7.2. GPT模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_generic_text_completion_with_gpt2.html">7.3. 利用GPT-2进行通用的文本补全任务</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.4. 运行GPT-3的任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_05_comparing_the_output_of_gpt2_and_gpt3.html">7.5. 比较GPT-2与GPT-3的输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_06_fine_tuning_gpt3.html">7.6. 微调GPT-3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_07_the_role_of_an_industry_40_ai_specialist.html">7.7. 工业4.0下AI专家的角色</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+
+    <div class="document">
+        <div class="page-content" role="main">
+        
+  <div class="section" id="gpt-3">
+<h1><span class="section-number">7.4. </span>运行GPT-3的任务<a class="headerlink" href="#gpt-3" title="Permalink to this heading">¶</a></h1>
+<p>在本节中，我们会以两种不同的方式来运行GPT-3任务：</p>
+<ul class="simple">
+<li><p>不使用代码，在线运行GPT-3任务</p></li>
+<li><p>使用代码运行GPT-3任务</p></li>
+</ul>
+<div class="section" id="nlp">
+<h2><span class="section-number">7.4.1. </span>在线运行NLP任务<a class="headerlink" href="#nlp" title="Permalink to this heading">¶</a></h2>
+<p>首先，让我们定义一组提示（prompt）和响应（response）的标准结构:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code>= NLP任务的名称（输入）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">E</span></code>= 对GPT-3引擎的说明。E位于T之前（输入）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span></code>= 我们希望GPT-3处理的文本或内容（输入）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">S</span></code>= 向GPT-3说明我们的期望。必要时添加在T之后（输入）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R</span></code>= GPT-3的响应（输出）</p></li>
+</ul>
+<p>上述提示的结构只是一个指导性的框架。但GPT-3非常灵活，可能会有许多变化。实际应用中,我们可以根据具体需求灵活调整提示的结构和内容。</p>
+<p>下面我们为一些任务构建prompt.</p>
+<div class="section" id="id1">
+<h3><span class="section-number">7.4.1.1. </span>知识问答任务<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">E</span> <span class="o">=</span> <span class="s2">&quot;Q: &quot;</span>
+<span class="n">T</span> <span class="o">=</span> <span class="s2">&quot;Who was the president of the United States in 1965?&quot;</span>
+<span class="n">S</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">A:&quot;</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">N</span> <span class="o">+</span> <span class="n">E</span> <span class="o">+</span> <span class="n">T</span> <span class="o">+</span> <span class="n">S</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>Q: Who was the president of the United States in 1965?
+A:
+</pre></div>
+</div>
+<p>这里<code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">=</span> <span class="pre">&quot;Q:</span> <span class="pre">&quot;</span></code>向GPT-3说明了接下来是一个问题，<code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">&quot;\nA:&quot;</span></code>向GPT-3说明了我们期望它给出一个回答。</p>
+<p>另外，这里<code class="docutils literal notranslate"><span class="pre">R</span></code>就是GPt-3针对<code class="docutils literal notranslate"><span class="pre">T</span></code>所给出的回答。</p>
+</div>
+<div class="section" id="movie-to-emoji">
+<h3><span class="section-number">7.4.1.2. </span>Movie to Emoji<a class="headerlink" href="#movie-to-emoji" title="Permalink to this heading">¶</a></h3>
+<p>Movie to Emoji是一个使用emoji表情符号来表示电影名称的任务。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">E</span> <span class="o">=</span> <span class="s2">&quot;Back to Future: 👨👴🚗⌚</span><span class="se">\n</span><span class="s2">Batman: 🤵🦇</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="n">T</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">S</span> <span class="o">=</span> <span class="s2">&quot;Transformers: &quot;</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">N</span> <span class="o">+</span> <span class="n">E</span> <span class="o">+</span> <span class="n">T</span> <span class="o">+</span> <span class="n">S</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>Back to Future: 👨👴🚗⌚
+Batman: 🤵🦇
+Transformers:
+</pre></div>
+</div>
+<p>这里的<code class="docutils literal notranslate"><span class="pre">E</span></code>给了GPT-3两个示例（2-shot），<code class="docutils literal notranslate"><span class="pre">S</span></code>给出电影标题加冒号和空格，表示期望GPT-3能像示例中一样对新的电影标题生成emoji.</p>
+<p>这里GPT-3给出的<code class="docutils literal notranslate"><span class="pre">R</span></code>可以是<code class="docutils literal notranslate"><span class="pre">🚗🤖</span></code>.</p>
+</div>
+<div class="section" id="id2">
+<h3><span class="section-number">7.4.1.3. </span>给小学生解释问题<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">E</span> <span class="o">=</span> <span class="s2">&quot;My second grader asked me what this passage means:</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+<span class="n">T</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;The initial conclusions can be divided into two categories: facts and</span>
+<span class="s2">fiction. The facts are that OpenAI has one of the most powerful NLP services</span>
+<span class="s2">in the world. The main facts are: OpenAI engines are powerful zero-shot that</span>
+<span class="s2">require no hunting for all kinds of transformer models, no pre-training,</span>
+<span class="s2">and no fine-tuning. The supercomputers used to train the models are unique.</span>
+<span class="s2">If the prompt is well-designed, we obtain surprisingly accurate responses.</span>
+<span class="s2">Implementing the NLP tasks in this section required a copy and paste action</span>
+<span class="s2">that any software beginner can perform. Fiction begins with dystopian and</span>
+<span class="s2">hype assertions AI will replace data scientists and AI specialists. Is that</span>
+<span class="s2">true? Before answering that question, first ask yourself the following</span>
+<span class="s2">questions about the example we just ran: How do we know the sentence was</span>
+<span class="s2">incorrect in the first place? How do we know the answer is correct without</span>
+<span class="s2">us humans reading and confirming this? How did the engine know it was a</span>
+<span class="s2">grammar correction task? If the response is incorrect, how can we understand</span>
+<span class="s2">what happened to help improve the prompt or revert to manual mode in a welldesigned human interface? The truth is that humans will need to intervene</span>
+<span class="s2">to answers these questions manually, with rule-bases, quality control</span>
+<span class="s2">automated pipelines, and many other tools. The facts are convincing. It is</span>
+<span class="s2">true that running an NLP task requires little development. The fiction is</span>
+<span class="s2">not convincing. Humans are still required. OpenAI engines are not there to</span>
+<span class="s2">replace humans but to help them perform more high-level gratifying tasks.</span>
+<span class="s2">You can now fly a jet without having to build it!</span><span class="se">\n\n</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">S</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">I rephrase it for him, in plain language a second grader can understand: &quot;</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">N</span> <span class="o">+</span> <span class="n">E</span> <span class="o">+</span> <span class="n">T</span> <span class="o">+</span> <span class="n">S</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>My second grader asked me what this passage means:
+
+The initial conclusions can be divided into two categories: facts and
+fiction. The facts are that OpenAI has one of the most powerful NLP services
+in the world. The main facts are: OpenAI engines are powerful zero-shot that
+require no hunting for all kinds of transformer models, no pre-training,
+and no fine-tuning. The supercomputers used to train the models are unique.
+If the prompt is well-designed, we obtain surprisingly accurate responses.
+Implementing the NLP tasks in this section required a copy and paste action
+that any software beginner can perform. Fiction begins with dystopian and
+hype assertions AI will replace data scientists and AI specialists. Is that
+true? Before answering that question, first ask yourself the following
+questions about the example we just ran: How do we know the sentence was
+incorrect in the first place? How do we know the answer is correct without
+us humans reading and confirming this? How did the engine know it was a
+grammar correction task? If the response is incorrect, how can we understand
+what happened to help improve the prompt or revert to manual mode in a welldesigned human interface? The truth is that humans will need to intervene
+to answers these questions manually, with rule-bases, quality control
+automated pipelines, and many other tools. The facts are convincing. It is
+true that running an NLP task requires little development. The fiction is
+not convincing. Humans are still required. OpenAI engines are not there to
+replace humans but to help them perform more high-level gratifying tasks.
+You can now fly a jet without having to build it!
+
+
+
+I rephrase it for him, in plain language a second grader can understand:
+</pre></div>
+</div>
+<p>这里<code class="docutils literal notranslate"><span class="pre">E</span></code>告诉GPT-3，有一个二年级学生来询问文章的意思。<code class="docutils literal notranslate"><span class="pre">T</span></code>告诉GPT-3文章的正文。<code class="docutils literal notranslate"><span class="pre">S</span></code>的目的是期望GPT-3能在其后补全一段二年级学生可以听懂的文章释义。</p>
+<p>读者可以在OpenAI的官网或镜像网站尝试向GPT-3或其他模型发送以上prompt，看看GPT-3给出的回答怎么样。</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">7.4.2. </span>GPT-3引擎入门<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
+<p>OpenAI拥有世界上最强大的Transformer引擎之一。一个GPT-3模型可以执行数百种任务。GPT-3甚至可以做一些它没有被训练过的任务。</p>
+<p>这一部分介绍如何利用API来使用GPT-3引擎。</p>
+<div class="section" id="id4">
+<h3><span class="section-number">7.4.2.1. </span>第1步：安装<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install openai
+import openai
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Looking</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">simple</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>Collecting openai
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/16/35/10bb93c51c446370cf760ea0e722c78755bbe0572aeb4663bf8c19c9b082/openai-1.30.1-py3-none-any.whl (320 kB)
+[?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.0/320.6 kB ? eta -:--:--
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span> ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ 317.4/320.6 kB 13.2 MB/s eta 0:00:01
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 320.6/320.6 kB 7.2 MB/s eta 0:00:00
+[?25hRequirement already satisfied: anyio&lt;5,&gt;=3.5.0 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from openai) (4.3.0)
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Collecting</span> <span class="n">distro</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">1.7.0</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">openai</span><span class="p">)</span>
+  <span class="n">Downloading</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="mi">12</span><span class="o">/</span><span class="n">b3</span><span class="o">/</span><span class="mi">231</span><span class="n">ffd4ab1fc9d679809f356cebee130ac7daa00d6d6f3206dd4fd137e9e</span><span class="o">/</span><span class="n">distro</span><span class="o">-</span><span class="mf">1.9.0</span><span class="o">-</span><span class="n">py3</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="nb">any</span><span class="o">.</span><span class="n">whl</span> <span class="p">(</span><span class="mi">20</span> <span class="n">kB</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>Collecting httpx&lt;1,&gt;=0.23.0 (from openai)
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/41/7b/ddacf6dcebb42466abd03f368782142baa82e08fc0c1f8eaa05b4bae87d5/httpx-0.27.0-py3-none-any.whl (75 kB)
+[?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.0/75.6 kB ? eta -:--:--
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span> ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 75.6/75.6 kB 3.6 MB/s eta 0:00:00
+[?25h
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>Collecting pydantic&lt;3,&gt;=1.9.0 (from openai)
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/ed/76/9a17032880ed27f2dbd490c77a3431cbc80f47ba81534131de3c2846e736/pydantic-2.7.1-py3-none-any.whl (409 kB)
+[?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.0/409.3 kB ? eta -:--:--
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺ 399.4/409.3 kB 12.1 MB/s eta 0:00:01
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span> ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 409.3/409.3 kB 7.8 MB/s eta 0:00:00
+[?25hRequirement already satisfied: sniffio in /root/miniconda3/envs/book/lib/python3.10/site-packages (from openai) (1.3.1)
+Requirement already satisfied: tqdm&gt;4 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from openai) (4.66.2)
+Requirement already satisfied: typing-extensions&lt;5,&gt;=4.7 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from openai) (4.10.0)
+Requirement already satisfied: idna&gt;=2.8 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from anyio&lt;5,&gt;=3.5.0-&gt;openai) (2.10)
+Requirement already satisfied: exceptiongroup&gt;=1.0.2 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from anyio&lt;5,&gt;=3.5.0-&gt;openai) (1.2.0)
+Requirement already satisfied: certifi in /root/miniconda3/envs/book/lib/python3.10/site-packages (from httpx&lt;1,&gt;=0.23.0-&gt;openai) (2024.2.2)
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>Collecting httpcore==1.* (from httpx&lt;1,&gt;=0.23.0-&gt;openai)
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/78/d4/e5d7e4f2174f8a4d63c8897d79eb8fe2503f7ecc03282fee1fa2719c2704/httpcore-1.0.5-py3-none-any.whl (77 kB)
+[?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.0/77.9 kB ? eta -:--:--
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span> ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 77.9/77.9 kB 3.3 MB/s eta 0:00:00
+[?25hCollecting h11&lt;0.15,&gt;=0.13 (from httpcore==1.*-&gt;httpx&lt;1,&gt;=0.23.0-&gt;openai)
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/95/04/ff642e65ad6b90db43e668d70ffb6736436c7ce41fcc549f4e9472234127/h11-0.14.0-py3-none-any.whl (58 kB)
+[?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.0/58.3 kB ? eta -:--:--
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.3/58.3 kB 3.3 MB/s eta 0:00:00
+[?25h
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Collecting</span> <span class="n">annotated</span><span class="o">-</span><span class="n">types</span><span class="o">&gt;=</span><span class="mf">0.4.0</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">pydantic</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">1.9.0</span><span class="o">-&gt;</span><span class="n">openai</span><span class="p">)</span>
+  <span class="n">Downloading</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="mi">28</span><span class="o">/</span><span class="mi">78</span><span class="o">/</span><span class="n">d31230046e58c207284c6b2c4e8d96e6d3cb4e52354721b944d3e1ee4aa5</span><span class="o">/</span><span class="n">annotated_types</span><span class="o">-</span><span class="mf">0.6.0</span><span class="o">-</span><span class="n">py3</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="nb">any</span><span class="o">.</span><span class="n">whl</span> <span class="p">(</span><span class="mi">12</span> <span class="n">kB</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>Collecting pydantic-core==2.18.2 (from pydantic&lt;3,&gt;=1.9.0-&gt;openai)
+  Downloading https://pypi.tuna.tsinghua.edu.cn/packages/a6/a5/c351d83454267964d24b79e9116d716157071df4682f865d1274235a0cac/pydantic_core-2.18.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+[?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.0/2.1 MB ? eta -:--:--
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span> ━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0.4/2.1 MB 12.7 MB/s eta 0:00:01
+ ━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━ 0.8/2.1 MB 12.4 MB/s eta 0:00:01
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span> ━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━ 1.2/2.1 MB 12.0 MB/s eta 0:00:01
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span> ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━ 1.6/2.1 MB 12.1 MB/s eta 0:00:01
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ 2.0/2.1 MB 11.9 MB/s eta 0:00:01
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span> ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ 2.0/2.1 MB 11.9 MB/s eta 0:00:01
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 9.9 MB/s eta 0:00:00
+[?25h
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Installing</span> <span class="n">collected</span> <span class="n">packages</span><span class="p">:</span> <span class="n">pydantic</span><span class="o">-</span><span class="n">core</span><span class="p">,</span> <span class="n">h11</span><span class="p">,</span> <span class="n">distro</span><span class="p">,</span> <span class="n">annotated</span><span class="o">-</span><span class="n">types</span><span class="p">,</span> <span class="n">pydantic</span><span class="p">,</span> <span class="n">httpcore</span><span class="p">,</span> <span class="n">httpx</span><span class="p">,</span> <span class="n">openai</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">Attempting</span> <span class="n">uninstall</span><span class="p">:</span> <span class="n">h11</span>
+    <span class="n">Found</span> <span class="n">existing</span> <span class="n">installation</span><span class="p">:</span> <span class="n">h11</span> <span class="mf">0.9.0</span>
+    <span class="n">Uninstalling</span> <span class="n">h11</span><span class="o">-</span><span class="mf">0.9.0</span><span class="p">:</span>
+      <span class="n">Successfully</span> <span class="n">uninstalled</span> <span class="n">h11</span><span class="o">-</span><span class="mf">0.9.0</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">Attempting</span> <span class="n">uninstall</span><span class="p">:</span> <span class="n">pydantic</span>
+    <span class="n">Found</span> <span class="n">existing</span> <span class="n">installation</span><span class="p">:</span> <span class="n">pydantic</span> <span class="mf">1.8.2</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">Uninstalling</span> <span class="n">pydantic</span><span class="o">-</span><span class="mf">1.8.2</span><span class="p">:</span>
+      <span class="n">Successfully</span> <span class="n">uninstalled</span> <span class="n">pydantic</span><span class="o">-</span><span class="mf">1.8.2</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">Attempting</span> <span class="n">uninstall</span><span class="p">:</span> <span class="n">httpcore</span>
+    <span class="n">Found</span> <span class="n">existing</span> <span class="n">installation</span><span class="p">:</span> <span class="n">httpcore</span> <span class="mf">0.9.1</span>
+    <span class="n">Uninstalling</span> <span class="n">httpcore</span><span class="o">-</span><span class="mf">0.9.1</span><span class="p">:</span>
+      <span class="n">Successfully</span> <span class="n">uninstalled</span> <span class="n">httpcore</span><span class="o">-</span><span class="mf">0.9.1</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">Attempting</span> <span class="n">uninstall</span><span class="p">:</span> <span class="n">httpx</span>
+    <span class="n">Found</span> <span class="n">existing</span> <span class="n">installation</span><span class="p">:</span> <span class="n">httpx</span> <span class="mf">0.13.3</span>
+    <span class="n">Uninstalling</span> <span class="n">httpx</span><span class="o">-</span><span class="mf">0.13.3</span><span class="p">:</span>
+      <span class="n">Successfully</span> <span class="n">uninstalled</span> <span class="n">httpx</span><span class="o">-</span><span class="mf">0.13.3</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ERROR</span><span class="p">:</span> <span class="n">pip</span><span class="s1">&#39;s dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.</span>
+<span class="n">googletrans</span> <span class="mf">3.1.0</span><span class="n">a0</span> <span class="n">requires</span> <span class="n">httpx</span><span class="o">==</span><span class="mf">0.13.3</span><span class="p">,</span> <span class="n">but</span> <span class="n">you</span> <span class="n">have</span> <span class="n">httpx</span> <span class="mf">0.27.0</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">incompatible</span><span class="o">.</span>
+<span class="n">spacy</span> <span class="mf">3.3.3</span> <span class="n">requires</span> <span class="n">pydantic</span><span class="o">!=</span><span class="mf">1.8</span><span class="p">,</span><span class="o">!=</span><span class="mf">1.8.1</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">1.9.0</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">1.7.4</span><span class="p">,</span> <span class="n">but</span> <span class="n">you</span> <span class="n">have</span> <span class="n">pydantic</span> <span class="mf">2.7.1</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">incompatible</span><span class="o">.</span>
+<span class="n">spacy</span> <span class="mf">3.3.3</span> <span class="n">requires</span> <span class="n">typing</span><span class="o">-</span><span class="n">extensions</span><span class="o">&lt;</span><span class="mf">4.6.0</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">3.7.4.1</span><span class="p">,</span> <span class="n">but</span> <span class="n">you</span> <span class="n">have</span> <span class="n">typing</span><span class="o">-</span><span class="n">extensions</span> <span class="mf">4.10.0</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">incompatible</span><span class="o">.</span>
+<span class="n">thinc</span> <span class="mf">8.0.17</span> <span class="n">requires</span> <span class="n">pydantic</span><span class="o">!=</span><span class="mf">1.8</span><span class="p">,</span><span class="o">!=</span><span class="mf">1.8.1</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">1.9.0</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">1.7.4</span><span class="p">,</span> <span class="n">but</span> <span class="n">you</span> <span class="n">have</span> <span class="n">pydantic</span> <span class="mf">2.7.1</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">incompatible</span><span class="o">.</span>
+<span class="n">Successfully</span> <span class="n">installed</span> <span class="n">annotated</span><span class="o">-</span><span class="n">types</span><span class="o">-</span><span class="mf">0.6.0</span> <span class="n">distro</span><span class="o">-</span><span class="mf">1.9.0</span> <span class="n">h11</span><span class="o">-</span><span class="mf">0.14.0</span> <span class="n">httpcore</span><span class="o">-</span><span class="mf">1.0.5</span> <span class="n">httpx</span><span class="o">-</span><span class="mf">0.27.0</span> <span class="n">openai</span><span class="o">-</span><span class="mf">1.30.1</span> <span class="n">pydantic</span><span class="o">-</span><span class="mf">2.7.1</span> <span class="n">pydantic</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="mf">2.18.2</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">Running</span> <span class="n">pip</span> <span class="k">as</span> <span class="n">the</span> <span class="s1">&#39;root&#39;</span> <span class="n">user</span> <span class="n">can</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">broken</span> <span class="n">permissions</span> <span class="ow">and</span> <span class="n">conflicting</span> <span class="n">behaviour</span> <span class="k">with</span> <span class="n">the</span> <span class="n">system</span> <span class="n">package</span> <span class="n">manager</span><span class="o">.</span> <span class="n">It</span> <span class="ow">is</span> <span class="n">recommended</span> <span class="n">to</span> <span class="n">use</span> <span class="n">a</span> <span class="n">virtual</span> <span class="n">environment</span> <span class="n">instead</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pip</span><span class="o">.</span><span class="n">pypa</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">warnings</span><span class="o">/</span><span class="n">venv</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="api-key">
+<h3><span class="section-number">7.4.2.2. </span>第2步：输入API key<a class="headerlink" href="#api-key" title="Permalink to this heading">¶</a></h3>
+<p>首先需要去OpenAI官网或代理机构（x宝，x夕夕）购买一个API
+key，然后通过代码配置api_key:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">openai</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;[REPLACE THIS WITH YOUR API KEY]&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3><span class="section-number">7.4.2.3. </span>第3步：运行NLP任务<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Completion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;davinci&quot;</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="s2">&quot;Original: She no went to the market.</span><span class="se">\n</span><span class="s2">Standard American English:&quot;</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+    <span class="n">top_p</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">frequency_penalty</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">presence_penalty</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">stop</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>上面代码中的prompt描述了一个任务：将“She no went to the
+market.”这个句子转换为标准英语。</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h2><span class="section-number">7.4.3. </span>小结<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
+<p>可以看到，通过构建GPT-3可以理解的prompt，未经微调的GPT-3也可以很好地完成prompt中指定的任务。因此，开发者可以利用GPT-3的这一特性自行封装许多功能性的模块并用于具体的业务场景中。</p>
+</div>
+</div>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">7.4. 运行GPT-3的任务</a><ul>
+<li><a class="reference internal" href="#nlp">7.4.1. 在线运行NLP任务</a><ul>
+<li><a class="reference internal" href="#id1">7.4.1.1. 知识问答任务</a></li>
+<li><a class="reference internal" href="#movie-to-emoji">7.4.1.2. Movie to Emoji</a></li>
+<li><a class="reference internal" href="#id2">7.4.1.3. 给小学生解释问题</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3">7.4.2. GPT-3引擎入门</a><ul>
+<li><a class="reference internal" href="#id4">7.4.2.1. 第1步：安装</a></li>
+<li><a class="reference internal" href="#api-key">7.4.2.2. 第2步：输入API key</a></li>
+<li><a class="reference internal" href="#id5">7.4.2.3. 第3步：运行NLP任务</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">7.4.3. 小结</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="section_03_generic_text_completion_with_gpt2.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>7.3. 利用GPT-2进行通用的文本补全任务</div>
+         </div>
+     </a>
+     <a id="button-next" href="section_05_comparing_the_output_of_gpt2_and_gpt3.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>7.5. 比较GPT-2与GPT-3的输出</div>
+        </div>
+     </a>
+  </div>
+        
+        </main>
+    </div>
+  </body>
+</html>

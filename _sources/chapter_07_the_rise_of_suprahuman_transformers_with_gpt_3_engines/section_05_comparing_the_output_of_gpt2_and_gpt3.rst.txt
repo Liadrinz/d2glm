@@ -12,14 +12,14 @@ nature, but which it cannot answer, as they transcend every faculty of
 the mind.
 译：人类理性在认知的某个领域被要求考虑一些问题,这些问题是它自身的性质提出的,但它却无法回答,因为这些问题超越了心智的一切能力。
 
-**GPT-2给出的回答是：**
+**GPT-2给出的一个回答是：**
 
 The question of the nature of the mind is not, as it were, a question of
 the nature of the body, but of the nature of the mind. It is, therefore,
 a question of the nature of the mind, and of the nature of the body.
 译：关于心智本质的问题,并不像是关于身体本质的问题,而是关于心智本身的本质。因此,这是一个关于心智本质和身体本质的问题。
 
-**GPT-3给出的回答是：**
+**GPT-3给出的一个回答是：**
 
 What is meant by this is that there are some things in our experience
 that are beyond reason. It is not that reason is a bad guide or is

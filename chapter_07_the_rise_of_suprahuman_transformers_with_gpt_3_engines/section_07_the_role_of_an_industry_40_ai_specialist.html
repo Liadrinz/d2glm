@@ -26,6 +26,7 @@
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8. 分词器和数据集的匹配" href="../chapter_09_matching_tokenizers_and_datasets/index.html" />
     <link rel="prev" title="7.6. 微调GPT-3" href="section_06_fine_tuning_gpt3.html" /> 
   </head>
 <body>
@@ -136,6 +137,9 @@ Show Source
 <li class="toctree-l2 current"><a class="current reference internal" href="#">7.7. 工业4.0下AI专家的角色</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/index.html">8. 分词器和数据集的匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">9. 解释黑盒Transformer模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_16_the_emergence_of_transformer_driven_copilots/index.html">10. Transformer驱动的Copilot</a></li>
 </ul>
 
             </nav>
@@ -212,6 +216,9 @@ Show Source
 <li class="toctree-l2 current"><a class="current reference internal" href="#">7.7. 工业4.0下AI专家的角色</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/index.html">8. 分词器和数据集的匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">9. 解释黑盒Transformer模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_16_the_emergence_of_transformer_driven_copilots/index.html">10. Transformer驱动的Copilot</a></li>
 </ul>
 
             </nav>
@@ -225,12 +232,62 @@ Show Source
         
   <div class="section" id="ai">
 <h1><span class="section-number">7.7. </span>工业4.0下AI专家的角色<a class="headerlink" href="#ai" title="Permalink to this heading">¶</a></h1>
+<p>总之,工业4.0开发人员的角色是成为一名跨学科的AI专家。开发人员、数据科学家和AI专家将逐步学习更多关于语言学、业务目标、专业知识等方面的知识。工业4.0
+AI专家将以实践中的跨学科知识和经验来指导团队。</p>
+<p>他们需要掌握广泛的技能和知识,不仅仅是纯粹的技术领域,还包括对行业背景、业务需求、用户需求等有深入的了解。这种全面的视角和知识结构,才能真正发挥AI技术在工业4.0中的价值和潜力。</p>
+<p>在实施Transformer模型时,以下三个领域需要人类专家参与:</p>
+<ul>
+<li><p>道德与伦理</p>
+<p>在实施类人Transformer模型时,产业4.0
+AI专家需要确保执行道德和伦理的做法。例如,欧洲法规对此有严格要求,需要在必要时向用户解释自动决策过程。美国也有反歧视法律来保护公民免受自动化偏见的影响。</p>
+</li>
+<li><p>提示（Prompts）和响应（Responses）</p>
+<p>用户和UI开发人员需要借助产业4.0
+AI专家来解释如何为自然语言处理任务创建适当的提示,向Transformer模型展示如何执行任务,并验证其响应。</p>
+</li>
+<li><p>理解模型并对模型进行质量控制</p></li>
+</ul>
+<p>即使在调整了模型的超参数之后,模型仍然无法按预期运行会出现什么情况?我们将在:ref:<cite>chapter-14</cite>介绍这一情况。</p>
+<div class="section" id="id1">
+<h2><span class="section-number">7.7.1. </span>初步结论<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<p>初步结论可以分为两类:事实和虚构。</p>
+<p>一个事实是,OpenAI拥有世界上最强大的自然语言处理服务之一。其他事实包括:</p>
+<ul class="simple">
+<li><p>OpenAI引擎是强大的零样本引擎,不需要搜索各种变压器模型,不需要预训练,也不需要微调</p></li>
+<li><p>用于训练模型的超级计算机是独特的</p></li>
+<li><p>如果提示设计得当,我们可以获得惊人准确的响应</p></li>
+<li><p>在本章中实现自然语言处理任务只需要复制粘贴,任何软件初学者都可以完成</p></li>
+</ul>
+<p>很多人认为人工智能将取代数据科学家和人工智能专家。这是真的吗?在回答这个问题之前,先问自己以下问题:</p>
+<ul class="simple">
+<li><p>我们如何知道一个句子是否不正确? •</p></li>
+</ul>
+<p>我们如何在不阅读和确认的情况下知道答案是否正确? •
+引擎是如何知道这是一个语法纠正任务的? •
+如果响应不正确,我们如何理解发生了什么,以帮助改进提示或恢复到良好设计的人机界面中的手动模式?</p>
+<p>事实是,人类需要手动介入来回答这些问题,需要使用规则库、经过质量控制的自动化管道以及许多其他工具。</p>
+<p>这些事实是有说服力的。在许多情况下,运行一个自然语言处理任务只需要很少的开发工作。</p>
+<p>人类仍然是必需的。OpenAI引擎并不是为了取代人类,而是为了帮助人类执行更高级的有意义的任务。现在你可以驾驶喷气式飞机,而不必自己制造它!</p>
+<p>我们需要回答本节中提出的令人兴奋的问题。那么,让我们继续探索您在这条通往人工智能未来的精彩道路上的全新迷人的工业4.0角色吧!</p>
+</div>
 </div>
 
 
         </div>
         <div class="side-doc-outline">
             <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">7.7. 工业4.0下AI专家的角色</a><ul>
+<li><a class="reference internal" href="#id1">7.7.1. 初步结论</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
             </div>
         </div>
 
@@ -242,6 +299,13 @@ Show Source
             <span class="pagenation-direction">Previous</span>
             <div>7.6. 微调GPT-3</div>
          </div>
+     </a>
+     <a id="button-next" href="../chapter_09_matching_tokenizers_and_datasets/index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>8. 分词器和数据集的匹配</div>
+        </div>
      </a>
   </div>
         

@@ -137,6 +137,9 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="section_07_the_role_of_an_industry_40_ai_specialist.html">7.7. 工业4.0下AI专家的角色</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/index.html">8. 分词器和数据集的匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">9. 解释黑盒Transformer模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_16_the_emergence_of_transformer_driven_copilots/index.html">10. Transformer驱动的Copilot</a></li>
 </ul>
 
             </nav>
@@ -213,6 +216,9 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="section_07_the_role_of_an_industry_40_ai_specialist.html">7.7. 工业4.0下AI专家的角色</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/index.html">8. 分词器和数据集的匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">9. 解释黑盒Transformer模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_16_the_emergence_of_transformer_driven_copilots/index.html">10. Transformer驱动的Copilot</a></li>
 </ul>
 
             </nav>
@@ -226,12 +232,45 @@ Show Source
         
   <div class="section" id="gpt-3">
 <h1><span class="section-number">7.6. </span>微调GPT-3<a class="headerlink" href="#gpt-3" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="openaiada">
+<h2><span class="section-number">7.6.1. </span>微调OpenAI的Ada引擎<a class="headerlink" href="#openaiada" title="Permalink to this heading">¶</a></h2>
+<p>OpenAI提供了对GPT-3进行微调的API，只需要设置API
+key，准备数据，指定模型，即可在云端进行微调。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!export OPENAI_API_KEY=&quot;[REPLACE THIS WITH YOUR KEY]&quot;
+!openai api fine_tunes.create -t &quot;kantgpt_prepared.jsonl&quot; -m &quot;ada&quot;
+</pre></div>
+</div>
+<p>上述命令表示使用<code class="docutils literal notranslate"><span class="pre">&quot;kantgpt_prepared.jsonl&quot;</span></code>数据对<code class="docutils literal notranslate"><span class="pre">&quot;ada&quot;</span></code>模型进行微调。</p>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">7.6.2. </span>使用微调后模型进行文本补全<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!openai api completions.create -m ada:[YOUR_MODEL_INFO] &quot;Several concepts are a priori such as&quot;
+</pre></div>
+</div>
+<p>其中<code class="docutils literal notranslate"><span class="pre">[YOUR_MODEL_INFO]</span></code>会在完成微调之后显示。</p>
+<p>补全结果如下：</p>
+<p>Several concepts are a priori such as the term freedom and the concept
+of free will.</p>
+</div>
 </div>
 
 
         </div>
         <div class="side-doc-outline">
             <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">7.6. 微调GPT-3</a><ul>
+<li><a class="reference internal" href="#openaiada">7.6.1. 微调OpenAI的Ada引擎</a></li>
+<li><a class="reference internal" href="#id1">7.6.2. 使用微调后模型进行文本补全</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
             </div>
         </div>
 

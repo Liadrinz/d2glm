@@ -13,8 +13,6 @@ Text-to-text模型的崛起
 
 T5模型可以总结为文本到文本迁移的Transformer。因此,每个自然语言处理任务都被表述为一个文本到文本的问题来解决。
 
-.. _ch8-sec1-fig-1:
-
 为特定任务使用前缀而非指定输入输出格式
 --------------------------------------
 
@@ -36,14 +34,16 @@ Prefix + Sequence A -> Sequence B
 :numref:`ch8-sec1-fig-1`
 所示,许多自然语言处理任务的输入和输出已经被统一了。
 
+.. _ch8-sec1-fig-1:
+
 .. figure:: screenshots/2024-05-19-16-00-44.png
+
+   T5根据前缀处理多种任务
 
 
 统一化过程使得我们能够对广泛的NLP任务使用相同的模型、超参数和优化器。
 
 我们已经了解了标准的文本到文本输入输出格式。现在让我们来看看T5模型的架构。
-
-.. _ch8-sec-1-fig-2:
 
 T5模型架构
 ----------
@@ -53,7 +53,11 @@ T5模型架构
 因此他们选用了原始transformer模型的架构，如 :numref:`ch8-sec-1-fig-2`
 所示：
 
+.. _ch8-sec-1-fig-2:
+
 .. figure:: screenshots/transformers.svg
+
+   T5模型架构保留了原始Transformer架构
 
 
 谷歌T5团队保留了大部分原始Transformer的架构和术语，但也做了一些轻微的词汇和功能变更:

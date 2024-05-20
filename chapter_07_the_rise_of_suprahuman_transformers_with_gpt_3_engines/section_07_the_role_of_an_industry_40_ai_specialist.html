@@ -26,7 +26,7 @@
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8. 分词器和数据集的匹配" href="../chapter_09_matching_tokenizers_and_datasets/index.html" />
+    <link rel="next" title="8. 将Transformers用于法律和金融文件的摘要" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/index.html" />
     <link rel="prev" title="7.6. 微调GPT-3" href="section_06_fine_tuning_gpt3.html" /> 
   </head>
 <body>
@@ -137,9 +137,14 @@ Show Source
 <li class="toctree-l2 current"><a class="current reference internal" href="#">7.7. 工业4.0下AI专家的角色</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/index.html">8. 分词器和数据集的匹配</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">9. 解释黑盒Transformer模型</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_16_the_emergence_of_transformer_driven_copilots/index.html">10. Transformer驱动的Copilot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/index.html">8. 将Transformers用于法律和金融文件的摘要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_01_designing_a_universal_text_to_text_model.html">8.1. 设计一个通用的文本到文本（text-to-text）模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_02_text_summarization_with_t5.html">8.2. 用T5做文本摘要</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/index.html">9. 分词器和数据集的匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">10. 解释黑盒Transformer模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_16_the_emergence_of_transformer_driven_copilots/index.html">11. Transformer驱动的Copilot</a></li>
 </ul>
 
             </nav>
@@ -216,9 +221,14 @@ Show Source
 <li class="toctree-l2 current"><a class="current reference internal" href="#">7.7. 工业4.0下AI专家的角色</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/index.html">8. 分词器和数据集的匹配</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">9. 解释黑盒Transformer模型</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_16_the_emergence_of_transformer_driven_copilots/index.html">10. Transformer驱动的Copilot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/index.html">8. 将Transformers用于法律和金融文件的摘要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_01_designing_a_universal_text_to_text_model.html">8.1. 设计一个通用的文本到文本（text-to-text）模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_02_text_summarization_with_t5.html">8.2. 用T5做文本摘要</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/index.html">9. 分词器和数据集的匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">10. 解释黑盒Transformer模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_16_the_emergence_of_transformer_driven_copilots/index.html">11. Transformer驱动的Copilot</a></li>
 </ul>
 
             </nav>
@@ -253,7 +263,7 @@ AI专家来解释如何为自然语言处理任务创建适当的提示,向Trans
 <p>初步结论可以分为两类:事实和虚构。</p>
 <p>一个事实是,OpenAI拥有世界上最强大的自然语言处理服务之一。其他事实包括:</p>
 <ul class="simple">
-<li><p>OpenAI引擎是强大的零样本引擎,不需要搜索各种变压器模型,不需要预训练,也不需要微调</p></li>
+<li><p>OpenAI引擎是强大的零样本引擎,不需要搜索各种Transformer模型,不需要预训练,也不需要微调</p></li>
 <li><p>用于训练模型的超级计算机是独特的</p></li>
 <li><p>如果提示设计得当,我们可以获得惊人准确的响应</p></li>
 <li><p>在本章中实现自然语言处理任务只需要复制粘贴,任何软件初学者都可以完成</p></li>
@@ -300,11 +310,11 @@ AI专家来解释如何为自然语言处理任务创建适当的提示,向Trans
             <div>7.6. 微调GPT-3</div>
          </div>
      </a>
-     <a id="button-next" href="../chapter_09_matching_tokenizers_and_datasets/index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
          <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>8. 分词器和数据集的匹配</div>
+            <div>8. 将Transformers用于法律和金融文件的摘要</div>
         </div>
      </a>
   </div>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>8.2. 用T5做文本摘要 &#8212; Transformer for NLP 0.0.1 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fontawesome/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/d2l.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/d2l.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="section_03_summarization_with_gpt3.html" />
+    <link rel="prev" title="8.1. 设计一个通用的文本到文本（text-to-text）模型" href="section_01_designing_a_universal_text_to_text_model.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">8. </span>T5模型解决多种NLP任务</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active"><span class="section-number">8.2. </span>用T5做文本摘要</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="../search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="../_sources/chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_02_text_summarization_with_t5.rst.txt" rel="nofollow">
+  <i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/index.html">7. GPT-3的崛起</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_01_suprahuman_nlp_with_gpt3-transformer-models.html">7.1. 利用GPT-3进行超人类NLP任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_02_the_architecture_of_openai_gpt_transformer_models.html">7.2. GPT模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_03_generic_text_completion_with_gpt2.html">7.3. 利用GPT-2进行通用的文本补全任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_04_running_openai_gpt3_tasks.html">7.4. 运行GPT-3的任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_05_comparing_the_output_of_gpt2_and_gpt3.html">7.5. 比较GPT-2与GPT-3的输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_06_fine_tuning_gpt3.html">7.6. 微调GPT-3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_07_the_role_of_an_industry_40_ai_specialist.html">7.7. 工业4.0下AI专家的角色</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">8. T5模型解决多种NLP任务</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_designing_a_universal_text_to_text_model.html">8.1. 设计一个通用的文本到文本（text-to-text）模型</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8.2. 用T5做文本摘要</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/index.html">9. 分词器和数据集的匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">10. 解释黑盒Transformer模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_16_the_emergence_of_transformer_driven_copilots/index.html">11. Transformer驱动的Copilot</a></li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+
+	<script type="text/javascript" src="../_static/sphinx_materialdesign_theme.js "></script>
+    <header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/index.html">7. GPT-3的崛起</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_01_suprahuman_nlp_with_gpt3-transformer-models.html">7.1. 利用GPT-3进行超人类NLP任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_02_the_architecture_of_openai_gpt_transformer_models.html">7.2. GPT模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_03_generic_text_completion_with_gpt2.html">7.3. 利用GPT-2进行通用的文本补全任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_04_running_openai_gpt3_tasks.html">7.4. 运行GPT-3的任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_05_comparing_the_output_of_gpt2_and_gpt3.html">7.5. 比较GPT-2与GPT-3的输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_06_fine_tuning_gpt3.html">7.6. 微调GPT-3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_07_the_role_of_an_industry_40_ai_specialist.html">7.7. 工业4.0下AI专家的角色</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">8. T5模型解决多种NLP任务</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_designing_a_universal_text_to_text_model.html">8.1. 设计一个通用的文本到文本（text-to-text）模型</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8.2. 用T5做文本摘要</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/index.html">9. 分词器和数据集的匹配</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">10. 解释黑盒Transformer模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_16_the_emergence_of_transformer_driven_copilots/index.html">11. Transformer驱动的Copilot</a></li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+
+    <div class="document">
+        <div class="page-content" role="main">
+        
+  <div class="section" id="t5">
+<h1><span class="section-number">8.2. </span>用T5做文本摘要<a class="headerlink" href="#t5" title="Permalink to this heading">¶</a></h1>
+<p>自然语言处理摘要任务提取文本的简洁部分。这一部分将首先介绍我们在本章中将使用的Hugging
+Face资源。然后我们将初始化一个T5-large变换器模型。最后,我们将看到如何使用T5来总结任何文档,包括法律和公司文档。</p>
+<div class="section" id="hugging-face">
+<h2><span class="section-number">8.2.1. </span>Hugging Face资源<a class="headerlink" href="#hugging-face" title="Permalink to this heading">¶</a></h2>
+<p>Hugging
+Face设计了一个在更高级别实现Transformer的框架。在:ref:<cite>chapter-3</cite>中，我们使用Hugging
+Face对BERT模型进行了微调，在:ref:<cite>chapter-4</cite>中，我们使用Hugging
+Face预训练了RoBERTa模型。在:ref:<cite>chapter-7</cite>中，我们使用Hugging
+Face体验了与GPT-2交互的过程。</p>
+<p>Hugging
+Face在其框架内提供了三个主要资源:模型（models）、数据集（datasets）和指标（metrics）。</p>
+<p>访问<a class="reference external" href="https://huggingface.co/">huggingface.co</a>的<a class="reference external" href="https://huggingface.co/models">模型页面</a>，搜索“google-t5”，可以看到，出现了“google-t5/t5-small”、“google-t5/t5-base”、“google-t5/t5-large”、“google-t5/t5-3b”和“google-t5/t5-7b”等不同大小的模型：</p>
+<ul class="simple">
+<li><p>base是基础模型，类似于bert-base,拥有12层和约220M参数。</p></li>
+<li><p>small是小模型，有6层和60M参数。</p></li>
+<li><p>large是大模型，类似于bert-large,有12层和770M参数。</p></li>
+<li><p>3b和11b模型都使用24层的编码器和解码器,分别拥有约2.8B和11B参数。</p></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">8.2.2. </span>初始化T5模型<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<p>首先安装必要的包：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span># Hide outputs
+!pip install transformers sentencepiece
+</pre></div>
+</div>
+<p>导入接下来会用到的包</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">T5Config</span><span class="p">,</span> <span class="n">T5ForConditionalGeneration</span><span class="p">,</span> <span class="n">T5Tokenizer</span>
+</pre></div>
+</div>
+<p>初始化<code class="docutils literal notranslate"><span class="pre">google-t5/t5-large</span></code>预训练模型和分词器：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">T5ForConditionalGeneration</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;google-t5/t5-large&#39;</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">T5Tokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;google-t5/t5-large&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<pre class="output literal-block">You are using the default legacy behaviour of the &lt;class 'transformers.models.t5.tokenization_t5.T5Tokenizer'&gt;. This is expected, and simply means that the <cite>legacy</cite> (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set <cite>legacy=False</cite>. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in <a class="reference external" href="https://github.com/huggingface/transformers/pull/24565">https://github.com/huggingface/transformers/pull/24565</a></pre>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Special</span> <span class="n">tokens</span> <span class="n">have</span> <span class="n">been</span> <span class="n">added</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">vocabulary</span><span class="p">,</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">the</span> <span class="n">associated</span> <span class="n">word</span> <span class="n">embeddings</span> <span class="n">are</span> <span class="n">fine</span><span class="o">-</span><span class="n">tuned</span> <span class="ow">or</span> <span class="n">trained</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>初始化一个预训练的分词器只需要一行代码。但是,这并不能证明分词词典包含了我们所需的全部词汇。我们将在:ref:<cite>chapter-9</cite>中探究分词器和数据集之间的关系。</p>
+<p>在这里我们不使用GPU，CPU足够我们的demo运行了：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>接下来我们探索T5模型的架构。</p>
+<p>首先我们来看模型的配置：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T5Config</span> <span class="p">{</span>
+  <span class="s2">&quot;_name_or_path&quot;</span><span class="p">:</span> <span class="s2">&quot;google-t5/t5-large&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;architectures&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;T5ForConditionalGeneration&quot;</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;classifier_dropout&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+  <span class="s2">&quot;d_ff&quot;</span><span class="p">:</span> <span class="mi">4096</span><span class="p">,</span>
+  <span class="s2">&quot;d_kv&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+  <span class="s2">&quot;d_model&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+  <span class="s2">&quot;decoder_start_token_id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">&quot;dense_act_fn&quot;</span><span class="p">:</span> <span class="s2">&quot;relu&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;dropout_rate&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+  <span class="s2">&quot;eos_token_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;feed_forward_proj&quot;</span><span class="p">:</span> <span class="s2">&quot;relu&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;initializer_factor&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+  <span class="s2">&quot;is_encoder_decoder&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;is_gated_act&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+  <span class="s2">&quot;layer_norm_epsilon&quot;</span><span class="p">:</span> <span class="mf">1e-06</span><span class="p">,</span>
+  <span class="s2">&quot;model_type&quot;</span><span class="p">:</span> <span class="s2">&quot;t5&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;n_positions&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
+  <span class="s2">&quot;num_decoder_layers&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+  <span class="s2">&quot;num_heads&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="s2">&quot;num_layers&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+  <span class="s2">&quot;output_past&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;pad_token_id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">&quot;relative_attention_max_distance&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+  <span class="s2">&quot;relative_attention_num_buckets&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+  <span class="s2">&quot;task_specific_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;summarization&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;early_stopping&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;length_penalty&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+      <span class="s2">&quot;max_length&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+      <span class="s2">&quot;min_length&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+      <span class="s2">&quot;no_repeat_ngram_size&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s2">&quot;num_beams&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;summarize: &quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;translation_en_to_de&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;early_stopping&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;max_length&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+      <span class="s2">&quot;num_beams&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;translate English to German: &quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;translation_en_to_fr&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;early_stopping&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;max_length&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+      <span class="s2">&quot;num_beams&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;translate English to French: &quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;translation_en_to_ro&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;early_stopping&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;max_length&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+      <span class="s2">&quot;num_beams&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;translate English to Romanian: &quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;transformers_version&quot;</span><span class="p">:</span> <span class="s2">&quot;4.39.2&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;use_cache&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;vocab_size&quot;</span><span class="p">:</span> <span class="mi">32128</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>可以看到，“t5-large”模型有16个注意力头和24层。</p>
+<p>在<code class="docutils literal notranslate"><span class="pre">&quot;task_specific_params&quot;</span></code>中，我们还可以看到T5的文本到文本实现,它在输入句子前添加前缀来触发要执行的任务。这个前缀使得在不修改模型参数的情况下,就可以用文本到文本的格式表示各种各样的任务。在我们的例子中,前缀是“summarization:”.</p>
+<p>我们可以看到T5:</p>
+<ul class="simple">
+<li><p>实现了束搜索算法,它将扩展四个最重要的文本完成预测。</p></li>
+<li><p>在每个批次中完成num_beam个句子时应用提前停止。</p></li>
+<li><p>确保不重复等于no_repeat_ngram_size的n元语法。</p></li>
+<li><p>使用min_length和max_length来控制样本的长度。</p></li>
+<li><p>应用长度惩罚。</p></li>
+</ul>
+<p>另一个比较有意思的超参数是<code class="docutils literal notranslate"><span class="pre">&quot;vocab_size&quot;:</span> <span class="pre">32128</span></code>，即词表大小为32128.</p>
+<p>词表本身就是一个值得探讨的话题。词表过大会导致表征的稀疏性，词表过小会导致许多词无法被表示。我们将在:ref:<cite>chapter-9</cite>中进一步探讨这个问题。</p>
+<p>通过打印整个模型我们可以查看模型更多的细节：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T5ForConditionalGeneration</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">shared</span><span class="p">):</span> <span class="n">Embedding</span><span class="p">(</span><span class="mi">32128</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">encoder</span><span class="p">):</span> <span class="n">T5Stack</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">embed_tokens</span><span class="p">):</span> <span class="n">Embedding</span><span class="p">(</span><span class="mi">32128</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">block</span><span class="p">):</span> <span class="n">ModuleList</span><span class="p">(</span>
+      <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">T5Block</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">layer</span><span class="p">):</span> <span class="n">ModuleList</span><span class="p">(</span>
+          <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">T5LayerSelfAttention</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">SelfAttention</span><span class="p">):</span> <span class="n">T5Attention</span><span class="p">(</span>
+              <span class="p">(</span><span class="n">q</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">o</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">relative_attention_bias</span><span class="p">):</span> <span class="n">Embedding</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+            <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+          <span class="p">)</span>
+          <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">T5LayerFF</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">DenseReluDense</span><span class="p">):</span> <span class="n">T5DenseActDense</span><span class="p">(</span>
+              <span class="p">(</span><span class="n">wi</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">wo</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">act</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+            <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+          <span class="p">)</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+      <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">23</span><span class="p">):</span> <span class="mi">23</span> <span class="n">x</span> <span class="n">T5Block</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">layer</span><span class="p">):</span> <span class="n">ModuleList</span><span class="p">(</span>
+          <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">T5LayerSelfAttention</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">SelfAttention</span><span class="p">):</span> <span class="n">T5Attention</span><span class="p">(</span>
+              <span class="p">(</span><span class="n">q</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">o</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+            <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+          <span class="p">)</span>
+          <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">T5LayerFF</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">DenseReluDense</span><span class="p">):</span> <span class="n">T5DenseActDense</span><span class="p">(</span>
+              <span class="p">(</span><span class="n">wi</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">wo</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">act</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+            <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+          <span class="p">)</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">(</span><span class="n">final_layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+    <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">decoder</span><span class="p">):</span> <span class="n">T5Stack</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">embed_tokens</span><span class="p">):</span> <span class="n">Embedding</span><span class="p">(</span><span class="mi">32128</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">block</span><span class="p">):</span> <span class="n">ModuleList</span><span class="p">(</span>
+      <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">T5Block</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">layer</span><span class="p">):</span> <span class="n">ModuleList</span><span class="p">(</span>
+          <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">T5LayerSelfAttention</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">SelfAttention</span><span class="p">):</span> <span class="n">T5Attention</span><span class="p">(</span>
+              <span class="p">(</span><span class="n">q</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">o</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">relative_attention_bias</span><span class="p">):</span> <span class="n">Embedding</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+            <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+          <span class="p">)</span>
+          <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">T5LayerCrossAttention</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">EncDecAttention</span><span class="p">):</span> <span class="n">T5Attention</span><span class="p">(</span>
+              <span class="p">(</span><span class="n">q</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">o</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+            <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+          <span class="p">)</span>
+          <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">T5LayerFF</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">DenseReluDense</span><span class="p">):</span> <span class="n">T5DenseActDense</span><span class="p">(</span>
+              <span class="p">(</span><span class="n">wi</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">wo</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">act</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+            <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+          <span class="p">)</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+      <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">23</span><span class="p">):</span> <span class="mi">23</span> <span class="n">x</span> <span class="n">T5Block</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">layer</span><span class="p">):</span> <span class="n">ModuleList</span><span class="p">(</span>
+          <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">T5LayerSelfAttention</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">SelfAttention</span><span class="p">):</span> <span class="n">T5Attention</span><span class="p">(</span>
+              <span class="p">(</span><span class="n">q</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">o</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+            <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+          <span class="p">)</span>
+          <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">T5LayerCrossAttention</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">EncDecAttention</span><span class="p">):</span> <span class="n">T5Attention</span><span class="p">(</span>
+              <span class="p">(</span><span class="n">q</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">o</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+            <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+          <span class="p">)</span>
+          <span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="n">T5LayerFF</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">DenseReluDense</span><span class="p">):</span> <span class="n">T5DenseActDense</span><span class="p">(</span>
+              <span class="p">(</span><span class="n">wi</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">wo</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+              <span class="p">(</span><span class="n">act</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+            <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+          <span class="p">)</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">(</span><span class="n">final_layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+    <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="p">(</span><span class="n">lm_head</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">32128</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>也可以只打印你希望的模块，以编码器的第13层为例：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">block</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T5Block</span><span class="p">(</span>
+  <span class="p">(</span><span class="n">layer</span><span class="p">):</span> <span class="n">ModuleList</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">T5LayerSelfAttention</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">SelfAttention</span><span class="p">):</span> <span class="n">T5Attention</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">q</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">o</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+      <span class="p">)</span>
+      <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+      <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">T5LayerFF</span><span class="p">(</span>
+      <span class="p">(</span><span class="n">DenseReluDense</span><span class="p">):</span> <span class="n">T5DenseActDense</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">wi</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">wo</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">act</span><span class="p">):</span> <span class="n">ReLU</span><span class="p">()</span>
+      <span class="p">)</span>
+      <span class="p">(</span><span class="n">layer_norm</span><span class="p">):</span> <span class="n">T5LayerNorm</span><span class="p">()</span>
+      <span class="p">(</span><span class="n">dropout</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>可以看到，自注意力子层以长度为1024的向量作为输入和输出，前馈子层的隐藏层产生的特征是长度为4096的向量。</p>
+</div>
+<div class="section" id="t5-large">
+<h2><span class="section-number">8.2.3. </span>使用T5-large对文档做摘要<a class="headerlink" href="#t5-large" title="Permalink to this heading">¶</a></h2>
+<p>前面我们已经初始化了T5模型<code class="docutils literal notranslate"><span class="pre">model</span></code>和T5分词器<code class="docutils literal notranslate"><span class="pre">tokenizer</span></code>，现在我们来对文档做摘要。</p>
+<div class="section" id="id2">
+<h3><span class="section-number">8.2.3.1. </span>定义摘要函数<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">ml</span><span class="p">):</span>
+    <span class="c1"># 格式规范化</span>
+    <span class="n">preprocess_text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="c1"># 加上&quot;summarize: &quot;前缀，告诉T5要做摘要任务</span>
+    <span class="n">t5_prepared_text</span> <span class="o">=</span> <span class="s2">&quot;summarize: &quot;</span> <span class="o">+</span> <span class="n">preprocess_text</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Preprocessed and prepared text: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">t5_prepared_text</span><span class="p">)</span>
+    <span class="c1"># 将文本转换为Tensor</span>
+    <span class="n">tokenized_text</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">t5_prepared_text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="c1"># 利用前面定义的T5模型生成摘要</span>
+    <span class="n">summary_ids</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+        <span class="n">tokenized_text</span><span class="p">,</span>
+        <span class="n">num_beams</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">no_repeat_ngram_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">min_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+        <span class="n">max_length</span><span class="o">=</span><span class="n">ml</span><span class="p">,</span>
+        <span class="n">early_stopping</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="c1"># 解码输出</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">summary_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3><span class="section-number">8.2.3.2. </span>运行摘要任务<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<p>常见话题的摘要：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">The United States Declaration of Independence was the first Etext released by Project Gutenberg, early in 1971. The title was stored in an emailed instruction set which required a tape or diskpack be hand mounted for retrieval. The diskpack was the size of a large cake in a cake carrier, cost $1500, and contained 5 megabytes, of which this file took 1-2%. Two tape backups were kept plus one on paper tape. The 10,000 files we hope to have online by the end of 2001 should take about 1-2</span><span class="si">% o</span><span class="s2">f a comparably priced drive in 2001.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of characters:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">summarize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Summarized text: </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>Number of characters: 530
+Preprocessed and prepared text:
+ summarize: The United States Declaration of Independence was the first Etext released by Project Gutenberg, early in 1971. The title was stored in an emailed instruction set which required a tape or diskpack be hand mounted for retrieval. The diskpack was the size of a large cake in a cake carrier, cost $1500, and contained 5 megabytes, of which this file took 1-2%. Two tape backups were kept plus one on paper tape. The 10,000 files we hope to have online by the end of 2001 should take about 1-2% of a comparably priced drive in 2001.
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Summarized</span> <span class="n">text</span><span class="p">:</span>
+<span class="n">the</span> <span class="n">united</span> <span class="n">states</span> <span class="n">declaration</span> <span class="n">of</span> <span class="n">independence</span> <span class="n">was</span> <span class="n">the</span> <span class="n">first</span> <span class="n">etext</span> <span class="n">released</span> <span class="n">by</span> <span class="n">project</span> <span class="n">gutenberg</span><span class="p">,</span> <span class="n">early</span> <span class="ow">in</span> <span class="mf">1971.</span> <span class="n">the</span> <span class="mi">10</span><span class="p">,</span><span class="mi">000</span> <span class="n">files</span> <span class="n">we</span> <span class="n">hope</span> <span class="n">to</span> <span class="n">have</span> <span class="n">online</span> <span class="n">by</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="mi">2001</span> <span class="n">should</span> <span class="n">take</span> <span class="n">about</span> <span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">%</span> <span class="n">of</span> <span class="n">a</span> <span class="n">comparably</span> <span class="n">priced</span> <span class="n">drive</span> <span class="ow">in</span>
+</pre></div>
+</div>
+<p>权利法案的摘要：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">No person shall be held to answer for a capital, or otherwise infamous crime, unless on a presentment or indictment of a Grand Jury, except in cases arising in the land or naval forces, or in the Militia, when in actual service in time of War or public danger; nor shall any person be subject for the same offense to be twice put in jeopardy of life or limb; nor shall be compelled in any criminal case to be a witness against himself, nor be deprived of life, liberty, or property, without due process of law; nor shall private property be taken for public use without just compensation.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of characters:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">summarize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Summarized text: </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Number</span> <span class="n">of</span> <span class="n">characters</span><span class="p">:</span> <span class="mi">590</span>
+<span class="n">Preprocessed</span> <span class="ow">and</span> <span class="n">prepared</span> <span class="n">text</span><span class="p">:</span>
+ <span class="n">summarize</span><span class="p">:</span> <span class="n">No</span> <span class="n">person</span> <span class="n">shall</span> <span class="n">be</span> <span class="n">held</span> <span class="n">to</span> <span class="n">answer</span> <span class="k">for</span> <span class="n">a</span> <span class="n">capital</span><span class="p">,</span> <span class="ow">or</span> <span class="n">otherwise</span> <span class="n">infamous</span> <span class="n">crime</span><span class="p">,</span> <span class="n">unless</span> <span class="n">on</span> <span class="n">a</span> <span class="n">presentment</span> <span class="ow">or</span> <span class="n">indictment</span> <span class="n">of</span> <span class="n">a</span> <span class="n">Grand</span> <span class="n">Jury</span><span class="p">,</span> <span class="k">except</span> <span class="ow">in</span> <span class="n">cases</span> <span class="n">arising</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">land</span> <span class="ow">or</span> <span class="n">naval</span> <span class="n">forces</span><span class="p">,</span> <span class="ow">or</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">Militia</span><span class="p">,</span> <span class="n">when</span> <span class="ow">in</span> <span class="n">actual</span> <span class="n">service</span> <span class="ow">in</span> <span class="n">time</span> <span class="n">of</span> <span class="n">War</span> <span class="ow">or</span> <span class="n">public</span> <span class="n">danger</span><span class="p">;</span> <span class="n">nor</span> <span class="n">shall</span> <span class="nb">any</span> <span class="n">person</span> <span class="n">be</span> <span class="n">subject</span> <span class="k">for</span> <span class="n">the</span> <span class="n">same</span> <span class="n">offense</span> <span class="n">to</span> <span class="n">be</span> <span class="n">twice</span> <span class="n">put</span> <span class="ow">in</span> <span class="n">jeopardy</span> <span class="n">of</span> <span class="n">life</span> <span class="ow">or</span> <span class="n">limb</span><span class="p">;</span> <span class="n">nor</span> <span class="n">shall</span> <span class="n">be</span> <span class="n">compelled</span> <span class="ow">in</span> <span class="nb">any</span> <span class="n">criminal</span> <span class="n">case</span> <span class="n">to</span> <span class="n">be</span> <span class="n">a</span> <span class="n">witness</span> <span class="n">against</span> <span class="n">himself</span><span class="p">,</span> <span class="n">nor</span> <span class="n">be</span> <span class="n">deprived</span> <span class="n">of</span> <span class="n">life</span><span class="p">,</span> <span class="n">liberty</span><span class="p">,</span> <span class="ow">or</span> <span class="nb">property</span><span class="p">,</span> <span class="n">without</span> <span class="n">due</span> <span class="n">process</span> <span class="n">of</span> <span class="n">law</span><span class="p">;</span> <span class="n">nor</span> <span class="n">shall</span> <span class="n">private</span> <span class="nb">property</span> <span class="n">be</span> <span class="n">taken</span> <span class="k">for</span> <span class="n">public</span> <span class="n">use</span> <span class="n">without</span> <span class="n">just</span> <span class="n">compensation</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Summarized</span> <span class="n">text</span><span class="p">:</span>
+<span class="n">no</span> <span class="n">person</span> <span class="n">shall</span> <span class="n">be</span> <span class="n">held</span> <span class="n">to</span> <span class="n">answer</span> <span class="k">for</span> <span class="n">a</span> <span class="n">capital</span><span class="p">,</span> <span class="ow">or</span> <span class="n">otherwise</span> <span class="n">infamous</span> <span class="n">crime</span><span class="p">,</span> <span class="k">except</span> <span class="ow">in</span> <span class="n">cases</span> <span class="n">arising</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">land</span> <span class="ow">or</span> <span class="n">naval</span> <span class="n">forces</span><span class="o">.</span> <span class="n">nor</span> <span class="n">shall</span> <span class="nb">any</span> <span class="n">person</span> <span class="n">be</span> <span class="n">subject</span> <span class="k">for</span> <span class="n">the</span> <span class="n">same</span> <span class="n">offense</span> <span class="n">to</span> <span class="n">be</span> <span class="n">twice</span> <span class="n">put</span> <span class="ow">in</span> <span class="n">jeopar</span>
+</pre></div>
+</div>
+<p>企业法摘要：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">The law regarding corporations prescribes that a corporation can be incorporated in the state of Montana to serve any lawful purpose. In the state of Montana, a corporation has all the powers of a natural person for carrying out its business activities. The corporation can sue and be sued in its corporate name. It has perpetual succession. The corporation can buy, sell or otherwise acquire an interest in a real or personal property. It can conduct business, carry on operations, and have offices and exercise the powers in a state, territory or district in possession of the U.S., or in a foreign country. It can appoint officers and agents of the corporation for various duties and fix their compensation. The name of a corporation must contain the word &quot;corporation&quot; or its abbreviation &quot;corp.&quot; The name of a corporation should not be deceptively similar to the name of another corporation incorporated in the same state. It should not be deceptively identical to the fictitious name adopted by a foreign corporation having business transactions in the state. The corporation is formed by one or more natural persons by executing and filing articles of incorporation to the secretary of state of filing. The qualifications for directors are fixed either by articles of incorporation or bylaws. The names and addresses of the initial directors and purpose of incorporation should be set forth in the articles of incorporation. The articles of incorporation should contain the corporate name, the number of shares authorized to issue, a brief statement of the character of business carried out by the corporation, the names and addresses of the directors until successors are elected, and name and addresses of incorporators. The shareholders have the power to change the size of board of directors.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of characters:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">summarize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Summarized text: </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Number</span> <span class="n">of</span> <span class="n">characters</span><span class="p">:</span> <span class="mi">1805</span>
+<span class="n">Preprocessed</span> <span class="ow">and</span> <span class="n">prepared</span> <span class="n">text</span><span class="p">:</span>
+ <span class="n">summarize</span><span class="p">:</span> <span class="n">The</span> <span class="n">law</span> <span class="n">regarding</span> <span class="n">corporations</span> <span class="n">prescribes</span> <span class="n">that</span> <span class="n">a</span> <span class="n">corporation</span> <span class="n">can</span> <span class="n">be</span> <span class="n">incorporated</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">state</span> <span class="n">of</span> <span class="n">Montana</span> <span class="n">to</span> <span class="n">serve</span> <span class="nb">any</span> <span class="n">lawful</span> <span class="n">purpose</span><span class="o">.</span> <span class="n">In</span> <span class="n">the</span> <span class="n">state</span> <span class="n">of</span> <span class="n">Montana</span><span class="p">,</span> <span class="n">a</span> <span class="n">corporation</span> <span class="n">has</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">powers</span> <span class="n">of</span> <span class="n">a</span> <span class="n">natural</span> <span class="n">person</span> <span class="k">for</span> <span class="n">carrying</span> <span class="n">out</span> <span class="n">its</span> <span class="n">business</span> <span class="n">activities</span><span class="o">.</span> <span class="n">The</span> <span class="n">corporation</span> <span class="n">can</span> <span class="n">sue</span> <span class="ow">and</span> <span class="n">be</span> <span class="n">sued</span> <span class="ow">in</span> <span class="n">its</span> <span class="n">corporate</span> <span class="n">name</span><span class="o">.</span> <span class="n">It</span> <span class="n">has</span> <span class="n">perpetual</span> <span class="n">succession</span><span class="o">.</span> <span class="n">The</span> <span class="n">corporation</span> <span class="n">can</span> <span class="n">buy</span><span class="p">,</span> <span class="n">sell</span> <span class="ow">or</span> <span class="n">otherwise</span> <span class="n">acquire</span> <span class="n">an</span> <span class="n">interest</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">real</span> <span class="ow">or</span> <span class="n">personal</span> <span class="nb">property</span><span class="o">.</span> <span class="n">It</span> <span class="n">can</span> <span class="n">conduct</span> <span class="n">business</span><span class="p">,</span> <span class="n">carry</span> <span class="n">on</span> <span class="n">operations</span><span class="p">,</span> <span class="ow">and</span> <span class="n">have</span> <span class="n">offices</span> <span class="ow">and</span> <span class="n">exercise</span> <span class="n">the</span> <span class="n">powers</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">state</span><span class="p">,</span> <span class="n">territory</span> <span class="ow">or</span> <span class="n">district</span> <span class="ow">in</span> <span class="n">possession</span> <span class="n">of</span> <span class="n">the</span> <span class="n">U</span><span class="o">.</span><span class="n">S</span><span class="o">.</span><span class="p">,</span> <span class="ow">or</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">foreign</span> <span class="n">country</span><span class="o">.</span> <span class="n">It</span> <span class="n">can</span> <span class="n">appoint</span> <span class="n">officers</span> <span class="ow">and</span> <span class="n">agents</span> <span class="n">of</span> <span class="n">the</span> <span class="n">corporation</span> <span class="k">for</span> <span class="n">various</span> <span class="n">duties</span> <span class="ow">and</span> <span class="n">fix</span> <span class="n">their</span> <span class="n">compensation</span><span class="o">.</span> <span class="n">The</span> <span class="n">name</span> <span class="n">of</span> <span class="n">a</span> <span class="n">corporation</span> <span class="n">must</span> <span class="n">contain</span> <span class="n">the</span> <span class="n">word</span> <span class="s2">&quot;corporation&quot;</span> <span class="ow">or</span> <span class="n">its</span> <span class="n">abbreviation</span> <span class="s2">&quot;corp.&quot;</span> <span class="n">The</span> <span class="n">name</span> <span class="n">of</span> <span class="n">a</span> <span class="n">corporation</span> <span class="n">should</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">deceptively</span> <span class="n">similar</span> <span class="n">to</span> <span class="n">the</span> <span class="n">name</span> <span class="n">of</span> <span class="n">another</span> <span class="n">corporation</span> <span class="n">incorporated</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">same</span> <span class="n">state</span><span class="o">.</span> <span class="n">It</span> <span class="n">should</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">deceptively</span> <span class="n">identical</span> <span class="n">to</span> <span class="n">the</span> <span class="n">fictitious</span> <span class="n">name</span> <span class="n">adopted</span> <span class="n">by</span> <span class="n">a</span> <span class="n">foreign</span> <span class="n">corporation</span> <span class="n">having</span> <span class="n">business</span> <span class="n">transactions</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">state</span><span class="o">.</span> <span class="n">The</span> <span class="n">corporation</span> <span class="ow">is</span> <span class="n">formed</span> <span class="n">by</span> <span class="n">one</span> <span class="ow">or</span> <span class="n">more</span> <span class="n">natural</span> <span class="n">persons</span> <span class="n">by</span> <span class="n">executing</span> <span class="ow">and</span> <span class="n">filing</span> <span class="n">articles</span> <span class="n">of</span> <span class="n">incorporation</span> <span class="n">to</span> <span class="n">the</span> <span class="n">secretary</span> <span class="n">of</span> <span class="n">state</span> <span class="n">of</span> <span class="n">filing</span><span class="o">.</span> <span class="n">The</span> <span class="n">qualifications</span> <span class="k">for</span> <span class="n">directors</span> <span class="n">are</span> <span class="n">fixed</span> <span class="n">either</span> <span class="n">by</span> <span class="n">articles</span> <span class="n">of</span> <span class="n">incorporation</span> <span class="ow">or</span> <span class="n">bylaws</span><span class="o">.</span> <span class="n">The</span> <span class="n">names</span> <span class="ow">and</span> <span class="n">addresses</span> <span class="n">of</span> <span class="n">the</span> <span class="n">initial</span> <span class="n">directors</span> <span class="ow">and</span> <span class="n">purpose</span> <span class="n">of</span> <span class="n">incorporation</span> <span class="n">should</span> <span class="n">be</span> <span class="nb">set</span> <span class="n">forth</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">articles</span> <span class="n">of</span> <span class="n">incorporation</span><span class="o">.</span> <span class="n">The</span> <span class="n">articles</span> <span class="n">of</span> <span class="n">incorporation</span> <span class="n">should</span> <span class="n">contain</span> <span class="n">the</span> <span class="n">corporate</span> <span class="n">name</span><span class="p">,</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">shares</span> <span class="n">authorized</span> <span class="n">to</span> <span class="n">issue</span><span class="p">,</span> <span class="n">a</span> <span class="n">brief</span> <span class="n">statement</span> <span class="n">of</span> <span class="n">the</span> <span class="n">character</span> <span class="n">of</span> <span class="n">business</span> <span class="n">carried</span> <span class="n">out</span> <span class="n">by</span> <span class="n">the</span> <span class="n">corporation</span><span class="p">,</span> <span class="n">the</span> <span class="n">names</span> <span class="ow">and</span> <span class="n">addresses</span> <span class="n">of</span> <span class="n">the</span> <span class="n">directors</span> <span class="n">until</span> <span class="n">successors</span> <span class="n">are</span> <span class="n">elected</span><span class="p">,</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">and</span> <span class="n">addresses</span> <span class="n">of</span> <span class="n">incorporators</span><span class="o">.</span> <span class="n">The</span> <span class="n">shareholders</span> <span class="n">have</span> <span class="n">the</span> <span class="n">power</span> <span class="n">to</span> <span class="n">change</span> <span class="n">the</span> <span class="n">size</span> <span class="n">of</span> <span class="n">board</span> <span class="n">of</span> <span class="n">directors</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Summarized</span> <span class="n">text</span><span class="p">:</span>
+<span class="n">a</span> <span class="n">corporation</span> <span class="n">can</span> <span class="n">be</span> <span class="n">incorporated</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">state</span> <span class="n">of</span> <span class="n">Montana</span> <span class="n">to</span> <span class="n">serve</span> <span class="nb">any</span> <span class="n">lawful</span> <span class="n">purpose</span><span class="o">.</span> <span class="n">the</span> <span class="n">corporation</span> <span class="n">has</span> <span class="n">perpetual</span> <span class="n">succession</span> <span class="ow">and</span> <span class="n">can</span> <span class="n">buy</span><span class="p">,</span> <span class="n">sell</span> <span class="ow">or</span> <span class="n">otherwise</span> <span class="n">acquire</span> <span class="n">an</span> <span class="n">interest</span> <span class="ow">in</span> <span class="n">real</span> <span class="ow">or</span> <span class="n">personal</span> <span class="nb">property</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">8.2. 用T5做文本摘要</a><ul>
+<li><a class="reference internal" href="#hugging-face">8.2.1. Hugging Face资源</a></li>
+<li><a class="reference internal" href="#id1">8.2.2. 初始化T5模型</a></li>
+<li><a class="reference internal" href="#t5-large">8.2.3. 使用T5-large对文档做摘要</a><ul>
+<li><a class="reference internal" href="#id2">8.2.3.1. 定义摘要函数</a></li>
+<li><a class="reference internal" href="#id3">8.2.3.2. 运行摘要任务</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="section_01_designing_a_universal_text_to_text_model.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>8.1. 设计一个通用的文本到文本（text-to-text）模型</div>
+         </div>
+     </a>
+     <a id="button-next" href="section_03_summarization_with_gpt3.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div><no title></div>
+        </div>
+     </a>
+  </div>
+        
+        </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,379 @@
+
+匹配数据集和分词器
+==================
+
+下载基准数据集来训练transformer模型确实有许多优势。数据已经过准备,每个研究实验室都使用相同的参考资料。此外,transformer模型的性能也可以与同一数据集上的其他模型进行比较。
+
+然而,仍需要做更多工作来提高transformer的性能。此外,在生产环境中实现transformer模型需要仔细的规划和定义最佳实践。
+
+在本节中,我们将定义一些最佳实践,以避免关键的绊脚石。
+
+然后我们将在Python中使用余弦相似度的一些示例,来衡量分词和编码数据集的局限性。
+
+最佳实践
+--------
+
+`Raffel等人(2019) <https://arxiv.org/pdf/1910.10683>`__\ 定义了一个标准的文本到文本transformer模型：T5.
+另外，他们还打破了只使用原始数据而不事先预处理它们的惯例。
+
+数据预处理可以缩短训练时间。以常见网络抓取(Common
+Crawl)为例,它包含了通过网页提取获得的无标注文本。在数据集中已经去除了非文本内容和标记。
+
+然而,谷歌的T5团队发现,通过Common
+Crawl获得的大部分文本并没有达到自然语言或英语的水平。因此他们决定,在使用这些数据集之前需要对其进行清洗。
+
+我们将采纳\ `Raffel等人(2019) <https://arxiv.org/pdf/1910.10683>`__\ 提出的建议,并将企业质量控制的最佳实践应用于数据预处理和质量控制阶段。除了应用许多其他规则外,所描述的示例显示了获得可接受的真实项目数据集所需的巨大工作量。
+
+:numref:`ch9-sec1-fig-1`
+中列举了数据集质量控制的关键过程。其中第1步预处理阶段在训练过程中进行，第2步生产质控在生产过程中进行。
+
+.. _ch9-sec1-fig-1:
+
+.. figure:: screenshots/key_quality_control_process.svg
+
+   数据集质量控制的关键过程
+
+
+第1步：预处理
+~~~~~~~~~~~~~
+
+我们将采纳\ `Raffel等人(2019) <https://arxiv.org/pdf/1910.10683>`__\ 建议在使用数据集训练模型之前先对它们进行预处理。
+
+Transformer模型已经发展成了语言的学习器，而我们人类则成为了他们的老师。但要教会机器学生一门语言，比如英语，我们必须先向学生解释什么样的英语是规范且正确的。
+
+在使用数据集之前，我们需要对其应用一些标准的启发式的方法：
+
+-  **有标点符号的句子** 建议选择以句号或问号结尾的句子。
+
+-  **删除不当词语**
+   应该删除不当词语。可以参考\ `此表 <https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-OtherwiseBad-Words>`__
+
+-  **删除代码**
+   虽然有时代码就是我们想要的内容。但是,对于自然语言处理任务来说,通常最好从内容中删除代码。
+
+-  **语言检测** 有时网站包含默认的“lorem
+   ipsum”文本页面。我们需要确保数据集的所有内容都是我们需要的语言。一个很好的起点是使用\ `langdetect <https://pypi.org/project/langdetect/>`__,它可以检测50多种语言。
+
+-  **删除歧视性内容**
+   这是必须的。建议构建一个知识库，收集网上或特定数据集中能够获取的所有信息，防止任何形式的歧视。你肯定希望你的机器具有道德操守!
+
+-  **逻辑检查**
+   在数据集上运行经过训练的transformer模型，执行自然语言推理(NLI)任务，过滤掉那些毫无意义的句子。
+
+-  **无效引用**
+   消除那些引用了无效链接、不道德网站或人物的文本。这是一项艰巨的任务,但却是值得的。
+
+上面列出了一些主要的最佳实践。然而，还需要更多工作，例如过滤违反隐私法的内容，以及针对特定项目的其他操作。
+
+一旦一个transformer经过训练学习到了正确的语言，我们需要帮助它在生产阶段检测输入文本中的问题。
+
+第2步：生产质控
+~~~~~~~~~~~~~~~
+
+模型训练好后将会被投入生产环境中为用户提供服务。经过第1步的预处理，模型已经能有良好的表现。然而，在生产环境中，我们应该对模型有更高的道德责任要求。
+
+生产环境中常用的质控实践如下：
+
+-  **实时检查输入文本**
+   不要让模型接收到不好的输入，利用第1步预处理中启发式的规则对实时输入的数据（例如来自用户的输入）进行过滤。
+
+-  **实时消息日志**
+   将被拒绝的数据以及被过滤的原因一并存储，以便用户可以查阅日志。当transformer被要求回答不合适的问题时，将这些消息显示给用户。
+
+-  **语言转换** 将罕见的词汇转换为标准的词汇。
+
+-  **隐私检查**
+   无论您是将数据流式传输到transformer模型中还是分析用户输入,除非经过用户或transformer运行所在国家/地区的授权,否则隐私数据必须从数据集和任务中排除。这是一个棘手的话题。必要时请咨询法律顾问。
+
+持续由人类进行质量控制
+~~~~~~~~~~~~~~~~~~~~~~
+
+transformer将逐步接管大部分复杂的自然语言处理任务。然而,人工干预仍然是必需的。我们认为社交媒体巨头已经完全自动化了一切。但事实上,我们会发现有内容管理员在决定什么对他们的平台来说是好还是坏的。
+
+正确的方法是训练一个transformer,实施它,控制输出,并将重要的结果反馈到训练集中。这样,训练集将不断改进,而transformer也将继续学习。
+
+Word2Vec分词
+------------
+
+首先安装并导入所需要的包：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    !pip install gensim
+    import nltk
+    
+    nltk.download('punkt')
+    import math
+    import warnings
+    import gensim
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from gensim.models import Word2Vec
+    from nltk.tokenize import sent_tokenize, word_tokenize
+    from sklearn.metrics.pairwise import cosine_similarity
+    
+    warnings.filterwarnings(action = 'ignore')
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple
+    Requirement already satisfied: gensim in /root/miniconda3/envs/book/lib/python3.10/site-packages (4.3.2)
+    Requirement already satisfied: numpy>=1.18.5 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from gensim) (1.26.4)
+    Requirement already satisfied: scipy>=1.7.0 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from gensim) (1.12.0)
+    Requirement already satisfied: smart-open>=1.8.1 in /root/miniconda3/envs/book/lib/python3.10/site-packages (from gensim) (6.4.0)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+    
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    [nltk_data] Downloading package punkt to /root/nltk_data...
+    [nltk_data]   Package punkt is already up-to-date!
+
+
+下载语料文件\ ``text.txt``\ ：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    !wget https://raw.githubusercontent.com/Denis2054/Transformers-for-NLP-2nd-Edition/main/Chapter08/text.txt
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    --2024-05-22 15:57:19--  https://raw.githubusercontent.com/Denis2054/Transformers-for-NLP-2nd-Edition/main/Chapter08/text.txt
+    Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 198.18.1.56, 2606:50c0:8001::154, 2606:50c0:8002::154, ...
+    Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|198.18.1.56|:443... connected.
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    HTTP request sent, awaiting response... 
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    200 OK
+    Length: 121038 (118K) [text/plain]
+    Saving to: ‘text.txt.8’
+    
+    text.txt.8            0%[                    ]       0  --.-KB/s               
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    text.txt.8          100%[===================>] 118.20K   689KB/s    in 0.2s    
+    
+    2024-05-22 15:57:20 (689 KB/s) - ‘text.txt.8’ saved [121038/121038]
+    
+
+
+加载语料：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    sample = open("text.txt", "r")
+    s = sample.read()
+    f = s.replace("\n", " ")
+    data = []
+    # 句子解析
+    for i in sent_tokenize(f):
+        temp = []
+        # 将句子分为词
+        for j in word_tokenize(i):
+            temp.append(j.lower())
+        data.append(temp)
+    # 基于语料创建Skip Gram模型
+    model2 = gensim.models.Word2Vec(data, min_count=1, vector_size=512, window=5, sg=1)
+    print(model2)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Word2Vec<vocab=3291, vector_size=512, alpha=0.025>
+
+
+这里\ ``window=5``\ 用于限制当前词与被预测词之间的距离，\ ``sg=1``\ 表示使用skip-gram算法。
+
+输出显示，词表大小为\ ``10816``\ ，词嵌入向量的长度为\ ``512``\ ，学习率被设为\ ``alpha=0.025``.
+
+现在，我们有了一个使用嵌入向量表征单词的模型。我们可以基于此创建一个余弦相似度函数\ ``similarity(word1, word2)``\ ：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    def similarity(word1, word2):
+        try:
+            a = model2.wv[word1]
+        except KeyError:
+            a = None
+        try:
+            b = model2.wv[word2]
+        except KeyError:
+            b = None
+        # 如果任一词未知，则认为相似度为0.0
+        if a is None or b is None:
+            return 0.0
+        # 增加一个维度，以适应`cosine_similarity`函数的要求
+        a = a[None, ...]
+        b = b[None, ...]
+        # 返回余弦相似度
+        return cosine_similarity(a, b)[0][0]
+
+示例0：数据集中的单词
+~~~~~~~~~~~~~~~~~~~~~
+
+我们计算\ ``freedom``\ 和\ ``liberty``\ 在数据集中的余弦相似度：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    word1 = "freedom"
+    word2 = "liberty"
+    print("Similarity", similarity(word1, word2), word1, word2)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Similarity 0.9992444 freedom liberty
+
+
+我们知道，二者都表示“自由”的意思。可以看到，计算得到的相似度很高。
+
+需要注意的是，相似度算法并不是一个确定性的迭代计算。这一节的结果可能会随着数据集内容的变化、再次运行后数据集大小的变化或模块版本的变化而改变。
+
+示例1：数据集外的单词
+~~~~~~~~~~~~~~~~~~~~~
+
+我们计算\ ``corporations``\ 和\ ``rights``\ 之间的相似度：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    word1 = "corporations"
+    word2 = "rights"
+    print("Similarity", similarity(word1, word2), word1, word2)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Similarity 0.0 corporations rights
+
+
+可以看到，模型中找不到\ ``corporations``\ 这个单词，我们的计算函数给出了报错信息，并返回了0.0的相似度。
+
+如果缺失的单词很重要，它将引发一系列问题，从而扭曲变换器模型的输出。我们将缺失的单词称为\ ``unk``\ 。
+
+我们思考以下可能性和问题：
+
+-  ``unk``\ 出现在了在训练语料中，但没有出现在分词后的词典中（例如，分词器将其进一步拆分成了两个token，或者将其与前后的单词合并成同一个token）
+-  ``unk``\ 没有出现在训练语料中
+-  虽然数据集中没有包含\ ``unk``\ ，但在生产环境中，\ ``unk``\ 不可避免地会出现在用户的输入中
+
+你可能想到使用字节级别的字节对编码（Byte-Level Byte Pair Encoding,
+Byte-Level BPE），但是这可能导致更严重的问题：
+
+-  ``unk``\ 会被拆成单词碎片。例如，\ ``corporations``\ 可能会被拆成\ ``corp + o + ra + tion + s``\ ，并且能保证这些碎片都能在数据集和分词后的数据集中找到
+-  ``unk``\ 会变成一系列使用碎片token表示的子词（sub-words），但是这些碎片token无法传达单词的原意
+-  Transformer模型仍然可以很好地训练，没人会发现\ ``unk``\ 被拆成了无意义地碎片，甚至可能产生很好的结果
+-  然而，此时如果传入\ ``corporal``\ 这个单词，模型会认为它与\ ``corporations``\ 相似，因为它包含\ ``corp + o + ra``\ 这些碎片
+
+我们可以看到，社交媒体的标准可能足以使用transformer处理一些不太重要的话题。但在现实生活中的企业项目中，要开发一个与数据集匹配的预训练标记化器，需要付出艰苦的努力。在现实生活中，数据集每天都在随用户输入而增长。用户输入成为应该定期训练和更新的模型数据集的一部分。
+
+示例2：复杂的关系
+~~~~~~~~~~~~~~~~~
+
+我们比较\ ``etext``\ 和\ ``declaration``\ 的相似度：
+
+.. raw:: latex
+
+   \diilbookstyleinputcell
+
+.. code:: python
+
+    word1 = "etext"
+    word2 = "declaration"
+    print("Similarity", similarity(word1, word2), word1, word2)
+
+
+.. raw:: latex
+
+   \diilbookstyleoutputcell
+
+.. parsed-literal::
+    :class: output
+
+    Similarity 0.97163755 etext declaration
+

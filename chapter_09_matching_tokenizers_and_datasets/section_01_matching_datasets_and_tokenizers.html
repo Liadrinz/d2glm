@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <title>9.1. 匹配数据集和分词器 &#8212; Transformer for NLP 0.0.1 documentation</title>
+
+    <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fontawesome/all.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/d2l.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/d2l.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9.2. 使用特定词表进行标准的NLP任务" href="section_02_standard_nlp_tasks_with_specific_vocabulary.html" />
+    <link rel="prev" title="9. 分词器和数据集的匹配" href="index.html" /> 
+  </head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
+    <div class="mdl-layout__header-row">
+        
+        <nav class="mdl-navigation breadcrumb">
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">9. </span>分词器和数据集的匹配</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active"><span class="section-number">9.1. </span>匹配数据集和分词器</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+        
+<form class="form-inline pull-sm-right" action="../search.html" method="get">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+        <label id="quick-search-icon" class="mdl-button mdl-js-button mdl-button--icon"  for="waterfall-exp">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="q"  id="waterfall-exp" placeholder="Search" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </div>
+      </div>
+      <div class="mdl-tooltip" data-mdl-for="quick-search-icon">
+      Quick search
+      </div>
+</form>
+        
+<a id="button-show-source"
+    class="mdl-button mdl-js-button mdl-button--icon"
+    href="../_sources/chapter_09_matching_tokenizers_and_datasets/section_01_matching_datasets_and_tokenizers.rst.txt" rel="nofollow">
+  <i class="material-icons">code</i>
+</a>
+<div class="mdl-tooltip" data-mdl-for="button-show-source">
+Show Source
+</div>
+        </nav>
+    </div>
+    <div class="mdl-layout__header-row header-links">
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+      </nav>
+    </div>
+</header><header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/index.html">7. GPT-3的崛起</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_01_suprahuman_nlp_with_gpt3-transformer-models.html">7.1. 利用GPT-3进行超人类NLP任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_02_the_architecture_of_openai_gpt_transformer_models.html">7.2. GPT模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_03_generic_text_completion_with_gpt2.html">7.3. 利用GPT-2进行通用的文本补全任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_04_running_openai_gpt3_tasks.html">7.4. 运行GPT-3的任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_05_comparing_the_output_of_gpt2_and_gpt3.html">7.5. 比较GPT-2与GPT-3的输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_06_fine_tuning_gpt3.html">7.6. 微调GPT-3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_07_the_role_of_an_industry_40_ai_specialist.html">7.7. 工业4.0下AI专家的角色</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/index.html">8. T5模型解决多种NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_01_designing_a_universal_text_to_text_model.html">8.1. 设计一个通用的文本到文本（text-to-text）模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_02_text_summarization_with_t5.html">8.2. 用T5做文本摘要</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">9. 分词器和数据集的匹配</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.1. 匹配数据集和分词器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_standard_nlp_tasks_with_specific_vocabulary.html">9.2. 使用特定词表进行标准的NLP任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_exploring_the_scope_of_gpt3.html">9.3. GPT-3中的分词问题</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">10. 解释黑盒Transformer模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_16_the_emergence_of_transformer_driven_copilots/index.html">11. Transformer驱动的Copilot</a></li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+        <main class="mdl-layout__content" tabIndex="0">
+
+	<script type="text/javascript" src="../_static/sphinx_materialdesign_theme.js "></script>
+    <header class="mdl-layout__drawer">
+    
+          <!-- Title -->
+      <span class="mdl-layout-title">
+          <a class="title" href="../index.html">
+              <span class="title-text">
+                  Transformer for NLP
+              </span>
+          </a>
+      </span>
+    
+    
+      <div class="globaltoc">
+        <span class="mdl-layout-title toc">Table Of Contents</span>
+        
+        
+            
+            <nav class="mdl-navigation">
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter_01_what_are_transformers/index.html">1. 什么是Transformer?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_01_the_ecosystem_of_transformers.html">1.1. Transformer的生态系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_02_optimizing_nlp_models_with_transformers.html">1.2. 使用Transformer优化NLP模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_01_what_are_transformers/section_03_what_resources_should_we_use.html">1.3. 我们需要什么资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/index.html">2. 从Transformer的架构开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_01_the_rise_of_the_transformer_attention_is_all_you_need.html">2.1. Transformer模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_02_training_and_performance.html">2.2. 模型训练和表现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_03_transformer_models_in_hugging_face.html">2.3. Hugging Face上的Transformer模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_02_getting_started_with_architecture_of_the_transformer_model/section_04_exercise.html">2.4. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/index.html">3. 微调BERT模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_01_the_architecture_of_bert.html">3.1. BERT模型的架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_02_fine_tuning_bert.html">3.2. 微调BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_03_fine_tuning_bert_models/section_03_exercise.html">3.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/index.html">4. 从头开始预训练RoBERTa模型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_01_pretraining_from_scratch.html">4.1. 从头开始预训练</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_04_pretraining_a_roberta_model_from_scratch/section_02_exercise.html">4.2. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/index.html">5. 使用Transformer进行下游NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_01_transformer_performances_versus_human_baselines.html">5.1. Transformer的性能 VS 人类基准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_02_running_downstream_tasks.html">5.2. 运行下游任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_05_downstream_nlp_tasks_with_transformers/section_03_exercise.html">5.3. 练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/index.html">6. 基于Transformer的机器翻译</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_01_defining_machine_translation.html">6.1. 机器翻译的定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_02_preprocessing_a_wmt_dataset.html">6.2. 预处理WMT数据集</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_03_evaluating_machine_translation_with_bleu.html">6.3. 使用BLEU评估机器翻译的质量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_06_machine_translation_with_the_transformer/section_04_translations_with_trax.html">6.4. 使用Trax进行翻译</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/index.html">7. GPT-3的崛起</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_01_suprahuman_nlp_with_gpt3-transformer-models.html">7.1. 利用GPT-3进行超人类NLP任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_02_the_architecture_of_openai_gpt_transformer_models.html">7.2. GPT模型架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_03_generic_text_completion_with_gpt2.html">7.3. 利用GPT-2进行通用的文本补全任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_04_running_openai_gpt3_tasks.html">7.4. 运行GPT-3的任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_05_comparing_the_output_of_gpt2_and_gpt3.html">7.5. 比较GPT-2与GPT-3的输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_06_fine_tuning_gpt3.html">7.6. 微调GPT-3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_07_the_role_of_an_industry_40_ai_specialist.html">7.7. 工业4.0下AI专家的角色</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/index.html">8. T5模型解决多种NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_01_designing_a_universal_text_to_text_model.html">8.1. 设计一个通用的文本到文本（text-to-text）模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_02_text_summarization_with_t5.html">8.2. 用T5做文本摘要</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">9. 分词器和数据集的匹配</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.1. 匹配数据集和分词器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_02_standard_nlp_tasks_with_specific_vocabulary.html">9.2. 使用特定词表进行标准的NLP任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_exploring_the_scope_of_gpt3.html">9.3. GPT-3中的分词问题</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">10. 解释黑盒Transformer模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_16_the_emergence_of_transformer_driven_copilots/index.html">11. Transformer驱动的Copilot</a></li>
+</ul>
+
+            </nav>
+        
+        </div>
+    
+</header>
+
+    <div class="document">
+        <div class="page-content" role="main">
+        
+  <div class="section" id="id1">
+<h1><span class="section-number">9.1. </span>匹配数据集和分词器<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h1>
+<p>下载基准数据集来训练transformer模型确实有许多优势。数据已经过准备,每个研究实验室都使用相同的参考资料。此外,transformer模型的性能也可以与同一数据集上的其他模型进行比较。</p>
+<p>然而,仍需要做更多工作来提高transformer的性能。此外,在生产环境中实现transformer模型需要仔细的规划和定义最佳实践。</p>
+<p>在本节中,我们将定义一些最佳实践,以避免关键的绊脚石。</p>
+<p>然后我们将在Python中使用余弦相似度的一些示例,来衡量分词和编码数据集的局限性。</p>
+<div class="section" id="id2">
+<h2><span class="section-number">9.1.1. </span>最佳实践<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://arxiv.org/pdf/1910.10683">Raffel等人(2019)</a>定义了一个标准的文本到文本transformer模型：T5.
+另外，他们还打破了只使用原始数据而不事先预处理它们的惯例。</p>
+<p>数据预处理可以缩短训练时间。以常见网络抓取(Common
+Crawl)为例,它包含了通过网页提取获得的无标注文本。在数据集中已经去除了非文本内容和标记。</p>
+<p>然而,谷歌的T5团队发现,通过Common
+Crawl获得的大部分文本并没有达到自然语言或英语的水平。因此他们决定,在使用这些数据集之前需要对其进行清洗。</p>
+<p>我们将采纳<a class="reference external" href="https://arxiv.org/pdf/1910.10683">Raffel等人(2019)</a>提出的建议,并将企业质量控制的最佳实践应用于数据预处理和质量控制阶段。除了应用许多其他规则外,所描述的示例显示了获得可接受的真实项目数据集所需的巨大工作量。</p>
+<p><a class="reference internal" href="#ch9-sec1-fig-1"><span class="std std-numref">Fig. 9.1.1</span></a>
+中列举了数据集质量控制的关键过程。其中第1步预处理阶段在训练过程中进行，第2步生产质控在生产过程中进行。</p>
+<div class="figure align-default" id="id9">
+<span id="ch9-sec1-fig-1"></span><img alt="../_images/key_quality_control_process.svg" src="../_images/key_quality_control_process.svg" /><p class="caption"><span class="caption-number">Fig. 9.1.1 </span><span class="caption-text">数据集质量控制的关键过程</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="id3">
+<h3><span class="section-number">9.1.1.1. </span>第1步：预处理<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<p>我们将采纳<a class="reference external" href="https://arxiv.org/pdf/1910.10683">Raffel等人(2019)</a>建议在使用数据集训练模型之前先对它们进行预处理。</p>
+<p>Transformer模型已经发展成了语言的学习器，而我们人类则成为了他们的老师。但要教会机器学生一门语言，比如英语，我们必须先向学生解释什么样的英语是规范且正确的。</p>
+<p>在使用数据集之前，我们需要对其应用一些标准的启发式的方法：</p>
+<ul class="simple">
+<li><p><strong>有标点符号的句子</strong> 建议选择以句号或问号结尾的句子。</p></li>
+<li><p><strong>删除不当词语</strong>
+应该删除不当词语。可以参考<a class="reference external" href="https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-OtherwiseBad-Words">此表</a></p></li>
+<li><p><strong>删除代码</strong>
+虽然有时代码就是我们想要的内容。但是,对于自然语言处理任务来说,通常最好从内容中删除代码。</p></li>
+<li><p><strong>语言检测</strong> 有时网站包含默认的“lorem
+ipsum”文本页面。我们需要确保数据集的所有内容都是我们需要的语言。一个很好的起点是使用<a class="reference external" href="https://pypi.org/project/langdetect/">langdetect</a>,它可以检测50多种语言。</p></li>
+<li><p><strong>删除歧视性内容</strong>
+这是必须的。建议构建一个知识库，收集网上或特定数据集中能够获取的所有信息，防止任何形式的歧视。你肯定希望你的机器具有道德操守!</p></li>
+<li><p><strong>逻辑检查</strong>
+在数据集上运行经过训练的transformer模型，执行自然语言推理(NLI)任务，过滤掉那些毫无意义的句子。</p></li>
+<li><p><strong>无效引用</strong>
+消除那些引用了无效链接、不道德网站或人物的文本。这是一项艰巨的任务,但却是值得的。</p></li>
+</ul>
+<p>上面列出了一些主要的最佳实践。然而，还需要更多工作，例如过滤违反隐私法的内容，以及针对特定项目的其他操作。</p>
+<p>一旦一个transformer经过训练学习到了正确的语言，我们需要帮助它在生产阶段检测输入文本中的问题。</p>
+</div>
+<div class="section" id="id4">
+<h3><span class="section-number">9.1.1.2. </span>第2步：生产质控<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
+<p>模型训练好后将会被投入生产环境中为用户提供服务。经过第1步的预处理，模型已经能有良好的表现。然而，在生产环境中，我们应该对模型有更高的道德责任要求。</p>
+<p>生产环境中常用的质控实践如下：</p>
+<ul class="simple">
+<li><p><strong>实时检查输入文本</strong>
+不要让模型接收到不好的输入，利用第1步预处理中启发式的规则对实时输入的数据（例如来自用户的输入）进行过滤。</p></li>
+<li><p><strong>实时消息日志</strong>
+将被拒绝的数据以及被过滤的原因一并存储，以便用户可以查阅日志。当transformer被要求回答不合适的问题时，将这些消息显示给用户。</p></li>
+<li><p><strong>语言转换</strong> 将罕见的词汇转换为标准的词汇。</p></li>
+<li><p><strong>隐私检查</strong>
+无论您是将数据流式传输到transformer模型中还是分析用户输入,除非经过用户或transformer运行所在国家/地区的授权,否则隐私数据必须从数据集和任务中排除。这是一个棘手的话题。必要时请咨询法律顾问。</p></li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h3><span class="section-number">9.1.1.3. </span>持续由人类进行质量控制<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
+<p>transformer将逐步接管大部分复杂的自然语言处理任务。然而,人工干预仍然是必需的。我们认为社交媒体巨头已经完全自动化了一切。但事实上,我们会发现有内容管理员在决定什么对他们的平台来说是好还是坏的。</p>
+<p>正确的方法是训练一个transformer,实施它,控制输出,并将重要的结果反馈到训练集中。这样,训练集将不断改进,而transformer也将继续学习。</p>
+</div>
+</div>
+<div class="section" id="word2vec">
+<h2><span class="section-number">9.1.2. </span>Word2Vec分词<a class="headerlink" href="#word2vec" title="Permalink to this heading">¶</a></h2>
+<p>首先安装并导入所需要的包：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install gensim
+import nltk
+
+nltk.download(&#39;punkt&#39;)
+import math
+import warnings
+import gensim
+import matplotlib.pyplot as plt
+import numpy as np
+from gensim.models import Word2Vec
+from nltk.tokenize import sent_tokenize, word_tokenize
+from sklearn.metrics.pairwise import cosine_similarity
+
+warnings.filterwarnings(action = &#39;ignore&#39;)
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Looking</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">simple</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">gensim</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="mf">4.3.2</span><span class="p">)</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">numpy</span><span class="o">&gt;=</span><span class="mf">1.18.5</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">gensim</span><span class="p">)</span> <span class="p">(</span><span class="mf">1.26.4</span><span class="p">)</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">scipy</span><span class="o">&gt;=</span><span class="mf">1.7.0</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">gensim</span><span class="p">)</span> <span class="p">(</span><span class="mf">1.12.0</span><span class="p">)</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">smart</span><span class="o">-</span><span class="nb">open</span><span class="o">&gt;=</span><span class="mf">1.8.1</span> <span class="ow">in</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">miniconda3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">gensim</span><span class="p">)</span> <span class="p">(</span><span class="mf">6.4.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">Running</span> <span class="n">pip</span> <span class="k">as</span> <span class="n">the</span> <span class="s1">&#39;root&#39;</span> <span class="n">user</span> <span class="n">can</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">broken</span> <span class="n">permissions</span> <span class="ow">and</span> <span class="n">conflicting</span> <span class="n">behaviour</span> <span class="k">with</span> <span class="n">the</span> <span class="n">system</span> <span class="n">package</span> <span class="n">manager</span><span class="o">.</span> <span class="n">It</span> <span class="ow">is</span> <span class="n">recommended</span> <span class="n">to</span> <span class="n">use</span> <span class="n">a</span> <span class="n">virtual</span> <span class="n">environment</span> <span class="n">instead</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pip</span><span class="o">.</span><span class="n">pypa</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">warnings</span><span class="o">/</span><span class="n">venv</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package punkt to /root/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+</pre></div>
+</div>
+<p>下载语料文件<code class="docutils literal notranslate"><span class="pre">text.txt</span></code>：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!wget https://raw.githubusercontent.com/Denis2054/Transformers-for-NLP-2nd-Edition/main/Chapter08/text.txt
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="mi">2024</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">22</span> <span class="mi">15</span><span class="p">:</span><span class="mi">57</span><span class="p">:</span><span class="mi">19</span><span class="o">--</span>  <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Denis2054</span><span class="o">/</span><span class="n">Transformers</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="n">NLP</span><span class="o">-</span><span class="mi">2</span><span class="n">nd</span><span class="o">-</span><span class="n">Edition</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">Chapter08</span><span class="o">/</span><span class="n">text</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">Resolving</span> <span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span> <span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="p">)</span><span class="o">...</span> <span class="mf">198.18.1.56</span><span class="p">,</span> <span class="mi">2606</span><span class="p">:</span><span class="mi">50</span><span class="n">c0</span><span class="p">:</span><span class="mi">8001</span><span class="p">::</span><span class="mi">154</span><span class="p">,</span> <span class="mi">2606</span><span class="p">:</span><span class="mi">50</span><span class="n">c0</span><span class="p">:</span><span class="mi">8002</span><span class="p">::</span><span class="mi">154</span><span class="p">,</span> <span class="o">...</span>
+<span class="n">Connecting</span> <span class="n">to</span> <span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span> <span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="p">)</span><span class="o">|</span><span class="mf">198.18.1.56</span><span class="o">|</span><span class="p">:</span><span class="mf">443.</span><span class="o">..</span> <span class="n">connected</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HTTP</span> <span class="n">request</span> <span class="n">sent</span><span class="p">,</span> <span class="n">awaiting</span> <span class="n">response</span><span class="o">...</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span>200 OK
+Length: 121038 (118K) [text/plain]
+Saving to: ‘text.txt.8’
+</pre></div>
+</div>
+<p>text.txt.8            0%[                    ]       0  –.-KB/s</p>
+<p>text.txt.8          100%[===================&gt;] 118.20K   689KB/s    in 0.2s</p>
+<blockquote>
+<div><p>2024-05-22 15:57:20 (689 KB/s) - ‘text.txt.8’ saved [121038/121038]</p>
+</div></blockquote>
+<p>加载语料：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;text.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># 句子解析</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># 将句子分为词</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+<span class="c1"># 基于语料创建Skip Gram模型</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Word2Vec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">sg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Word2Vec</span><span class="o">&lt;</span><span class="n">vocab</span><span class="o">=</span><span class="mi">3291</span><span class="p">,</span> <span class="n">vector_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.025</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>这里<code class="docutils literal notranslate"><span class="pre">window=5</span></code>用于限制当前词与被预测词之间的距离，<code class="docutils literal notranslate"><span class="pre">sg=1</span></code>表示使用skip-gram算法。</p>
+<p>输出显示，词表大小为<code class="docutils literal notranslate"><span class="pre">10816</span></code>，词嵌入向量的长度为<code class="docutils literal notranslate"><span class="pre">512</span></code>，学习率被设为<code class="docutils literal notranslate"><span class="pre">alpha=0.025</span></code>.</p>
+<p>现在，我们有了一个使用嵌入向量表征单词的模型。我们可以基于此创建一个余弦相似度函数<code class="docutils literal notranslate"><span class="pre">similarity(word1,</span> <span class="pre">word2)</span></code>：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">word1</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">word2</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1"># 如果任一词未知，则认为相似度为0.0</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">b</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="c1"># 增加一个维度，以适应`cosine_similarity`函数的要求</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="c1"># 返回余弦相似度</span>
+    <span class="k">return</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="id6">
+<h3><span class="section-number">9.1.2.1. </span>示例0：数据集中的单词<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
+<p>我们计算<code class="docutils literal notranslate"><span class="pre">freedom</span></code>和<code class="docutils literal notranslate"><span class="pre">liberty</span></code>在数据集中的余弦相似度：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word1</span> <span class="o">=</span> <span class="s2">&quot;freedom&quot;</span>
+<span class="n">word2</span> <span class="o">=</span> <span class="s2">&quot;liberty&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Similarity&quot;</span><span class="p">,</span> <span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">),</span> <span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Similarity</span> <span class="mf">0.9992444</span> <span class="n">freedom</span> <span class="n">liberty</span>
+</pre></div>
+</div>
+<p>我们知道，二者都表示“自由”的意思。可以看到，计算得到的相似度很高。</p>
+<p>需要注意的是，相似度算法并不是一个确定性的迭代计算。这一节的结果可能会随着数据集内容的变化、再次运行后数据集大小的变化或模块版本的变化而改变。</p>
+</div>
+<div class="section" id="id7">
+<h3><span class="section-number">9.1.2.2. </span>示例1：数据集外的单词<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h3>
+<p>我们计算<code class="docutils literal notranslate"><span class="pre">corporations</span></code>和<code class="docutils literal notranslate"><span class="pre">rights</span></code>之间的相似度：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word1</span> <span class="o">=</span> <span class="s2">&quot;corporations&quot;</span>
+<span class="n">word2</span> <span class="o">=</span> <span class="s2">&quot;rights&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Similarity&quot;</span><span class="p">,</span> <span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">),</span> <span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Similarity</span> <span class="mf">0.0</span> <span class="n">corporations</span> <span class="n">rights</span>
+</pre></div>
+</div>
+<p>可以看到，模型中找不到<code class="docutils literal notranslate"><span class="pre">corporations</span></code>这个单词，我们的计算函数给出了报错信息，并返回了0.0的相似度。</p>
+<p>如果缺失的单词很重要，它将引发一系列问题，从而扭曲变换器模型的输出。我们将缺失的单词称为<code class="docutils literal notranslate"><span class="pre">unk</span></code>。</p>
+<p>我们思考以下可能性和问题：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">unk</span></code>出现在了在训练语料中，但没有出现在分词后的词典中（例如，分词器将其进一步拆分成了两个token，或者将其与前后的单词合并成同一个token）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unk</span></code>没有出现在训练语料中</p></li>
+<li><p>虽然数据集中没有包含<code class="docutils literal notranslate"><span class="pre">unk</span></code>，但在生产环境中，<code class="docutils literal notranslate"><span class="pre">unk</span></code>不可避免地会出现在用户的输入中</p></li>
+</ul>
+<p>你可能想到使用字节级别的字节对编码（Byte-Level Byte Pair Encoding,
+Byte-Level BPE），但是这可能导致更严重的问题：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">unk</span></code>会被拆成单词碎片。例如，<code class="docutils literal notranslate"><span class="pre">corporations</span></code>可能会被拆成<code class="docutils literal notranslate"><span class="pre">corp</span> <span class="pre">+</span> <span class="pre">o</span> <span class="pre">+</span> <span class="pre">ra</span> <span class="pre">+</span> <span class="pre">tion</span> <span class="pre">+</span> <span class="pre">s</span></code>，并且能保证这些碎片都能在数据集和分词后的数据集中找到</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unk</span></code>会变成一系列使用碎片token表示的子词（sub-words），但是这些碎片token无法传达单词的原意</p></li>
+<li><p>Transformer模型仍然可以很好地训练，没人会发现<code class="docutils literal notranslate"><span class="pre">unk</span></code>被拆成了无意义地碎片，甚至可能产生很好的结果</p></li>
+<li><p>然而，此时如果传入<code class="docutils literal notranslate"><span class="pre">corporal</span></code>这个单词，模型会认为它与<code class="docutils literal notranslate"><span class="pre">corporations</span></code>相似，因为它包含<code class="docutils literal notranslate"><span class="pre">corp</span> <span class="pre">+</span> <span class="pre">o</span> <span class="pre">+</span> <span class="pre">ra</span></code>这些碎片</p></li>
+</ul>
+<p>我们可以看到，社交媒体的标准可能足以使用transformer处理一些不太重要的话题。但在现实生活中的企业项目中，要开发一个与数据集匹配的预训练标记化器，需要付出艰苦的努力。在现实生活中，数据集每天都在随用户输入而增长。用户输入成为应该定期训练和更新的模型数据集的一部分。</p>
+</div>
+<div class="section" id="id8">
+<h3><span class="section-number">9.1.2.3. </span>示例2：复杂的关系<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h3>
+<p>我们比较<code class="docutils literal notranslate"><span class="pre">etext</span></code>和<code class="docutils literal notranslate"><span class="pre">declaration</span></code>的相似度：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">word1</span> <span class="o">=</span> <span class="s2">&quot;etext&quot;</span>
+<span class="n">word2</span> <span class="o">=</span> <span class="s2">&quot;declaration&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Similarity&quot;</span><span class="p">,</span> <span class="n">similarity</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">),</span> <span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Similarity</span> <span class="mf">0.97163755</span> <span class="n">etext</span> <span class="n">declaration</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+        </div>
+        <div class="side-doc-outline">
+            <div class="side-doc-outline--content"> 
+<div class="localtoc">
+    <p class="caption">
+      <span class="caption-text">Table Of Contents</span>
+    </p>
+    <ul>
+<li><a class="reference internal" href="#">9.1. 匹配数据集和分词器</a><ul>
+<li><a class="reference internal" href="#id2">9.1.1. 最佳实践</a><ul>
+<li><a class="reference internal" href="#id3">9.1.1.1. 第1步：预处理</a></li>
+<li><a class="reference internal" href="#id4">9.1.1.2. 第2步：生产质控</a></li>
+<li><a class="reference internal" href="#id5">9.1.1.3. 持续由人类进行质量控制</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#word2vec">9.1.2. Word2Vec分词</a><ul>
+<li><a class="reference internal" href="#id6">9.1.2.1. 示例0：数据集中的单词</a></li>
+<li><a class="reference internal" href="#id7">9.1.2.2. 示例1：数据集外的单词</a></li>
+<li><a class="reference internal" href="#id8">9.1.2.3. 示例2：复杂的关系</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+            </div>
+        </div>
+
+      <div class="clearer"></div>
+    </div><div class="pagenation">
+     <a id="button-prev" href="index.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+         <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
+         <div class="pagenation-text">
+            <span class="pagenation-direction">Previous</span>
+            <div>9. 分词器和数据集的匹配</div>
+         </div>
+     </a>
+     <a id="button-next" href="section_02_standard_nlp_tasks_with_specific_vocabulary.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+         <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
+        <div class="pagenation-text">
+            <span class="pagenation-direction">Next</span>
+            <div>9.2. 使用特定词表进行标准的NLP任务</div>
+        </div>
+     </a>
+  </div>
+        
+        </main>
+    </div>
+  </body>
+</html>

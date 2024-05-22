@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     
-    <title>8. T5模型解决多种NLP任务 &#8212; Transformer for NLP 0.0.1 documentation</title>
+    <title>9.2. 使用特定词表进行标准的NLP任务 &#8212; Transformer for NLP 0.0.1 documentation</title>
 
     <link rel="stylesheet" href="../_static/material-design-lite-1.3.0/material.blue-deep_orange.min.css" type="text/css" />
     <link rel="stylesheet" href="../_static/sphinx_materialdesign_theme.css" type="text/css" />
@@ -26,15 +26,16 @@
     <script src="../_static/d2l.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8.1. 设计一个通用的文本到文本（text-to-text）模型" href="section_01_designing_a_universal_text_to_text_model.html" />
-    <link rel="prev" title="7.7. 工业4.0下AI专家的角色" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_07_the_role_of_an_industry_40_ai_specialist.html" /> 
+    <link rel="next" title="9.3. GPT-3中的分词问题" href="section_03_exploring_the_scope_of_gpt3.html" />
+    <link rel="prev" title="9.1. 匹配数据集和分词器" href="section_01_matching_datasets_and_tokenizers.html" /> 
   </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-drawer"><header class="mdl-layout__header mdl-layout__header--waterfall ">
     <div class="mdl-layout__header-row">
         
         <nav class="mdl-navigation breadcrumb">
-            <a class="mdl-navigation__link is-active"><span class="section-number">8. </span>T5模型解决多种NLP任务</a>
+            <a class="mdl-navigation__link" href="index.html"><span class="section-number">9. </span>分词器和数据集的匹配</a><i class="material-icons">navigate_next</i>
+            <a class="mdl-navigation__link is-active"><span class="section-number">9.2. </span>使用特定词表进行标准的NLP任务</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
@@ -57,7 +58,7 @@
         
 <a id="button-show-source"
     class="mdl-button mdl-js-button mdl-button--icon"
-    href="../_sources/chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/index.rst.txt" rel="nofollow">
+    href="../_sources/chapter_09_matching_tokenizers_and_datasets/section_02_standard_nlp_tasks_with_specific_vocabulary.rst.txt" rel="nofollow">
   <i class="material-icons">code</i>
 </a>
 <div class="mdl-tooltip" data-mdl-for="button-show-source">
@@ -136,15 +137,15 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_07_the_role_of_an_industry_40_ai_specialist.html">7.7. 工业4.0下AI专家的角色</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">8. T5模型解决多种NLP任务</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="section_01_designing_a_universal_text_to_text_model.html">8.1. 设计一个通用的文本到文本（text-to-text）模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_02_text_summarization_with_t5.html">8.2. 用T5做文本摘要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/index.html">8. T5模型解决多种NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_01_designing_a_universal_text_to_text_model.html">8.1. 设计一个通用的文本到文本（text-to-text）模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_02_text_summarization_with_t5.html">8.2. 用T5做文本摘要</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/index.html">9. 分词器和数据集的匹配</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/section_01_matching_datasets_and_tokenizers.html">9.1. 匹配数据集和分词器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/section_02_standard_nlp_tasks_with_specific_vocabulary.html">9.2. 使用特定词表进行标准的NLP任务</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/section_03_exploring_the_scope_of_gpt3.html">9.3. GPT-3中的分词问题</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">9. 分词器和数据集的匹配</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_matching_datasets_and_tokenizers.html">9.1. 匹配数据集和分词器</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.2. 使用特定词表进行标准的NLP任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_exploring_the_scope_of_gpt3.html">9.3. GPT-3中的分词问题</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">10. 解释黑盒Transformer模型</a></li>
@@ -225,15 +226,15 @@ Show Source
 <li class="toctree-l2"><a class="reference internal" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_07_the_role_of_an_industry_40_ai_specialist.html">7.7. 工业4.0下AI专家的角色</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">8. T5模型解决多种NLP任务</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="section_01_designing_a_universal_text_to_text_model.html">8.1. 设计一个通用的文本到文本（text-to-text）模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_02_text_summarization_with_t5.html">8.2. 用T5做文本摘要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/index.html">8. T5模型解决多种NLP任务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_01_designing_a_universal_text_to_text_model.html">8.1. 设计一个通用的文本到文本（text-to-text）模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter_08_applying_transformers_to_legal_and_financial_documents_for_ai_text_summarization/section_02_text_summarization_with_t5.html">8.2. 用T5做文本摘要</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/index.html">9. 分词器和数据集的匹配</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/section_01_matching_datasets_and_tokenizers.html">9.1. 匹配数据集和分词器</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/section_02_standard_nlp_tasks_with_specific_vocabulary.html">9.2. 使用特定词表进行标准的NLP任务</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter_09_matching_tokenizers_and_datasets/section_03_exploring_the_scope_of_gpt3.html">9.3. GPT-3中的分词问题</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">9. 分词器和数据集的匹配</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="section_01_matching_datasets_and_tokenizers.html">9.1. 匹配数据集和分词器</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.2. 使用特定词表进行标准的NLP任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section_03_exploring_the_scope_of_gpt3.html">9.3. GPT-3中的分词问题</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter_14_interpreting_black_box_transformer_models/index.html">10. 解释黑盒Transformer模型</a></li>
@@ -249,44 +250,8 @@ Show Source
     <div class="document">
         <div class="page-content" role="main">
         
-  <div class="section" id="t5nlp">
-<h1><span class="section-number">8. </span>T5模型解决多种NLP任务<a class="headerlink" href="#t5nlp" title="Permalink to this heading">¶</a></h1>
-<p>在:ref:<cite>chapter-7</cite>中,我们发现OpenAI开始尝试零样本模型,这些模型不需要微调,也不需要开发,可以用几行代码实现,即所有自然语言处理问题都可以表示为一个文本到文本（text-to-text）的问题。<a class="reference external" href="https://arxiv.org/pdf/1910.10683">Raffel等人(2019)</a>基于这一结论设计了一个transformer元模型。</p>
-<p>任何自然语言处理任务的文本到文本表示都提供了一个独特的框架来分析transformer的方法论和实践。这个想法是让transformer通过文本到文本的方法在训练和微调阶段通过迁移学习来学习语言。</p>
-<p>Raffel等人(2019)将这种方法命名为文本到文本迁移transformer（<strong>T</strong>ext-<strong>T</strong>o-<strong>T</strong>ext
-<strong>T</strong>ransfer <strong>T</strong>ransformer），称为T5模型。</p>
-<p>我们将在本章开始时介绍T5模型的概念和架构。然后我们将使用T5模型对文档进行总结,使用Hugging
-Face模型实现。</p>
-<p>最后,我们将把文本到文本的方法应用到GPT-3引擎使用的显示和上下文过程中。虽然并不完美,但令人难以置信的零样本响应超过了任何人能够想象的。</p>
-<p>本章涵盖以下主题:</p>
-<ul class="simple">
-<li><p>文本到文本的transformer模型</p></li>
-<li><p>T5模型的架构</p></li>
-<li><p>T5方法论</p></li>
-<li><p>transformer模型从训练到学习的发展</p></li>
-<li><p>Hugging Facetransformer模型</p></li>
-<li><p>实现T5模型</p></li>
-<li><p>总结法律文本</p></li>
-<li><p>总结金融文本</p></li>
-<li><p>transformer模型的局限性</p></li>
-<li><p>GPT-3的使用</p></li>
-</ul>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="section_01_designing_a_universal_text_to_text_model.html">8.1. 设计一个通用的文本到文本（text-to-text）模型</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="section_01_designing_a_universal_text_to_text_model.html#id1">8.1.1. Text-to-text模型的崛起</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_01_designing_a_universal_text_to_text_model.html#id2">8.1.2. 为特定任务使用前缀而非指定输入输出格式</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_01_designing_a_universal_text_to_text_model.html#t5">8.1.3. T5模型架构</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="section_02_text_summarization_with_t5.html">8.2. 用T5做文本摘要</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="section_02_text_summarization_with_t5.html#hugging-face">8.2.1. Hugging Face资源</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_02_text_summarization_with_t5.html#id1">8.2.2. 初始化T5模型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="section_02_text_summarization_with_t5.html#t5-large">8.2.3. 使用T5-large对文档做摘要</a></li>
-</ul>
-</li>
-</ul>
-</div>
+  <div class="section" id="nlp">
+<h1><span class="section-number">9.2. </span>使用特定词表进行标准的NLP任务<a class="headerlink" href="#nlp" title="Permalink to this heading">¶</a></h1>
 </div>
 
 
@@ -298,18 +263,18 @@ Face模型实现。</p>
 
       <div class="clearer"></div>
     </div><div class="pagenation">
-     <a id="button-prev" href="../chapter_07_the_rise_of_suprahuman_transformers_with_gpt_3_engines/section_07_the_role_of_an_industry_40_ai_specialist.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
+     <a id="button-prev" href="section_01_matching_datasets_and_tokenizers.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="P">
          <i class="pagenation-arrow-L fas fa-arrow-left fa-lg"></i>
          <div class="pagenation-text">
             <span class="pagenation-direction">Previous</span>
-            <div>7.7. 工业4.0下AI专家的角色</div>
+            <div>9.1. 匹配数据集和分词器</div>
          </div>
      </a>
-     <a id="button-next" href="section_01_designing_a_universal_text_to_text_model.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
+     <a id="button-next" href="section_03_exploring_the_scope_of_gpt3.html" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" role="botton" accesskey="N">
          <i class="pagenation-arrow-R fas fa-arrow-right fa-lg"></i>
         <div class="pagenation-text">
             <span class="pagenation-direction">Next</span>
-            <div>8.1. 设计一个通用的文本到文本（text-to-text）模型</div>
+            <div>9.3. GPT-3中的分词问题</div>
         </div>
      </a>
   </div>
